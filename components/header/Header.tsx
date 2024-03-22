@@ -8,6 +8,7 @@ import type { SectionProps } from "deco/types.ts";
 import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
+import { useUI } from "../../sdk/useUI.ts";
 
 export interface Logo {
   src: ImageWidget;
@@ -107,6 +108,8 @@ function Header({
 }
 
 export const loader = (props: Props, _req: Request, ctx: AppContext) => {
+  const { isMobile } = useUI();
+  isMobile.value = ctx.device === "desktop" ? false : true;
   return { ...props, device: ctx.device };
 };
 
