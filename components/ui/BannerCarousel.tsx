@@ -9,7 +9,6 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
-import Image from "apps/website/components/Image.tsx";
 import { useUI } from "../../sdk/useUI.ts";
 
 /**
@@ -78,8 +77,6 @@ const PROPS_FONT_SIZE = {
 function Action(
   action: { title: string; label: string; href: string; fontSize?: FontSize },
 ) {
-  console.log("action", action.fontSize?.fontSize);
-
   return (
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
       <span
@@ -109,31 +106,31 @@ function BannerItemMobile(
   } = image;
 
   return (
-    <div class="flex flex-row w-full ">
+    <div class="flex flex-row w-full relative">
       <a
         id={id}
         href={action?.href ?? "#"}
         aria-label={action?.label}
-        class="relative overflow-y-hidden w-full"
+        class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
       >
         {action &&
           <Action {...action} />}
-        <Picture preload={lcp}>
-          <Source
-            media="(max-width: 767px)"
-            fetchPriority={lcp ? "high" : "auto"}
-            src={mobile}
-            width={430}
-            height={590}
-          />
-          <img
-            class="object-cover w-full h-full"
-            loading={lcp ? "eager" : "lazy"}
-            src={mobile}
-            alt={alt}
-          />
-        </Picture>
       </a>
+      <Picture preload={lcp}>
+        <Source
+          media="(max-width: 767px)"
+          fetchPriority={lcp ? "high" : "auto"}
+          src={mobile}
+          width={350}
+          height={450}
+        />
+        <img
+          class="object-cover w-full h-full"
+          loading={lcp ? "eager" : "lazy"}
+          src={mobile}
+          alt={alt}
+        />
+      </Picture>
     </div>
   );
 }
@@ -146,18 +143,18 @@ function BannerItem(
     secondImage,
   } = image;
 
-  console.log("item", image);
-
   return (
-    <div class="flex flex-row w-full">
-      <a
-        id={id}
-        href={primaryImage.action?.href ?? "#"}
-        aria-label={primaryImage.action?.label}
-        class="relative overflow-y-hidden w-full"
-      >
-        {primaryImage.action && <Action {...primaryImage.action} />}
-        <Picture preload={lcp}>
+    <div class="flex flex-row w-full relative">
+      <div class="flex flex-row w-full relative">
+        <a
+          id={id}
+          href={primaryImage.action?.href ?? "#"}
+          aria-label={primaryImage.action?.label}
+          class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
+        >
+          {primaryImage.action && <Action {...primaryImage.action} />}
+        </a>
+        <Picture preload={lcp} class="w-full h-full">
           <Source
             media="(max-width: 767px)"
             fetchPriority={lcp ? "high" : "auto"}
@@ -179,17 +176,19 @@ function BannerItem(
             alt={primaryImage.alt}
           />
         </Picture>
-      </a>
+      </div>
       {secondImage &&
         (
-          <a
-            id={id}
-            href={secondImage.action?.href ?? "#"}
-            aria-label={secondImage.action?.label}
-            class="relative overflow-y-hidden w-full"
-          >
-            {secondImage.action && <Action {...secondImage.action} />}
-            <Picture preload={lcp}>
+          <div class="flex flex-row w-full relative">
+            <a
+              id={id}
+              href={secondImage.action?.href ?? "#"}
+              aria-label={secondImage.action?.label}
+              class="absolute overflow-y-hidden w-full bg-gradient-to-t from-[#01010157] to-transparent"
+            >
+              {secondImage.action && <Action {...secondImage.action} />}
+            </a>
+            <Picture preload={lcp} class="w-full h-full">
               <Source
                 media="(max-width: 767px)"
                 fetchPriority={lcp ? "high" : "auto"}
@@ -211,7 +210,7 @@ function BannerItem(
                 alt={secondImage.alt}
               />
             </Picture>
-          </a>
+          </div>
         )}
     </div>
   );
@@ -236,13 +235,13 @@ function Dots(
           `,
         }}
       />
-      <ul class="carousel justify-center col-span-full gap-6 z-10 row-start-4">
+      <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4">
         {images?.map((_, index) => (
           <li class="carousel-item">
             <Slider.Dot index={index}>
               <div class="py-5">
                 <div
-                  class="w-16 sm:w-20 h-0.5 rounded group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  class=" w-12 h-1 lg:w-[71px] group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
                   style={{ animationDuration: `${interval}s` }}
                 />
               </div>
@@ -302,8 +301,6 @@ function BannerCarousel(props: Props) {
   }
 
   const arrayImage = isMobile.value && arrayImagesMobile();
-
-  console.log("array", arrayImage, images);
 
   return (
     <div
