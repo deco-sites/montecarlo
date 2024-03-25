@@ -21,51 +21,56 @@ export interface Props {
   list?: Category[];
 }
 
-
 const DEFAULT_LIST = [
   {
     href: "/aneis",
-    image: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/6173365f-ddb6-463d-a995-cd92a748fd6d",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/6173365f-ddb6-463d-a995-cd92a748fd6d",
     label: "Anéis",
     description: "Anéis",
-    alt: " "
+    alt: " ",
   },
   {
     href: "/acessorios",
-    image: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/143a0a9c-366a-431f-bbff-48c510ced483",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/143a0a9c-366a-431f-bbff-48c510ced483",
     label: "Acessórios",
     description: "Acessórios",
-    alt: " "
+    alt: " ",
   },
   {
     href: "/relogios",
-    image: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/3a5552fe-7eae-4e3d-92b4-6e1cbe0c6666",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/3a5552fe-7eae-4e3d-92b4-6e1cbe0c6666",
     label: "Relógios",
     description: "Relógios",
-    alt: " "
+    alt: " ",
   },
   {
     href: "/aliancas",
-    image: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/82b76e53-e1a3-4d5a-bfc2-07684bb2bcd4",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/82b76e53-e1a3-4d5a-bfc2-07684bb2bcd4",
     label: "Alianças",
     description: "Alianças",
-    alt: " "
+    alt: " ",
   },
   {
     href: "/pulseiras",
-    image: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/8c7a8467-bf85-493d-88ed-258d9074bb19",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/8c7a8467-bf85-493d-88ed-258d9074bb19",
     label: "Pulseiras",
     description: "Pulseiras",
-    alt: " "
+    alt: " ",
   },
   {
     href: "/colares",
-    image: "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/749057b2-4d42-4806-871c-0787c52399f1",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/749057b2-4d42-4806-871c-0787c52399f1",
     label: "Colares",
     description: "Colares",
-    alt: " "
-  }
-]
+    alt: " ",
+  },
+];
 
 function CategoryList(props: Props) {
   const id = useId();
@@ -89,21 +94,24 @@ function CategoryList(props: Props) {
 
       <div class="flex flex-row flex-wrap gap-2 justify-center items-center">
         {list.map((category) => (
-          <a href={category.href} class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group">
-            < Image loading={"eager"}
+          <a
+            href={category.href}
+            class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
+          >
+            <Image
+              loading={"eager"}
               src={category.image}
               width={163}
               height={163}
               alt={category.alt}
-              class="max-w-[228px] w-full group-hover:opacity-75 duration-300" >
+              class="max-w-[228px] w-full group-hover:opacity-75 duration-300"
+            >
             </Image>
             <h3 class="text-sm font-medium">{category.label}</h3>
           </a>
-        ))
-        }
-
-      </div >
-    </div >
+        ))}
+      </div>
+    </div>
   );
 }
 
