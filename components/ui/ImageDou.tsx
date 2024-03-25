@@ -44,11 +44,11 @@ function SectionImage({ props }: { props: Image }) {
         />
         <img class="w-full h-full" src={desktop} alt={alt} />
       </Picture>
-      <div class="w-full absolute top-0 left-0 h-full flex flex-col justify-center items-center bg-gradient-to-t from-[#0000004d] group-hover:from-[#ffc72ce6] group-hover:bg-[#ffc72ce6] gap-2 duration-300 lg:gap-3">
-        <h3 class="hidden group-hover:flex text-3xl lg:text-[50px] text-black duration-300">
+      <div class="w-full absolute top-0 left-0 h-full flex flex-col justify-center items-center bg-gradient-to-t from-[#0000004d] group-hover:from-[#ffc72ce6] group-hover:bg-[#ffc72ce6] gap-2 duration-300 lg:gap-5">
+        <h3 class="hidden group-hover:flex text-3xl lg:text-[50px] text-black duration-300 font-beausiteGrand">
           {contentTitle}
         </h3>
-        <h3 class="flex group-hover:hidden text-3xl lg:text-[50px] absolute bottom-28 text-white">
+        <h3 class="flex group-hover:hidden text-3xl lg:text-[50px] absolute bottom-28 text-[#F5F3E7] font-beausiteGrand">
           {title}
         </h3>
         {content && (
@@ -58,7 +58,7 @@ function SectionImage({ props }: { props: Image }) {
           >
           </span>
         )}
-        <a class="bg-primary absolute bottom-11 text-sm text-black px-2 py-3 group-hover:bg-[#F5F3E7] duration-300">
+        <a class="bg-primary absolute bottom-11 text-sm text-black px-3 py-3 group-hover:bg-[#F5F3E7] duration-300">
           {button}
         </a>
       </div>
