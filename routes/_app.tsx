@@ -29,6 +29,123 @@ export default defineApp(async (_req, ctx) => {
 
         {/* Web Manifest */}
         <link rel="manifest" href={asset("/site.webmanifest")} />
+
+        <style
+          type="text/css"
+          dangerouslySetInnerHTML={{
+            __html: `
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-Regular.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: italic;
+            font-weight: 400;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-RegularItlaic.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: normal;
+            font-weight: 300;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-Light.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: italic;
+            font-weight: 300;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-LightItalic.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: normal;
+            font-weight: 200;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-Thin.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: italic;
+            font-weight: 200;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-ThinItalic.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: normal;
+            font-weight: 500;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-Medium.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: italic;
+            font-weight: 500;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-MediumItalic.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: normal;
+            font-weight: 600;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-Bold.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: italic;
+            font-weight: 600;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-BoldItalic.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: normal;
+            font-weight: 700;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-Black.otf")
+            }") format(OpenType)
+          }
+          @font-face {
+            font-family: 'BeausiteGrand';
+            font-style: italic;
+            font-weight: 700;
+            font-display: swap;
+            src: url("${
+              asset("/fonts/BeausiteGrand-BlackItalic.otf")
+            }") format(OpenType)
+          }
+          `,
+          }}
+        >
+        </style>
       </Head>
 
       {/* Rest of Preact tree */}
