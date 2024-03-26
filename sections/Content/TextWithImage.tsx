@@ -76,7 +76,7 @@ export default function TextWithImage({
           loading="lazy"
         />
       </div>
-      <div class="absolute lg:relative w-full h-full flex-1 flex flex-col items-center justify-end lg:justify-center order-0">
+      <div class="absolute lg:relative w-full h-full flex-1 flex flex-col items-center justify-end lg:justify-center order-0 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)] lg:to-transparent">
         <div class="flex flex-col p-5 py-14 max-w-[430px] gap-3">
           <h3
             class="text-2xl block lg:hidden text-center text-white"
