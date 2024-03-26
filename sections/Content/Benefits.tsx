@@ -1,151 +1,87 @@
-import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
+
+import Carousel, {
+  Props as CarouselProps,
+} from "../../components/layout/Carousel.tsx";
 
 interface Benefit {
-  label: string;
-  /**
-   * @format icon-select
-   * @options deco-sites/storefront/loaders/availableIcons.ts
-   */
-  icon: AvailableIcons;
-  description: string;
+  label?: string;
+  icon: ImageWidget;
+  iconAlt?: string;
+  description?: string;
 }
 
 export interface Props {
-  /**
-   * @default Benefits
-   */
-  title?: string;
-  /**
-   * @default Check out the benefits
-   */
-  description?: string;
-  benefits?: Array<Benefit>;
-  layout?: {
-    variation?: "Simple" | "With border" | "Color reverse";
-    headerAlignment?: "center" | "left";
+  title?: {
+    desktop?: HTMLWidget;
+    mobile?: HTMLWidget;
   };
+  description?: HTMLWidget;
+  benefits?: Array<Benefit>;
+  slider?: CarouselProps;
 }
 
-export default function Benefits(
-  props: Props,
-) {
-  const {
-    title = "Benefits",
-    description = "Check out the benefits",
-    benefits = [{
-      icon: "Truck",
-      label: "Entrega em todo Brasil",
-      description: "Consulte o prazo no fechamento da compra.",
-    }, {
-      icon: "Discount",
-      label: "15% na primeira compra",
-      description: "Aplicado direto na sacola de compras.",
-    }, {
-      icon: "ArrowsPointingOut",
-      label: "Devolução grátis",
-      description: "Veja as condições para devolver seu produto.",
-    }],
-    layout,
-  } = props;
+export default function Benefits({
+  title = {
+    desktop: "Lorem ipsum dolor sit amet",
+    mobile: "Lorem ipsum dolor sit amet",
+  },
+  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+  benefits = [
+    {
+      label: "Lorem ipsum",
+      icon: "https://placehold.co/20x20",
+      iconAlt: "",
+      description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    },
+    {
+      label: "Lorem ipsum",
+      icon: "https://placehold.co/20x20",
+      description: "Lorem ipsum dolor sit amet, coA cada compra, ganhe 15% de bônus no próximo pedidonsectetur adipiscing elit.",
+    }
+  ],
+  slider,
+}: Props) {
 
   const listOfBenefits = benefits.map((benefit, index) => {
-    const showDivider = index < benefits.length - 1;
-    const reverse = layout?.variation === "Color reverse";
-    const benefitLayout = !layout?.variation || layout?.variation === "Simple"
-      ? "tiled"
-      : "piledup";
-
     return (
-      <div
-        class={`${
-          reverse ? "bg-primary text-primary-content p-4 lg:px-8 lg:py-4" : ""
-        } flex gap-4 ${
-          benefitLayout == "piledup" ? "flex-col items-center text-center" : ""
-        } ${
-          showDivider && benefitLayout !== "piledup"
-            ? "border-b border-neutral-300"
-            : ""
-        } ${showDivider ? "pb-4 lg:pr-8 lg:border-r lg:border-b-0" : ""} ${
-          showDivider && !reverse ? "lg:pb-0" : ""
-        }`}
-      >
-        <div class="flex-none">
-          <Icon
-            id={benefit.icon}
-            class={"text-base-content"}
-            width={36}
-            height={36}
-            strokeWidth={0.01}
-            fill="currentColor"
+      <div class="flex flex-col h-full max-w-[127px]">
+        <div 
+          class="
+            relative flex justify-center items-center mb-4 min-h-[100px]
+            before:absolute before:w-[70px] before:h-[70px] before:border-2 before:border-black before:rotate-45
+          ">
+          <img 
+            height={20}
+            width="auto"
+            src={benefit.icon}
+            alt={benefit.iconAlt}
+            decoding="async"
+            loading="lazy"
           />
         </div>
-        <div class="flex-auto flex flex-col gap-1 lg:gap-2">
-          <div
-            class={`text-base lg:text-xl leading-7 ${
-              reverse ? "text-base-100" : "text-base-content"
-            }`}
-          >
-            {benefit.label}
-          </div>
-          <p
-            class={`text-sm leading-5 ${
-              reverse ? "text-base-100" : "text-neutral"
-            } ${benefitLayout == "piledup" ? "hidden lg:block" : ""}`}
-          >
-            {benefit.description}
-          </p>
+        <div class="flex flex-col gap-1 text-center font-poppins">
+          <p class="text-sm font-medium">{benefit.label}</p>
+          <p class="text-xs font-light">{benefit.description}</p>
         </div>
       </div>
     );
   });
 
   return (
-    <>
-      {!layout?.variation || layout?.variation === "Simple"
-        ? (
-          <div class="w-full container px-4 py-8 flex flex-col gap-8 lg:gap-10 lg:py-10 lg:px-0">
-            <Header
-              title={title}
-              description={description}
-              alignment={layout?.headerAlignment || "center"}
-            />
-            <div class="w-full flex justify-center">
-              <div class="flex flex-col gap-4 lg:gap-8 w-full lg:grid grid-flow-col auto-cols-fr">
-                {listOfBenefits}
-              </div>
-            </div>
-          </div>
-        )
-        : ""}
-      {layout?.variation === "With border" && (
-        <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
-          <Header
-            title={title}
-            description={description}
-            alignment={layout?.headerAlignment || "center"}
-          />
-          <div class="w-full flex justify-center">
-            <div class="grid grid-cols-2 gap-4 w-full py-6 px-4 border border-base-300 lg:gap-8 lg:grid-flow-col lg:auto-cols-fr lg:p-10">
-              {listOfBenefits}
-            </div>
-          </div>
-        </div>
-      )}
-      {layout?.variation === "Color reverse" && (
-        <div class="w-full container flex flex-col px-4 py-8 gap-8 lg:gap-10 lg:py-10 lg:px-0">
-          <Header
-            title={title}
-            description={description}
-            alignment={layout?.headerAlignment || "center"}
-          />
-          <div class="w-full flex justify-center">
-            <div class="grid grid-cols-2 gap-4 w-full lg:gap-8 lg:grid-flow-col lg:auto-cols-fr">
-              {listOfBenefits}
-            </div>
-          </div>
-        </div>
-      )}
-    </>
+    <div class="bg-white flex flex-col mx-auto py-12 gap-5 lg:gap-16">
+      <div class="flex flex-col gap-3 container px-5">
+        { title?.mobile && <h3 class="text-sm font-poppins block lg:hidden" dangerouslySetInnerHTML={{ __html: title.mobile }}/> }
+        { title?.desktop && <h3 class="text-2xl font-poppins hidden lg:block" dangerouslySetInnerHTML={{ __html: title.desktop }}/> }
+        { description && <span class="text-sm lg:text-lg font-poppins" dangerouslySetInnerHTML={{ __html: description }}/> }
+      </div>
+      <div class="hidden lg:flex container flex-row flex-wrap gap-10 justify-evenly items-start max-w-[1080px]">
+        {listOfBenefits}
+      </div>
+      <div class="block lg:hidden mx-5">
+        <Carousel {...slider} children={listOfBenefits} />
+      </div>
+    </div>
   );
 }
