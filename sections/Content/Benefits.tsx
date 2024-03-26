@@ -38,21 +38,20 @@ export default function Benefits({
     {
       label: "Lorem ipsum",
       icon: "https://placehold.co/20x20",
-      description: "Lorem ipsum dolor sit amet, coA cada compra, ganhe 15% de bônus no próximo pedidonsectetur adipiscing elit.",
-    }
+      description:
+        "Lorem ipsum dolor sit amet, coA cada compra, ganhe 15% de bônus no próximo pedidonsectetur adipiscing elit.",
+    },
   ],
   slider,
 }: Props) {
-
   const listOfBenefits = benefits.map((benefit, index) => {
     return (
       <div class="flex flex-col h-full max-w-[127px]">
-        <div 
-          class="
+        <div class="
             relative flex justify-center items-center mb-4 min-h-[100px]
             before:absolute before:w-[70px] before:h-[70px] before:border-2 before:border-black before:rotate-45
           ">
-          <img 
+          <img
             height={20}
             width="auto"
             src={benefit.icon}
@@ -72,9 +71,24 @@ export default function Benefits({
   return (
     <div class="bg-white flex flex-col mx-auto py-12 gap-5 lg:gap-16">
       <div class="flex flex-col gap-3 container px-5">
-        { title?.mobile && <h3 class="text-sm font-poppins block lg:hidden" dangerouslySetInnerHTML={{ __html: title.mobile }}/> }
-        { title?.desktop && <h3 class="text-2xl font-poppins hidden lg:block" dangerouslySetInnerHTML={{ __html: title.desktop }}/> }
-        { description && <span class="text-sm lg:text-lg font-poppins" dangerouslySetInnerHTML={{ __html: description }}/> }
+        {title?.mobile && (
+          <h3
+            class="text-sm font-poppins block lg:hidden"
+            dangerouslySetInnerHTML={{ __html: title.mobile }}
+          />
+        )}
+        {title?.desktop && (
+          <h3
+            class="text-2xl font-poppins hidden lg:block"
+            dangerouslySetInnerHTML={{ __html: title.desktop }}
+          />
+        )}
+        {description && (
+          <span
+            class="text-sm lg:text-lg font-poppins"
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
+        )}
       </div>
       <div class="hidden lg:flex container flex-row flex-wrap gap-10 justify-evenly items-start max-w-[1080px]">
         {listOfBenefits}
