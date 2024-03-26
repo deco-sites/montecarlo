@@ -6,12 +6,11 @@ import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Category {
-  tag?: string;
   label: string;
   description?: string;
   href?: string;
-  image?: ImageWidget;
-  buttonText?: string;
+  image: ImageWidget;
+  alt?: string;
 }
 
 export interface Props {
@@ -20,81 +19,56 @@ export interface Props {
     description?: string;
   };
   list?: Category[];
-  layout?: {
-    headerAlignment?: "center" | "left";
-    categoryCard?: {
-      textPosition?: "top" | "bottom";
-      textAlignment?: "center" | "left";
-    };
-  };
-}
-
-function CardText(
-  { tag, label, description, alignment }: {
-    tag?: string;
-    label?: string;
-    description?: string;
-    alignment?: "center" | "left";
-  },
-) {
-  return (
-    <div
-      class={`flex flex-col ${
-        alignment === "center" ? "text-center" : "text-left"
-      }`}
-    >
-      {tag && <div class="text-sm text-primary">{tag}</div>}
-      {label && <h3 class="text-lg text-base-content">{label}</h3>}
-      {description && <div class="text-sm text-neutral">{description}</div>}
-    </div>
-  );
 }
 
 const DEFAULT_LIST = [
   {
-    tag: "10% off",
-    label: "Feminino",
-    description: "Moda feminina direto de Milão",
-    href: "/feminino",
+    href: "/aneis",
     image:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
-    buttonText: "Ver produtos",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/6173365f-ddb6-463d-a995-cd92a748fd6d",
+    label: "Anéis",
+    description: "Anéis",
+    alt: " ",
   },
   {
-    tag: "10% off",
-    label: "Feminino",
-    description: "Moda feminina direto de Milão",
-    href: "/feminino",
+    href: "/acessorios",
     image:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
-    buttonText: "Ver produtos",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/143a0a9c-366a-431f-bbff-48c510ced483",
+    label: "Acessórios",
+    description: "Acessórios",
+    alt: " ",
   },
   {
-    tag: "10% off",
-    label: "Feminino",
-    description: "Moda feminina direto de Milão",
-    href: "/feminino",
+    href: "/relogios",
     image:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
-    buttonText: "Ver produtos",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/3a5552fe-7eae-4e3d-92b4-6e1cbe0c6666",
+    label: "Relógios",
+    description: "Relógios",
+    alt: " ",
   },
   {
-    tag: "10% off",
-    label: "Feminino",
-    description: "Moda feminina direto de Milão",
-    href: "/feminino",
+    href: "/aliancas",
     image:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
-    buttonText: "Ver produtos",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/82b76e53-e1a3-4d5a-bfc2-07684bb2bcd4",
+    label: "Alianças",
+    description: "Alianças",
+    alt: " ",
   },
   {
-    tag: "10% off",
-    label: "Feminino",
-    description: "Moda feminina direto de Milão",
-    href: "/feminino",
+    href: "/pulseiras",
     image:
-      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2753/b2278d2d-2270-482b-98d4-f09d5f05ba97",
-    buttonText: "Ver produtos",
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/8c7a8467-bf85-493d-88ed-258d9074bb19",
+    label: "Pulseiras",
+    description: "Pulseiras",
+    alt: " ",
+  },
+  {
+    href: "/colares",
+    image:
+      "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/4616/749057b2-4d42-4806-871c-0787c52399f1",
+    label: "Colares",
+    description: "Colares",
+    alt: " ",
   },
 ];
 
@@ -106,78 +80,37 @@ function CategoryList(props: Props) {
       description: "",
     },
     list = DEFAULT_LIST,
-    layout = {
-      headerAlignment: "center",
-      categoryCard: {
-        textPosition: "top",
-        textAlignment: "center",
-      },
-    },
   } = props;
 
   return (
     <div
       id={id}
-      class="container py-8 flex flex-col gap-8 lg:gap-10 text-base-content  lg:py-10"
+      class=" py-7 lg:py- flex flex-col justify-center items-center gap-5 lg:gap-10 text-base-content lg:py-10 text-center px-1"
     >
-      <Header
-        title={header.title}
-        description={header.description || ""}
-        alignment={layout.headerAlignment || "center"}
-      />
+      <div class="flex flex-col w-full gap-1">
+        <h2 class=" font-semibold text-xl lg:text-3xl">{header.title}</h2>
+        <p class=" font-medium  text-sm lg:text-base">{header.description}</p>
+      </div>
 
-      <Slider class="carousel carousel-start gap-4 lg:gap-8 row-start-2 row-end-5">
-        {list.map((
-          { tag, label, description, href, image, buttonText },
-          index,
-        ) => (
-          <Slider.Item
-            index={index}
-            class="flex flex-col gap-4 carousel-item first:pl-6 sm:first:pl-0 last:pr-6 sm:last:pr-0"
+      <div class="flex flex-row flex-wrap gap-2 justify-center items-center">
+        {list.map((category) => (
+          <a
+            href={category.href}
+            class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
           >
-            <a
-              href={href}
-              class="flex flex-col gap-4 lg:w-[280px] w-40 lg:h-auto"
+            <Image
+              loading={"eager"}
+              src={category.image}
+              width={163}
+              height={163}
+              alt={category.alt}
+              class="max-w-[228px] w-full group-hover:opacity-75 duration-300"
             >
-              {layout.categoryCard?.textPosition === "top" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
-                )}
-              {image &&
-                (
-                  <figure>
-                    <Image
-                      class="card w-full"
-                      src={image}
-                      alt={description || label || tag}
-                      width={160}
-                      height={195}
-                      loading="lazy"
-                    />
-                  </figure>
-                )}
-              {layout.categoryCard?.textPosition === "bottom" &&
-                (
-                  <CardText
-                    tag={tag}
-                    label={label}
-                    description={description}
-                    alignment={layout?.categoryCard?.textAlignment}
-                  />
-                )}
-            </a>
-            {buttonText &&
-              <a href={href} class="btn">{buttonText}</a>}
-          </Slider.Item>
+            </Image>
+            <h3 class="text-sm font-medium">{category.label}</h3>
+          </a>
         ))}
-      </Slider>
-
-      <SliderJS rootId={id} />
+      </div>
     </div>
   );
 }

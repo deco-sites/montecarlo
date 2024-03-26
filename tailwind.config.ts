@@ -7,6 +7,10 @@ export default {
   theme: {
     container: { center: true },
     extend: {
+      fontFamily: {
+        "beausiteGrand": ["BeausiteGrand"],
+        "poppins": ["Poppins", "sans-serif"],
+      },
       animation: {
         sliding: "sliding 30s linear infinite",
       },
@@ -16,9 +20,6 @@ export default {
           "100%": { transform: "translateX(-50%)" },
         },
       },
-      fontFamily: {
-        "poppins": ["Poppins", "sans-serif"],
-      }
     },
   },
 };
