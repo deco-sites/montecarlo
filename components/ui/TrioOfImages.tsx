@@ -77,8 +77,8 @@ function Card({ image }: { image: CardImage }) {
 
   return (
     <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 ">
-      <div class="relative flex justify-center items-center">
-        <Picture preload={preload}>
+      <div class="relative flex justify-center items-center w-full h-full">
+        <Picture preload={preload} class="w-full h-full">
           <Source
             media="(max-width: 767px)"
             fetchPriority={preload ? "high" : "auto"}
