@@ -44,8 +44,8 @@ function Buttons() {
           <Icon
             class="text-base-100"
             size={40}
-            id="ChevronLeft"
-            strokeWidth={3}
+            id="arrowLeft"
+            strokeWidth={1}
           />
         </Slider.PrevButton>
       </div>
@@ -54,8 +54,8 @@ function Buttons() {
           <Icon
             class="text-base-100"
             size={40}
-            id="ChevronRight"
-            strokeWidth={3}
+            id="arrowRight"
+            strokeWidth={1}
           />
         </Slider.NextButton>
       </div>
@@ -103,7 +103,10 @@ function Card({ image }: { image: CardImage }) {
           />
         </Picture>
         {button && (
-          <a class="absolute bottom-9 p-3 bg-primary text-black" href={href}>
+          <a
+            class="absolute bottom-9 py-4 px-6 bg-primary text-black"
+            href={href}
+          >
             {button}
           </a>
         )}
@@ -131,9 +134,11 @@ export default function TrioOfImages(
 
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8">
-      <div>
-        {title && <h3>{title}</h3>}
-        {subTitle && <h3>{subTitle}</h3>}
+      <div class="flex flex-col w-full gap-1">
+        {title && <h3 class=" font-semibold text-xl lg:text-3xl">{title}</h3>}
+        {subTitle && (
+          <p class=" font-medium  text-sm lg:text-base">{subTitle}</p>
+        )}
       </div>
       <div
         id={id}
