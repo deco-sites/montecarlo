@@ -9,6 +9,7 @@ export default {
     extend: {
       fontFamily: {
         "beausiteGrand": ["BeausiteGrand"],
+        "poppins": ["Poppins", "sans-serif"],
       },
       animation: {
         sliding: "sliding 30s linear infinite",
