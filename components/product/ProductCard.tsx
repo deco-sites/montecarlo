@@ -144,49 +144,6 @@ function ProductCard({
         class="relative overflow-hidden"
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
-        {/* Wishlist button */}
-
-        <div
-          class={`absolute top-2 z-10 flex items-center
-            ${
-            l?.elementsPositions?.favoriteIcon === "Top left"
-              ? "left-2"
-              : "right-2"
-          }
-            
-          `}
-        >
-          <div
-            class={`${l?.hide?.favoriteIcon ? "hidden" : "block"} ${
-              l?.onMouseOver?.showFavoriteIcon ? "lg:group-hover:block" : ""
-            }`}
-          >
-            {platform === "vtex" && (
-              <WishlistButtonVtex
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
-            {platform === "wake" && (
-              <WishlistButtonWake
-                productGroupID={productGroupID}
-                productID={productID}
-              />
-            )}
-          </div>
-          {/* Discount % */}
-          {!l?.hide?.discount && (
-            <div class="text-sm bg-base-100 p-[10px]">
-              <span class="text-base-content font-bold">
-                {listPrice && price
-                  ? `${Math.round(((listPrice - price) / listPrice) * 100)}% `
-                  : ""}
-              </span>
-              OFF
-            </div>
-          )}
-        </div>
-
         {/* Product Images */}
         <a
           href={url && relative(url)}
