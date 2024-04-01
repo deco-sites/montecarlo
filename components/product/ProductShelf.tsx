@@ -16,23 +16,28 @@ import { clx } from "../../sdk/clx.ts";
 export interface Props {
   products: Product[] | null;
   title?: string;
-  description?: string;
+  /**
+   * @format html
+   */
+  subTitle?: string;
   layout?: {
     numberOfSliders?: {
       mobile?: 1 | 2 | 3 | 4 | 5;
-      desktop?: 1 | 2 | 3 | 4 | 5;
+      desktop?: 1 | 2 | 3 | 4 | 5 | 6;
     };
     headerAlignment?: "center" | "left";
     headerfontSize?: "Normal" | "Large" | "Small";
     showArrows?: boolean;
+    ctaCollection?: string;
+    hrefCollection?: string;
   };
   cardLayout?: cardLayout;
 }
 
-function ProductShelf({
+function ShelfCollection({
   products,
   title,
-  description,
+  subTitle,
   layout,
   cardLayout,
 }: Props) {
@@ -48,6 +53,7 @@ function ProductShelf({
     3: "md:w-1/3",
     4: "md:w-1/4",
     5: "md:w-1/5",
+    6: "md:w-1/6",
   };
 
   const slideMobile = {
@@ -58,28 +64,36 @@ function ProductShelf({
     5: "w-1/5",
   };
   return (
-    <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">
-      <Header
-        title={title || ""}
-        description={description || ""}
-        fontSize={layout?.headerfontSize || "Large"}
-        alignment={layout?.headerAlignment || "center"}
-      />
-
+    <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 items-center">
+      <div class="flex flex-col w-full gap-1">
+        {title && (
+          <h3 class=" font-semibold text-center text-xl lg:text-3xl">
+            {title}
+          </h3>
+        )}
+        {subTitle && (
+          <span
+            dangerouslySetInnerHTML={{ __html: subTitle }}
+            class=" font-medium text-center text-sm lg:text-base"
+          >
+          </span>
+        )}
+      </div>
       <div
         id={id}
         class={clx(
-          "grid",
-          layout?.showArrows && "grid-cols-[48px_1fr_48px]",
-          "px-0 md:px-5 container",
+          "grid max-w-[1488px]",
+          layout?.showArrows &&
+            "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
+          "px-0",
         )}
       >
-        <Slider class="carousel carousel-center sm:carousel-end sm:gap-1 row-start-2 row-end-5">
+        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start ">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
               class={clx(
-                "carousel-item",
+                "carousel-item ",
                 slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
                 slideMobile[layout?.numberOfSliders?.mobile ?? 1],
               )}
@@ -97,14 +111,14 @@ function ProductShelf({
 
         {layout?.showArrows && (
           <>
-            <div class="relative block z-10 col-start-1 row-start-3">
+            <div class="relative z-10 col-start-1 row-start-3 hidden lg:block">
               <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronLeft" strokeWidth={3} class="w-5" />
+                <Icon size={40} id="arrowLeft" strokeWidth={3} />
               </Slider.PrevButton>
             </div>
-            <div class="relative block z-10 col-start-3 row-start-3">
+            <div class="relative z-10 col-start-3 row-start-3 hidden lg:block">
               <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
-                <Icon size={24} id="ChevronRight" strokeWidth={3} />
+                <Icon size={40} id="arrowRight" strokeWidth={3} />
               </Slider.NextButton>
             </div>
           </>
@@ -127,8 +141,17 @@ function ProductShelf({
           }}
         />
       </div>
+      {layout?.ctaCollection && (
+        <a
+          href={layout?.hrefCollection || ""}
+          aria-label="view product"
+          class="w-min py-[10px] px-[14px] bg-primary text-black text-sm lg:hidden"
+        >
+          {layout?.ctaCollection}
+        </a>
+      )}
     </div>
   );
 }
 
-export default ProductShelf;
+export default ShelfCollection;

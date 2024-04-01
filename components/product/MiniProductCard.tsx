@@ -13,6 +13,23 @@ import Image from "apps/website/components/Image.tsx";
 import { relative } from "../../sdk/url.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
+interface Name {
+  /**
+   * @title Product Name fontSize
+   * @format button-group
+   * @options deco-sites/montecarlo/loaders/icons.ts
+   */
+  fontSize?: "Small" | "Normal" | "Large";
+}
+interface Price {
+  /**
+   * @title Price fontSize
+   * @format button-group
+   * @options deco-sites/montecarlo/loaders/icons.ts
+   */
+  fontSize?: "Small" | "Normal" | "Large";
+}
+
 /**
  * @titleBy value
  */
@@ -27,6 +44,8 @@ export interface Layout {
     showCta?: boolean;
     ctaText?: string;
   };
+  name?: Name;
+  price?: Price;
   materialImages?: ImgMaterial[];
 }
 
@@ -47,6 +66,12 @@ interface Props {
 
 const WIDTH = 200;
 const HEIGHT = 200;
+
+const PROPS_FONT_SIZE = {
+  "Small": "text-sm",
+  "Normal": "text-base",
+  "Large": "text-lg",
+};
 
 function MiniProductCard({
   product,
@@ -79,6 +104,9 @@ function MiniProductCard({
   const l = layout;
   const align = "center";
   const relativeUrl = relative(url);
+
+  console.log("font", layout?.name?.fontSize);
+
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
     return (
@@ -101,7 +129,7 @@ function MiniProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm"
+      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm "
     >
       {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
@@ -175,10 +203,12 @@ function MiniProductCard({
         </a>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col justify-between">
+      <div class="flex-auto flex flex-col justify-between text-start">
         <div class="flex flex-col gap-0">
           <h2
-            class="truncate text-sm font-normal"
+            class={`truncate font-normal ${
+              PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
+            }`}
             dangerouslySetInnerHTML={{ __html: name ?? "" }}
           />
         </div>
@@ -219,7 +249,11 @@ function MiniProductCard({
                 <>{formatPrice(listPrice, offers?.priceCurrency)}</>
               )}
             </div>
-            <div class="text-blak text-sm  font-bold">
+            <div
+              class={`text-blak font-bold ${
+                PROPS_FONT_SIZE[layout?.price?.fontSize || "Small"]
+              }`}
+            >
               {formatPrice(price, offers?.priceCurrency)}
             </div>
             <div class="text-black text-xs font-light min-h-4">

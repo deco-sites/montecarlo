@@ -6,39 +6,47 @@ import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { useVariantPossibilities } from "../../sdk/useVariantPossiblities.ts";
+import { useMaterialProducts } from "../../sdk/useMaterialProducts.ts";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "../../sdk/url.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
+
+interface Name {
+  /**
+   * @title Product Name fontSize
+   * @format button-group
+   * @options deco-sites/montecarlo/loaders/icons.ts
+   */
+  fontSize?: "Small" | "Normal" | "Large";
+}
+interface Price {
+  /**
+   * @title Price fontSize
+   * @format button-group
+   * @options deco-sites/montecarlo/loaders/icons.ts
+   */
+  fontSize?: "Small" | "Normal" | "Large";
+}
+
+/**
+ * @titleBy value
+ */
+interface ImgMaterial {
+  value: string;
+  image: ImageWidget;
+}
 
 export interface Layout {
-  basics?: {
-    contentAlignment?: "Left" | "Center";
-    oldPriceSize?: "Small" | "Normal";
+  onMouseOver?: {
+    image?: "Change image" | "Zoom image" | "None";
+    showCta?: boolean;
     ctaText?: string;
   };
-  elementsPositions?: {
-    skuSelector?: "Top" | "Bottom";
-    favoriteIcon?: "Top right" | "Top left";
-  };
-  hide?: {
-    productName?: boolean;
-    productDescription?: boolean;
-    allPrices?: boolean;
-    discount?: boolean;
-    installments?: boolean;
-    skuSelector?: boolean;
-    cta?: boolean;
-    favoriteIcon?: boolean;
-  };
-  onMouseOver?: {
-    image?: "Change image" | "Zoom image";
-    card?: "None" | "Move up";
-    showFavoriteIcon?: boolean;
-    showSkuSelector?: boolean;
-    showCardShadow?: boolean;
-    showCta?: boolean;
-  };
+  name?: Name;
+  price?: Price;
+  materialImages?: ImgMaterial[];
 }
 
 interface Props {
@@ -57,9 +65,15 @@ interface Props {
 }
 
 const WIDTH = 200;
-const HEIGHT = 279;
+const HEIGHT = 200;
 
-function ProductCard({
+const PROPS_FONT_SIZE = {
+  "Small": "text-sm",
+  "Normal": "text-base",
+  "Large": "text-lg",
+};
+
+function MiniProductCard({
   product,
   preload,
   itemListName,
@@ -67,7 +81,15 @@ function ProductCard({
   platform,
   index,
 }: Props) {
-  const { url, productID, name, image: images, offers, isVariantOf } = product;
+  const {
+    url,
+    productID,
+    name,
+    image: images,
+    offers,
+    isVariantOf,
+    additionalProperty,
+  } = product;
   const id = `product-card-${productID}`;
   const hasVariant = isVariantOf?.hasVariant ?? [];
   const productGroupID = isVariantOf?.productGroupID;
@@ -76,13 +98,15 @@ function ProductCard({
   const { listPrice, price, installments } = useOffer(offers);
   const possibilities = useVariantPossibilities(hasVariant, product);
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
+  const materials = isVariantOf &&
+    useMaterialProducts(isVariantOf.additionalProperty);
 
   const l = layout;
-  const align =
-    !l?.basics?.contentAlignment || l?.basics?.contentAlignment == "Left"
-      ? "left"
-      : "center";
+  const align = "center";
   const relativeUrl = relative(url);
+
+  console.log("font", layout?.name?.fontSize);
+
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
     return (
@@ -100,27 +124,21 @@ function ProductCard({
       </li>
     );
   });
+
   const cta = (
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block"
+      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm "
     >
-      {l?.basics?.ctaText || "Ver produto"}
+      {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
   );
 
   return (
     <div
       id={id}
-      class={`card card-compact group w-full ${
-        align === "center" ? "text-center" : "text-start"
-      } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
-        ${
-        l?.onMouseOver?.card === "Move up" &&
-        "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2"
-      }
-      `}
+      class={`card card-compact group w-full px-1 gap-2 text-center h-min max-w-[246px] mx-auto md:max-w-full`}
       data-deco="view-product"
     >
       <SendEventOnClick
@@ -148,7 +166,7 @@ function ProductCard({
         <a
           href={url && relative(url)}
           aria-label="view product"
-          class="grid grid-cols-1 grid-rows-1 w-full"
+          class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
           <Image
             src={front.url!}
@@ -166,160 +184,85 @@ function ProductCard({
             decoding="async"
           />
           {(!l?.onMouseOver?.image ||
-            l?.onMouseOver?.image == "Change image") && (
-            <Image
-              src={back?.url ?? front.url!}
-              alt={back?.alternateName ?? front.alternateName}
-              width={WIDTH}
-              height={HEIGHT}
-              class="bg-base-100 col-span-full row-span-full transition-opacity rounded w-full opacity-0 lg:group-hover:opacity-100"
-              sizes="(max-width: 640px) 50vw, 20vw"
-              loading="lazy"
-              decoding="async"
-            />
-          )}
+              l?.onMouseOver?.image == "Change image")
+            ? (
+              <Image
+                src={back?.url ?? front.url!}
+                alt={back?.alternateName ?? front.alternateName}
+                width={WIDTH}
+                height={HEIGHT}
+                class="bg-base-100 col-span-full row-span-full transition-opacity w-full opacity-0 lg:group-hover:opacity-100"
+                sizes="(max-width: 640px) 50vw, 20vw"
+                loading="lazy"
+                decoding="async"
+              />
+            )
+            : (null)}
         </a>
-        <figcaption
-          class={`
-          absolute bottom-1 left-0 w-full flex flex-col gap-3 p-2 ${
-            l?.onMouseOver?.showSkuSelector || l?.onMouseOver?.showCta
-              ? "transition-opacity opacity-0 lg:group-hover:opacity-100"
-              : "lg:hidden"
-          }`}
-        >
-          {/* SKU Selector */}
-          {l?.onMouseOver?.showSkuSelector && (
-            <ul class="flex justify-center items-center gap-2 w-full">
-              {skuSelector}
-            </ul>
-          )}
-          {l?.onMouseOver?.showCta && cta}
-        </figcaption>
       </figure>
       {/* Prices & Name */}
-      <div class="flex-auto flex flex-col p-2 gap-3 lg:gap-2">
-        {/* SKU Selector */}
-        {(!l?.elementsPositions?.skuSelector ||
-          l?.elementsPositions?.skuSelector === "Top") && (
-          <>
-            {l?.hide?.skuSelector
-              ? (
-                ""
-              )
-              : (
-                <ul
-                  class={`flex items-center gap-2 w-full overflow-auto p-3 ${
-                    align === "center" ? "justify-center" : "justify-start"
-                  } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
-                >
-                  {skuSelector}
-                </ul>
-              )}
-          </>
-        )}
+      <div class="flex-auto flex flex-col justify-between text-start">
+        <div class="flex flex-col gap-0">
+          <h2
+            class={`truncate font-normal ${
+              PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
+            }`}
+            dangerouslySetInnerHTML={{ __html: name ?? "" }}
+          />
+        </div>
+        <div class="flex w-full h-auto flex-1 py-1">
+          {materials?.map((item) => {
+            if (
+              !layout?.materialImages || layout?.materialImages === undefined
+            ) {
+              return null;
+            }
 
-        {l?.hide?.productName && l?.hide?.productDescription
-          ? (
-            ""
-          )
-          : (
-            <div class="flex flex-col gap-0">
-              {l?.hide?.productName
-                ? (
-                  ""
-                )
-                : (
-                  <h2
-                    class="truncate text-base lg:text-lg text-base-content uppercase font-normal"
-                    dangerouslySetInnerHTML={{ __html: name ?? "" }}
-                  />
-                )}
-              {l?.hide?.productDescription
-                ? (
-                  ""
-                )
-                : (
-                  <div
-                    class="truncate text-sm lg:text-sm text-neutral"
-                    dangerouslySetInnerHTML={{ __html: description ?? "" }}
-                  />
-                )}
-            </div>
-          )}
-        {l?.hide?.allPrices
-          ? (
-            ""
-          )
-          : (
-            <div class="flex flex-col gap-2">
-              <div
-                class={`flex flex-col gap-0 ${
-                  l?.basics?.oldPriceSize === "Normal"
-                    ? "lg:flex-row-reverse lg:gap-2"
-                    : ""
-                } ${align === "center" ? "justify-center" : "justify-end"}`}
-              >
-                <div
-                  class={`line-through text-base-300 text-xs font-light ${
-                    l?.basics?.oldPriceSize === "Normal" ? "lg:text-sm" : ""
-                  }`}
-                >
-                  {formatPrice(listPrice, offers?.priceCurrency)}
-                </div>
-                <div class="text-base-content lg:text-sm font-light">
-                  {formatPrice(price, offers?.priceCurrency)}
-                </div>
-              </div>
-            </div>
-          )}
+            const img = layout?.materialImages.find((img) =>
+              img.value === item
+            );
 
-        {/* SKU Selector */}
-        {l?.elementsPositions?.skuSelector === "Bottom" && (
-          <>
-            <ul
-              class={`flex items-center gap-2 w-full ${
-                align === "center" ? "justify-center" : "justify-between"
-              } ${l?.onMouseOver?.showSkuSelector ? "lg:hidden" : ""}`}
-            >
-              {l?.hide?.installments
-                ? (
-                  ""
-                )
-                : (
-                  <li>
-                    <span class="text-base-300 font-light text-sm truncate">
-                      ou {installments}
-                    </span>
-                  </li>
-                )}
-              {l?.hide?.skuSelector
-                ? (
-                  ""
-                )
-                : (
-                  <li>
-                    <ul class="flex items-center gap-2">{skuSelector}</ul>
-                  </li>
-                )}
-            </ul>
-          </>
-        )}
-        {!l?.hide?.cta
-          ? (
+            if (!img || img === undefined) {
+              return null;
+            }
+            return (
+              <Image
+                class="rounded-full h-min"
+                src={img.image}
+                width={15}
+                height={15}
+                alt={img.value}
+              />
+            );
+          })}
+        </div>
+        <div class="flex flex-col gap-2 group-hover:hidden">
+          <div
+            class={`flex flex-col gap-0 justify-between`}
+          >
             <div
-              class={`flex-auto flex items-end ${
-                l?.onMouseOver?.showCta ? "lg:hidden" : ""
+              class={`line-through text-[#9F9584] text-xs font-light min-h-4`}
+            >
+              {(listPrice && price) && (listPrice > price) && (
+                <>{formatPrice(listPrice, offers?.priceCurrency)}</>
+              )}
+            </div>
+            <div
+              class={`text-blak font-bold ${
+                PROPS_FONT_SIZE[layout?.price?.fontSize || "Small"]
               }`}
             >
-              {cta}
+              {formatPrice(price, offers?.priceCurrency)}
             </div>
-          )
-          : (
-            ""
-          )}
+            <div class="text-black text-xs font-light min-h-4">
+              {installments}
+            </div>
+          </div>
+        </div>
+        {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
     </div>
   );
 }
 
-export default ProductCard;
+export default MiniProductCard;
