@@ -15,8 +15,7 @@ import { useUI } from "../../sdk/useUI.ts";
  * @titleBy alt
  */
 export interface Banner {
-  primaryImage: ImageItem;
-  secondImage?: ImageItem;
+  banner: ImageItem[];
 }
 
 interface FontSize {
@@ -36,12 +35,12 @@ export interface ImageItem {
   alt: string;
   action?: {
     /** @description when user clicks on the image, go to this link */
-    href: string;
+    href?: string;
     /** @description Image text title */
-    title: string;
+    title?: string;
     fontSize?: FontSize;
     /** @description Button label */
-    label: string;
+    label?: string;
   };
 }
 
@@ -75,23 +74,32 @@ const PROPS_FONT_SIZE = {
 };
 
 function Action(
-  action: { title: string; label: string; href: string; fontSize?: FontSize },
+  action: {
+    title?: string;
+    label?: string;
+    href?: string;
+    fontSize?: FontSize;
+  },
 ) {
   return (
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
-      <span
-        class={`${
-          PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
-        } font-light text-primary text-center font-beausiteGrand`}
-      >
-        {action.title}
-      </span>
-      <Button
-        class="bg-primary text-sm py-4 px-6 w-fit hover:bg-primary border-none"
-        aria-label={action.label}
-      >
-        {action.label}
-      </Button>
+      {action.title && (
+        <span
+          class={`${
+            PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
+          } font-light text-primary text-center font-beausiteGrand`}
+        >
+          {action.title}
+        </span>
+      )}
+      {action.label && (
+        <Button
+          class="bg-primary text-sm py-4 px-6 w-fit hover:bg-primary border-none"
+          aria-label={action.label}
+        >
+          {action?.label}
+        </Button>
+      )}
     </div>
   );
 }
@@ -138,80 +146,42 @@ function BannerItemMobile(
 function BannerItem(
   { image, lcp, id }: { image: Banner; lcp?: boolean; id: string },
 ) {
-  const {
-    primaryImage,
-    secondImage,
-  } = image;
-
   return (
     <div class="flex flex-row w-full relative">
-      <div class="flex flex-row w-full relative">
-        <a
-          id={id}
-          href={primaryImage.action?.href ?? "#"}
-          aria-label={primaryImage.action?.label}
-          class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
-        >
-          {primaryImage.action && <Action {...primaryImage.action} />}
-        </a>
-        <Picture preload={lcp} class="w-full h-full">
-          <Source
-            media="(max-width: 767px)"
-            fetchPriority={lcp ? "high" : "auto"}
-            src={primaryImage.mobile}
-            width={430}
-            height={590}
-          />
-          <Source
-            media="(min-width: 768px)"
-            fetchPriority={lcp ? "high" : "auto"}
-            src={primaryImage.desktop}
-            width={1440}
-            height={600}
-          />
-          <img
-            class="object-cover w-full h-full"
-            loading={lcp ? "eager" : "lazy"}
-            src={primaryImage.desktop}
-            alt={primaryImage.alt}
-          />
-        </Picture>
-      </div>
-      {secondImage &&
-        (
-          <div class="flex flex-row w-full relative">
-            <a
-              id={id}
-              href={secondImage.action?.href ?? "#"}
-              aria-label={secondImage.action?.label}
-              class="absolute overflow-y-hidden w-full bg-gradient-to-t from-[#01010157] to-transparent"
-            >
-              {secondImage.action && <Action {...secondImage.action} />}
-            </a>
-            <Picture preload={lcp} class="w-full h-full">
-              <Source
-                media="(max-width: 767px)"
-                fetchPriority={lcp ? "high" : "auto"}
-                src={secondImage.mobile}
-                width={430}
-                height={590}
-              />
-              <Source
-                media="(min-width: 768px)"
-                fetchPriority={lcp ? "high" : "auto"}
-                src={secondImage.desktop}
-                width={1440}
-                height={600}
-              />
-              <img
-                class="object-cover w-full h-full"
-                loading={lcp ? "eager" : "lazy"}
-                src={secondImage.desktop}
-                alt={secondImage.alt}
-              />
-            </Picture>
-          </div>
-        )}
+      {image.banner.map((primaryImage) => (
+        <div class="flex flex-row w-full relative">
+          <a
+            id={id}
+            href={primaryImage.action?.href ?? "#"}
+            aria-label={primaryImage.action?.label}
+            class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
+          >
+            {primaryImage.action && <Action {...primaryImage.action} />}
+          </a>
+          <Picture preload={lcp} class="w-full h-full">
+            <Source
+              media="(max-width: 767px)"
+              fetchPriority={lcp ? "high" : "auto"}
+              src={primaryImage.mobile}
+              width={430}
+              height={590}
+            />
+            <Source
+              media="(min-width: 768px)"
+              fetchPriority={lcp ? "high" : "auto"}
+              src={primaryImage.desktop}
+              width={1440}
+              height={600}
+            />
+            <img
+              class="object-cover w-full h-full"
+              loading={lcp ? "eager" : "lazy"}
+              src={primaryImage.desktop}
+              alt={primaryImage.alt}
+            />
+          </Picture>
+        </div>
+      ))}
     </div>
   );
 }
@@ -292,9 +262,10 @@ function BannerCarousel(props: Props) {
   function arrayImagesMobile() {
     const array: Array<ImageItem> = [];
     images?.map((img) => {
-      array.push(img.primaryImage);
-      if (img.secondImage) {
-        array.push(img.secondImage);
+      if (img?.banner) {
+        img.banner.map((item) => {
+          array.push(item);
+        });
       }
     });
     return array;
