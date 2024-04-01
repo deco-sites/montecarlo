@@ -58,10 +58,11 @@ import * as $$$$$$45 from "./sections/Product/ProductShelfTabbed.tsx";
 import * as $$$$$$46 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$47 from "./sections/Product/ShelfCollection.tsx";
 import * as $$$$$$48 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$49 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$50 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$51 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$52 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$49 from "./sections/Product/Showcases.tsx";
+import * as $$$$$$50 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$51 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$52 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$53 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -125,10 +126,11 @@ const manifest = {
     "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$46,
     "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$47,
     "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$48,
-    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$49,
-    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$50,
-    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$51,
-    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$52,
+    "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$49,
+    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$50,
+    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$51,
+    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$52,
+    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$53,
   },
   "apps": {
     "deco-sites/montecarlo/apps/decohub.ts": $$$$$$$$$$$0,

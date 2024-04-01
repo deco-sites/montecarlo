@@ -105,8 +105,6 @@ function MiniProductCard({
   const align = "center";
   const relativeUrl = relative(url);
 
-  console.log("font", layout?.name?.fontSize);
-
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
     return (
