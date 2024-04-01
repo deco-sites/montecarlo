@@ -54,3 +54,32 @@
     --dot-progress: 100%
   }
 }
+
+@media (max-width: 1024px){
+
+    .customScroll {
+    overflow-x: auto;
+    overflow-y: scroll;
+    box-sizing: content-box;
+    display: flex;
+    flex: none;
+    scroll-snap-align: start;
+    padding-bottom: 12px;
+  }
+
+  .customScroll::-webkit-scrollbar {
+    width: 100%; 
+    margin: 10px 10px;
+    height: 4px;           /* width of the entire scrollbar */
+  }
+  .customScroll::-webkit-scrollbar-track {
+    background: #F5F3E7;  
+    margin:8px;
+    border-radius:8px;
+    /* color of the tracking area */
+  }
+  .customScroll::-webkit-scrollbar-thumb {
+    background-color: #CAC7B6;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */ /* creates padding around scroll thumb */
+  }
+}

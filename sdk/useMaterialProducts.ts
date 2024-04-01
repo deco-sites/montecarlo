@@ -11,7 +11,5 @@ export function useMaterialProducts(
     }
   });
 
-  console.log("arrayM", arrayMaterial);
-
   return arrayMaterial;
 }

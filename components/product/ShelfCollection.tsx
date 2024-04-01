@@ -28,6 +28,8 @@ export interface Props {
     headerAlignment?: "center" | "left";
     headerfontSize?: "Normal" | "Large" | "Small";
     showArrows?: boolean;
+    ctaCollection?: string;
+    hrefCollection?: string;
   };
   cardLayout?: cardLayout;
 }
@@ -62,7 +64,7 @@ function ShelfCollection({
     5: "w-1/5",
   };
   return (
-    <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 bg-[#E0DFD6] lg:bg-white">
+    <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 bg-[#E0DFD6] lg:bg-white items-center">
       <div class="flex flex-col w-full gap-1">
         {title && (
           <h3 class=" font-semibold text-center text-xl lg:text-3xl">
@@ -80,13 +82,13 @@ function ShelfCollection({
       <div
         id={id}
         class={clx(
-          "grid",
+          "grid max-w-[1488px]",
           layout?.showArrows &&
-            "grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
+            "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
           "px-0",
         )}
       >
-        <Slider class="carousel carousel-item sm:carousel-end row-start-2 row-end-5">
+        <Slider class="row-start-2 lg:carousel lg:carousel-item row-end-5 customScroll snap-mandatory snap-start">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
@@ -109,12 +111,12 @@ function ShelfCollection({
 
         {layout?.showArrows && (
           <>
-            <div class="relative block z-10 col-start-1 row-start-3">
+            <div class="relative z-10 col-start-1 row-start-3 hidden lg:block">
               <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
                 <Icon size={40} id="arrowLeft" strokeWidth={3} />
               </Slider.PrevButton>
             </div>
-            <div class="relative block z-10 col-start-3 row-start-3">
+            <div class="relative z-10 col-start-3 row-start-3 hidden lg:block">
               <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
                 <Icon size={40} id="arrowRight" strokeWidth={3} />
               </Slider.NextButton>
@@ -139,6 +141,15 @@ function ShelfCollection({
           }}
         />
       </div>
+      {layout?.ctaCollection && (
+        <a
+          href={layout?.hrefCollection || ""}
+          aria-label="view product"
+          class="w-min py-[10px] px-[14px] bg-primary text-black text-sm lg:hidden"
+        >
+          {layout?.ctaCollection}
+        </a>
+      )}
     </div>
   );
 }

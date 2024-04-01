@@ -22,32 +22,10 @@ interface ImgMaterial {
 }
 
 export interface Layout {
-  basics?: {
-    contentAlignment?: "Left" | "Center";
-    oldPriceSize?: "Small" | "Normal";
-    ctaText?: string;
-  };
-  elementsPositions?: {
-    skuSelector?: "Top" | "Bottom";
-    favoriteIcon?: "Top right" | "Top left";
-  };
-  hide?: {
-    productName?: boolean;
-    productDescription?: boolean;
-    allPrices?: boolean;
-    discount?: boolean;
-    installments?: boolean;
-    skuSelector?: boolean;
-    cta?: boolean;
-    favoriteIcon?: boolean;
-  };
   onMouseOver?: {
-    image?: "Change image" | "Zoom image";
-    card?: "None" | "Move up";
-    showFavoriteIcon?: boolean;
-    showSkuSelector?: boolean;
-    showCardShadow?: boolean;
+    image?: "Change image" | "Zoom image" | "None";
     showCta?: boolean;
+    ctaText?: string;
   };
   materialImages?: ImgMaterial[];
 }
@@ -99,10 +77,7 @@ function MiniProductCard({
     useMaterialProducts(isVariantOf.additionalProperty);
 
   const l = layout;
-  const align =
-    !l?.basics?.contentAlignment || l?.basics?.contentAlignment == "Left"
-      ? "left"
-      : "center";
+  const align = "center";
   const relativeUrl = relative(url);
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
@@ -126,21 +101,16 @@ function MiniProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="btn btn-block hidden group-hover:flex "
+      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm"
     >
-      {l?.basics?.ctaText || "Ver produto"}
+      {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
   );
 
   return (
     <div
       id={id}
-      class={`card card-compact group w-full px-1 gap-2 ${
-        align === "center" ? "text-center" : "text-start"
-      } ${l?.onMouseOver?.showCardShadow ? "lg:hover:card-bordered" : ""}
-        ${
-        l?.onMouseOver?.card === "Move up" &&
-        "duration-500 transition-translate ease-in-out lg:hover:-translate-y-2 "
+      class={`card card-compact group w-full px-1 gap-2 text-center"
       }
       `}
       data-deco="view-product"
@@ -188,55 +158,30 @@ function MiniProductCard({
             decoding="async"
           />
           {(!l?.onMouseOver?.image ||
-            l?.onMouseOver?.image == "Change image") && (
-            <Image
-              src={back?.url ?? front.url!}
-              alt={back?.alternateName ?? front.alternateName}
-              width={WIDTH}
-              height={HEIGHT}
-              class="bg-base-100 col-span-full row-span-full transition-opacity w-full opacity-0 lg:group-hover:opacity-100"
-              sizes="(max-width: 640px) 50vw, 20vw"
-              loading="lazy"
-              decoding="async"
-            />
-          )}
+              l?.onMouseOver?.image == "Change image")
+            ? (
+              <Image
+                src={back?.url ?? front.url!}
+                alt={back?.alternateName ?? front.alternateName}
+                width={WIDTH}
+                height={HEIGHT}
+                class="bg-base-100 col-span-full row-span-full transition-opacity w-full opacity-0 lg:group-hover:opacity-100"
+                sizes="(max-width: 640px) 50vw, 20vw"
+                loading="lazy"
+                decoding="async"
+              />
+            )
+            : (null)}
         </a>
-        <figcaption
-          class={`
-          absolute bottom-1 left-0 w-full flex flex-col gap-3 p-2 ${
-            l?.onMouseOver?.showSkuSelector || l?.onMouseOver?.showCta
-              ? "transition-opacity opacity-0 lg:group-hover:opacity-100"
-              : "lg:hidden"
-          }`}
-        >
-          {/* SKU Selector */}
-          {l?.onMouseOver?.showSkuSelector && (
-            <ul class="flex justify-center items-center gap-2 w-full">
-              {skuSelector}
-            </ul>
-          )}
-        </figcaption>
       </figure>
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col justify-between">
-        {l?.hide?.productName && l?.hide?.productDescription
-          ? (
-            ""
-          )
-          : (
-            <div class="flex flex-col gap-0">
-              {l?.hide?.productName
-                ? (
-                  ""
-                )
-                : (
-                  <h2
-                    class="truncate text-sm font-normal"
-                    dangerouslySetInnerHTML={{ __html: name ?? "" }}
-                  />
-                )}
-            </div>
-          )}
+        <div class="flex flex-col gap-0">
+          <h2
+            class="truncate text-sm font-normal"
+            dangerouslySetInnerHTML={{ __html: name ?? "" }}
+          />
+        </div>
         <div class="flex w-full h-auto flex-1 py-1">
           {materials?.map((item) => {
             if (
@@ -263,32 +208,26 @@ function MiniProductCard({
             );
           })}
         </div>
-        {l?.hide?.allPrices
-          ? (
-            ""
-          )
-          : (
-            <div class="flex flex-col gap-2 group-hover:hidden">
-              <div
-                class={`flex flex-col gap-0 justify-between`}
-              >
-                {(listPrice && price) && (listPrice > price) && (
-                  <div
-                    class={`line-through text-[#9F9584] text-xs font-light`}
-                  >
-                    {formatPrice(listPrice, offers?.priceCurrency)}
-                  </div>
-                )}
-                <div class="text-blak text-sm  font-bold">
-                  {formatPrice(price, offers?.priceCurrency)}
-                </div>
-                <div class="text-black text-xs font-light">
-                  {installments}
-                </div>
-              </div>
+        <div class="flex flex-col gap-2 group-hover:hidden">
+          <div
+            class={`flex flex-col gap-0 justify-between`}
+          >
+            <div
+              class={`line-through text-[#9F9584] text-xs font-light min-h-4`}
+            >
+              {(listPrice && price) && (listPrice > price) && (
+                <>{formatPrice(listPrice, offers?.priceCurrency)}</>
+              )}
             </div>
-          )}
-        {l?.onMouseOver?.showCta && cta}
+            <div class="text-blak text-sm  font-bold">
+              {formatPrice(price, offers?.priceCurrency)}
+            </div>
+            <div class="text-black text-xs font-light min-h-4">
+              {installments}
+            </div>
+          </div>
+        </div>
+        {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
     </div>
   );
