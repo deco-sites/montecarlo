@@ -76,10 +76,12 @@ function Newsletter({
 
       const fields = form.fields.map((field) => field.name);
 
-      const formData: {[key: string]: string | boolean} = {};
+      const formData: { [key: string]: string | boolean } = {};
 
       for (const field of fields) {
-        const input = e.currentTarget.elements.namedItem(field) as RadioNodeList;
+        const input = e.currentTarget.elements.namedItem(
+          field,
+        ) as RadioNodeList;
         formData[field] = input.value;
       }
 
@@ -89,8 +91,8 @@ function Newsletter({
 
       const currentDate = new Date();
       const year = currentDate.getFullYear();
-      const month = ('0' + (currentDate.getMonth() + 1)).slice(-2);
-      const day = ('0' + currentDate.getDate()).slice(-2);
+      const month = ("0" + (currentDate.getMonth() + 1)).slice(-2);
+      const day = ("0" + currentDate.getDate()).slice(-2);
 
       formData["creation_date"] = `${year}-${month}-${day}`;
 
@@ -101,19 +103,21 @@ function Newsletter({
       const options = {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       };
-      
-      await fetch("https://rckmiddleware--montecarlo.myvtex.com/_v/register-leads-mkt-cloud", options)
-        .then(response => {
+
+      await fetch(
+        "https://rckmiddleware--montecarlo.myvtex.com/_v/register-leads-mkt-cloud",
+        options,
+      )
+        .then((response) => {
           return response.json();
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error);
         });
-
     } finally {
       loading.value = false;
     }
@@ -195,7 +199,9 @@ function Newsletter({
                     for="termsAndConditions"
                     class="flex-1 text-xs"
                     dangerouslySetInnerHTML={{
-                      __html: form.termsAndConditions ? form.termsAndConditions : "",
+                      __html: form.termsAndConditions
+                        ? form.termsAndConditions
+                        : "",
                     }}
                   />
                 </div>

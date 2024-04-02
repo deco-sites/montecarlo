@@ -65,13 +65,12 @@ export default function NewsletterSection({
     },
   },
 }: Props) {
-
   return (
-      <Newsletter
-        title={title}
-        description={description}
-        form={form}
-        layout={layout}
-      />
+    <Newsletter
+      title={title}
+      description={description}
+      form={form}
+      layout={layout}
+    />
   );
 }
