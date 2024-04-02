@@ -83,3 +83,27 @@
     border-radius: 20px;       /* roundness of the scroll thumb */ /* creates padding around scroll thumb */
   }
 }
+
+.customScrollVertical {
+  overflow-x: auto;
+  overflow-y: scroll;
+  box-sizing: content-box;
+  display: flex;
+  scroll-snap-align: start;
+  padding-bottom: 12px;
+}
+
+.customScrollVertical::-webkit-scrollbar {
+  width: 4px; 
+  height: 100%;           /* width of the entire scrollbar */
+}
+.customScrollVertical::-webkit-scrollbar-track {
+  background: white;  
+  margin:8px;
+  border-radius:8px;
+  /* color of the tracking area */
+}
+.customScrollVertical::-webkit-scrollbar-thumb {
+  background-color: #CAC7B6;    /* color of the scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */ /* creates padding around scroll thumb */
+}
