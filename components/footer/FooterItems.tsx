@@ -26,13 +26,16 @@ export default function FooterItems(
             {sections.map((section) => (
               <li>
                 <div class="flex flex-col gap-2">
-                  <span class="font-medium text-lg">
+                  <span class="font-medium text-sm">
                     {section.label}
                   </span>
                   <ul class={`flex flex-col gap-2 flex-wrap text-sm`}>
                     {section.items?.map((item) => (
                       <li>
-                        <a href={item.href} class="block py-1 link link-hover">
+                        <a
+                          href={item.href}
+                          class="block py-1 link link-hover text-xs"
+                        >
                           {item.label}
                         </a>
                       </li>
@@ -44,10 +47,10 @@ export default function FooterItems(
           </ul>
 
           {/* Mobile view */}
-          <ul class="flex flex-col md:hidden gap-4">
+          <ul class="flex flex-col md:hidden gap-6 font-semibold text-sm">
             {sections.map((section) => (
               <li>
-                <div class="collapse collapse-arrow ">
+                <div class="collapse collapse-arrowCustom border-b-[1px] border-black rounded-none py-2">
                   <input id={section.label} type="checkbox" class="min-h-[0]" />
                   <label
                     htmlFor={section.label}
@@ -55,7 +58,7 @@ export default function FooterItems(
                   >
                     <span>{section.label}</span>
                   </label>
-                  <div class="collapse-content">
+                  <div class="collapse-content px-0">
                     <ul
                       class={`flex flex-col gap-1 pl-5 pt-2`}
                     >
@@ -63,7 +66,7 @@ export default function FooterItems(
                         <li>
                           <a
                             href={item.href}
-                            class="block py-1 link link-hover"
+                            class="block py-1 link link-hover text-xs"
                           >
                             {item.label}
                           </a>

@@ -4,13 +4,13 @@ import Image from "apps/website/components/Image.tsx";
 /**
  * @titleBy alt
  */
-export interface PaymentItem {
+export interface Security {
   src: ImageWidget;
   alt: string;
 }
 
-export default function PaymentMethods(
-  { content }: { content?: { title?: string; items?: PaymentItem[] } },
+export default function Securitys(
+  { content }: { content?: { title?: string; items?: Security[] } },
 ) {
   return (
     <>
@@ -24,8 +24,8 @@ export default function PaymentMethods(
               return (
                 <li>
                   <Image
-                    width={20}
-                    height={12}
+                    width={68}
+                    height={68}
                     loading="lazy"
                     src={item.src}
                     alt={item.alt}

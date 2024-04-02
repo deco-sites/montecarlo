@@ -7,10 +7,15 @@ import MobileApps from "../../components/footer/MobileApps.tsx";
 import PaymentMethods from "../../components/footer/PaymentMethods.tsx";
 import RegionSelector from "../../components/footer/RegionSelector.tsx";
 import Social from "../../components/footer/Social.tsx";
-import Newsletter from "../../islands/Newsletter.tsx";
 import { clx } from "../../sdk/clx.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import PoweredByDeco from "apps/website/components/PoweredByDeco.tsx";
+import FormStore from "./FormStore.tsx";
+import type { Security } from "./Security.tsx";
+import type { PaymentItem } from "./PaymentMethods.tsx";
+import type { Stack } from "./Stacks.tsx";
+import Stacks from "./Stacks.tsx";
+import Securitys from "./Security.tsx";
 
 export type Item = {
   label: string;
@@ -33,10 +38,6 @@ export interface SocialItem {
   link: string;
 }
 
-export interface PaymentItem {
-  label: "Diners" | "Elo" | "Mastercard" | "Pix" | "Visa";
-}
-
 export interface MobileApps {
   /** @description Link to the app */
   apple?: string;
@@ -47,13 +48,6 @@ export interface MobileApps {
 export interface RegionOptions {
   currency?: Item[];
   language?: Item[];
-}
-
-export interface NewsletterForm {
-  placeholder?: string;
-  buttonText?: string;
-  /** @format html */
-  helpText?: string;
 }
 
 export interface Layout {
@@ -71,7 +65,6 @@ export interface Layout {
     | "Variation 5";
   hide?: {
     logo?: boolean;
-    newsletter?: boolean;
     sectionLinks?: boolean;
     socialLinks?: boolean;
     paymentMethods?: boolean;
@@ -82,33 +75,46 @@ export interface Layout {
   };
 }
 
+interface FormStore {
+  title?: string;
+  placeholderState?: string;
+  placeholderCity?: string;
+  button?: string;
+}
+
 export interface Props {
   logo?: {
     image: ImageWidget;
     description?: string;
-  };
-  newsletter?: {
-    title?: string;
-    /** @format textarea */
-    description?: string;
-    form?: NewsletterForm;
   };
   sections?: Section[];
   social?: {
     title?: string;
     items: SocialItem[];
   };
+  formState?: FormStore;
+  /**
+   * @format html
+   */
+  copyWrite?: string;
   payments?: {
     title?: string;
     items: PaymentItem[];
   };
   mobileApps?: MobileApps;
-  regionOptions?: RegionOptions;
   extraLinks?: Item[];
   backToTheTop?: {
     text?: string;
   };
   layout?: Layout;
+  security?: {
+    title?: string;
+    items: Security[];
+  };
+  stacks?: {
+    title?: string;
+    items: Stack[];
+  };
 }
 
 const LAYOUT = {
@@ -121,11 +127,6 @@ const LAYOUT = {
 
 function Footer({
   logo,
-  newsletter = {
-    title: "Newsletter",
-    description: "",
-    form: { placeholder: "", buttonText: "", helpText: "" },
-  },
   sections = [{
     "label": "Sobre",
     "items": [
@@ -163,20 +164,18 @@ function Footer({
     title: "Redes sociais",
     items: [{ label: "Instagram", link: "/" }, { label: "Tiktok", link: "/" }],
   },
-  payments = {
-    title: "Formas de pagamento",
-    items: [{ label: "Mastercard" }, { label: "Visa" }, { label: "Pix" }],
-  },
+  payments,
+  stacks,
   mobileApps = { apple: "/", android: "/" },
-  regionOptions = { currency: [], language: [] },
   extraLinks = [],
-  backToTheTop,
+  formState,
+  copyWrite,
+  security,
   layout = {
     backgroundColor: "Primary",
     variation: "Variation 1",
     hide: {
       logo: false,
-      newsletter: false,
       sectionLinks: false,
       socialLinks: false,
       paymentMethods: false,
@@ -188,15 +187,6 @@ function Footer({
   },
 }: Props) {
   const _logo = layout?.hide?.logo ? <></> : <Logo logo={logo} />;
-  const _newsletter = layout?.hide?.newsletter ? <></> : (
-    <Newsletter
-      content={newsletter}
-      layout={{
-        tiled: layout?.variation == "Variation 4" ||
-          layout?.variation == "Variation 5",
-      }}
-    />
-  );
   const _sectionLinks = layout?.hide?.sectionLinks ? <></> : (
     <FooterItems
       sections={sections}
@@ -213,9 +203,6 @@ function Footer({
   const _apps = layout?.hide?.mobileApps
     ? <></>
     : <MobileApps content={mobileApps} />;
-  const _region = layout?.hide?.regionOptions
-    ? <></>
-    : <RegionSelector content={regionOptions} />;
   const _links = layout?.hide?.extraLinks
     ? <></>
     : <ExtraLinks content={extraLinks} />;
@@ -223,17 +210,15 @@ function Footer({
   return (
     <footer
       class={clx(
-        "w-full flex flex-col pt-10 pb-2 md:pb-10 gap-10",
-        LAYOUT[layout?.backgroundColor ?? "Primary"],
+        "w-full flex flex-col pt-10 gap-10 bg-primary",
       )}
     >
-      <div class="lg:container mx-6 lg:mx-auto">
+      <div class="max-w-[1408px] w-full lg:mx-auto">
         {(!layout?.variation || layout?.variation == "Variation 1") && (
           <div class="flex flex-col gap-10">
             <div class="flex flex-col md:flex-row md:justify-between md:flex-wrap lg:flex-nowrap gap-8 lg:gap-12">
               {_logo}
               {_sectionLinks}
-              {_newsletter}
             </div>
             <Divider />
             <div class="flex flex-col md:flex-row gap-10 md:gap-14 md:items-end">
@@ -241,7 +226,6 @@ function Footer({
               {_social}
               <div class="flex flex-col lg:flex-row gap-10 lg:gap-14 lg:items-end">
                 {_apps}
-                {_region}
               </div>
             </div>
             <Divider />
@@ -259,10 +243,8 @@ function Footer({
                 {_social}
                 {_payments}
                 {_apps}
-                {_region}
               </div>
               <div class="flex flex-col gap-10 lg:gap-20 lg:w-1/2 lg:pr-10">
-                {_newsletter}
                 {_sectionLinks}
               </div>
             </div>
@@ -278,7 +260,6 @@ function Footer({
             {_logo}
             <div class="flex flex-col lg:flex-row gap-14">
               <div class="flex flex-col md:flex-row lg:flex-col md:justify-between lg:justify-normal gap-10 lg:w-2/5">
-                {_newsletter}
                 <div class="flex flex-col gap-10">
                   {_payments}
                   {_apps}
@@ -289,7 +270,6 @@ function Footer({
                   {_sectionLinks}
                   {_social}
                 </div>
-                {_region}
               </div>
             </div>
             <Divider />
@@ -301,36 +281,29 @@ function Footer({
         )}
         {layout?.variation == "Variation 4" && (
           <div class="flex flex-col gap-10">
-            {_newsletter}
-            {layout?.hide?.newsletter ? <></> : <Divider />}
-            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between">
+            <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between px-2">
               {_sectionLinks}
-              <div class="flex flex-col md:flex-row lg:flex-col gap-10 lg:gap-10 lg:w-2/5 lg:pl-10">
-                <div class="flex flex-col md:flex-row gap-10 lg:gap-20">
-                  <div class="lg:flex-auto">
-                    {_payments}
-                  </div>
-                  <div class="lg:flex-auto">
-                    {_social}
-                  </div>
-                </div>
-                <div class="flex flex-col gap-10 lg:gap-10">
-                  {_region}
-                  {_apps}
-                </div>
+              <div class="flex flex-col md:flex-row lg:flex-col gap-10 lg:gap-7 lg:w-[30%]">
+                <FormStore formState={formState} />
+                {_social}
+                {copyWrite && (
+                  <span
+                    class="font-semibold text-sm text-center lg:text-start"
+                    dangerouslySetInnerHTML={{ __html: copyWrite }}
+                  >
+                  </span>
+                )}
               </div>
             </div>
-            <Divider />
-            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center">
-              {_logo}
-              <PoweredByDeco />
+            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center bg-white px-2 pt-8 pb-12">
+              <Securitys content={security} />
+              <Stacks content={stacks} />
+              {_payments}
             </div>
           </div>
         )}
         {layout?.variation == "Variation 5" && (
           <div class="flex flex-col gap-10">
-            {_newsletter}
-            {layout?.hide?.newsletter ? <></> : <Divider />}
             {_logo}
             <div class="flex flex-col md:flex-row gap-10 lg:gap-20 md:justify-between">
               {_sectionLinks}
@@ -345,15 +318,11 @@ function Footer({
               <PoweredByDeco />
               <div class="flex flex-col md:flex-row gap-10 md:items-center">
                 {_links}
-                {_region}
               </div>
             </div>
           </div>
         )}
       </div>
-      {layout?.hide?.backToTheTop
-        ? <></>
-        : <BackToTop content={backToTheTop?.text} />}
     </footer>
   );
 }
