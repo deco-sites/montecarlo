@@ -119,7 +119,7 @@ function Footer({
         "w-full flex flex-col gap-10",
       )}
     >
-      <div class="bg-primary w-full lg:mx-auto pt-10">
+      <div class="bg-primary w-full lg:mx-auto pt-12">
         <div class="flex flex-col gap-10">
           <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between px-2 max-w-[1408px] w-full lg:mx-auto">
             <FooterItems
