@@ -112,6 +112,7 @@ export default function Newsletter({
         </div>
         <form
           action={form.action}
+          method="POST"
           class="flex flex-col gap-5 items-center font-poppins"
         >
           <div class="flex flex-col lg:flex-row items-start gap-2.5 lg:gap-2 w-full">
