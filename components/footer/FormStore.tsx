@@ -1,4 +1,7 @@
+import type { ImageWidget } from "apps/admin/widgets.ts";
+import Image from "apps/website/components/Image.tsx";
 export interface Props {
+  icon?: ImageWidget;
   title?: string;
   placeholderState?: string;
   placeholderCity?: string;
@@ -8,11 +11,21 @@ export interface Props {
 export default function FormStore({ formState }: { formState?: Props }) {
   return (
     <form class="w-full flex-col flex items-center lg:items-start font-semibold text-sm">
+      {formState?.icon && (
+        <Image
+          width={25}
+          height={28}
+          alt={"Localização"}
+          src={formState.icon}
+          loading="lazy"
+          class="flex lg:hidden object-contain mb-2"
+        />
+      )}
       <h4 class="mb-6">
         {formState?.title}
       </h4>
       <select
-        className="select select-bordered w-full max-w-xs bg-primary border-b pl-0 text-sm outline-none"
+        className="select select-bordered w-full  bg-primary border-b pl-0 text-sm outline-none "
         style={{
           border: "none",
           borderBottom: "1px solid black",
@@ -24,7 +37,7 @@ export default function FormStore({ formState }: { formState?: Props }) {
         <option>Greedo</option>
       </select>
       <select
-        className="select select-bordered w-full max-w-xs bg-primary border-b pl-0 text-sm  outline-none"
+        className="select select-bordered w-full bg-primary border-b pl-0 text-sm  outline-none "
         style={{
           border: "none",
           borderBottom: "1px solid black",
