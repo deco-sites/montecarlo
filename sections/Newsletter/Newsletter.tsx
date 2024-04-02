@@ -2,14 +2,18 @@ import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 interface Form {
   action: string;
-  fields: {
-    name: string;
-    type: string;
-    placeholder?: string;
-    required?: boolean;
-  }[];
+  fields: Field[];
   privacyPolicy?: HTMLWidget;
   submitButtonText?: string;
+}
+
+interface Field {
+  name: string;
+  type: string;
+  placeholder?: string;
+  required?: boolean;
+  helpText?: string;
+  pattern?: string;
 }
 
 interface Layout {
@@ -39,11 +43,15 @@ export default function Newsletter({
       type: "text",
       placeholder: "nome",
       required: true,
+      helpText: "",
+      pattern: "",
     }, {
       name: "e-mail",
       type: "email",
       placeholder: "e-mail",
       required: true,
+      helpText: "",
+      pattern: "",
     }],
     privacyPolicy:
       "Li e concordo com os <a href='#termos'>Termos e Condições</a>, e com a <a href='#politica'>Política de privacidade</a> da Monte Carlo.",
@@ -67,8 +75,9 @@ export default function Newsletter({
         <input
           type="checkbox"
           class="peer relative h-5 w-5 cursor-pointer appearance-none border-2 transition-all checked:border-[#FFC72C] checked:bg-[#FFC72C]"
-          id="privacyPolicy"
+          name="privacyPolicy"
           checked={false}
+          required
         />
         <span class="absolute text-black transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
           <svg
@@ -105,15 +114,21 @@ export default function Newsletter({
           action={form.action}
           class="flex flex-col gap-5 items-center font-poppins"
         >
-          <div class="flex flex-col lg:flex-row gap-2.5 lg:gap-2 w-full">
+          <div class="flex flex-col lg:flex-row items-start gap-2.5 lg:gap-2 w-full">
             {form.fields.map((field) => (
-              <input
-                class="flex-1 p-3 text-xs placeholder-black font-medium"
-                name={field.name}
-                type={field.type}
-                placeholder={field.placeholder}
-                required={field.required}
-              />
+              <label for={field.name} class="flex flex-col gap-1 flex-1 w-full">
+                <input
+                  class="flex-1 p-3 text-xs placeholder-black font-medium peer focus:outline-none"
+                  name={field.name}
+                  type={field.type}
+                  placeholder={field.placeholder}
+                  required={field.required}
+                  pattern={field.pattern}
+                />
+                  <span class="hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                    {field.helpText}
+                  </span>
+              </label>
             ))}
           </div>
 
