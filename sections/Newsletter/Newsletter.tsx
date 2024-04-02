@@ -125,9 +125,9 @@ export default function Newsletter({
                   required={field.required}
                   pattern={field.pattern}
                 />
-                  <span class="hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
-                    {field.helpText}
-                  </span>
+                <span class="hidden text-xs text-red-500 peer-[&:not(:placeholder-shown):not(:focus):invalid]:block">
+                  {field.helpText}
+                </span>
               </label>
             ))}
           </div>
