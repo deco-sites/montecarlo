@@ -140,7 +140,7 @@ export default function TrioOfImages(
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8 gap-5 lg:gap-10">
       <div class="flex flex-col w-full gap-1 items-center">
-        {title && <h3 class=" font-semibold text-xl lg:text-3xl">{title}</h3>}
+        {title && <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>}
         {subTitle && (
           <span
             dangerouslySetInnerHTML={{ __html: subTitle }}

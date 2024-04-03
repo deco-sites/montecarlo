@@ -48,9 +48,9 @@ function SectionImage({ props }: { props: Image }) {
         <h3 class="hidden group-hover:flex text-3xl lg:text-[50px] text-black duration-300 font-beausiteGrand">
           {contentTitle}
         </h3>
-        <h3 class="flex group-hover:hidden text-3xl lg:text-[50px] absolute bottom-28 text-[#F5F3E7] font-beausiteGrand">
+        <h2 class="flex group-hover:hidden text-3xl lg:text-[50px] absolute bottom-28 text-[#F5F3E7] font-beausiteGrand">
           {title}
-        </h3>
+        </h2>
         {content && (
           <span
             class="hidden group-hover:flex text-lg lg:text-xl max-w-[400px] text-center text-black duration-300"

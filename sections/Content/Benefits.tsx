@@ -72,13 +72,13 @@ export default function Benefits({
     <div class="bg-white flex flex-col mx-auto py-12 gap-5 lg:gap-16">
       <div class="flex flex-col gap-3 container px-5">
         {title?.mobile && (
-          <h3
+          <h2
             class="text-sm font-poppins block lg:hidden"
             dangerouslySetInnerHTML={{ __html: title.mobile }}
           />
         )}
         {title?.desktop && (
-          <h3
+          <h2
             class="text-2xl font-poppins hidden lg:block"
             dangerouslySetInnerHTML={{ __html: title.desktop }}
           />

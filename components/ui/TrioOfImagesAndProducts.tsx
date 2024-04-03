@@ -148,7 +148,7 @@ export default function TrioOfImagesAndProducts(
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8">
       <div class="flex flex-col w-full gap-1">
-        {title && <h3 class=" font-semibold text-xl lg:text-3xl">{title}</h3>}
+        {title && <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>}
         {subTitle && (
           <p class=" font-medium  text-sm lg:text-base">{subTitle}</p>
         )}

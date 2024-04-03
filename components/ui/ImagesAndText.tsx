@@ -48,9 +48,9 @@ function CardImage(
       <div class="flex flex-col w-full items-center gap-6 lg:py-11 py-6 lg:px-20 px-8">
         <div class="flex flex-col w-full gap-1">
           {title && (
-            <h3 class=" font-semibold text-center text-xl lg:text-3xl">
+            <h2 class=" font-semibold text-center text-xl lg:text-3xl">
               {title}
-            </h3>
+            </h2>
           )}
           {content && (
             <span

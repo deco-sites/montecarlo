@@ -113,9 +113,9 @@ function Card({ image }: { image: CardImage }) {
       </div>
       <div class="flex flex-col gap-1">
         {title && (
-          <h4 class="text-center font-medium text-lg text-black lg:text-xl">
+          <h2 class="text-center font-medium text-lg text-black lg:text-xl">
             {title}
-          </h4>
+          </h2>
         )}
         {description && (
           <p class="text-center text-sm max-w-[240px] lg:max-w-full text-black">
