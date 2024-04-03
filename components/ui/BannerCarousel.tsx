@@ -85,8 +85,9 @@ function Action(
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
       {action.title && (
         <span
-          class={`${PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
-            } font-light text-primary text-center font-beausiteGrand`}
+          class={`${
+            PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
+          } font-light text-primary text-center font-beausiteGrand`}
         >
           {action.title}
         </span>
