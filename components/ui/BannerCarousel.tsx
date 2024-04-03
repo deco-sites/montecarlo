@@ -85,9 +85,8 @@ function Action(
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
       {action.title && (
         <span
-          class={`${
-            PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
-          } font-light text-primary text-center font-beausiteGrand`}
+          class={`${PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
+            } font-light text-primary text-center font-beausiteGrand`}
         >
           {action.title}
         </span>
@@ -124,7 +123,7 @@ function BannerItemMobile(
         {action &&
           <Action {...action} />}
       </a>
-      <Picture preload={lcp}>
+      <Picture preload={lcp} class="w-full h-full">
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
@@ -160,21 +159,21 @@ function BannerItem(
           </a>
           <Picture preload={lcp} class="w-full h-full">
             <Source
-              media="(max-width: 767px)"
-              fetchPriority={lcp ? "high" : "auto"}
-              src={primaryImage.mobile}
-              width={430}
-              height={590}
-            />
-            <Source
-              media="(min-width: 768px)"
+              media="(max-width: 1366px)"
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
-              width={1440}
-              height={600}
+              width={image.banner.length > 1 ? 631 : 1263}
+              height={492}
+            />
+            <Source
+              media="(min-width: 1367px)"
+              fetchPriority={lcp ? "high" : "auto"}
+              src={primaryImage.desktop}
+              width={image.banner.length > 1 ? 748 : 1495}
+              height={583}
             />
             <img
-              class="object-cover w-full h-full"
+              class="object-cover w-full"
               loading={lcp ? "eager" : "lazy"}
               src={primaryImage.desktop}
               alt={primaryImage.alt}
@@ -276,7 +275,7 @@ function BannerCarousel(props: Props) {
   return (
     <div
       id={id}
-      class="grid h-[72vh] grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min"
+      class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {isMobile.value && arrayImage
