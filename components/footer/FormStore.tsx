@@ -1,6 +1,7 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { Data } from "../../loaders/SearchStore.tsx";
+import Form from "../../islands/FormStore/Form.tsx";
 export interface Props {
   icon?: ImageWidget;
   title?: string;
@@ -26,39 +27,11 @@ export default function FormStore({ formState }: { formState?: Props }) {
       <h4 class="mb-6">
         {formState?.title}
       </h4>
-      <select
-        className="select select-bordered w-full  bg-primary border-b pl-0 text-sm outline-none "
-        style={{
-          border: "none",
-          borderBottom: "1px solid black",
-          borderRadius: "0px",
-        }}
-      >
-        <option disabled selected>{formState?.placeholderState}</option>
-        {formState?.searchStore?.data.map((item) => (
-          <option>
-            {item.state}
-          </option>
-        ))}
-      </select>
-      <select
-        className="select select-bordered w-full bg-primary border-b pl-0 text-sm  outline-none "
-        style={{
-          border: "none",
-          borderBottom: "1px solid black",
-          borderRadius: "0px",
-        }}
-      >
-        <option disabled selected>{formState?.placeholderCity}</option>
-        {}
-      </select>
-
-      <button
-        type={"submit"}
-        class="mt-6  bg-[#F5F3E7] px-[10px] py-[14px] text-xs"
-      >
-        {formState?.button}
-      </button>
+      {formState && <Form
+        placeholderCity={formState?.placeholderCity}
+        placeholderState={formState?.placeholderState}
+        button={formState?.button}
+        searchStore={formState?.searchStore?.data} />}
     </form>
   );
 }
