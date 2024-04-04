@@ -27,11 +27,14 @@ export default function FormStore({ formState }: { formState?: Props }) {
       <h4 class="mb-6">
         {formState?.title}
       </h4>
-      {formState && <Form
-        placeholderCity={formState?.placeholderCity}
-        placeholderState={formState?.placeholderState}
-        button={formState?.button}
-        searchStore={formState?.searchStore?.data} />}
+      {formState && (
+        <Form
+          placeholderCity={formState?.placeholderCity}
+          placeholderState={formState?.placeholderState}
+          button={formState?.button}
+          searchStore={formState?.searchStore?.data}
+        />
+      )}
     </form>
   );
 }
