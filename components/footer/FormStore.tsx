@@ -1,11 +1,13 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
+import type { Data } from "../../loaders/SearchStore.tsx";
 export interface Props {
   icon?: ImageWidget;
   title?: string;
   placeholderState?: string;
   placeholderCity?: string;
   button?: string;
+  searchStore?: Data;
 }
 
 export default function FormStore({ formState }: { formState?: Props }) {
@@ -33,8 +35,11 @@ export default function FormStore({ formState }: { formState?: Props }) {
         }}
       >
         <option disabled selected>{formState?.placeholderState}</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
+        {formState?.searchStore?.data.map((item) => (
+          <option>
+            {item.state}
+          </option>
+        ))}
       </select>
       <select
         className="select select-bordered w-full bg-primary border-b pl-0 text-sm  outline-none "
@@ -45,8 +50,7 @@ export default function FormStore({ formState }: { formState?: Props }) {
         }}
       >
         <option disabled selected>{formState?.placeholderCity}</option>
-        <option>Han Solo</option>
-        <option>Greedo</option>
+        {}
       </select>
 
       <button
