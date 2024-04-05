@@ -6,6 +6,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import ProductCardInline from "../product/ProductCardInline.tsx";
+import ButtonLink from "./ButtonLink.tsx";
 
 /**
  * @titleBy title
@@ -116,12 +117,11 @@ function Card({ image }: { image: CardImage }) {
           </div>
         </div>
         {button && (
-          <a
-            class="absolute bottom-9 py-4 px-6 bg-primary text-black"
+          <ButtonLink
             href={href || ""}
-          >
-            {button}
-          </a>
+            classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
+            label={button}
+          />
         )}
       </div>
       <div class="flex flex-col gap-1">

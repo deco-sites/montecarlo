@@ -1,5 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import ButtonLink from "./ButtonLink.tsx";
 
 /**
  * @titleBy title
@@ -61,13 +62,11 @@ function CardImage(
           )}
         </div>
         {button?.label && (
-          <a
+          <ButtonLink
             href={button?.href || ""}
-            aria-label="view product"
-            class="w-fit py-[10px] px-[14px] bg-primary text-black text-sm"
-          >
-            {button?.label}
-          </a>
+            classCustom={"text-black text-sm"}
+            label={button?.label}
+          />
         )}
       </div>
     </div>

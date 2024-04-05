@@ -1,5 +1,6 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import ButtonLink from "./ButtonLink.tsx";
 
 /**
  * @titleBy title
@@ -25,7 +26,8 @@ export interface Props {
 }
 
 function SectionImage({ props }: { props: Image }) {
-  const { mobile, desktop, alt, content, contentTitle, button, title } = props;
+  const { mobile, desktop, alt, content, contentTitle, button, title, href } =
+    props;
 
   return (
     <div class="relative flex flex-col group w-full lg:w-2/4">
@@ -58,9 +60,11 @@ function SectionImage({ props }: { props: Image }) {
           >
           </span>
         )}
-        <a class="bg-primary absolute bottom-11 text-sm text-black px-3 py-3 group-hover:bg-[#F5F3E7] duration-300">
-          {button}
-        </a>
+        <ButtonLink
+          href={href || ""}
+          classCustom={"text-black text-sm text-black group-hover:bg-[#F5F3E7] duration-300 absolute bottom-11"}
+          label={button}
+        />
       </div>
     </div>
   );

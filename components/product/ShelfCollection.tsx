@@ -12,6 +12,7 @@ import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { clx } from "../../sdk/clx.ts";
+import ButtonLink from "../ui/ButtonLink.tsx";
 
 export interface Props {
   products: Product[] | null;
@@ -142,13 +143,11 @@ function ShelfCollection({
         />
       </div>
       {layout?.ctaCollection && (
-        <a
+        <ButtonLink
           href={layout?.hrefCollection || ""}
-          aria-label="view product"
-          class="w-min py-[10px] px-[14px] bg-primary text-black text-sm lg:hidden"
-        >
-          {layout?.ctaCollection}
-        </a>
+          classCustom={"text-black text-sm lg:hidden"}
+          label={layout?.ctaCollection}
+        />
       )}
     </div>
   );

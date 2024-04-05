@@ -94,7 +94,7 @@ function Action(
       )}
       {action.label && (
         <Button
-          class="bg-primary text-sm py-4 px-6 w-fit hover:bg-primary border-none"
+          class="bg-primary text-sm py-4 px-6 w-fit hover:bg-primary border-none hover:opacity-80"
           aria-label={action.label}
         >
           {action?.label}
