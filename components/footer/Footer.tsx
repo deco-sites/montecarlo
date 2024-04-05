@@ -51,8 +51,10 @@ export interface Props {
    * @format html
    */
   copyWrite?: string;
-  logo: ImageWidget;
-  alt?: string;
+  logo: {
+    src: ImageWidget;
+    alt?: string;
+  };
   payments?: {
     title?: string;
     items: PaymentItem[];
@@ -109,7 +111,6 @@ function Footer({
   stacks,
   formState,
   logo,
-  alt,
   copyWrite,
   security,
 }: Props) {
@@ -130,14 +131,16 @@ function Footer({
               <FormStore formState={formState} />
               <Social content={social} />
               <div class="flex w-full items-center lg:items-start flex-col gap-2">
-                <Image
-                  width={25}
-                  height={28}
-                  alt={alt}
-                  src={logo}
-                  loading="lazy"
-                  class="flex lg:hidden object-contain"
-                />
+                {logo.src && (
+                  <Image
+                    width={25}
+                    height={28}
+                    alt={logo.alt}
+                    src={logo.src}
+                    loading="lazy"
+                    class="flex lg:hidden object-contain"
+                  />
+                )}
                 {copyWrite && (
                   <span
                     class="font-semibold text-sm text-center lg:text-start"

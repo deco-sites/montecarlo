@@ -310,4 +310,3 @@ function BannerCarousel(props: Props) {
 }
 
 export default BannerCarousel;
-
