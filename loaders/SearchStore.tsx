@@ -21,8 +21,7 @@ export interface Props {
 
 /**@title Search Store */
 const loader = async (): Promise<Data> => {
-  const link =
-    "https://www.montecarlo.com.br/api/dataentities/NL/search?_fields=city,state,uf";
+  const link = "/api/dataentities/NL/search?_fields=city,state,uf";
 
   const settings = {
     method: "GET",
@@ -32,9 +31,9 @@ const loader = async (): Promise<Data> => {
     },
   };
 
-  const storesMD: LocationStore[] = await fetch(link, settings).then((data) =>
-    data.json()
-  );
+  const storesMD: LocationStore[] = await fetch(link, settings).then((data) => {
+    return data.json();
+  });
 
   const states: Array<States> = [];
 

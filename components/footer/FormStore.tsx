@@ -11,7 +11,13 @@ export interface Props {
   searchStore?: Data;
 }
 
+export function LoadingFallback() {
+  return <h1>Carregando</h1>;
+}
+
 export default function FormStore({ formState }: { formState?: Props }) {
+  console.log("data", formState?.searchStore?.data);
+
   return (
     <form class="w-full flex-col flex items-center lg:items-start font-semibold text-sm">
       {formState?.icon && (

@@ -34,6 +34,10 @@ export default function Select(
     localStorage.setItem("findStoresCity", JSON.stringify(obj));
   }
 
+  if (!searchStore) {
+    return null;
+  }
+
   return (
     <>
       <select
