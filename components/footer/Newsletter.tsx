@@ -86,7 +86,11 @@ function Newsletter({
       }
 
       if (form.termsAndConditions) {
-        formData["termsAndConditions"] = (e.currentTarget.elements.namedItem("termsAndConditions") as RadioNodeList)?.value === "true" ? true : false;
+        formData["termsAndConditions"] = (e.currentTarget.elements.namedItem(
+            "termsAndConditions",
+          ) as RadioNodeList)?.value === "true"
+          ? true
+          : false;
       }
 
       const currentDate = new Date();
