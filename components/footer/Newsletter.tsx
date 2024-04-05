@@ -85,9 +85,9 @@ function Newsletter({
         formData[field] = input.value;
       }
 
-      // if (form.termsAndConditions) {
-      //   formData["termsAndConditions"] = (e.currentTarget.elements.namedItem("termsAndConditions") as RadioNodeList)?.value === "true" ? true : false;
-      // }
+      if (form.termsAndConditions) {
+        formData["termsAndConditions"] = (e.currentTarget.elements.namedItem("termsAndConditions") as RadioNodeList)?.value === "true" ? true : false;
+      }
 
       const currentDate = new Date();
       const year = currentDate.getFullYear();
@@ -98,55 +98,58 @@ function Newsletter({
 
       formData["page"] = "lead_newsletter_footer";
 
-        const emailAlreadyExists = await fetch("https://mid--montecarlo.myvtex.com/_v/newsletter?email=" + formData.email)
-          .then((response) => {
-            return response.json();
-          })
-          .catch((error) => {
-            console.error(error);
-            return error;
-          });
-          if (emailAlreadyExists) {
+      const emailAlreadyExists = await fetch(
+        "https://mid--montecarlo.myvtex.com/_v/newsletter?email=" +
+          formData.email,
+      )
+        .then((response) => {
+          return response.json();
+        })
+        .catch((error) => {
+          console.error(error);
+          return error;
+        });
+      if (emailAlreadyExists) {
+        if (emailAlreadyExists.status === 404) {
+          await fetch(
+            "https://rckmiddleware--montecarlo.myvtex.com/_v/register-leads-mkt-cloud",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(formData),
+            },
+          )
+            .then((response) => {
+              return response.json();
+            })
+            .catch((error) => {
+              console.error(error);
+            });
 
-            if (emailAlreadyExists.status === 404) {
-              await fetch(
-                "https://rckmiddleware--montecarlo.myvtex.com/_v/register-leads-mkt-cloud",
-                {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(formData),
-                }
-              )
-                .then((response) => {
-                  return response.json();
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-
-              await fetch(
-                "https://mid--montecarlo.myvtex.com/_v/newsletter",
-                {
-                  method: "PATCH",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify({
-                    email: formData.email,
-                    firstName: formData.name
-                  }),
-                }
-              )
-                .then((response) => {
-                  return response.json();
-                })
-                .catch((error) => {
-                  console.error(error);
-                });
-            }
-          }
+          await fetch(
+            "https://mid--montecarlo.myvtex.com/_v/newsletter",
+            {
+              method: "PATCH",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                email: formData.email,
+                firstName: formData.name,
+                termsofuse: formData.termsAndConditions,
+              }),
+            },
+          )
+            .then((response) => {
+              return response.json();
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      }
     } finally {
       loading.value = false;
     }
