@@ -89,12 +89,12 @@ function ShelfCollection({
           "px-0",
         )}
       >
-        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start ">
+        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-5 lg:gap-0 px-14 lg:px-0">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
               class={clx(
-                "carousel-item ",
+                "carousel-item max-w-[246px] snap-center sm:w-1/3 sm:max-w-none lg:snap-start ",
                 slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
                 slideMobile[layout?.numberOfSliders?.mobile ?? 1],
               )}
