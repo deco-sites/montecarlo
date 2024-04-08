@@ -51,12 +51,12 @@ function Showcase({
     return null;
   }
   const slideDesktop = {
-    1: "md:w-full",
-    2: "md:w-1/2",
-    3: "md:w-1/3",
-    4: "md:w-1/4",
-    5: "md:w-1/5",
-    6: "md:w-1/6",
+    1: "md:w-1/3 lg:w-full",
+    2: "md:w-1/3 lg:w-1/2",
+    3: "md:w-1/3 lg:w-1/3",
+    4: "md:w-1/3 lg:w-1/4",
+    5: "md:w-1/3 lg:w-1/5",
+    6: "md:w-1/3 lg:w-1/6",
   };
 
   const slideMobile = {

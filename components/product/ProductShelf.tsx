@@ -89,7 +89,7 @@ function ShelfCollection({
           "px-0",
         )}
       >
-        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-5 lg:gap-0 px-14 lg:px-0">
+        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-5 sm:gap-2 lg:gap-0 px-14 lg:px-0">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}

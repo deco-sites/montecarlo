@@ -35,6 +35,32 @@ export interface Props {
   cardLayout?: cardLayout;
 }
 
+function Dots(
+  { products, interval = 0 }: {
+    products: Product[];
+    interval?: number;
+  },
+) {
+  return (
+    <>
+      <ul class="carousel justify-center col-span-full lg:hidden z-10 row-start-4 w-11/12 mx-auto px-2 pt-2">
+        {products?.map((_, index) => (
+          <li class="carousel-item">
+            <Slider.Dot index={index}>
+              <div class="">
+                <div
+                  class=" h-1 group-disabled:bg-[#CAC7B6] bg-[#F5F3E7] duration-1000 ease-in-out"
+                  style={{ width: `calc(91.66vw/${products.length})` }}
+                />
+              </div>
+            </Slider.Dot>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
 function ShelfCollection({
   products,
   title,
@@ -49,12 +75,12 @@ function ShelfCollection({
     return null;
   }
   const slideDesktop = {
-    1: "md:w-full",
-    2: "md:w-1/2",
-    3: "md:w-1/3",
-    4: "md:w-1/4",
-    5: "md:w-1/5",
-    6: "md:w-1/6",
+    1: "md:w-1/3 lg:w-full",
+    2: "md:w-1/3 lg:w-1/2",
+    3: "md:w-1/3 lg:w-1/3",
+    4: "md:w-1/3 lg:w-1/4",
+    5: "md:w-1/3 lg:w-1/5",
+    6: "md:w-1/3 lg:w-1/6",
   };
 
   const slideMobile = {
@@ -89,7 +115,7 @@ function ShelfCollection({
           "px-0",
         )}
       >
-        <Slider class="row-start-2 lg:carousel lg:carousel-item row-end-5 customScroll snap-mandatory snap-start">
+        <Slider class="row-start-2 carousel carousel-item row-end-4 snap-mandatory snap-start">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
@@ -141,6 +167,7 @@ function ShelfCollection({
             },
           }}
         />
+        <Dots products={products} interval={0} />
       </div>
       {layout?.ctaCollection && (
         <ButtonLink
