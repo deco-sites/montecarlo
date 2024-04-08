@@ -24,12 +24,16 @@ export interface Props {
   secondImage: Image;
 }
 
-function SectionImage({ props }: { props: Image }) {
+export function SectionImage({ props, customClass, wrapperCustomClass, infoSectionCustomClass }: { props: Image, customClass?: string, wrapperCustomClass?: string, infoSectionCustomClass?: string }) {
   const { mobile, desktop, alt, content, contentTitle, button, title } = props;
 
+  if(!customClass) { customClass = ''; }
+  if(!wrapperCustomClass) { wrapperCustomClass = ''; }
+  if(!infoSectionCustomClass) { infoSectionCustomClass = ''; }
+
   return (
-    <div class="relative flex flex-col group w-full lg:w-2/4">
-      <Picture>
+    <div class={`relative flex flex-col group w-full lg:w-2/4 ${wrapperCustomClass}`}>
+      <Picture class={customClass}>
         <Source
           src={mobile}
           width={350}
@@ -44,7 +48,7 @@ function SectionImage({ props }: { props: Image }) {
         />
         <img class="w-full h-full" src={desktop} alt={alt} />
       </Picture>
-      <div class="w-full absolute top-0 left-0 h-full flex flex-col justify-center items-center bg-gradient-to-t from-[#0000004d] group-hover:from-[#ffc72ce6] group-hover:bg-[#ffc72ce6] gap-2 duration-300 lg:gap-5">
+      <div class={`w-full absolute top-0 left-0 h-full flex flex-col justify-center items-center bg-gradient-to-t from-[#0000004d] group-hover:from-[#ffc72ce6] group-hover:bg-[#ffc72ce6] gap-2 duration-300 lg:gap-5 ${infoSectionCustomClass}`}>
         <h3 class="hidden group-hover:flex text-3xl lg:text-[50px] text-black duration-300 font-beausiteGrand">
           {contentTitle}
         </h3>
@@ -58,7 +62,7 @@ function SectionImage({ props }: { props: Image }) {
           >
           </span>
         )}
-        <a class="bg-primary absolute bottom-11 text-sm text-black px-3 py-3 group-hover:bg-[#F5F3E7] duration-300">
+        <a class="bg-primary cursor-pointer absolute bottom-11 text-sm text-black px-3 py-3 group-hover:bg-[#F5F3E7] duration-300">
           {button}
         </a>
       </div>
