@@ -108,10 +108,9 @@ function Header({
 }
 
 export const loader = (props: Props, _req: Request, ctx: AppContext) => {
-  const { isMobile, isTablet } = useUI();
+  const { isMobile } = useUI();
 
   isMobile.value = ctx.device === "desktop" ? false : true;
-  isTablet.value = ctx.device === "tablet" ? true : false;
 
   return { ...props, device: ctx.device };
 };
