@@ -21,7 +21,8 @@ export interface Props {
 
 /**@title Search Store */
 const loader = async (): Promise<Data> => {
-  const link = "/api/dataentities/NL/search?_fields=city,state,uf";
+  const link =
+    "https://www.montecarlo.com.br/api/dataentities/NL/search?_fields=city,state,uf";
 
   const settings = {
     method: "GET",
