@@ -1,5 +1,4 @@
-import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { HTMLWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget, HTMLWidget } from "apps/admin/widgets.ts";
 
 import Carousel, {
   Props as CarouselProps,
@@ -69,7 +68,7 @@ export default function Benefits({
   });
 
   return (
-    <div class="bg-white flex flex-col mx-auto py-12 gap-5 lg:gap-16">
+    <div class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-5 lg:gap-16">
       <div class="flex flex-col gap-3 container px-5">
         {title?.mobile && (
           <h2
