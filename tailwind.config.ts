@@ -22,7 +22,7 @@ export default {
       },
       colors: {
         "perola-intermediario": "#F5F3E7",
-      }
+      },
     },
   },
 };

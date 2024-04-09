@@ -1,4 +1,4 @@
-import type { ImageWidget, HTMLWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 
 import Carousel, {
   Props as CarouselProps,
