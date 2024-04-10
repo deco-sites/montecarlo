@@ -15,6 +15,21 @@ function Dot({ index, children }: {
   );
 }
 
+function DotLine({ index, children }: {
+  index: number;
+  children: ComponentChildren;
+}) {
+  return (
+    <button
+      data-dot-line={index}
+      aria-label={`go to slider item ${index}`}
+      class="focus:outline-none group"
+    >
+      {children}
+    </button>
+  );
+}
+
 function Slider(props: JSX.IntrinsicElements["ul"]) {
   return <ul data-slider {...props} />;
 }
@@ -38,5 +53,6 @@ Slider.Dot = Dot;
 Slider.Item = Item;
 Slider.NextButton = NextButton;
 Slider.PrevButton = PrevButton;
+Slider.DotLine = DotLine;
 
 export default Slider;

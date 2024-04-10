@@ -14,11 +14,13 @@ export default function ProductDetails({ page }: Props) {
   }
 
   return (
-    <div class="w-full container py-8 flex flex-col gap-6 lg:py-10">
-      <div class="flex flex-col gap-6 lg:flex-row lg:justify-center">
+    <div class="w-full max-w-[1408px] py-8 grid grid-cols-[auto_auto_auto_336px] grid-rows-1 mx-auto gap-8">
+      <div class="flex flex-col gap-6 lg:flex-row lg:justify-center col-span-3">
         <ImageGallerySlider
           page={page}
         />
+      </div>
+      <div class="col-start-4">
         <ProductInfo
           page={page}
         />

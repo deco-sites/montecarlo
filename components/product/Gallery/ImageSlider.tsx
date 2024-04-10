@@ -3,7 +3,7 @@ import Image from "apps/website/components/Image.tsx";
 import Icon from "../../../components/ui/Icon.tsx";
 import Slider from "../../../components/ui/Slider.tsx";
 import ProductImageZoom from "../../../islands/ProductImageZoom.tsx";
-import SliderJS from "../../../islands/SliderJS.tsx";
+import SliderDotsJS from "../../../islands/SliderDotsJS.tsx";
 import { useId } from "../../../sdk/useId.ts";
 
 export interface Props {
@@ -34,15 +34,18 @@ export default function GallerySlider(props: Props) {
     layout,
   } = props;
 
-  const { width, height } = layout || { width: 300, height: 370 };
+  const { width, height } = layout || { width: 300, height: 300 };
 
   const aspectRatio = `${width} / ${height}`;
 
   return (
-    <div id={id} class="grid grid-flow-row sm:grid-flow-col">
+    <div
+      id={id}
+      class="grid grid-flow-row sm:grid-flow-col grid-cols-4 grid-rows-3 gap-1 max-h-[75%]"
+    >
       {/* Image Slider */}
-      <div class="relative order-1 sm:order-2">
-        <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+      <div class="relative order-1 sm:order-2 col-span-4 row-span-4">
+        <Slider class="carousel carousel-center w-full gap-8">
           {images.map((img, index) => (
             <Slider.Item
               index={index}
@@ -65,38 +68,54 @@ export default function GallerySlider(props: Props) {
         </Slider>
 
         <Slider.PrevButton
-          class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+          class="no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent"
           disabled
         >
-          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+          <Icon
+            class="text-black"
+            size={40}
+            id="arrowLeft"
+            strokeWidth={1}
+          />
         </Slider.PrevButton>
 
         <Slider.NextButton
-          class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+          class="no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent"
           disabled={images.length < 2}
         >
-          <Icon size={24} id="ChevronRight" strokeWidth={3} />
-        </Slider.NextButton>
-
-        <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-          <ProductImageZoom
-            images={images}
-            width={700}
-            height={Math.trunc(700 * height / width)}
+          <Icon
+            class="text-black"
+            size={40}
+            id="arrowRight"
+            strokeWidth={1}
           />
-        </div>
+        </Slider.NextButton>
+        <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 absolute bottom-0 left-1/3">
+          {images?.map((_, index) => (
+            <li class="carousel-item">
+              <Slider.DotLine index={index}>
+                <div class="py-5">
+                  <div class=" w-8 h-1 group-disabled:bg-primary bg-white" />
+                </div>
+              </Slider.DotLine>
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* Dots */}
-      <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
+      <ul
+        class="carousel carousel-center px-4 sm:px-0 sm:flex-col order-2 sm:order-1 row-span-3 col-start-1 col-end-1 w-full gap-1 snap-y"
+        data-slider-dots
+      >
         {images.map((img, index) => (
-          <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
+          <li class="carousel-item w-full snap-start">
             <Slider.Dot index={index}>
               <Image
                 style={{ aspectRatio }}
-                class="group-disabled:border-base-300 border rounded "
+                class="group-disabled:border-black border rounded w-full"
                 width={100}
-                height={123}
+                height={100}
                 src={img.url!}
                 alt={img.alternateName}
               />
@@ -104,8 +123,7 @@ export default function GallerySlider(props: Props) {
           </li>
         ))}
       </ul>
-
-      <SliderJS rootId={id} />
+      <SliderDotsJS rootId={id} />
     </div>
   );
 }
