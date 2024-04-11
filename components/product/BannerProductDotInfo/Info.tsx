@@ -1,18 +1,22 @@
 import Image from "apps/website/components/Image.tsx";
 
 interface Props {
-    alignment: "Left" | "Center" | "Right";
-    coordinates: string[];
+  alignment: "Left" | "Center" | "Right";
+  coordinates: string[];
 }
 
 export default function Info({ alignment, coordinates }: Props) {
-    // const x = 
-    //     alignment === "Left" && "left-[calc(-100%+7px)]" ||
-    //     alignment === "Right" && "right-[-7px]" ||
-    //     alignment === "Center" && ""
+  // const x =
+  //     alignment === "Left" && "left-[calc(-100%+7px)]" ||
+  //     alignment === "Right" && "right-[-7px]" ||
+  //     alignment === "Center" && ""
 
-    const x = Number(coordinates[0]) > 50 ? "right-[-7px]" : "left-[calc(-100%+7px)]";
-    const y = Number(coordinates[1]) > 50 ? "bottom-[calc(-100%-7px)]" : "top-[7px]";
+  const x = Number(coordinates[0]) > 50
+    ? "right-[-7px]"
+    : "left-[calc(-100%+7px)]";
+  const y = Number(coordinates[1]) > 50
+    ? "bottom-[calc(-100%-7px)]"
+    : "top-[7px]";
   return (
     <div
       class={`flex ${x} ${y} absolute invisible bg-white group-hover:visible group-data-[active=true]:visible opacity-0 group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:z-10 group-data-[active=true]:z-10 transition-opacity w-max items-center`}
