@@ -41,7 +41,7 @@ export default function GallerySlider(props: Props) {
   return (
     <div
       id={id}
-      class="grid grid-flow-row sm:grid-flow-col grid-cols-4 grid-rows-3 gap-1 max-h-[75%]"
+      class={`grid grid-flow-row sm:grid-flow-col grid-cols-4 grid-rows-3 gap-1 h-[99%] `}
     >
       {/* Image Slider */}
       <div class="relative order-1 sm:order-2 col-span-4 row-span-4">
@@ -90,7 +90,7 @@ export default function GallerySlider(props: Props) {
             strokeWidth={1}
           />
         </Slider.NextButton>
-        <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 absolute bottom-0 left-1/3">
+        <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 absolute left-0 right-0 bottom-0 mx-auto top-auto">
           {images?.map((_, index) => (
             <li class="carousel-item">
               <Slider.DotLine index={index}>
@@ -104,25 +104,27 @@ export default function GallerySlider(props: Props) {
       </div>
 
       {/* Dots */}
-      <ul
-        class="carousel carousel-center px-4 sm:px-0 sm:flex-col order-2 sm:order-1 row-span-3 col-start-1 col-end-1 w-full gap-1 snap-y"
-        data-slider-dots
-      >
-        {images.map((img, index) => (
-          <li class="carousel-item w-full snap-start">
-            <Slider.Dot index={index}>
-              <Image
-                style={{ aspectRatio }}
-                class="group-disabled:border-black border rounded w-full"
-                width={100}
-                height={100}
-                src={img.url!}
-                alt={img.alternateName}
-              />
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
+      <div class="order-2 sm:order-1 row-span-3 col-start-1 col-end-1 w-full relative h-full">
+        <ul
+          class="carousel carousel-center px-4 sm:px-0 sm:flex-col  gap-1 snap-y absolute top-0 left-0 right-0 bottom-0"
+          data-slider-dots
+        >
+          {images.map((img, index) => (
+            <li class="carousel-item w-full snap-start">
+              <Slider.Dot index={index}>
+                <Image
+                  style={{ aspectRatio }}
+                  class="group-disabled:border-black border rounded w-full"
+                  width={100}
+                  height={100}
+                  src={img.url!}
+                  alt={img.alternateName}
+                />
+              </Slider.Dot>
+            </li>
+          ))}
+        </ul>
+      </div>
       <SliderDotsJS rootId={id} />
     </div>
   );

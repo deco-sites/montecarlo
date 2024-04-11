@@ -174,18 +174,11 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
   const onClickPrev = () => {
     const indices = getElementsInsideContainer();
-    const indicesDots = getElementsInsideContaineDots();
     // Wow! items per page is how many elements are being displayed inside the container!!
     const itemsPerPage = indices.length;
-    const dotsPerPage = indicesDots.length;
 
     const isShowingFirst = indices[0] === 0;
     const pageIndex = Math.floor(indices[indices.length - 1] / itemsPerPage);
-
-    const isDotsShowFirst = indicesDots[0] === 0;
-    const dotsPage = Math.floor(
-      indicesDots[indicesDots.length - 1] / itemsPerPage,
-    );
 
     goToItem(
       isShowingFirst ? items.length - 1 : (pageIndex - 1) * itemsPerPage,
@@ -195,20 +188,14 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
   const onClickNext = () => {
     const indices = getElementsInsideContainer();
-    const indicesDots = getElementsInsideContaineDots();
     // Wow! items per page is how many elements are being displayed inside the container!!
     const itemsPerPage = indices.length;
-    const dotsPerPage = indicesDots.length;
 
     const isShowingLast = indices[indices.length - 1] === items.length - 1;
     const pageIndex = Math.floor(indices[0] / itemsPerPage);
 
-    const isDotsShowFirst =
-      indicesDots[indicesDots.length - 1] === dots.length - 1;
-    const dotsPage = Math.floor(indicesDots[0] / itemsPerPage);
-
     goToItem(isShowingLast ? 0 : (pageIndex + 1) * itemsPerPage);
-    goToItemY(isDotsShowFirst ? 0 : (dotsPage + 1) * dotsPerPage, true);
+    goToItemY(1, true);
   };
 
   const observer = new IntersectionObserver(
