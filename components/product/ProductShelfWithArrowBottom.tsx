@@ -4,7 +4,7 @@ import ProductCard, {
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { SendEventOnView } from "../../components/Analytics.tsx";
-import CtaCollection from "./Shelf/CtaCollection.tsx"
+import CtaCollection from "./Shelf/CtaCollection.tsx";
 import Title from "./Shelf/Title.tsx";
 import SubTitle from "./Shelf/SubTitle.tsx";
 
@@ -50,9 +50,7 @@ function Dots(
           <li class="carousel-item bg-#F5F3E7">
             <Slider.Dot index={index}>
               <div class="py-5">
-                <div
-                  class="w-10 h-2 rounded-lg lg:w-[71px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]"
-                />
+                <div class="w-10 h-2 rounded-lg lg:w-[71px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]" />
               </div>
             </Slider.Dot>
           </li>
@@ -104,7 +102,7 @@ function ShelfCollection({
   }
 
   while (products.length > 0) {
-      groupByNumberOfSlides.push(products.splice(0, numberPerView));
+    groupByNumberOfSlides.push(products.splice(0, numberPerView));
   }
 
   return (
@@ -132,23 +130,26 @@ function ShelfCollection({
                 )}
               >
                 {productGroup.map((product, index) => {
-                return (
-                  <div class={`${slideMobile[layout?.numberOfSliders?.mobile ?? 1]} ${slideDesktop[layout?.numberOfSliders?.desktop ?? 6]}`}>
-                    <ProductCard
-                      product={product}
-                      itemListName={title}
-                      layout={cardLayout}
-                      platform={platform}
-                      index={index}
-                    />
-                  </div>
+                  return (
+                    <div
+                      class={`${
+                        slideMobile[layout?.numberOfSliders?.mobile ?? 1]
+                      } ${slideDesktop[layout?.numberOfSliders?.desktop ?? 6]}`}
+                    >
+                      <ProductCard
+                        product={product}
+                        itemListName={title}
+                        layout={cardLayout}
+                        platform={platform}
+                        index={index}
+                      />
+                    </div>
                   );
                 })}
               </Slider.Item>
-            )
-          })
-        }
-        </Slider>       
+            );
+          })}
+        </Slider>
         <SliderJS rootId={id} />
         <SendEventOnView
           id={id}
@@ -185,7 +186,12 @@ function ShelfCollection({
         </div>
       </div>
 
-      <CtaCollection ctaCollection={layout?.ctaCollection} hrefCollection={layout?.hrefCollection} showOnMobile={layout?.showCtaOnMobile} showOnDesktop={layout?.showCtaOnDesktop} />
+      <CtaCollection
+        ctaCollection={layout?.ctaCollection}
+        hrefCollection={layout?.hrefCollection}
+        showOnMobile={layout?.showCtaOnMobile}
+        showOnDesktop={layout?.showCtaOnDesktop}
+      />
     </div>
   );
 }

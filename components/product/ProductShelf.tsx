@@ -4,7 +4,7 @@ import ProductCard, {
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import { SendEventOnView } from "../../components/Analytics.tsx";
-import CtaCollection from "./Shelf/CtaCollection.tsx"
+import CtaCollection from "./Shelf/CtaCollection.tsx";
 import Title from "./Shelf/Title.tsx";
 import SubTitle from "./Shelf/SubTitle.tsx";
 
@@ -18,7 +18,6 @@ import { clx } from "../../sdk/clx.ts";
 import type { Product } from "apps/commerce/types.ts";
 
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-
 
 export interface Props {
   products: Product[] | null;
@@ -140,7 +139,12 @@ function ShelfCollection({
           }}
         />
       </div>
-      <CtaCollection ctaCollection={layout?.ctaCollection} hrefCollection={layout?.hrefCollection} showOnMobile={layout?.showCtaOnMobile} showOnDesktop={layout?.showCtaOnDesktop} />
+      <CtaCollection
+        ctaCollection={layout?.ctaCollection}
+        hrefCollection={layout?.hrefCollection}
+        showOnMobile={layout?.showCtaOnMobile}
+        showOnDesktop={layout?.showCtaOnDesktop}
+      />
     </div>
   );
 }
