@@ -47,7 +47,9 @@ export default function ImageQuad(
   { firstImage, secondImage, thirdImage, fourthImage }: Props,
 ) {
   return (
-    <div class={"container flex flex-col py-8 px-5 sm:flex-wrap sm:flex-row md:px-0"}>
+    <div
+      class={"container flex flex-col py-8 px-5 sm:flex-wrap sm:flex-row md:px-0"}
+    >
       <WrapperImage>
         <SectionImage
           props={firstImage}
