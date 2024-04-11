@@ -21,7 +21,7 @@ export default {
         },
       },
       colors: {
-        "perola+": "#9F9584"
+        "perola+": "#9F9584",
       },
     },
   },

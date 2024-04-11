@@ -68,7 +68,8 @@ export default function TextWithImageCollection({
           p-2.5 lg:p-12 md:p-2.5 pb-0 md:pb-0 lg:pr-0
         `}
         >
-          {/* <img
+          {
+            /* <img
             class="w-full object-cover block md:hidden"
             src={image.mobile}
             alt={title}
@@ -81,7 +82,8 @@ export default function TextWithImageCollection({
             alt={title}
             decoding="async"
             loading="lazy"
-          /> */}
+          /> */
+          }
           <BannerProductDotInfo {...image} />
         </div>
       </div>
