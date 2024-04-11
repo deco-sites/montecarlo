@@ -20,6 +20,9 @@ export default {
           "100%": { transform: "translateX(-50%)" },
         },
       },
+      colors: {
+        "perola+": "#9F9584",
+      },
     },
   },
 };
