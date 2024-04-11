@@ -1,10 +1,10 @@
 import Image from "apps/website/components/Image.tsx";
 
 interface ProductData {
-    image?: string;
-    productName?: string;
-    oldPrice?: string;
-    price?: string;
+  image?: string;
+  productName?: string;
+  oldPrice?: string;
+  price?: string;
 }
 
 interface Props {
@@ -15,10 +15,9 @@ interface Props {
 }
 
 export default function Info({ alignment, coordinates, id, data }: Props) {
-
-    function handleInfo(event: MouseEvent) {
-        console.log({product: {id, data}});
-    }
+  function handleInfo(event: MouseEvent) {
+    console.log({ product: { id, data } });
+  }
   // const x =
   //     alignment === "Left" && "left-[calc(-100%+7px)]" ||
   //     alignment === "Right" && "right-[-7px]" ||
@@ -45,16 +44,16 @@ export default function Info({ alignment, coordinates, id, data }: Props) {
       </div>
 
       <div class="flex flex-col justify-center p-1 md:p-4 gap-1 font-poppins text-[11px] md:text-sm text-black max-w-[30vw] md:max-w-48 max-h-28">
-        {
-            data?.productName && <span class="line-clamp-2">{data.productName}</span>
-        }
+        {data?.productName && (
+          <span class="line-clamp-2">{data.productName}</span>
+        )}
         <div class="flex flex-col text-xs md:text-sm">
-            {
-                data?.oldPrice && <span class="text-perola+ font-light line-through">{data.oldPrice}</span>
-            }
-            {
-                data?.price && <span class="font-semibold">{data.price}</span>
-            }
+          {data?.oldPrice && (
+            <span class="text-perola+ font-light line-through">
+              {data.oldPrice}
+            </span>
+          )}
+          {data?.price && <span class="font-semibold">{data.price}</span>}
         </div>
       </div>
     </div>

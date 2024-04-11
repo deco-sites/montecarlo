@@ -26,10 +26,10 @@ interface Config {
 }
 
 interface ProductData {
-    image?: ImageWidget;
-    productName?: string;
-    oldPrice?: string;
-    price?: string;
+  image?: ImageWidget;
+  productName?: string;
+  oldPrice?: string;
+  price?: string;
 }
 
 interface Product {
@@ -65,7 +65,7 @@ function BannerProductDotInfo(props: Props) {
     );
   }
 
-  function DotInfo({id, data, config}: Product) {
+  function DotInfo({ id, data, config }: Product) {
     const position = {
       mobile: config.mobile.coordinates.split(":"),
       desktop: config.desktop.coordinates.split(":"),
