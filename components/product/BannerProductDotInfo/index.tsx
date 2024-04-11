@@ -25,17 +25,9 @@ interface Config {
   alignment: "Left" | "Center" | "Right";
 }
 
-interface ProductData {
-  image?: ImageWidget;
-  productName?: string;
-  oldPrice?: string;
-  price?: string;
-}
-
 interface Product {
   /** @description Defina a ID do Produto */
   id: number;
-  data?: ProductData;
   /** @description Configurações de exibição da Tag */
   config: {
     mobile: Config;
@@ -65,7 +57,7 @@ function BannerProductDotInfo(props: Props) {
     );
   }
 
-  function DotInfo({ id, data, config }: Product) {
+  function DotInfo({ id, config }: Product) {
     const position = {
       mobile: config.mobile.coordinates.split(":"),
       desktop: config.desktop.coordinates.split(":"),
@@ -90,7 +82,6 @@ function BannerProductDotInfo(props: Props) {
             alignment={config.mobile.alignment}
             coordinates={position.mobile}
             id={id}
-            data={data}
           />
           <Dot />
         </div>
@@ -108,7 +99,6 @@ function BannerProductDotInfo(props: Props) {
             alignment={config.desktop.alignment}
             coordinates={position.desktop}
             id={id}
-            data={data}
           />
           <Dot />
         </div>
@@ -131,7 +121,6 @@ function BannerProductDotInfo(props: Props) {
             key={index}
             id={product.id}
             config={product.config}
-            data={product.data}
           />
         ))}
 
