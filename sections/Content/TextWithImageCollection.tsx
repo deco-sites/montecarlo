@@ -1,4 +1,3 @@
-import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 import type { Props as BannerProductDotInfoProps } from "../../components/product/BannerProductDotInfo/index.tsx";

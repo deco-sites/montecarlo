@@ -1,11 +1,21 @@
 import Image from "apps/website/components/Image.tsx";
 
-export default function Info({ coords }: { coords: string[] }) {
-  const x = Number(coords[0]) > 50 ? "right-[-7px]" : "left-[calc(-100%+7px)]";
-  const y = Number(coords[1]) > 50 ? "bottom-[calc(-100%-7px)]" : "top-[7px]";
+interface Props {
+    alignment: "Left" | "Center" | "Right";
+    coordinates: string[];
+}
+
+export default function Info({ alignment, coordinates }: Props) {
+    // const x = 
+    //     alignment === "Left" && "left-[calc(-100%+7px)]" ||
+    //     alignment === "Right" && "right-[-7px]" ||
+    //     alignment === "Center" && ""
+
+    const x = Number(coordinates[0]) > 50 ? "right-[-7px]" : "left-[calc(-100%+7px)]";
+    const y = Number(coordinates[1]) > 50 ? "bottom-[calc(-100%-7px)]" : "top-[7px]";
   return (
     <div
-      class={`flex ${x} ${y} absolute invisible bg-white group-hover:visible group-data-[active=true]:visible opacity-0 group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:z-10 group-data-[active=true]:z-10 transition-opacity w-max`}
+      class={`flex ${x} ${y} absolute invisible bg-white group-hover:visible group-data-[active=true]:visible opacity-0 group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:z-10 group-data-[active=true]:z-10 transition-opacity w-max items-center`}
     >
       <div class="h-full">
         <Image
@@ -16,9 +26,9 @@ export default function Info({ coords }: { coords: string[] }) {
         />
       </div>
 
-      <div class="flex flex-col justify-center p-1 md:p-4 gap-1 font-poppins text-[10px] md:text-sm text-black max-w-[30vw] md:max-w-48 max-h-28">
+      <div class="flex flex-col justify-center p-1 md:p-4 gap-1 font-poppins text-[11px] md:text-sm text-black max-w-[30vw] md:max-w-48 max-h-28">
         <span class="line-clamp-2">Anel com Diamante em Ouro Amarelo 18k</span>
-        <div class="flex flex-col">
+        <div class="flex flex-col text-xs md:text-sm">
           <span class="text-perola+ font-light line-through">R$ 3.290,00</span>
           <span class="font-semibold">R$ 6.390,00</span>
         </div>
