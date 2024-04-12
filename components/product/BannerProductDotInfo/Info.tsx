@@ -67,28 +67,28 @@ export default function Info({ alignment, coordinates, id }: Props) {
       onClick={handleInfo}
       class={`flex ${x} ${y} absolute invisible bg-white group-hover:visible group-data-[active=true]:visible opacity-0 group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:z-10 group-data-[active=true]:z-10 transition-opacity w-max items-center cursor-pointer`}
     >
-      {productData?.image && (
-        <div class="h-full">
-          <Image
-            class="w-28 h-auto max-w-[20vw] object-cover"
-            src={`https://montecarlo.vteximg.com.br/arquivos/ids/${productData.image}`}
-            width={112}
-            height={112}
-          />
-        </div>
-      )}
+      
+      <div class="h-full">
+        <Image
+          class="w-28 h-auto max-w-[20vw] object-cover"
+          src={productData?.image ? `https://montecarlo.vteximg.com.br/arquivos/ids/${productData.image}`: "https://placehold.co/112x112"}
+          width={112}
+          height={112}
+        />
+      </div>
 
-      {productData?.productName && (
+
         <div class="flex flex-col justify-center p-1 md:p-4 gap-1 font-poppins text-[11px] md:text-sm text-black max-w-[30vw] md:max-w-48 max-h-28">
-          <span class="line-clamp-2">{productData?.productName}</span>
+          <span class="line-clamp-2">{productData?.productName ? productData.productName : "Lorem ipsum dolor sit amet"}</span>
           <div class="flex flex-col text-xs md:text-sm">
             <span class="text-perola+ font-light line-through">
-              {productData?.oldPrice}
+              {productData?.oldPrice ? productData.oldPrice : "R$ 9.999,00" }
             </span>
-            <span class="font-semibold">{productData?.price}</span>
+            <span class="font-semibold">
+              {productData?.price ? productData.price : "R$ 9.999,00" }
+            </span>
           </div>
         </div>
-      )}
     </div>
   );
 }
