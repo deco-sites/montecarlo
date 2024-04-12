@@ -2,9 +2,9 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import Icon from "../../../components/ui/Icon.tsx";
 import Slider from "../../../components/ui/Slider.tsx";
-import ProductImageZoom from "../../../islands/ProductImageZoom.tsx";
 import SliderDotsJS from "../../../islands/SliderDotsJS.tsx";
 import { useId } from "../../../sdk/useId.ts";
+import ZoomImage from "deco-sites/montecarlo/islands/Product/Zoom/ZoomImage.tsx";
 
 export interface Props {
   /** @title Integration */
@@ -51,18 +51,20 @@ export default function GallerySlider(props: Props) {
               index={index}
               class="carousel-item w-full"
             >
-              <Image
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio }}
-                src={img.url!}
-                alt={img.alternateName}
-                width={width}
-                height={height}
-                // Preload LCP image for better web vitals
-                preload={index === 0}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
+              <ZoomImage>
+                <Image
+                  class="w-full"
+                  sizes="(max-width: 640px) 100vw, 40vw"
+                  style={{ aspectRatio }}
+                  src={img.url!}
+                  alt={img.alternateName}
+                  width={width}
+                  height={height}
+                  // Preload LCP image for better web vitals
+                  preload={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              </ZoomImage>
             </Slider.Item>
           ))}
         </Slider>
