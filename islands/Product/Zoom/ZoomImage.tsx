@@ -10,34 +10,19 @@ export interface Props {
 
 export default function ZoomImage({ children }: Props) {
   const zoom = useRef<HTMLDivElement>(null);
+  const imgZoom = useRef<HTMLDivElement>(null);
   const activeZoom = useSignal(false);
 
   useSignalEffect(() => {
     function Zoom(e: MouseEvent, element: DOMRect) {
       if (zoom.current) {
-        const porcentageX = ((zoom.current.clientWidth * 2) / 100) * 25;
-        const porcentageY = ((zoom.current.clientHeight * 2) / 100) * 25;
+        const eixoX = e.clientX - element.x;
+        const eixoY = e.clientY - element.y;
 
-        const minX = 10;
-        const minY = 10;
-
-        const maxX = porcentageX;
-        const maxY = porcentageY;
-
-        const eixoX = (e.clientX - element.x) <= minX
-          ? minX
-          : (e.clientX - element.x) >= maxX
-          ? maxX
-          : (e.clientX - element.x);
-        const eixoY = (e.clientY - element.y) <= minY
-          ? minY
-          : (e.clientY - element.y) >= maxY
-          ? maxY
-          : (e.clientY - element.y);
-
-        zoom.current.style.transform = `scale(2, 2) translate3d(${
-          eixoX * -1
-        }px, ${eixoY * -1}px, 0)`;
+        if (imgZoom.current) {
+          imgZoom.current.style.transform = `scale(2, 2)`;
+          imgZoom.current.style.transformOrigin = `${eixoX}px ${eixoY}px`;
+        }
       }
     }
     if (zoom.current) {
@@ -46,18 +31,28 @@ export default function ZoomImage({ children }: Props) {
         zoom.current.addEventListener("mousemove", (e) => {
           Zoom(e, element);
         });
+        zoom.current.addEventListener("click", (e) => {
+          Zoom(e, element);
+        });
         zoom.current.addEventListener("mouseout", (e) => {
-          if (zoom.current) {
-            zoom.current.style.transform =
-              `scale(1, 1) translate3d(0px, 0px, 0)`;
+          if (imgZoom.current) {
+            imgZoom.current.style.transform = `scale(1, 1)`;
+            imgZoom.current.style.transformOrigin = `0px 0px`;
           }
         });
       } else {
         zoom.current.addEventListener("mousemove", (e) => {
           Zoom(e, element);
-          if (zoom.current) {
-            zoom.current.style.transform =
-              `scale(1, 1) translate3d(0px, 0px, 0)`;
+          if (imgZoom.current) {
+            imgZoom.current.style.transform = `scale(1, 1)`;
+            imgZoom.current.style.transformOrigin = `0px 0px`;
+          }
+        });
+        zoom.current.addEventListener("click", (e) => {
+          Zoom(e, element);
+          if (imgZoom.current) {
+            imgZoom.current.style.transform = `scale(1, 1)`;
+            imgZoom.current.style.transformOrigin = `0px 0px`;
           }
         });
       }
@@ -72,7 +67,9 @@ export default function ZoomImage({ children }: Props) {
         activeZoom.value ? "cursor-zoom-out" : "cursor-zoom-in"
       }`}
     >
-      {children}
+      <div ref={imgZoom}>
+        {children}
+      </div>
     </div>
   );
 }

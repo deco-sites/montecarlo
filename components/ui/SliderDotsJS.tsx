@@ -90,6 +90,7 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
     return;
   }
+  sliderDots.scrollTo(0, 0);
 
   const getElementsInsideContainer = () => {
     const indices: number[] = [];
@@ -112,27 +113,6 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
     return indices;
   };
 
-  const getElementsInsideContaineDots = () => {
-    const indices: number[] = [];
-    const sliderRect = sliderDots?.getBoundingClientRect();
-
-    for (let index = 0; index < items.length; index++) {
-      const item = dots.item(index);
-      const rect = item.getBoundingClientRect();
-
-      const ratio = intersectionY(
-        rect,
-        sliderRect,
-      ) / rect.height;
-
-      if (ratio > THRESHOLD) {
-        indices.push(index);
-      }
-    }
-
-    return indices;
-  };
-
   const goToItemY = (index: number, action: boolean) => {
     const item = dots.item(index);
 
@@ -143,6 +123,8 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
       return;
     }
+
+    console.log("teste");
 
     if (action) {
       sliderDots.scrollBy(0, item.offsetTop);
@@ -163,8 +145,6 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
 
       return;
     }
-    console.log("data", item.offsetLeft, root.offsetLeft);
-
     slider.scrollTo({
       top: 0,
       behavior: scroll,
