@@ -29,7 +29,7 @@ export default function Info({ alignment, coordinates, productData }: Props) {
         <div class="h-full">
           <Image
             class="w-28 h-auto max-w-[20vw] object-cover"
-            src={`https://montecarlo.vteximg.com.br/arquivos/ids/${productData[0].image}`}
+            src={productData[0].image}
             width={112}
             height={112}
           />

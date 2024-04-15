@@ -60,8 +60,7 @@ function BannerProductDotInfo(props: Props) {
   }
 
   function DotInfo({ config, productData }: ProductProps) {
-
-    console.log("index", {productData})
+    console.log("index", { productData });
 
     const position = {
       mobile: config.mobile.coordinates.split(":"),
