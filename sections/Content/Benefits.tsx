@@ -16,7 +16,6 @@ export interface Props {
     desktop?: HTMLWidget;
     mobile?: HTMLWidget;
   };
-  description?: HTMLWidget;
   benefits?: Array<Benefit>;
   slider?: CarouselProps;
 }
@@ -26,7 +25,6 @@ export default function Benefits({
     desktop: "Lorem ipsum dolor sit amet",
     mobile: "Lorem ipsum dolor sit amet",
   },
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   benefits = [
     {
       label: "Lorem ipsum",
@@ -37,8 +35,6 @@ export default function Benefits({
     {
       label: "Lorem ipsum",
       icon: "https://placehold.co/20x20",
-      description:
-        "Lorem ipsum dolor sit amet, coA cada compra, ganhe 15% de bônus no próximo pedidonsectetur adipiscing elit.",
     },
   ],
   slider,
@@ -80,12 +76,6 @@ export default function Benefits({
           <h2
             class="text-2xl font-poppins hidden lg:block"
             dangerouslySetInnerHTML={{ __html: title.desktop }}
-          />
-        )}
-        {description && (
-          <span
-            class="text-sm lg:text-lg font-poppins"
-            dangerouslySetInnerHTML={{ __html: description }}
           />
         )}
       </div>

@@ -120,7 +120,7 @@ function MiniProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm "
+      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
     >
       {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
@@ -166,7 +166,7 @@ function MiniProductCard({
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
+            class={`bg-base-100 col-span-full row-span-full  w-full ${
               l?.onMouseOver?.image == "Zoom image"
                 ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                 : ""
@@ -203,7 +203,7 @@ function MiniProductCard({
             dangerouslySetInnerHTML={{ __html: name ?? "" }}
           />
         </div>
-        <div class="flex w-full h-auto flex-1 py-1">
+        <div class="flex w-full h-auto flex-1 py-1 min-h-4">
           {materials?.map((item) => {
             if (
               !layout?.materialImages || layout?.materialImages === undefined
