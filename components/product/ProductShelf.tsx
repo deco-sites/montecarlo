@@ -153,7 +153,7 @@ function ShelfCollection({
       {layout?.ctaCollection && (
         <ButtonLink
           href={layout?.hrefCollection || ""}
-          classCustom={"text-black text-sm lg:hidden"}
+          classCustom={`text-black text-sm ${layout.showCtaOnMobile ? "block" : "hidden"} ${layout.showCtaOnDesktop ? "lg:block" : "lg:hidden"}`}
           label={layout?.ctaCollection}
         />
       )}
