@@ -4,6 +4,7 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import ButtonLink from "../ui/ButtonLink.tsx";
 
 /**
  * @titleBy altProduct
@@ -107,12 +108,11 @@ function Card({ image }: { image: CardImage }) {
           </Picture>
         </div>
         {button && (
-          <a
-            class="absolute bottom-9 py-4 px-6 bg-primary text-black hidden lg:flex"
-            href={href}
-          >
-            {button}
-          </a>
+          <ButtonLink
+            href={href || ""}
+            classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
+            label={button}
+          />
         )}
       </div>
       {(title || description) &&
@@ -140,7 +140,7 @@ export default function TrioOfImages(
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8 gap-5 lg:gap-10">
       <div class="flex flex-col w-full gap-1 items-center">
-        {title && <h3 class=" font-semibold text-xl lg:text-3xl">{title}</h3>}
+        {title && <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>}
         {subTitle && (
           <span
             dangerouslySetInnerHTML={{ __html: subTitle }}

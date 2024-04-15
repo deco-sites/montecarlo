@@ -6,6 +6,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import ProductCardInline from "../product/ProductCardInline.tsx";
+import ButtonLink from "./ButtonLink.tsx";
 
 /**
  * @titleBy title
@@ -116,12 +117,11 @@ function Card({ image }: { image: CardImage }) {
           </div>
         </div>
         {button && (
-          <a
-            class="absolute bottom-9 py-4 px-6 bg-primary text-black"
+          <ButtonLink
             href={href || ""}
-          >
-            {button}
-          </a>
+            classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
+            label={button}
+          />
         )}
       </div>
       <div class="flex flex-col gap-1">
@@ -148,7 +148,7 @@ export default function TrioOfImagesAndProducts(
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8">
       <div class="flex flex-col w-full gap-1">
-        {title && <h3 class=" font-semibold text-xl lg:text-3xl">{title}</h3>}
+        {title && <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>}
         {subTitle && (
           <p class=" font-medium  text-sm lg:text-base">{subTitle}</p>
         )}

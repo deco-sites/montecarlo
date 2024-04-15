@@ -14,6 +14,7 @@ import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { clx } from "../../sdk/clx.ts";
+import ButtonLink from "../ui/ButtonLink.tsx";
 
 import type { Product } from "apps/commerce/types.ts";
 
@@ -74,8 +75,18 @@ function ShelfCollection({
   return (
     <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 items-center">
       <div class="flex flex-col w-full gap-1">
-        <Title text={title} />
-        <SubTitle text={subTitle} />
+        {title && (
+          <h2 class=" font-semibold text-center text-xl lg:text-3xl">
+            {title}
+          </h2>
+        )}
+        {subTitle && (
+          <span
+            dangerouslySetInnerHTML={{ __html: subTitle }}
+            class=" font-medium text-center text-sm lg:text-base"
+          >
+          </span>
+        )}
       </div>
       <div
         id={id}
@@ -86,12 +97,12 @@ function ShelfCollection({
           "px-0",
         )}
       >
-        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start ">
+        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-5 sm:gap-2 lg:gap-0 px-14 lg:px-0">
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
               class={clx(
-                "carousel-item ",
+                "carousel-item max-w-[246px] snap-center sm:w-1/3 sm:max-w-none lg:snap-start ",
                 slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
                 slideMobile[layout?.numberOfSliders?.mobile ?? 1],
               )}
@@ -139,12 +150,13 @@ function ShelfCollection({
           }}
         />
       </div>
-      <CtaCollection
-        ctaCollection={layout?.ctaCollection}
-        hrefCollection={layout?.hrefCollection}
-        showOnMobile={layout?.showCtaOnMobile}
-        showOnDesktop={layout?.showCtaOnDesktop}
-      />
+      {layout?.ctaCollection && (
+        <ButtonLink
+          href={layout?.hrefCollection || ""}
+          classCustom={"text-black text-sm lg:hidden"}
+          label={layout?.ctaCollection}
+        />
+      )}
     </div>
   );
 }

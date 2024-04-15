@@ -12,6 +12,7 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "../../sdk/url.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
 
 interface Name {
   /**
@@ -30,14 +31,6 @@ interface Price {
   fontSize?: "Small" | "Normal" | "Large";
 }
 
-/**
- * @titleBy value
- */
-interface ImgMaterial {
-  value: string;
-  image: ImageWidget;
-}
-
 export interface Layout {
   onMouseOver?: {
     image?: "Change image" | "Zoom image" | "None";
@@ -46,7 +39,7 @@ export interface Layout {
   };
   name?: Name;
   price?: Price;
-  materialImages?: ImgMaterial[];
+  materialImages?: Material[];
 }
 
 interface Props {
@@ -218,9 +211,7 @@ function MiniProductCard({
               return null;
             }
 
-            const img = layout?.materialImages.find((img) =>
-              img.value === item
-            );
+            const img = layout?.materialImages.find((img) => img.name === item);
 
             if (!img || img === undefined) {
               return null;
@@ -231,7 +222,7 @@ function MiniProductCard({
                 src={img.image}
                 width={15}
                 height={15}
-                alt={img.value}
+                alt={img.name}
               />
             );
           })}

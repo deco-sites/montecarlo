@@ -23,14 +23,16 @@ export default function Securitys(
             {content.items.map((item) => {
               return (
                 <li>
-                  <Image
-                    width={68}
-                    height={68}
-                    loading="lazy"
-                    src={item.src}
-                    alt={item.alt}
-                    class="object-contain"
-                  />
+                  {item.src && (
+                    <Image
+                      width={68}
+                      height={68}
+                      loading="lazy"
+                      src={item.src}
+                      alt={item.alt}
+                      class="object-contain"
+                    />
+                  )}
                 </li>
               );
             })}
