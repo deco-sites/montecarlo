@@ -3,12 +3,11 @@ import Image from "apps/website/components/Image.tsx";
 import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
 
 interface Props {
-  alignment: "Left" | "Center" | "Right";
   coordinates: string[];
   productData?: ProductData[];
 }
 
-export default function Info({ alignment, coordinates, productData }: Props) {
+export default function Info({coordinates, productData }: Props) {
   function handleInfo(event: MouseEvent) {
     console.log({ product: productData });
   }

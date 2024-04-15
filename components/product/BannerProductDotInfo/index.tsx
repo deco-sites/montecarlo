@@ -18,13 +18,6 @@ interface Tag {
 interface Config {
   /** @description Defina as coordenadas para a Tag seguindo o formato x:y (horizontal:vertical). Exemplo: 10:20 */
   coordinates: string;
-  /**
-   * @format button-group
-   * @options deco-sites/montecarlo/loaders/icons.ts
-   * @description Defina o alinhamento da exibição das informações do produto
-   * @hide true
-   */
-  alignment: "Left" | "Center" | "Right";
 }
 
 interface ProductProps {
@@ -81,7 +74,6 @@ function BannerProductDotInfo(props: Props) {
           data-active="false"
         >
           <Info
-            alignment={config.mobile.alignment}
             coordinates={position.mobile}
             productData={productData}
           />
@@ -98,7 +90,6 @@ function BannerProductDotInfo(props: Props) {
           data-active="false"
         >
           <Info
-            alignment={config.desktop.alignment}
             coordinates={position.desktop}
             productData={productData}
           />
