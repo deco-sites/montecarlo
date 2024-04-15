@@ -28,7 +28,9 @@ const loader = async ({ id }: Props): Promise<ProductData> => {
 
     productData = {
       id: id,
-      image: `https://montecarlo.vteximg.com.br/arquivos/ids/${data[0].MainImage.ImageId}`,
+      image: `https://montecarlo.vteximg.com.br/arquivos/ids/${
+        data[0].MainImage.ImageId
+      }`,
       productName: data[0].Name,
       oldPrice: formatNumber.format(
         data[0].Offers[0].OffersPerSalesChannel[0].PriceWithoutDiscount,
