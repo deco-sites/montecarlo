@@ -2,6 +2,8 @@ import { useState } from "preact/hooks";
 
 import { ImageWidget } from "apps/admin/widgets.ts";
 
+import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
+
 import Banner from "./Banner.tsx";
 import ButtonDotsControl from "./ButtonDotsControl.tsx";
 import Dot from "./Dot.tsx";
@@ -10,7 +12,7 @@ import Info from "./Info.tsx";
 interface Tag {
   /** @title Tags Always Visible */
   alwaysActive?: boolean;
-  products?: Product[];
+  products?: ProductProps[];
 }
 
 interface Config {
@@ -25,9 +27,9 @@ interface Config {
   alignment: "Left" | "Center" | "Right";
 }
 
-interface Product {
+interface ProductProps {
   /** @description Defina a ID do Produto */
-  id: number;
+  productData?: ProductData[];
   /** @description Configurações de exibição da Tag */
   config: {
     mobile: Config;
@@ -57,7 +59,9 @@ function BannerProductDotInfo(props: Props) {
     );
   }
 
-  function DotInfo({ id, config }: Product) {
+  function DotInfo({ config, productData }: ProductProps) {
+    console.log("index", { productData });
+
     const position = {
       mobile: config.mobile.coordinates.split(":"),
       desktop: config.desktop.coordinates.split(":"),
@@ -81,7 +85,7 @@ function BannerProductDotInfo(props: Props) {
           <Info
             alignment={config.mobile.alignment}
             coordinates={position.mobile}
-            id={id}
+            productData={productData}
           />
           <Dot />
         </div>
@@ -98,7 +102,7 @@ function BannerProductDotInfo(props: Props) {
           <Info
             alignment={config.desktop.alignment}
             coordinates={position.desktop}
-            id={id}
+            productData={productData}
           />
           <Dot />
         </div>
@@ -119,8 +123,8 @@ function BannerProductDotInfo(props: Props) {
         {props.tags?.products?.map((product, index) => (
           <DotInfo
             key={index}
-            id={product.id}
             config={product.config}
+            productData={product.productData}
           />
         ))}
 
