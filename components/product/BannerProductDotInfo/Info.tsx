@@ -7,7 +7,7 @@ interface Props {
   productData?: ProductData[];
 }
 
-export default function Info({coordinates, productData }: Props) {
+export default function Info({ coordinates, productData }: Props) {
   function handleInfo(event: MouseEvent) {
     console.log({ product: productData });
   }
