@@ -4,6 +4,7 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import ButtonLink from "./ButtonLink.tsx";
 
 /**
  * @titleBy title
@@ -103,19 +104,18 @@ function Card({ image }: { image: CardImage }) {
           />
         </Picture>
         {button && (
-          <a
-            class="absolute bottom-9 py-4 px-6 bg-primary text-black"
-            href={href}
-          >
-            {button}
-          </a>
+          <ButtonLink
+            href={href || ""}
+            classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
+            label={button}
+          />
         )}
       </div>
       <div class="flex flex-col gap-1">
         {title && (
-          <h4 class="text-center font-medium text-lg text-black lg:text-xl">
+          <h2 class="text-center font-medium text-lg text-black lg:text-xl">
             {title}
-          </h4>
+          </h2>
         )}
         {description && (
           <p class="text-center text-sm max-w-[240px] lg:max-w-full text-black">

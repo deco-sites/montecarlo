@@ -23,14 +23,16 @@ export default function PaymentMethods(
             {content.items.map((item) => {
               return (
                 <li>
-                  <Image
-                    width={20}
-                    height={12}
-                    loading="lazy"
-                    src={item.src}
-                    alt={item.alt}
-                    class="object-contain"
-                  />
+                  {item.src && (
+                    <Image
+                      width={20}
+                      height={12}
+                      loading="lazy"
+                      src={item.src}
+                      alt={item.alt}
+                      class="object-contain"
+                    />
+                  )}
                 </li>
               );
             })}

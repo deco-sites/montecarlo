@@ -1,5 +1,6 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import ButtonLink from "./ButtonLink.tsx";
 
 /**
  * @titleBy title
@@ -32,7 +33,8 @@ export function SectionImage(
     infoSectionCustomClass?: string;
   },
 ) {
-  const { mobile, desktop, alt, content, contentTitle, button, title } = props;
+  const { mobile, desktop, alt, content, contentTitle, button, title, href } =
+    props;
 
   if (!customClass) customClass = "";
   if (!wrapperCustomClass) wrapperCustomClass = "";
@@ -63,9 +65,9 @@ export function SectionImage(
         <h3 class="hidden group-hover:flex text-3xl lg:text-[50px] text-black duration-300 font-beausiteGrand">
           {contentTitle}
         </h3>
-        <h3 class="flex group-hover:hidden text-3xl lg:text-[50px] absolute bottom-28 text-[#F5F3E7] font-beausiteGrand">
+        <h2 class="flex group-hover:hidden text-3xl lg:text-[50px] absolute bottom-28 text-[#F5F3E7] font-beausiteGrand">
           {title}
-        </h3>
+        </h2>
         {content && (
           <span
             class="hidden group-hover:flex text-lg lg:text-xl max-w-[400px] text-center text-black duration-300"
@@ -73,9 +75,11 @@ export function SectionImage(
           >
           </span>
         )}
-        <a class="bg-primary cursor-pointer absolute bottom-11 text-sm text-black px-3 py-3 group-hover:bg-[#F5F3E7] duration-300">
-          {button}
-        </a>
+        <ButtonLink
+          href={href || ""}
+          classCustom={"text-black text-sm text-black group-hover:bg-[#F5F3E7] duration-300 absolute bottom-11"}
+          label={button}
+        />
       </div>
     </div>
   );

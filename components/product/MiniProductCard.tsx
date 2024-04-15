@@ -12,6 +12,7 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "../../sdk/url.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
 
 interface Name {
   /**
@@ -30,14 +31,6 @@ interface Price {
   fontSize?: "Small" | "Normal" | "Large";
 }
 
-/**
- * @titleBy value
- */
-interface ImgMaterial {
-  value: string;
-  image: ImageWidget;
-}
-
 export interface Layout {
   onMouseOver?: {
     image?: "Change image" | "Zoom image" | "None";
@@ -46,7 +39,7 @@ export interface Layout {
   };
   name?: Name;
   price?: Price;
-  materialImages?: ImgMaterial[];
+  materialImages?: Material[];
 }
 
 interface Props {
@@ -127,7 +120,7 @@ function MiniProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm "
+      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
     >
       {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
@@ -173,7 +166,7 @@ function MiniProductCard({
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
+            class={`bg-base-100 col-span-full row-span-full  w-full ${
               l?.onMouseOver?.image == "Zoom image"
                 ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                 : ""
@@ -210,7 +203,7 @@ function MiniProductCard({
             dangerouslySetInnerHTML={{ __html: name ?? "" }}
           />
         </div>
-        <div class="flex w-full h-auto flex-1 py-1">
+        <div class="flex w-full h-auto flex-1 py-1 min-h-4">
           {materials?.map((item) => {
             if (
               !layout?.materialImages || layout?.materialImages === undefined
@@ -218,9 +211,7 @@ function MiniProductCard({
               return null;
             }
 
-            const img = layout?.materialImages.find((img) =>
-              img.value === item
-            );
+            const img = layout?.materialImages.find((img) => img.name === item);
 
             if (!img || img === undefined) {
               return null;
@@ -231,7 +222,7 @@ function MiniProductCard({
                 src={img.image}
                 width={15}
                 height={15}
-                alt={img.value}
+                alt={img.name}
               />
             );
           })}

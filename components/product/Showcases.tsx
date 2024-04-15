@@ -12,6 +12,7 @@ import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { clx } from "../../sdk/clx.ts";
+import ButtonLink from "../ui/ButtonLink.tsx";
 
 export interface Props {
   firstShelf: Product[] | null;
@@ -50,12 +51,12 @@ function Showcase({
     return null;
   }
   const slideDesktop = {
-    1: "md:w-full",
-    2: "md:w-1/2",
-    3: "md:w-1/3",
-    4: "md:w-1/4",
-    5: "md:w-1/5",
-    6: "md:w-1/6",
+    1: "md:w-1/3 lg:w-full",
+    2: "md:w-1/3 lg:w-1/2",
+    3: "md:w-1/3 lg:w-1/3",
+    4: "md:w-1/3 lg:w-1/4",
+    5: "md:w-1/3 lg:w-1/5",
+    6: "md:w-1/3 lg:w-1/6",
   };
 
   const slideMobile = {
@@ -69,9 +70,9 @@ function Showcase({
     <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 items-center">
       <div class="flex flex-col w-full gap-1">
         {title && (
-          <h3 class=" font-semibold text-center text-xl lg:text-3xl">
+          <h2 class=" font-semibold text-center text-xl lg:text-3xl">
             {title}
-          </h3>
+          </h2>
         )}
         {subTitle && (
           <span
@@ -173,13 +174,11 @@ function Showcase({
         <SliderJS rootId={id + "2"} />
       </div>
       {layout?.ctaCollection && (
-        <a
+        <ButtonLink
           href={layout?.hrefCollection || ""}
-          aria-label="view product"
-          class="w-min py-[10px] px-[14px] bg-primary text-black text-sm lg:hidden"
-        >
-          {layout?.ctaCollection}
-        </a>
+          classCustom={"text-black text-sm lg:hidden"}
+          label={layout?.ctaCollection}
+        />
       )}
     </div>
   );

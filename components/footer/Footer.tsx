@@ -51,8 +51,10 @@ export interface Props {
    * @format html
    */
   copyWrite?: string;
-  logo: ImageWidget;
-  alt?: string;
+  logo: {
+    src: ImageWidget;
+    alt?: string;
+  };
   payments?: {
     title?: string;
     items: PaymentItem[];
@@ -109,7 +111,6 @@ function Footer({
   stacks,
   formState,
   logo,
-  alt,
   copyWrite,
   security,
 }: Props) {
@@ -119,7 +120,7 @@ function Footer({
         "w-full flex flex-col gap-10",
       )}
     >
-      <div class="bg-primary w-full lg:mx-auto pt-12">
+      <div class="bg-primary w-full lg:mx-auto pt-12 sm">
         <div class="flex flex-col gap-10">
           <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between px-2 max-w-[1408px] w-full lg:mx-auto">
             <FooterItems
@@ -130,14 +131,16 @@ function Footer({
               <FormStore formState={formState} />
               <Social content={social} />
               <div class="flex w-full items-center lg:items-start flex-col gap-2">
-                <Image
-                  width={25}
-                  height={28}
-                  alt={alt}
-                  src={logo}
-                  loading="lazy"
-                  class="flex lg:hidden object-contain"
-                />
+                {logo.src && (
+                  <Image
+                    width={25}
+                    height={28}
+                    alt={logo.alt}
+                    src={logo.src}
+                    loading="lazy"
+                    class="flex lg:hidden object-contain"
+                  />
+                )}
                 {copyWrite && (
                   <span
                     class="font-semibold text-sm text-center lg:text-start"

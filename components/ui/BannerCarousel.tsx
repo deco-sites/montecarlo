@@ -94,7 +94,7 @@ function Action(
       )}
       {action.label && (
         <Button
-          class="bg-primary text-sm py-4 px-6 w-fit hover:bg-primary border-none"
+          class="bg-primary text-sm py-4 px-6 w-fit hover:bg-primary border-none hover:opacity-80"
           aria-label={action.label}
         >
           {action?.label}
@@ -124,7 +124,7 @@ function BannerItemMobile(
         {action &&
           <Action {...action} />}
       </a>
-      <Picture preload={lcp}>
+      <Picture preload={lcp} class="w-full h-full">
         <Source
           media="(max-width: 767px)"
           fetchPriority={lcp ? "high" : "auto"}
@@ -160,21 +160,21 @@ function BannerItem(
           </a>
           <Picture preload={lcp} class="w-full h-full">
             <Source
-              media="(max-width: 767px)"
-              fetchPriority={lcp ? "high" : "auto"}
-              src={primaryImage.mobile}
-              width={430}
-              height={590}
-            />
-            <Source
-              media="(min-width: 768px)"
+              media="(max-width: 1366px)"
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
-              width={1440}
-              height={600}
+              width={image.banner.length > 1 ? 631 : 1263}
+              height={492}
+            />
+            <Source
+              media="(min-width: 1367px)"
+              fetchPriority={lcp ? "high" : "auto"}
+              src={primaryImage.desktop}
+              width={image.banner.length > 1 ? 748 : 1495}
+              height={583}
             />
             <img
-              class="object-cover w-full h-full"
+              class="object-cover w-full"
               loading={lcp ? "eager" : "lazy"}
               src={primaryImage.desktop}
               alt={primaryImage.alt}
@@ -276,7 +276,7 @@ function BannerCarousel(props: Props) {
   return (
     <div
       id={id}
-      class="grid h-[72vh] grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min"
+      class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {isMobile.value && arrayImage
