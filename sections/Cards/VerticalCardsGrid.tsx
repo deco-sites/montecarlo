@@ -1,1 +1,1 @@
-export { default } from '../../components/ui/VerticalCardsGrid.tsx';
+export { default } from "../../components/ui/VerticalCardsGrid.tsx";

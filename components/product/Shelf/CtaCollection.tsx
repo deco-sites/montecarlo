@@ -7,7 +7,8 @@ interface Props {
 }
 
 function CtaCollection(
-  { ctaCollection, hrefCollection, showOnDesktop, showOnMobile, customClass }: Props
+  { ctaCollection, hrefCollection, showOnDesktop, showOnMobile, customClass }:
+    Props,
 ) {
   if (ctaCollection) {
     return (
@@ -16,7 +17,9 @@ function CtaCollection(
         aria-label="view product"
         class={`w-min py-[10px] px-[14px] bg-primary text-black text-sm  ${
           showOnMobile ? "block" : "hidden"
-        } lg:px-4 lg:py-2 lg:text-lg lg:${showOnDesktop ? "block" : "hidden"} ${customClass ? customClass : ''}`}
+        } lg:px-4 lg:py-2 lg:text-lg lg:${showOnDesktop ? "block" : "hidden"} ${
+          customClass ? customClass : ""
+        }`}
       >
         {ctaCollection}
       </a>
