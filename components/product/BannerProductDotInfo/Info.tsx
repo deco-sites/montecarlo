@@ -1,48 +1,63 @@
 import Image from "apps/website/components/Image.tsx";
+import { useState, useEffect } from "preact/hooks";
 
-import { invoke } from "../../../runtime.ts";
-import { useCallback } from "preact/hooks";
-
-// import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
+interface ProductData {
+  /** @description Defina a id do produto. Obs: Ao preencher este campo as informações do produto serão preenchidas automaticamente. */
+  id?: number;
+  /** @title Imagem
+   * @description Url da imagem do produto */
+  image?: string;
+  /** @title Nome do produto */
+  productName?: string;
+  /** @title De R$ */
+  listPrice?: string;
+  /** @title Por R$ */
+  price?: string;
+}
 
 interface Props {
   coordinates: string[];
-  productData?: {
-    id?: number;
-    image?: string;
-    productName?: string;
-    listPrice?: string;
-    price?: string;
-  };
+  product?: ProductData;
 }
 
-export default function Info({ coordinates, productData }: Props) {
+export default function Info({ coordinates, product }: Props) {
 
-  if (productData?.id) {
-    const fetchData = useCallback(async () => {
-      const data = await invoke["deco-sites/montecarlo"].loaders.ProductDotInfo({id: productData.id,})
+    function fetchData() {
+        const formatNumber = new Intl.NumberFormat("pt-BR", {
+            style: "currency",
+            currency: "BRL",
+            minimumFractionDigits: 2,
+          });
 
-      console.log({ info: productData, data });
-    }, [])
-    fetchData();
-  }
-
-  const testData = async () => {
-    try {
-      const response = await fetch(
-        `https://montecarlo.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/40710`,
-      );
-      const data = await response.json();
-  
-      // console.log({ data });
-    } catch (err) {
-      console.error(err);
+        return fetch(`https://montecarlo.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/${product?.id}`)
+            .then(response => response.json())
+            .then(data => ({
+                id: data[0]?.ProductId,
+                image: `https://montecarlo.vteximg.com.br/arquivos/ids/${data[0]?.MainImage.ImageId}`,
+                productName: data[0]?.Name,
+                listPrice: formatNumber.format(
+                    data[0]?.Offers[0]?.OffersPerSalesChannel[0]?.ListPrice
+                ),
+                price: formatNumber.format(
+                    data[0]?.Offers[0]?.OffersPerSalesChannel[0]?.Price
+                ),
+            }))
+            .catch(error => {
+                console.error('Erro ao fazer o fetch dos dados:', error);
+                return {
+                    id: productData?.id,
+                    image: `https://placehold.co/112x112`,
+                    productName: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+                };
+            });
     }
-  }
 
-  testData();
+    const [productData, setProductData] = useState<ProductData | null>(null);
 
-  // console.log({info: productData});
+    useEffect(() => {
+        product?.id ? fetchData().then(data => setProductData(data)) : setProductData(product ? product : null);
+    }, []);
+
 
   function handleInfo(event: MouseEvent) {
     console.log({ product: productData });

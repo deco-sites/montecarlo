@@ -2,12 +2,10 @@ import { useState } from "preact/hooks";
 
 import { ImageWidget } from "apps/admin/widgets.ts";
 
-import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
-
 import Banner from "./Banner.tsx";
 import ButtonDotsControl from "./ButtonDotsControl.tsx";
 import Dot from "./Dot.tsx";
-import Info from "../../../islands/Info.tsx";
+import Info from "./Info.tsx";
 
 interface Tag {
   /** @title Tags Always Visible */
@@ -20,8 +18,20 @@ interface Config {
   coordinates: string;
 }
 
+interface ProductData {
+  id?: number;
+  /** @description Url da imagem do produto */
+  image?: string;
+  /** @description Nome do produto */
+  productName?: string;
+  /** @description De R$ */
+  listPrice?: string;
+  /** @description Por R$ */
+  price?: string;
+}
+
 interface ProductProps {
-  /** @description Defina a ID do Produto */
+  /** @description Defina as informações do Produto */
   productData?: ProductData;
   /** @description Configurações de exibição da Tag */
   config: {
@@ -43,8 +53,6 @@ function BannerProductDotInfo(props: Props) {
   const [dotsActive, setDotsActive] = useState(
     props.tags?.alwaysActive || false,
   );
-
-  // console.log({BannerProductDotInfo: props})
 
   function handleDot(event: MouseEvent) {
     const dot = event.currentTarget as HTMLElement;
