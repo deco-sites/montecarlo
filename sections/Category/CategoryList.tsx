@@ -92,7 +92,7 @@ function CategoryList(props: Props) {
         <p class=" font-medium  text-sm lg:text-base">{header.description}</p>
       </div>
 
-      <div class="flex flex-row flex-wrap gap-2 justify-center items-center">
+      <div class="flex flex-row flex-wrap gap-2 justify-center items-center w-full">
         {list.map((category) => (
           <a
             href={category.href}

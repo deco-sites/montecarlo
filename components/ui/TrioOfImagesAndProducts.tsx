@@ -155,7 +155,7 @@ export default function TrioOfImagesAndProducts(
       </div>
       <div
         id={id}
-        class="grid grid-cols-[48px_1fr_48px] lg:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] h-auto max-w-[1408px]"
+        class="grid grid-cols-[48px_1fr_48px] lg:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] h-auto max-w-[1408px] w-full"
       >
         <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-2 lg:justify-center">
           {cards?.map((image, index) => {
