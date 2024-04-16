@@ -29,7 +29,7 @@ export default function Info({ coordinates, product }: Props) {
             minimumFractionDigits: 2,
           });
 
-        return fetch(`https://montecarlo.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/${product?.id}`)
+        return fetch(`/api/catalog_system/pub/products/offers/${product?.id}`)
             .then(response => response.json())
             .then(data => ({
                 id: data[0]?.ProductId,
