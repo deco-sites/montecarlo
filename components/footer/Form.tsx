@@ -1,6 +1,7 @@
 import { useRef } from "preact/compat";
 import { useSignal } from "@preact/signals";
 import { useEffect } from "preact/hooks";
+import { invoke } from "deco-sites/montecarlo/runtime.ts";
 
 interface States {
   city: string[];

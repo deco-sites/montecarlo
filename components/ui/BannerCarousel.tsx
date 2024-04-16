@@ -10,6 +10,7 @@ import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import { useUI } from "../../sdk/useUI.ts";
+import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy alt
@@ -124,21 +125,18 @@ function BannerItemMobile(
         {action &&
           <Action {...action} />}
       </a>
-      <Picture preload={lcp} class="w-full h-full">
-        <Source
-          media="(max-width: 767px)"
-          fetchPriority={lcp ? "high" : "auto"}
-          src={mobile}
-          width={350}
-          height={450}
-        />
-        <img
-          class="object-cover w-full h-full"
-          loading={lcp ? "eager" : "lazy"}
-          src={mobile}
-          alt={alt}
-        />
-      </Picture>
+      <Image
+        class="object-cover w-full h-full"
+        loading={lcp ? "eager" : "lazy"}
+        decoding="async"
+        sizes="(max-width: 640px) 100vw"
+        preload={lcp}
+        src={mobile}
+        alt={alt}
+        width={350}
+        height={450}
+        fetchPriority={lcp ? "high" : "auto"}
+      />
     </div>
   );
 }

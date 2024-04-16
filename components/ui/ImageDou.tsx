@@ -49,15 +49,19 @@ export function SectionImage(
           src={mobile}
           width={350}
           height={350}
+          fetchPriority="low"
+          loading={"lazy"}
           media="(max-width: 1023px)"
         />
         <Source
           src={desktop}
           width={756}
           height={656}
+          fetchPriority="low"
+          loading={"lazy"}
           media="(min-width: 1024px)"
         />
-        <img class="w-full h-full" src={desktop} alt={alt} />
+        <img class="w-full h-full" src={desktop} alt={alt} loading={"lazy"} />
       </Picture>
       <div
         class={`w-full absolute top-0 left-0 h-full flex flex-col justify-center items-center bg-gradient-to-t from-[#0000004d] group-hover:from-[#ffc72ce6] group-hover:bg-[#ffc72ce6] gap-2 duration-300 lg:gap-5 ${infoSectionCustomClass}`}
