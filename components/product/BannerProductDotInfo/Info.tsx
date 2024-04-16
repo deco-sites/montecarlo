@@ -1,13 +1,31 @@
 import Image from "apps/website/components/Image.tsx";
 
-import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
+import { invoke } from "../../../runtime.ts";
+import { useCallback } from "preact/hooks";
+
+// import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
 
 interface Props {
   coordinates: string[];
-  productData?: ProductData[];
+  productData?: {
+    id?: number;
+    image?: string;
+    productName?: string;
+    listPrice?: string;
+    price?: string;
+  };
 }
 
 export default function Info({ coordinates, productData }: Props) {
+
+  if (productData?.id) {
+    const fetchData = useCallback(async () => {
+      const data = await invoke["deco-sites/montecarlo"].loaders.ProductDotInfo({id: productData.id,})
+
+      console.log({ info: productData, data });
+    }, [])
+    fetchData();
+  }
 
   const testData = async () => {
     try {
@@ -16,7 +34,7 @@ export default function Info({ coordinates, productData }: Props) {
       );
       const data = await response.json();
   
-      console.log({ data });
+      // console.log({ data });
     } catch (err) {
       console.error(err);
     }
@@ -24,7 +42,7 @@ export default function Info({ coordinates, productData }: Props) {
 
   testData();
 
-  console.log({info: productData});
+  // console.log({info: productData});
 
   function handleInfo(event: MouseEvent) {
     console.log({ product: productData });
@@ -42,28 +60,28 @@ export default function Info({ coordinates, productData }: Props) {
       onClick={handleInfo}
       class={`flex ${x} ${y} absolute invisible bg-white group-hover:visible group-data-[active=true]:visible opacity-0 group-hover:opacity-100 group-data-[active=true]:opacity-100 group-hover:z-10 group-data-[active=true]:z-10 transition-opacity w-max items-center cursor-pointer`}
     >
-      {productData && productData[0]?.image && (
+      {productData && productData?.image && (
         <div class="h-full">
           <Image
             class="w-28 h-auto max-w-[20vw] object-cover"
-            src={productData[0].image}
+            src={productData.image}
             width={112}
             height={112}
           />
         </div>
       )}
 
-      {productData && productData[0]?.productName && (
+      {productData && productData?.productName && (
         <div class="flex flex-col justify-center p-1 md:p-4 gap-1 font-poppins text-[11px] md:text-sm text-black max-w-[30vw] md:max-w-48 max-h-28">
           <span class="line-clamp-2">
-            {productData[0].productName}
+            {productData.productName}
           </span>
           <div class="flex flex-col text-xs md:text-sm">
             <span class="text-perola+ font-light line-through">
-              {productData[0].oldPrice}
+              {productData.listPrice}
             </span>
             <span class="font-semibold">
-              {productData[0].price}
+              {productData.price}
             </span>
           </div>
         </div>

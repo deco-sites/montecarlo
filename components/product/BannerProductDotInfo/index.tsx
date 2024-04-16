@@ -7,7 +7,7 @@ import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
 import Banner from "./Banner.tsx";
 import ButtonDotsControl from "./ButtonDotsControl.tsx";
 import Dot from "./Dot.tsx";
-import Info from "./Info.tsx";
+import Info from "../../../islands/Info.tsx";
 
 interface Tag {
   /** @title Tags Always Visible */
@@ -22,11 +22,11 @@ interface Config {
 
 interface ProductProps {
   /** @description Defina a ID do Produto */
-  productData?: ProductData[];
+  productData?: ProductData;
   /** @description Configurações de exibição da Tag */
   config: {
-    mobile: { coordinates: string; };
-    desktop: { coordinates: string; };
+    mobile: Config;
+    desktop: Config;
   };
 }
 
@@ -36,18 +36,7 @@ export interface Props {
   desktop: ImageWidget;
   alt?: string;
   /** @description Adicione Tags para identificar produtos na imagem */
-  tags?: {
-    alwaysActive?: boolean;
-    products?: { 
-      /** @description Defina a ID do Produto */
-      productData?: ProductData[];
-      /** @description Configurações de exibição da Tag */
-      config: {
-        mobile: { coordinates: string; };
-        desktop: { coordinates: string; };
-      };
-    }[];
-  };
+  tags?: Tag;
 }
 
 function BannerProductDotInfo(props: Props) {
@@ -55,7 +44,7 @@ function BannerProductDotInfo(props: Props) {
     props.tags?.alwaysActive || false,
   );
 
-  console.log({BannerProductDotInfo: props})
+  // console.log({BannerProductDotInfo: props})
 
   function handleDot(event: MouseEvent) {
     const dot = event.currentTarget as HTMLElement;
@@ -88,7 +77,7 @@ function BannerProductDotInfo(props: Props) {
         >
           <Info
             coordinates={position.mobile}
-            productData={productData}
+            product={productData}
           />
           <Dot />
         </div>
@@ -104,7 +93,7 @@ function BannerProductDotInfo(props: Props) {
         >
           <Info
             coordinates={position.desktop}
-            productData={productData}
+            product={productData}
           />
           <Dot />
         </div>
