@@ -25,8 +25,8 @@ interface ProductProps {
   productData?: ProductData[];
   /** @description Configurações de exibição da Tag */
   config: {
-    mobile: Config;
-    desktop: Config;
+    mobile: { coordinates: string; };
+    desktop: { coordinates: string; };
   };
 }
 
@@ -36,7 +36,18 @@ export interface Props {
   desktop: ImageWidget;
   alt?: string;
   /** @description Adicione Tags para identificar produtos na imagem */
-  tags?: Tag;
+  tags?: {
+    alwaysActive?: boolean;
+    products?: { 
+      /** @description Defina a ID do Produto */
+      productData?: ProductData[];
+      /** @description Configurações de exibição da Tag */
+      config: {
+        mobile: { coordinates: string; };
+        desktop: { coordinates: string; };
+      };
+    }[];
+  };
 }
 
 function BannerProductDotInfo(props: Props) {
