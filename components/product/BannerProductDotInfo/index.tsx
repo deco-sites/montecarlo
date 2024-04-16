@@ -44,6 +44,8 @@ function BannerProductDotInfo(props: Props) {
     props.tags?.alwaysActive || false,
   );
 
+  console.log({BannerProductDotInfo: props})
+
   function handleDot(event: MouseEvent) {
     const dot = event.currentTarget as HTMLElement;
     dot.setAttribute(
