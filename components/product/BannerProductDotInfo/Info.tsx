@@ -9,6 +9,21 @@ interface Props {
 
 export default function Info({ coordinates, productData }: Props) {
 
+  const testData = async () => {
+    try {
+      const response = await fetch(
+        `https://montecarlo.vtexcommercestable.com.br/api/catalog_system/pub/products/offers/40710`,
+      );
+      const data = await response.json();
+  
+      console.log({ data });
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  testData();
+
   console.log({info: productData});
 
   function handleInfo(event: MouseEvent) {
