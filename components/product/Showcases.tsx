@@ -85,7 +85,7 @@ function Showcase({
       <div
         id={id + "1"}
         class={clx(
-          "grid max-w-[1408px]",
+          "grid max-w-[1504px]",
           layout?.showArrows &&
             "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
           "px-0",
@@ -130,7 +130,7 @@ function Showcase({
       <div
         id={id + "2"}
         class={clx(
-          "grid max-w-[1408px] pt-6 lg:pt-12",
+          "grid max-w-[1504px] pt-6 lg:pt-12",
           layout?.showArrows &&
             "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
           "px-0",
