@@ -10,8 +10,7 @@ import * as $$$0 from "./loaders/Layouts/MaterialProduct.tsx";
 import * as $$$1 from "./loaders/Layouts/MiniProductCard.tsx";
 import * as $$$2 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$3 from "./loaders/List/Sections.tsx";
-import * as $$$4 from "./loaders/ProductDotInfo.ts";
-import * as $$$5 from "./loaders/SearchStore.ts";
+import * as $$$4 from "./loaders/SearchStore.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Cards/IconCardsCarousel.tsx";
 import * as $$$$$$2 from "./sections/Cards/IconCardsCarouselWithImage.tsx";
@@ -82,8 +81,7 @@ const manifest = {
     "deco-sites/montecarlo/loaders/Layouts/MiniProductCard.tsx": $$$1,
     "deco-sites/montecarlo/loaders/Layouts/ProductCard.tsx": $$$2,
     "deco-sites/montecarlo/loaders/List/Sections.tsx": $$$3,
-    "deco-sites/montecarlo/loaders/ProductDotInfo.ts": $$$4,
-    "deco-sites/montecarlo/loaders/SearchStore.ts": $$$5,
+    "deco-sites/montecarlo/loaders/SearchStore.ts": $$$4,
   },
   "sections": {
     "deco-sites/montecarlo/sections/Animation/Animation.tsx": $$$$$$0,
