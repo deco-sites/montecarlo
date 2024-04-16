@@ -8,6 +8,9 @@ interface Props {
 }
 
 export default function Info({ coordinates, productData }: Props) {
+
+  console.log({info: productData});
+
   function handleInfo(event: MouseEvent) {
     console.log({ product: productData });
   }
