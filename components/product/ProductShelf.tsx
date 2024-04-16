@@ -80,7 +80,7 @@ function ShelfCollection({
       <div
         id={id}
         class={clx(
-          "grid max-w-[1488px]",
+          "grid max-w-[1504px]",
           layout?.showArrows &&
             "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
           "px-0",
