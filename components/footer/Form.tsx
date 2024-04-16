@@ -27,13 +27,6 @@ export default function Select(
   const state = useRef<HTMLSelectElement>(null);
   const obj = useSignal<States | undefined>(undefined);
 
-  async function SearchStore() {
-    const response = await invoke["deco-sites/montecarlo"].loaders.SearchStore(
-      {},
-    );
-    console.log("response", response);
-  }
-
   function Storange() {
     const obj = {
       selectedState: state.current?.value,
@@ -49,7 +42,6 @@ export default function Select(
   return (
     <>
       <select
-        onClick={SearchStore}
         onChange={(event) => {
           const selectedState = event?.currentTarget.value;
           const states = searchStore?.find((r) => r.state === selectedState);
