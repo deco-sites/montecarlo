@@ -38,7 +38,11 @@ function VerticalCard({ card, index }: { card: Card; index: number }) {
           index == 0 ? "ml-6 lg:ml-0" : ""
         }`}
       >
-        <img class="w-full h-[340px] object-cover 2xl:h-[400px]" src={card.image} alt={card.altText} />
+        <img
+          class="w-full h-[340px] object-cover 2xl:h-[400px]"
+          src={card.image}
+          alt={card.altText}
+        />
         <div class="text-center mt-4">
           <h3 class="text-xl font-medium">{card.title}</h3>
           <h4 class="text-sm font-light">{card.subTitle}</h4>
