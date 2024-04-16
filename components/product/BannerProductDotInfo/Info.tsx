@@ -2,16 +2,10 @@ import Image from "apps/website/components/Image.tsx";
 import { useState, useEffect } from "preact/hooks";
 
 interface ProductData {
-  /** @description Defina a id do produto. Obs: Ao preencher este campo as informações do produto serão preenchidas automaticamente. */
   id?: number;
-  /** @title Imagem
-   * @description Url da imagem do produto */
   image?: string;
-  /** @title Nome do produto */
   productName?: string;
-  /** @title De R$ */
   listPrice?: string;
-  /** @title Por R$ */
   price?: string;
 }
 
