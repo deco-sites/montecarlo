@@ -35,6 +35,7 @@ const loader = async (): Promise<Data> => {
   const storesMD: LocationStore[] = await fetch(link, settings).then((data) => {
     return data.json();
   }).catch((error) => {
+    console.log("errorSearchStore", error);
     return [
       { city: "Campinas", state: "São Paulo", uf: "SP" },
       { city: "Curitiba", state: "Paraná", uf: "PR" },

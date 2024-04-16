@@ -37,14 +37,24 @@ function CardImage(
           width={350}
           height={350}
           media="(max-width: 1023px)"
+          fetchPriority="low"
+          loading={"lazy"}
         />
         <Source
           src={imageDesktop}
           width={700}
           height={342}
           media="(min-width: 1024px)"
+          fetchPriority="low"
+          decoding="async"
+          loading={"lazy"}
         />
-        <img class="w-full h-full" src={imageDesktop} alt={alt} />
+        <img
+          class="w-full h-full"
+          src={imageDesktop}
+          alt={alt}
+          loading="lazy"
+        />
       </Picture>
       <div class="flex flex-col w-full items-center gap-6 lg:py-11 py-6 lg:px-20 px-8">
         <div class="flex flex-col w-full gap-1">

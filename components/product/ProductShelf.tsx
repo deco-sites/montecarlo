@@ -1,18 +1,23 @@
-import { SendEventOnView } from "../../components/Analytics.tsx";
 import ProductCard, {
   Layout as cardLayout,
 } from "../../components/product/ProductCard.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import Header from "../../components/ui/SectionHeader.tsx";
 import Slider from "../../components/ui/Slider.tsx";
+import { SendEventOnView } from "../../components/Analytics.tsx";
+import CtaCollection from "./Shelf/CtaCollection.tsx";
+import Title from "./Shelf/Title.tsx";
+import SubTitle from "./Shelf/SubTitle.tsx";
+
 import SliderJS from "../../islands/SliderJS.tsx";
+
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import type { Product } from "apps/commerce/types.ts";
-import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { clx } from "../../sdk/clx.ts";
-import ButtonLink from "../ui/ButtonLink.tsx";
+
+import type { Product } from "apps/commerce/types.ts";
+
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 export interface Props {
   products: Product[] | null;
@@ -30,6 +35,8 @@ export interface Props {
     headerfontSize?: "Normal" | "Large" | "Small";
     showArrows?: boolean;
     ctaCollection?: string;
+    showCtaOnDesktop?: boolean;
+    showCtaOnMobile?: boolean;
     hrefCollection?: string;
   };
   cardLayout?: cardLayout;
@@ -67,23 +74,13 @@ function ShelfCollection({
   return (
     <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 items-center">
       <div class="flex flex-col w-full gap-1">
-        {title && (
-          <h2 class=" font-semibold text-center text-xl lg:text-3xl">
-            {title}
-          </h2>
-        )}
-        {subTitle && (
-          <span
-            dangerouslySetInnerHTML={{ __html: subTitle }}
-            class=" font-medium text-center text-sm lg:text-base"
-          >
-          </span>
-        )}
+        <Title text={title} />
+        <SubTitle text={subTitle} />
       </div>
       <div
         id={id}
         class={clx(
-          "grid max-w-[1488px]",
+          "grid max-w-[1504px]",
           layout?.showArrows &&
             "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
           "px-0",
@@ -142,13 +139,12 @@ function ShelfCollection({
           }}
         />
       </div>
-      {layout?.ctaCollection && (
-        <ButtonLink
-          href={layout?.hrefCollection || ""}
-          classCustom={"text-black text-sm lg:hidden"}
-          label={layout?.ctaCollection}
-        />
-      )}
+      <CtaCollection
+        ctaCollection={layout?.ctaCollection}
+        hrefCollection={layout?.hrefCollection}
+        showOnMobile={layout?.showCtaOnMobile}
+        showOnDesktop={layout?.showCtaOnDesktop}
+      />
     </div>
   );
 }

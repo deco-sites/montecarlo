@@ -1,6 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
-import type { Data } from "../../loaders/SearchStore.tsx";
+import type { Data } from "../../loaders/SearchStore.ts";
 import Form from "../../islands/FormStore/Form.tsx";
 export interface Props {
   icon?: ImageWidget;

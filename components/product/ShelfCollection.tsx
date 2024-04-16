@@ -91,7 +91,7 @@ function ShelfCollection({
     5: "w-1/5",
   };
   return (
-    <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 bg-[#E0DFD6] lg:bg-white items-center">
+    <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 bg-[#E0DFD6] items-center">
       <div class="flex flex-col w-full gap-1">
         {title && (
           <h2 class=" font-semibold text-center text-xl lg:text-3xl">
@@ -109,7 +109,7 @@ function ShelfCollection({
       <div
         id={id}
         class={clx(
-          "grid max-w-[1488px]",
+          "grid max-w-[1504px]",
           layout?.showArrows &&
             "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
           "px-0",

@@ -92,14 +92,17 @@ function CategoryList(props: Props) {
         <p class=" font-medium  text-sm lg:text-base">{header.description}</p>
       </div>
 
-      <div class="flex flex-row flex-wrap gap-2 justify-center items-center">
+      <div class="flex flex-row flex-wrap gap-2 justify-center items-center w-full">
         {list.map((category) => (
           <a
             href={category.href}
             class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
           >
             <Image
-              loading={"eager"}
+              loading={"lazy"}
+              fetchPriority="low"
+              decoding="sync"
+              sizes="(max-width: 640px) 100vw, 20vw"
               src={category.image}
               width={163}
               height={163}
