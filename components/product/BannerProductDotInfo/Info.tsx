@@ -1,5 +1,5 @@
 import Image from "apps/website/components/Image.tsx";
-import { useState, useEffect } from "preact/hooks";
+import { useEffect, useState } from "preact/hooks";
 
 interface ProductData {
   id?: number;
@@ -15,43 +15,46 @@ interface Props {
 }
 
 export default function Info({ coordinates, product }: Props) {
+  function fetchData() {
+    const formatNumber = new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+      minimumFractionDigits: 2,
+    });
 
-    function fetchData() {
-        const formatNumber = new Intl.NumberFormat("pt-BR", {
-            style: "currency",
-            currency: "BRL",
-            minimumFractionDigits: 2,
-          });
+    return fetch(`/api/catalog_system/pub/products/offers/${product?.id}`)
+      .then((response) => response.json())
+      .then((data) => ({
+        id: data[0]?.ProductId,
+        image: `https://montecarlo.vteximg.com.br/arquivos/ids/${
+          data[0]?.MainImage.ImageId
+        }`,
+        productName: data[0]?.Name,
+        listPrice: formatNumber.format(
+          data[0]?.Offers[0]?.OffersPerSalesChannel[0]?.ListPrice,
+        ),
+        price: formatNumber.format(
+          data[0]?.Offers[0]?.OffersPerSalesChannel[0]?.Price,
+        ),
+      }))
+      .catch((error) => {
+        console.error("Erro ao fazer o fetch dos dados:", error);
+        return {
+          id: productData?.id,
+          image: `https://placehold.co/112x112`,
+          productName:
+            "Lorem ipsum dolor sit amet consectetur adipisicing elit",
+        };
+      });
+  }
 
-        return fetch(`/api/catalog_system/pub/products/offers/${product?.id}`)
-            .then(response => response.json())
-            .then(data => ({
-                id: data[0]?.ProductId,
-                image: `https://montecarlo.vteximg.com.br/arquivos/ids/${data[0]?.MainImage.ImageId}`,
-                productName: data[0]?.Name,
-                listPrice: formatNumber.format(
-                    data[0]?.Offers[0]?.OffersPerSalesChannel[0]?.ListPrice
-                ),
-                price: formatNumber.format(
-                    data[0]?.Offers[0]?.OffersPerSalesChannel[0]?.Price
-                ),
-            }))
-            .catch(error => {
-                console.error('Erro ao fazer o fetch dos dados:', error);
-                return {
-                    id: productData?.id,
-                    image: `https://placehold.co/112x112`,
-                    productName: "Lorem ipsum dolor sit amet consectetur adipisicing elit",
-                };
-            });
-    }
+  const [productData, setProductData] = useState<ProductData | null>(null);
 
-    const [productData, setProductData] = useState<ProductData | null>(null);
-
-    useEffect(() => {
-        product?.id ? fetchData().then(data => setProductData(data)) : setProductData(product ? product : null);
-    }, []);
-
+  useEffect(() => {
+    product?.id
+      ? fetchData().then((data) => setProductData(data))
+      : setProductData(product ? product : null);
+  }, []);
 
   function handleInfo(event: MouseEvent) {
     console.log({ product: productData });

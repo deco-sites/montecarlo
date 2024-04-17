@@ -21,7 +21,7 @@ interface Config {
 interface ProductData {
   /** @description Defina a id do produto. Obs: Ao preencher este campo não é necessário preencher os outros campos do produto. */
   id?: number;
-  /** 
+  /**
    * @title Imagem
    * @description Url da imagem do produto */
   image?: string;
