@@ -11,13 +11,24 @@ import ShippingSimulation from "../../islands/ShippingSimulation.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/wake.tsx";
 import { formatPrice } from "../../sdk/format.ts";
+import {
+  formatInstallments,
+  percentageDiscount,
+  returnCollection,
+} from "../../sdk/usePropertyValue.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
+export interface ExtraInformation {
+  /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
+  pixDiscont: number;
+  bonus: string;
+}
 interface Props {
   page: ProductDetailsPage | null;
   layout?: {
@@ -28,9 +39,10 @@ interface Props {
      */
     name?: "concat" | "productGroup" | "product";
   };
+  extraInformations: ExtraInformation;
 }
 
-function ProductInfo({ page, layout }: Props) {
+function ProductInfo({ page, layout, extraInformations }: Props) {
   const platform = usePlatform();
   const id = useId();
 
@@ -56,11 +68,19 @@ function ProductInfo({ page, layout }: Props) {
     availability,
   } = useOffer(offers);
   const productGroupID = isVariantOf?.productGroupID ?? "";
+  const model = isVariantOf?.model ?? null;
   const breadcrumb = {
     ...breadcrumbList,
     itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
     numberOfItems: breadcrumbList.numberOfItems - 1,
   };
+  const collections = returnCollection(isVariantOf?.additionalProperty);
+  const stringIstallments = installments
+    ? formatInstallments(installments)
+    : null;
+  const valuePix = percentageDiscount(price, extraInformations.pixDiscont);
+
+  console.log("product", product.additionalProperty);
 
   const eventItem = mapProductToAnalyticsItem({
     product,
@@ -70,36 +90,49 @@ function ProductInfo({ page, layout }: Props) {
   });
 
   return (
-    <div class="flex flex-col" id={id}>
+    <div class="flex flex-col gap-1" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
-      <div class="mt-4 sm:mt-8">
-        <div>
-          {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
-        </div>
-        <h1>
-          <span class="font-medium text-xl capitalize">
-            {layout?.name === "concat"
-              ? `${isVariantOf?.name} ${name}`
-              : layout?.name === "productGroup"
-              ? isVariantOf?.name
-              : name}
-          </span>
-        </h1>
-      </div>
-      {/* Prices */}
-      <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          {(listPrice ?? 0) > price && (
-            <span class="line-through text-base-300 text-xs">
-              {formatPrice(listPrice, offers?.priceCurrency)}
+      <div class="flex flex-row gap-2 flex-wrap mb-5">
+        {collections &&
+          collections.map((item) => (
+            <span class="text-xs underline-offset-2 decoration-primary underline lg:text-sm">
+              {"Coleção " + item.value}
             </span>
-          )}
-          <span class="font-medium text-xl text-secondary">
+          ))}
+      </div>
+      <h1>
+        <span class="font-medium text-base capitalize lg:text-xl">
+          {layout?.name === "concat"
+            ? `${isVariantOf?.name} ${name}`
+            : layout?.name === "productGroup"
+            ? isVariantOf?.name
+            : name}
+        </span>
+      </h1>
+      {model && (
+        <span class="text-xs text-[#AAA89C]">{"Referencia: " + model}</span>
+      )}
+      {/* Prices */}
+      <div class="mt-5 flex flex-col gap-3">
+        <div class="flex flex-row gap-1 items-center text-base lg:text-xl">
+          <span class=" font-semibold ">
             {formatPrice(price, offers?.priceCurrency)}
           </span>
+          {stringIstallments && (
+            <>
+              <span class=" ">em</span>
+              <span class=" font-semibold ">{stringIstallments}</span>
+            </>
+          )}
         </div>
-        <span class="text-sm text-base-300">{installments}</span>
+        <span class="bg-perola-intermediario px-1 py-2 text-sm w-fit">
+          {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
+          <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
+        </span>
+        <div class="underline-offset-2 decoration-primary underline text-sm flex flex-row gap-1 items-center">
+          {extraInformations.bonus} <Icon id="alertBonus" size={15} />
+        </div>
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6">
