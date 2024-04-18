@@ -74,7 +74,9 @@ export default function TextWithImageCollection({
         <div
           class={`
           p-2.5 lg:p-12 md:p-2.5 pb-0 md:pb-0 lg:pr-0
-          lg:flex ${placement === "left" ? "lg:justify-start" : "lg:justify-end"}
+          lg:flex ${
+            placement === "left" ? "lg:justify-start" : "lg:justify-end"
+          }
         `}
         >
           <BannerProductDotInfo {...image} />
