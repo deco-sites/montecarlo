@@ -11,13 +11,13 @@ export type Props = SearchResultProps;
 function CategoryWithPartials(props: SectionProps<typeof loader>) {
   return (
     <>
-        <CategoryAnchorComponent {...props} />
-        <BtnTeste />
-        <div id="teste">
-          <SearchResult {...props} />
-        </div>
+      <CategoryAnchorComponent {...props} />
+      <BtnTeste />
+      <div id="teste">
+        <SearchResult {...props} />
+      </div>
     </>
-    );
+  );
 }
 
 export const loader = (props: Props, req: Request) => {

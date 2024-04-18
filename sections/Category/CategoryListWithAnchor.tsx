@@ -83,7 +83,7 @@ function CategoryListWithAnchor(props: Props) {
       description: "",
     },
     list = DEFAULT_LIST,
-    idSelectedToShowProducts
+    idSelectedToShowProducts,
   } = props;
 
   return (
@@ -101,7 +101,7 @@ function CategoryListWithAnchor(props: Props) {
           <button
             class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
             {...usePartialSection({
-              props: { idSelectedToShowProducts: category.label }
+              props: { idSelectedToShowProducts: category.label },
             })}
           >
             <Image

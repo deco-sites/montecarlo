@@ -86,7 +86,7 @@ function CategoryAnchorComponent(props: Props) {
       description: "",
     },
     list = DEFAULT_LIST,
-    idSelectedToShowProducts
+    idSelectedToShowProducts,
   } = props;
 
   return (
