@@ -32,7 +32,7 @@ export default function HeroBanner({
   },
 }: Props) {
   return (
-    <div class="relative flex items-end">
+    <div class="relative flex items-end lg:max-h-[90vh] lg:min-h-[600px]">
       <div class="bg-red w-full h-full">
         <Picture>
           <Source
