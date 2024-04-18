@@ -137,7 +137,7 @@ function MiniProductCard({
   return (
     <div
       id={id}
-      class={`card card-compact group w-full px-1 gap-2 text-center h-min max-w-[246px] mx-auto md:max-w-full`}
+      class={`card card-compact group w-full px-1 gap-2 text-center h-min max-w-[260px] mx-auto md:max-w-full`}
       data-deco="view-product"
     >
       <SendEventOnClick
