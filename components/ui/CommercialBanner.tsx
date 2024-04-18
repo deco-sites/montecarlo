@@ -46,16 +46,16 @@ function CommercialBanner(
         className="py-10 w-full md:w-[50%] self-stretch flex items-center px-6 md:pr-20  lg:pr-0"
       >
         <div className="container md:max-w-[770px] lg:mr-0">
-          <h1
+          <h5
             dangerouslySetInnerHTML={{ __html: title }}
             className="text-2xl font-medium mb-4 leading-8 md:leading-[60px] md:text-[40px]"
           >
-          </h1>
-          <h2
+          </h5>
+          <h5
             dangerouslySetInnerHTML={{ __html: subTitle }}
             className="text-base font-light leading-6 md:leading-7"
           >
-          </h2>
+          </h5>
         </div>
       </div>
       <Picture className="w-full md:w-[50%] self-stretch">
