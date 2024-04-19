@@ -16,8 +16,6 @@ function VariantSelector({ product }: Props) {
     ? product.additionalProperty.find((r) => r.name === "Aro do Anel")?.value
     : null;
 
-  console.log("product", product);
-
   return (
     <ul class="flex flex-col gap-4">
       {Object.keys(possibilities).map((name) => (

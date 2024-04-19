@@ -84,6 +84,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     : null;
   const valuePix = percentageDiscount(price, extraInformations.pixDiscont);
 
+  const newName = parseInt(name) ? isVariantOf?.name : name;
+
   const eventItem = mapProductToAnalyticsItem({
     product,
     breadcrumbList: breadcrumb,
@@ -105,11 +107,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
       </div>
       <h1>
         <span class="font-medium text-base capitalize lg:text-xl">
-          {layout?.name === "concat"
-            ? `${isVariantOf?.name} ${name}`
-            : layout?.name === "productGroup"
-            ? isVariantOf?.name
-            : name}
+          {newName}
         </span>
       </h1>
       {model && (
