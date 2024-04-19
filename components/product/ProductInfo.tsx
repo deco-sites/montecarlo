@@ -25,6 +25,7 @@ import ProductSelector from "./ProductVariantSelector.tsx";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import BenefitsList from "deco-sites/montecarlo/components/product/Benefits/Benefits.tsx";
 import type { Props as Benefit } from "deco-sites/montecarlo/components/product/Benefits/Benefits.tsx";
+import type { PropsLoader } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts"
 
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
@@ -32,6 +33,7 @@ export interface ExtraInformation {
   bonus: string;
   nameGuia: string;
   benefit: Benefit;
+  group: PropsLoader;
 }
 interface Props {
   page: ProductDetailsPage | null;
@@ -44,6 +46,7 @@ interface Props {
     name?: "concat" | "productGroup" | "product";
   };
   extraInformations: ExtraInformation;
+
 }
 
 function ProductInfo({ page, layout, extraInformations }: Props) {
@@ -85,6 +88,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   const valuePix = percentageDiscount(price, extraInformations.pixDiscont);
 
   const newName = parseInt(name) ? isVariantOf?.name : name;
+
+  // console.log("product", product)
 
   const eventItem = mapProductToAnalyticsItem({
     product,
