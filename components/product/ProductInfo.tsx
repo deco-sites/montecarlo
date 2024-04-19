@@ -23,11 +23,15 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
+import BenefitsList from "deco-sites/montecarlo/components/product/Benefits/Benefits.tsx";
+import type { Props as Benefit } from "deco-sites/montecarlo/components/product/Benefits/Benefits.tsx";
 
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
   pixDiscont: number;
   bonus: string;
+  nameGuia: string;
+  benefit: Benefit;
 }
 interface Props {
   page: ProductDetailsPage | null;
@@ -80,8 +84,6 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     : null;
   const valuePix = percentageDiscount(price, extraInformations.pixDiscont);
 
-  console.log("product", product.additionalProperty);
-
   const eventItem = mapProductToAnalyticsItem({
     product,
     breadcrumbList: breadcrumb,
@@ -90,7 +92,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   });
 
   return (
-    <div class="flex flex-col gap-1" id={id}>
+    <div class="flex flex-col gap-1 px-2 lg:px-0" id={id}>
       <Breadcrumb itemListElement={breadcrumb.itemListElement} />
       {/* Code and name */}
       <div class="flex flex-row gap-2 flex-wrap mb-5">
@@ -121,12 +123,12 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           </span>
           {stringIstallments && (
             <>
-              <span class=" ">em</span>
+              <span class=" text-sm">em</span>
               <span class=" font-semibold ">{stringIstallments}</span>
             </>
           )}
         </div>
-        <span class="bg-perola-intermediario px-1 py-2 text-sm w-fit">
+        <span class="bg-perola-intermediario py-1 px-2 text-sm w-fit">
           {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
           <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
         </span>
@@ -135,69 +137,31 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
         </div>
       </div>
       {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6">
+      <div class="mt-4 sm:mt-6 flex flex-row items-end gap-6">
         <ProductSelector product={product} />
+        <span class="text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2">
+          {extraInformations.nameGuia}
+        </span>
       </div>
       {/* Add to Cart and Favorites button */}
-      <div class="mt-4 sm:mt-10 flex flex-col gap-2">
+      <div class="mt-7 flex flex-col gap-2 ">
         {availability === "https://schema.org/InStock"
           ? (
-            <>
-              {platform === "vtex" && (
-                <>
-                  <AddToCartButtonVTEX
-                    eventParams={{ items: [eventItem] }}
-                    productID={productID}
-                    seller={seller}
-                  />
-                  <WishlistButtonVtex
-                    variant="full"
-                    productID={productID}
-                    productGroupID={productGroupID}
-                  />
-                </>
-              )}
-              {platform === "wake" && (
-                <>
-                  <AddToCartButtonWake
-                    eventParams={{ items: [eventItem] }}
-                    productID={productID}
-                  />
-                  <WishlistButtonWake
-                    variant="full"
-                    productID={productID}
-                    productGroupID={productGroupID}
-                  />
-                </>
-              )}
-              {platform === "linx" && (
-                <AddToCartButtonLinx
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  productGroupID={productGroupID}
-                />
-              )}
-              {platform === "vnda" && (
-                <AddToCartButtonVNDA
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  additionalProperty={additionalProperty}
-                />
-              )}
-              {platform === "shopify" && (
-                <AddToCartButtonShopify
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                />
-              )}
-              {platform === "nuvemshop" && (
-                <AddToCartButtonNuvemshop
-                  productGroupID={productGroupID}
-                  eventParams={{ items: [eventItem] }}
-                  additionalProperty={additionalProperty}
-                />
-              )}
-            </>
+            <div class="flex flex-row gap-2 flex-wrap ">
+              <AddToCartButtonVTEX
+                eventParams={{ items: [eventItem] }}
+                productID={productID}
+                seller={seller}
+              />
+              <button class="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300">
+                Quero ganhar
+              </button>
+              <WishlistButtonVtex
+                customClass="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
+                productID={productID}
+                productGroupID={productGroupID}
+              />
+            </div>
           )
           : <OutOfStock productID={productID} />}
       </div>
@@ -214,32 +178,13 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             ]}
           />
         )}
-      </div>
-      {/* Description card */}
-      <div class="mt-4 sm:mt-6">
-        <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div
-                class="ml-2 mt-2"
-                dangerouslySetInnerHTML={{ __html: description }}
-              />
-            </details>
-          )}
+        <span class="text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2">
+          Não sei o meu CEP
         </span>
       </div>
-      {/* Analytics Event */}
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item",
-          params: {
-            item_list_id: "product",
-            item_list_name: "Product",
-            items: [eventItem],
-          },
-        }}
+      <BenefitsList
+        title={extraInformations.benefit.title}
+        benefits={extraInformations.benefit.benefits}
       />
     </div>
   );
