@@ -4,6 +4,7 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import { runtime } from "https://deno.land/x/ts_morph@20.0.0/common/ts_morph_common.js";
 
 export interface Category {
   label: string;
@@ -96,6 +97,11 @@ function CategoryList(props: Props) {
         {list.map((category) => (
           <a
             href={category.href}
+            onClick={() => {
+              pageSignal.value = runtime.invoke.vtex.loader.intelligentSearch.productListingPage({
+
+              })
+            }}
             class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
           >
             <Image

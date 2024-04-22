@@ -9,6 +9,7 @@ import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import {page as pageSignal} from "../../sdk/usePage.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -46,15 +47,15 @@ function NotFound() {
 }
 
 function Result({
-  page,
   layout,
   cardLayout,
   startingPage = 0,
   url: _url,
 }: Omit<Props, "page"> & {
-  page: ProductListingPage;
   url: string;
 }) {
+  const page = pageSignal.value
+
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo?.recordPerPage || products.length;
   const url = new URL(_url);
@@ -158,14 +159,11 @@ function Result({
   );
 }
 
-function SearchResult(
-  { page, ...props }: ReturnType<typeof loader>,
+function SearchResultIsland(
 ) {
-  if (!page) {
-    return <NotFound />;
-  }
 
-  return (<Result {...props} page={page} /> <ResultIsland />);
+
+  return <Result  />;
 }
 
 export const loader = (props: Props, req: Request) => {
@@ -175,4 +173,4 @@ export const loader = (props: Props, req: Request) => {
   };
 };
 
-export default SearchResult;
+export default SearchResultIsland;
