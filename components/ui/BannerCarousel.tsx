@@ -288,16 +288,12 @@ function Buttons() {
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
         <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
-<<<<<<< HEAD
-          <Icon class="text-primary" size={40} id="arrowLeft" strokeWidth={3} />
-=======
           <Icon
             class="text-white"
             size={40}
             id="arrowLeft"
             strokeWidth={3}
           />
->>>>>>> develop
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
