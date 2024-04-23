@@ -9,6 +9,7 @@ import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 import { useUI } from "../../sdk/useUI.ts";
+import DataLayer from "../../islands/DataLayer.tsx";
 
 export interface Logo {
   src: ImageWidget;
@@ -102,6 +103,7 @@ function Header({
             />
           </div>
         </Drawers>
+        <DataLayer />
       </header>
     </>
   );

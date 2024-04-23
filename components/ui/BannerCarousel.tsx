@@ -69,19 +69,17 @@ export interface Props {
 }
 
 const PROPS_FONT_SIZE = {
-  "Small": "text-[1.5rem] lg:text-[2.5rem]",
-  "Normal": "text-[2.5rem] lg:text-[3.8rem]",
-  "Large": "text-[3.5rem] lg:text-[6.3rem]",
+  Small: "text-[1.5rem] lg:text-[2.5rem]",
+  Normal: "text-[2.5rem] lg:text-[3.8rem]",
+  Large: "text-[3.5rem] lg:text-[6.3rem]",
 };
 
-function Action(
-  action: {
-    title?: string;
-    label?: string;
-    href?: string;
-    fontSize?: FontSize;
-  },
-) {
+function Action(action: {
+  title?: string;
+  label?: string;
+  href?: string;
+  fontSize?: FontSize;
+}) {
   return (
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
       {action.title && (
@@ -105,14 +103,16 @@ function Action(
   );
 }
 
-function BannerItemMobile(
-  { image, lcp, id }: { image: ImageItem; lcp?: boolean; id: string },
-) {
-  const {
-    mobile,
-    alt,
-    action,
-  } = image;
+function BannerItemMobile({
+  image,
+  lcp,
+  id,
+}: {
+  image: ImageItem;
+  lcp?: boolean;
+  id: string;
+}) {
+  const { mobile, alt, action } = image;
 
   return (
     <div class="flex flex-row w-full relative">
@@ -122,8 +122,19 @@ function BannerItemMobile(
         aria-label={action?.label}
         class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
       >
-        {action &&
-          <Action {...action} />}
+        {action && <Action {...action} />}
+        <SendEventOnClick
+          id="bannerElementId"
+          event={{
+            name: "select_promotion" as const,
+            params: {
+              crative_name: mobile,
+              creative_slot: "banner mobile",
+              promotion_id: id,
+              promotion_name: alt,
+            },
+          }}
+        />
       </a>
       <Image
         class="object-cover w-full h-full"
@@ -137,13 +148,33 @@ function BannerItemMobile(
         height={450}
         fetchPriority={lcp ? "high" : "auto"}
       />
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            view_promotion: alt,
+            crative_name: alt,
+            creative_slot: "banner mobile",
+            promotion_id: id,
+            promotion_name: alt,
+            items: [],
+          },
+        }}
+      />
     </div>
   );
 }
 
-function BannerItem(
-  { image, lcp, id }: { image: Banner; lcp?: boolean; id: string },
-) {
+function BannerItem({
+  image,
+  lcp,
+  id,
+}: {
+  image: Banner;
+  lcp?: boolean;
+  id: string;
+}) {
   return (
     <div class="flex flex-row w-full relative">
       {image.banner.map((primaryImage) => (
@@ -178,18 +209,45 @@ function BannerItem(
               alt={primaryImage.alt}
             />
           </Picture>
+          <SendEventOnClick
+            id="bannerElementId"
+            event={{
+              name: "select_promotion" as const,
+              params: {
+                crative_name: primaryImage.desktop,
+                creative_slot: primaryImage.desktop,
+                promotion_id: id,
+                promotion_name: primaryImage.alt,
+              },
+            }}
+          />
+          <SendEventOnView
+            id={id}
+            event={{
+              name: "view_promotion",
+              params: {
+                view_promotion: primaryImage.alt,
+                crative_name: primaryImage.alt,
+                creative_slot: primaryImage.desktop,
+                promotion_id: id,
+                promotion_name: primaryImage.alt,
+                items: [],
+              },
+            }}
+          />
         </div>
       ))}
     </div>
   );
 }
 
-function Dots(
-  { images, interval = 0 }: {
-    images: Banner[] | ImageItem[];
-    interval?: number;
-  },
-) {
+function Dots({
+  images,
+  interval = 0,
+}: {
+  images: Banner[] | ImageItem[];
+  interval?: number;
+}) {
   return (
     <>
       <style
@@ -226,12 +284,7 @@ function Buttons() {
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
         <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
-          <Icon
-            class="text-primary"
-            size={40}
-            id="arrowLeft"
-            strokeWidth={3}
-          />
+          <Icon class="text-primary" size={40} id="arrowLeft" strokeWidth={3} />
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2">

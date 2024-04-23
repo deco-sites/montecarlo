@@ -1,4 +1,5 @@
 import Icon, { AvailableIcons } from "../../components/ui/Icon.tsx";
+import ItemFooter from "../../islands/ItemFooter.tsx";
 
 export type Item = {
   label: string;
@@ -32,12 +33,7 @@ export default function FooterItems(
                   <ul class={`flex flex-col gap-2 flex-wrap text-sm`}>
                     {section.items?.map((item) => (
                       <li>
-                        <a
-                          href={item.href}
-                          class="block py-1 link link-hover text-xs"
-                        >
-                          {item.label}
-                        </a>
+                        <ItemFooter href={item.href} label={item.label} />
                       </li>
                     ))}
                   </ul>
