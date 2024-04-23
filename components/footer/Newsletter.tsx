@@ -245,7 +245,7 @@ function Newsletter({
 
             <div class="flex flex-1 self-center">
               <input
-                class="w-fit text-sm p-3.5 cursor-pointer disabled:loading"
+                class="w-fit text-sm p-3.5 cursor-pointer disabled:loading hover:opacity-80"
                 style={{
                   backgroundColor: layout?.submitButton?.bgColor,
                   color: layout?.submitButton?.textColor,

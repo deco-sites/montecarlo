@@ -3,24 +3,33 @@ import type { HTMLWidget } from "apps/admin/widgets.ts";
 import type { Props as BannerProductDotInfoProps } from "../../components/product/BannerProductDotInfo/index.tsx";
 import BannerProductDotInfo from "../../islands/BannerProductDotInfo.tsx";
 
+interface StyleProps {
+  textAlign?: "left" | "center" | "right";
+  /** @format color-input */
+  backgroundColor?: string;
+  /** @format color-input */
+  secondaryBackgroundColor?: string;
+  /** @format color-input */
+  fontColor?: string;
+}
+
+interface CTAProps {
+  label?: string;
+  href?: string;
+  /** @format color-input */
+  backgroundColor?: string;
+  /** @format color-input */
+  fontColor?: string;
+  alignment?: "left" | "center" | "right";
+}
+
 export interface Props {
   title?: HTMLWidget;
   description?: HTMLWidget;
   image?: BannerProductDotInfoProps;
   placement: "left" | "right";
-  style: {
-    textAlign?: "left" | "center" | "right";
-    backgroundColor?: string;
-    secondaryBackgroundColor?: string;
-    fontColor?: string;
-  };
-  CTA?: {
-    label?: string;
-    href?: string;
-    backgroundColor?: string;
-    fontColor?: string;
-    alignment?: "left" | "center" | "right";
-  };
+  style: StyleProps;
+  CTA?: CTAProps;
 }
 
 const PLACEMENT = {
@@ -90,7 +99,7 @@ export default function TextWithImageCollection({
             <a
               href={CTA.href}
               class={`
-                btn text-sm py-2.5 px-3.5 w-fit rounded-none border-transparent
+                btn text-sm py-2.5 px-3.5 w-fit rounded-none border-transparent hover:opacity-80
                 ${CTA.alignment === "left" && "self-start"}
                 ${CTA.alignment === "center" && "self-center"}
                 ${CTA.alignment === "right" && "self-end"}

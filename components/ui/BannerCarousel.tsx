@@ -267,7 +267,11 @@ function Dots({
             <Slider.Dot index={index}>
               <div class="py-5">
                 <div
-                  class=" w-12 h-1 lg:w-[71px] group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  class={`w-12 h-1 lg:w-[71px] ${
+                    !interval
+                      ? "bg-[rgba(255,255,255,0.4)] group-disabled:bg-primary"
+                      : "group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  }`}
                   style={{ animationDuration: `${interval}s` }}
                 />
               </div>
@@ -284,13 +288,22 @@ function Buttons() {
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
         <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
+<<<<<<< HEAD
           <Icon class="text-primary" size={40} id="arrowLeft" strokeWidth={3} />
+=======
+          <Icon
+            class="text-white"
+            size={40}
+            id="arrowLeft"
+            strokeWidth={3}
+          />
+>>>>>>> develop
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
         <Slider.NextButton class=" bg-transparent border-none hover:bg-transparent text-primary">
           <Icon
-            class="text-primary"
+            class="text-white"
             size={40}
             id="arrowRight"
             strokeWidth={3}
