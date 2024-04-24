@@ -113,7 +113,7 @@ function BannerProductDotInfo(props: Props) {
   }
 
   return (
-    <div class="relative max-w-[100vw] w-full h-full">
+    <div class="relative lg:max-w-[80vh] w-full h-full">
       <Banner
         preload={props.preload}
         mobile={props.mobile}
