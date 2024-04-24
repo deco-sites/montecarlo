@@ -108,7 +108,6 @@ function BannerItemMobile({
   lcp,
   id,
   promotionName,
-  
 }: {
   promotionName: string;
   image: ImageItem;
@@ -128,7 +127,7 @@ function BannerItemMobile({
         {action && <Action {...action} />}
       </a>
       <SendEventOnClick
-        id= {id}
+        id={id}
         event={{
           name: "select_promotion",
           params: {
@@ -337,25 +336,25 @@ function BannerCarousel(props: Props) {
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {isMobile.value && arrayImage
           ? arrayImage?.map((image, index) => (
-              <Slider.Item index={index} class="carousel-item w-full ">
-                <BannerItemMobile
-                  image={image}
-                  lcp={index === 0 && preload}
-                  id={`${id}::${index}`}
-                  promotionName={'promotionName'}
-                />
-              </Slider.Item>
-            ))
+            <Slider.Item index={index} class="carousel-item w-full ">
+              <BannerItemMobile
+                image={image}
+                lcp={index === 0 && preload}
+                id={`${id}::${index}`}
+                promotionName={"promotionName"}
+              />
+            </Slider.Item>
+          ))
           : images?.map((image, index) => (
-              <Slider.Item index={index} class="carousel-item w-full ">
-                <BannerItem
-                  image={image}
-                  lcp={index === 0 && preload}
-                  id={`${id}::${index}`}
-                  promotionName={'promotionName'}
-                />
-              </Slider.Item>
-            ))}
+            <Slider.Item index={index} class="carousel-item w-full ">
+              <BannerItem
+                image={image}
+                lcp={index === 0 && preload}
+                id={`${id}::${index}`}
+                promotionName={"promotionName"}
+              />
+            </Slider.Item>
+          ))}
       </Slider>
 
       {props.arrows && <Buttons />}
