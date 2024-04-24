@@ -36,7 +36,7 @@ interface Variants {
   active: boolean;
 }
 
-interface GroupVariants {
+export interface GroupVariants {
   type: string;
   variants: Variants[];
 }
