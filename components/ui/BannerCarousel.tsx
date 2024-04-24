@@ -107,7 +107,10 @@ function BannerItemMobile({
   image,
   lcp,
   id,
+  promotionName,
+  
 }: {
+  promotionName: string;
   image: ImageItem;
   lcp?: boolean;
   id: string;
@@ -123,19 +126,20 @@ function BannerItemMobile({
         class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
       >
         {action && <Action {...action} />}
-        <SendEventOnClick
-          id="bannerElementId"
-          event={{
-            name: "select_promotion" as const,
-            params: {
-              crative_name: mobile,
-              creative_slot: "banner mobile",
-              promotion_id: id,
-              promotion_name: alt,
-            },
-          }}
-        />
       </a>
+      <SendEventOnClick
+        id= {id}
+        event={{
+          name: "select_promotion",
+          params: {
+            item_list_name: alt,
+            item_list_id: alt,
+            creative_name: alt,
+            promotion_name: promotionName,
+            items: [],
+          },
+        }}
+      />
       <Image
         class="object-cover w-full h-full"
         loading={lcp ? "eager" : "lazy"}
@@ -170,7 +174,9 @@ function BannerItem({
   image,
   lcp,
   id,
+  promotionName,
 }: {
+  promotionName: string;
   image: Banner;
   lcp?: boolean;
   id: string;
@@ -210,14 +216,14 @@ function BannerItem({
             />
           </Picture>
           <SendEventOnClick
-            id="bannerElementId"
+            id={id}
             event={{
-              name: "select_promotion" as const,
+              name: "select_promotion",
               params: {
-                crative_name: primaryImage.desktop,
-                creative_slot: primaryImage.desktop,
-                promotion_id: id,
-                promotion_name: primaryImage.alt,
+                item_list_name: primaryImage.desktop,
+                item_list_id: primaryImage.alt,
+                promotion_name: promotionName,
+                items: [],
               },
             }}
           />
@@ -288,22 +294,12 @@ function Buttons() {
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
         <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
-          <Icon
-            class="text-white"
-            size={40}
-            id="arrowLeft"
-            strokeWidth={3}
-          />
+          <Icon class="text-white" size={40} id="arrowLeft" strokeWidth={3} />
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
         <Slider.NextButton class=" bg-transparent border-none hover:bg-transparent text-primary">
-          <Icon
-            class="text-white"
-            size={40}
-            id="arrowRight"
-            strokeWidth={3}
-          />
+          <Icon class="text-white" size={40} id="arrowRight" strokeWidth={3} />
         </Slider.NextButton>
       </div>
     </>
@@ -341,23 +337,25 @@ function BannerCarousel(props: Props) {
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {isMobile.value && arrayImage
           ? arrayImage?.map((image, index) => (
-            <Slider.Item index={index} class="carousel-item w-full ">
-              <BannerItemMobile
-                image={image}
-                lcp={index === 0 && preload}
-                id={`${id}::${index}`}
-              />
-            </Slider.Item>
-          ))
+              <Slider.Item index={index} class="carousel-item w-full ">
+                <BannerItemMobile
+                  image={image}
+                  lcp={index === 0 && preload}
+                  id={`${id}::${index}`}
+                  promotionName={'promotionName'}
+                />
+              </Slider.Item>
+            ))
           : images?.map((image, index) => (
-            <Slider.Item index={index} class="carousel-item w-full ">
-              <BannerItem
-                image={image}
-                lcp={index === 0 && preload}
-                id={`${id}::${index}`}
-              />
-            </Slider.Item>
-          ))}
+              <Slider.Item index={index} class="carousel-item w-full ">
+                <BannerItem
+                  image={image}
+                  lcp={index === 0 && preload}
+                  id={`${id}::${index}`}
+                  promotionName={'promotionName'}
+                />
+              </Slider.Item>
+            ))}
       </Slider>
 
       {props.arrows && <Buttons />}
