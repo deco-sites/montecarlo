@@ -4,8 +4,8 @@ import type { Props as BannerProductDotInfoProps } from "../../components/produc
 import BannerProductDotInfo from "../../islands/BannerProductDotInfo.tsx";
 
 import {
-  SendEventOnView,
   SendEventOnClick,
+  SendEventOnView,
 } from "../../components/Analytics.tsx";
 
 interface StyleProps {
@@ -46,7 +46,8 @@ const PLACEMENT = {
 export default function TextWithImageCollection({
   title = "Lorem ipsum",
   promotion = "ColecaoAllure",
-  description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ornare ultrices. Vestibulum gravida ligula nec ex scelerisque, sed tristique neque porttitor. ",
+  description =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ornare ultrices. Vestibulum gravida ligula nec ex scelerisque, sed tristique neque porttitor. ",
   image = {
     mobile: "https://placehold.co/380x380",
     desktop: "https://placehold.co/704x704",
