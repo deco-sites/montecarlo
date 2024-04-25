@@ -46,9 +46,6 @@ export interface Props {
 }
 
 const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
-  console.log("iniciou o loader ");
-  // console.log("props", props);
-
   if (props.product === null) {
     return null;
   }
@@ -85,7 +82,6 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
   //Pega a categoria
   const currentCategory: number = parseInt(currentProduct.categoryId);
 
-  console.log("currentCategory", currentCategory);
   //Define as variações
 
   const materialProperty: string | null = isVariantOf &&
@@ -142,9 +138,7 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
   const isFeCollection =
     currentProduct?.items[0]?.complementName == "COLEÇÃO FÉ";
 
-  console.log("categoory", isThumb, currentCategory, product.category);
-
-  //Caso nçao tenha produtos similares
+  //Caso n tenha produtos similares
   if (result === null) {
     return null;
   }
@@ -186,7 +180,6 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
     //&& (isForeverCollection || isDestineeCollection || isSolitariosCollection)
   ) {
     typesToBeRendered.push("Cor do metal", "cts");
-    console.log("entrou aqui ");
   }
 
   if (isColares) {
@@ -217,17 +210,10 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
     typesToBeRendered.push("variacoes");
   }
 
-  console.log("typesToBeRendered", typesToBeRendered, typesToBeRendered.length);
-
-  typesToBeRendered.map((type) => {
-    console.log("types", type);
-  });
-
   if (typesToBeRendered && result && typesToBeRendered.length > 0) {
     const arrayVariant: GroupVariants[] = [];
     //Percorre os tipos
     typesToBeRendered.map((type) => {
-      console.log("currentProduct", materialProperty, type);
       //verifica o tipo
       if (type == "Cor do metal" && materialProperty) {
         const materials = [materialProperty];
@@ -555,7 +541,6 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
         arrayVariant.push({ type: "Variações", variants: variants });
       }
     });
-    console.log("variants", arrayVariant);
     return arrayVariant;
   }
   return null;

@@ -58,8 +58,6 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   const id = useId();
   const { groups } = extraInformations;
 
-  console.log("group", groups);
-
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
   }
@@ -148,16 +146,18 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
-        <div class="flex gap-2 w-full flex-wrap">
-          {groups?.map((group) => (
-            <SelectVariants
-              variants={group.variants}
-              type={group.type}
-              materialImages={extraInformations.materialImages}
-              losses={extraInformations.lossesImage}
-            />
-          ))}
-        </div>
+        {groups && (
+          <div class="flex gap-2 w-full flex-wrap">
+            {groups.map((group) => (
+              <SelectVariants
+                variants={group.variants}
+                type={group.type}
+                materialImages={extraInformations.materialImages}
+                losses={extraInformations.lossesImage}
+              />
+            ))}
+          </div>
+        )}
         <ProductSelector product={product} />
         <span
           class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 ${

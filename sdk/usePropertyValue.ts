@@ -14,7 +14,6 @@ export function returnCollection(propertys?: PropertyValue[]) {
       arrayCollection.push(item);
     }
   });
-  console.log("propertys", arrayCollection);
   return arrayCollection;
 }
 

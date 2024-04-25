@@ -21,7 +21,6 @@ interface GroupVariants {
 export function SelectVariants(
   { type, variants, materialImages, losses }: GroupVariants,
 ) {
-  console.log("material", materialImages);
   if (type == "Material") {
     return (
       <div class="flex flex-col gap-1 min-w-32 order-1">
@@ -36,7 +35,6 @@ export function SelectVariants(
 
             const img = materialImages.find((img) => img.name === item.message);
 
-            console.log("img", img);
             if (!img || img === undefined) {
               return null;
             }
@@ -74,7 +72,6 @@ export function SelectVariants(
 
             const img = losses.find((img) => img.name === item.message);
 
-            console.log("img", img);
             if (!img || img === undefined) {
               return null;
             }
@@ -162,7 +159,51 @@ export function SelectVariants(
         </div>
       </div>
     );
+  } else if (type == "Letras") {
+    return (
+      <div class="flex flex-col gap-1 w-full order-5">
+        <span class="text-xs uppercase">{type}</span>
+        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1 items-center flex-wrap">
+          {variants?.map((item) => {
+            return (
+              <a
+                href={item.link.replace("https://montecarlo.myvtex.com", "")}
+                class={` " p-1 w-7 h-7 rounded-full flex justify-center items-center "  ${
+                  item.active && "border border-primary rounded-full "
+                } `}
+              >
+                {item.message}
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    );
   } else {
-    return <p>nop</p>;
+    return (
+      <div class="flex flex-col gap-1 w-full order-5">
+        <span class="text-xs uppercase">Disponível em:</span>
+        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1 items-center flex-wrap">
+          {variants?.map((item) => {
+            return (
+              <a
+                href={item.link.replace("https://montecarlo.myvtex.com", "")}
+                class={` " p-1 w-16 h-16 flex justify-center items-center "  ${
+                  item.active && "border border-primary rounded-lg "
+                } `}
+              >
+                <Image
+                  class="w-full h-full object-cover rounded-lg"
+                  src={item.urlImage || ""}
+                  width={30}
+                  height={30}
+                  alt={item.message}
+                />
+              </a>
+            );
+          })}
+        </div>
+      </div>
+    );
   }
 }
