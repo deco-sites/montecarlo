@@ -165,7 +165,7 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
     typesToBeRendered.push("Cor do metal", "Tamanho");
   }
 
-  if (isAneis) {
+  if (isAneis && !stoneProperty) {
     typesToBeRendered.push("Cor do metal", "pedra");
   }
 
@@ -300,7 +300,7 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
           });
         });
 
-        arrayVariant.push({ type: "Cor do Metal", variants: variants });
+        arrayVariant.push({ type: "Material", variants: variants });
       }
       if (type == "pedra" && stoneProperty) {
         const stones = [stoneProperty];

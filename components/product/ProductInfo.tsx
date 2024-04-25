@@ -28,6 +28,7 @@ import type { Props as Benefit } from "deco-sites/montecarlo/components/product/
 import type { GroupVariants } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts";
 import { SelectVariants } from "deco-sites/montecarlo/components/product/Similar/VariantGroup.tsx";
 import { Material } from "deco-sites/montecarlo/loaders/Layouts/MaterialProduct.tsx";
+import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
 
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
@@ -37,6 +38,7 @@ export interface ExtraInformation {
   benefit: Benefit;
   groups: GroupVariants[] | null;
   materialImages?: Material[];
+  lossesImage?: Losses[];
 }
 interface Props {
   page: ProductDetailsPage | null;
@@ -145,18 +147,25 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
         </div>
       </div>
       {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6 flex flex-row items-end gap-6 flex-wrap">
+      <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
+        <div class="flex gap-2 w-full flex-wrap">
+          {groups?.map((group) => (
+            <SelectVariants
+              variants={group.variants}
+              type={group.type}
+              materialImages={extraInformations.materialImages}
+              losses={extraInformations.lossesImage}
+            />
+          ))}
+        </div>
         <ProductSelector product={product} />
-        <span class="text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2">
+        <span
+          class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 ${
+            product.isVariantOf?.hasVariant.length == 1 && " w-full text-center"
+          }`}
+        >
           {extraInformations.nameGuia}
         </span>
-        {groups?.map((group) => (
-          <SelectVariants
-            variants={group.variants}
-            type={group.type}
-            materialImages={extraInformations.materialImages}
-          />
-        ))}
       </div>
       {/* Add to Cart and Favorites button */}
       <div class="mt-7 flex flex-col gap-2 ">
