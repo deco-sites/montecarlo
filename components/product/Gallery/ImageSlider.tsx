@@ -28,6 +28,8 @@ export default function GallerySlider(props: Props) {
   const id = useId();
   const { isMobile } = useUI();
 
+  const isLaunch = props.page?.product.isVariantOf?.additionalProperty?.find((r) => r.value == "Lançamentos")
+
   if (!props.page) {
     throw new Error("Missing Product Details Page Info");
   }
@@ -73,9 +75,8 @@ export default function GallerySlider(props: Props) {
         </Slider>
 
         <Slider.PrevButton
-          class={`"no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
-            props.arrowMobile ? "flex" : "hidden lg:flex"
-          }`}
+          class={`"no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${props.arrowMobile ? "flex" : "hidden lg:flex"
+            }`}
           disabled
         >
           <Icon
@@ -87,9 +88,8 @@ export default function GallerySlider(props: Props) {
         </Slider.PrevButton>
 
         <Slider.NextButton
-          class={`"no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
-            props.arrowMobile ? "flex" : "hidden lg:flex"
-          }`}
+          class={`"no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${props.arrowMobile ? "flex" : "hidden lg:flex"
+            }`}
           disabled={images.length < 2}
         >
           <Icon
@@ -120,6 +120,7 @@ export default function GallerySlider(props: Props) {
             </li>
           ))}
         </ul>
+        {isLaunch && <span class={"absolute top-1 right-1 lg:top-0 lg:right-0 py-1 px-3 text-xs lg:text-sm bg-perola-intermediario"}>Lançamento</span>}
       </div>
       {/* Dots */}
       {!isMobile.value &&
