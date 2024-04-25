@@ -29,11 +29,13 @@ import type { GroupVariants } from "deco-sites/montecarlo/loaders/Product/Simila
 import { SelectVariants } from "deco-sites/montecarlo/components/product/Similar/VariantGroup.tsx";
 import { Material } from "deco-sites/montecarlo/loaders/Layouts/MaterialProduct.tsx";
 import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
+import ModalBonus from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
+import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
   pixDiscont: number;
-  bonus: string;
+  bonus: ModalBonusProps;
   nameGuia: string;
   benefit: Benefit;
   groups: GroupVariants[] | null;
@@ -140,9 +142,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
           <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
         </span>
-        <div class="underline-offset-2 decoration-primary underline text-sm flex flex-row gap-1 items-center">
-          {extraInformations.bonus} <Icon id="alertBonus" size={15} />
-        </div>
+        <ModalBonus props={extraInformations.bonus} />
       </div>
       {/* Sku Selector */}
       <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
