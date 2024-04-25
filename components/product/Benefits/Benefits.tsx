@@ -17,7 +17,7 @@ function Benefit({ props }: { props: Benefit }) {
   return (
     <div class="flex flex-row h-full w-full gap-3 ">
       <div class="
-            relative flex justify-center items-center min-h-16 min-w-16
+            relative flex justify-center items-center h-16 w-16 p-5
             before:absolute before:w-12 before:h-12 before:border-2 before:border-black before:rotate-45
           ">
         <Image
@@ -28,7 +28,7 @@ function Benefit({ props }: { props: Benefit }) {
           decoding="async"
           loading="lazy"
           fetchPriority="low"
-          class="w-auto object-contain max-h-5"
+          class="w-auto object-contain max-w-5"
         />
       </div>
       <div class="flex flex-col gap-1 text-start font-poppins justify-center">
