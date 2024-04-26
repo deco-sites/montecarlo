@@ -33,7 +33,7 @@ export default function HeroBanner({
 }: Props) {
   return (
     <div class="relative flex items-end">
-      <div class="bg-red w-full h-full">
+      <div class="w-full h-full">
         <Picture>
           <Source
             media="(max-width: 768px)"
