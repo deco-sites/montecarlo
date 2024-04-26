@@ -32,6 +32,8 @@ import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
 import ModalBonus from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 
+import ProductDescription from "./ProductDescription.tsx";
+
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
   pixDiscont: number;
@@ -96,7 +98,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
 
   const newName = parseInt(name) ? isVariantOf?.name : name;
 
-  // console.log("product", product)
+  // console.log("product", product);
 
   const eventItem = mapProductToAnalyticsItem({
     product,
@@ -106,111 +108,128 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   });
 
   return (
-    <div class="flex flex-col gap-1 px-2 lg:px-0" id={id}>
-      <Breadcrumb itemListElement={breadcrumb.itemListElement} />
-      {/* Code and name */}
-      <div class="flex flex-row gap-2 flex-wrap mb-5">
-        {collections &&
-          collections.map((item) => (
-            <span class="text-xs underline-offset-2 decoration-primary underline lg:text-sm">
-              {"Coleção " + item.value}
-            </span>
-          ))}
-      </div>
-      <h1>
-        <span class="font-medium text-base capitalize lg:text-xl">
-          {newName}
-        </span>
-      </h1>
-      {model && (
-        <span class="text-xs text-[#AAA89C]">{"Referencia: " + model}</span>
-      )}
-      {/* Prices */}
-      <div class="mt-5 flex flex-col gap-3">
-        <div class="flex flex-row gap-1 items-center text-base lg:text-xl">
-          <span class=" font-semibold ">
-            {formatPrice(price, offers?.priceCurrency)}
-          </span>
-          {stringIstallments && (
-            <>
-              <span class=" text-sm">em</span>
-              <span class=" font-semibold ">{stringIstallments}</span>
-            </>
-          )}
-        </div>
-        <span class="bg-perola-intermediario py-1 px-2 text-sm w-fit">
-          {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
-          <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
-        </span>
-        <ModalBonus props={extraInformations.bonus} />
-      </div>
-      {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
-        {groups && (
-          <div class="flex gap-2 w-full flex-wrap">
-            {groups.map((group) => (
-              <SelectVariants
-                variants={group.variants}
-                type={group.type}
-                materialImages={extraInformations.materialImages}
-                losses={extraInformations.lossesImage}
-              />
-            ))}
+    <>
+      <div class="col-start-4 row-span-2">
+        <div class="flex flex-col gap-1 px-2 lg:px-0" id={id}>
+          <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+          {/* Code and name */}
+          <div class="flex flex-row gap-2 flex-wrap mb-5">
+            {collections &&
+              collections.map((item) => (
+                <span class="text-xs underline-offset-2 decoration-primary underline lg:text-sm">
+                  {"Coleção " + item.value}
+                </span>
+              ))}
           </div>
-        )}
-        <ProductSelector product={product} />
-        <span
-          class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 ${
-            product.isVariantOf?.hasVariant.length == 1 && " w-full text-center"
-          }`}
-        >
-          {extraInformations.nameGuia}
-        </span>
-      </div>
-      {/* Add to Cart and Favorites button */}
-      <div class="mt-7 flex flex-col gap-2 ">
-        {availability === "https://schema.org/InStock"
-          ? (
-            <div class="flex flex-row gap-2 flex-wrap ">
-              <AddToCartButtonVTEX
-                eventParams={{ items: [eventItem] }}
-                productID={productID}
-                seller={seller}
-              />
-              <button class="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300">
-                Quero ganhar
-              </button>
-              <WishlistButtonVtex
-                customClass="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
-                productID={productID}
-                productGroupID={productGroupID}
-              />
+          <h1>
+            <span class="font-medium text-base capitalize lg:text-xl">
+              {newName}
+            </span>
+          </h1>
+          {model && (
+            <span class="text-xs text-[#AAA89C]">{"Referencia: " + model}</span>
+          )}
+          {/* Prices */}
+          <div class="mt-5 flex flex-col gap-3">
+            <div class="flex flex-row gap-1 items-center text-base lg:text-xl">
+              <span class=" font-semibold ">
+                {formatPrice(price, offers?.priceCurrency)}
+              </span>
+              {stringIstallments && (
+                <>
+                  <span class=" text-sm">em</span>
+                  <span class=" font-semibold ">{stringIstallments}</span>
+                </>
+              )}
             </div>
-          )
-          : <OutOfStock productID={productID} />}
-      </div>
-      {/* Shipping Simulation */}
-      <div class="mt-8">
-        {platform === "vtex" && (
-          <ShippingSimulation
-            items={[
-              {
-                id: Number(product.sku),
-                quantity: 1,
-                seller: seller,
-              },
-            ]}
+            <span class="bg-perola-intermediario py-1 px-2 text-sm w-fit">
+              {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
+              <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
+            </span>
+            <ModalBonus props={extraInformations.bonus} />
+          </div>
+          {/* Sku Selector */}
+          <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
+            {groups && (
+              <div class="flex gap-2 w-full flex-wrap">
+                {groups.map((group) => (
+                  <SelectVariants
+                    variants={group.variants}
+                    type={group.type}
+                    materialImages={extraInformations.materialImages}
+                    losses={extraInformations.lossesImage}
+                  />
+                ))}
+              </div>
+            )}
+            <ProductSelector product={product} />
+            <span
+              class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 ${
+                product.isVariantOf?.hasVariant.length == 1 &&
+                " w-full text-center"
+              }`}
+            >
+              {extraInformations.nameGuia}
+            </span>
+          </div>
+          {/* Add to Cart and Favorites button */}
+          <div class="mt-7 flex flex-col gap-2 ">
+            {availability === "https://schema.org/InStock"
+              ? (
+                <div class="flex flex-row gap-2 flex-wrap ">
+                  <AddToCartButtonVTEX
+                    eventParams={{ items: [eventItem] }}
+                    productID={productID}
+                    seller={seller}
+                  />
+                  <button class="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300">
+                    Quero ganhar
+                  </button>
+                  <WishlistButtonVtex
+                    customClass="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
+                    productID={productID}
+                    productGroupID={productGroupID}
+                  />
+                </div>
+              )
+              : <OutOfStock productID={productID} />}
+          </div>
+          {/* Shipping Simulation */}
+          <div class="mt-8">
+            {platform === "vtex" && (
+              <ShippingSimulation
+                items={[
+                  {
+                    id: Number(product.sku),
+                    quantity: 1,
+                    seller: seller,
+                  },
+                ]}
+              />
+            )}
+            <span class="text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2">
+              Não sei o meu CEP
+            </span>
+          </div>
+          <BenefitsList
+            title={extraInformations.benefit.title}
+            benefits={extraInformations.benefit.benefits}
           />
-        )}
-        <span class="text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2">
-          Não sei o meu CEP
-        </span>
+        </div>
       </div>
-      <BenefitsList
-        title={extraInformations.benefit.title}
-        benefits={extraInformations.benefit.benefits}
-      />
-    </div>
+      <div class="col-start-1 xl:col-start-2 col-end-4 row-start-1 lg:px-0 w-full max-w-[770px]">
+        <ProductDescription product={product} />
+
+        {
+          /* <pre>
+          <code>
+            {JSON.stringify(product, null, "  ")}
+          </code>
+        </pre> */
+        }
+        {/* <div class="none">{JSON.stringify(product, null, 4)}</div> */}
+      </div>
+    </>
   );
 }
 

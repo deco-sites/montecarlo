@@ -16,19 +16,21 @@ export default function ProductDetails({ page, extraInformations }: Props) {
     return <NotFound />;
   }
 
+  const { breadcrumbList, product } = page;
+
+  console.log({ product, description: product.description });
+
   return (
-    <div class="w-full py-8 flex flex-col lg:grid grid-cols-[auto_auto_auto_336px] grid-rows-1 mx-auto gap-2 lg:gap-8 container">
+    <div class="w-full py-8 flex flex-col lg:grid grid-cols-[15%_auto_auto_346px] justify-items-end grid-rows-1 mx-auto gap-4 lg:gap-8 max-w-[1408px]">
       <div class="flex flex-col gap-6 lg:flex-row lg:justify-center col-span-3 row-end-1">
         <ImageGallerySlider
           page={page}
         />
       </div>
-      <div class="col-start-4 row-span-2">
-        <ProductInfo
-          page={page}
-          extraInformations={extraInformations}
-        />
-      </div>
+      <ProductInfo
+        page={page}
+        extraInformations={extraInformations}
+      />
     </div>
   );
 }
