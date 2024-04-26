@@ -335,26 +335,26 @@ function BannerCarousel(props: Props) {
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
         {isMobile.value && arrayImage
           ? arrayImage?.map((image, index) => (
+            <Slider.Item index={index} class="carousel-item w-full ">
+              <BannerItemMobile
+                image={image}
+                lcp={index === 0 && preload}
+                id={`${id}::${index}`}
+              />
+            </Slider.Item>
+          ))
+          : images?.map((image, index) => {
+            console.log(image);
+            return (
               <Slider.Item index={index} class="carousel-item w-full ">
-                <BannerItemMobile
+                <BannerItem
                   image={image}
                   lcp={index === 0 && preload}
                   id={`${id}::${index}`}
                 />
               </Slider.Item>
-            ))
-          : images?.map((image, index) => {
-              console.log(image);
-              return (
-                <Slider.Item index={index} class="carousel-item w-full ">
-                  <BannerItem
-                    image={image}
-                    lcp={index === 0 && preload}
-                    id={`${id}::${index}`}
-                  />
-                </Slider.Item>
-              );
-            })}
+            );
+          })}
       </Slider>
 
       {props.arrows && <Buttons />}
