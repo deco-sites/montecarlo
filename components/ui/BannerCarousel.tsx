@@ -274,6 +274,7 @@ function BannerCarousel(props: Props) {
   }
 
   const arrayImage = isMobile.value && arrayImagesMobile();
+  const imageArray = arrayImagesMobile();
 
   return (
     <div
@@ -289,6 +290,18 @@ function BannerCarousel(props: Props) {
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
               />
+              <SendEventOnView
+                id={id}
+                event={{
+                  name: "view_promotion",
+                  params: {
+                    creative_name: imageArray[index].alt,
+                    creative_slot: index.toString(),
+                    promotion_id: imageArray[index].action?.href,
+                    promotion_name: imageArray[index].action?.label,
+                  },
+                }}
+              />
             </Slider.Item>
           ))
           : images?.map((image, index) => (
@@ -297,6 +310,18 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
+              />
+              <SendEventOnView
+                id={id}
+                event={{
+                  name: "view_promotion",
+                  params: {
+                    creative_name: imageArray[index].alt,
+                    creative_slot: index.toString(),
+                    promotion_id: imageArray[index].action?.href,
+                    promotion_name: imageArray[index].action?.label,
+                  },
+                }}
               />
             </Slider.Item>
           ))}

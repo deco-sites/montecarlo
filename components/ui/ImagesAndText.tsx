@@ -1,3 +1,8 @@
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import ButtonLink from "./ButtonLink.tsx";
@@ -18,6 +23,8 @@ interface CardImage {
     label?: string;
     href?: string;
   };
+  id: string;
+  index: string;
 }
 
 export interface Props {
@@ -25,12 +32,25 @@ export interface Props {
 }
 
 function CardImage(
-  { imageMobile, imageDesktop, alt, title, content, button }: CardImage,
+  { imageMobile, imageDesktop, alt, title, content, button, id, index }:
+    CardImage,
 ) {
   console.log("button", button);
 
   return (
     <div class="w-full lg:w-2/4 flex flex-col bg-[#F5F3E7]">
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+            creative_slot: index,
+            promotion_id: button?.href,
+            promotion_name: button?.label,
+          },
+        }}
+      />
       <Picture>
         <Source
           src={imageMobile}
@@ -84,9 +104,10 @@ function CardImage(
 }
 
 export default function ImagesAndText({ cardsImage }: Props) {
+  const id = useId();
   return (
     <div class="flex flex-col lg:flex-row w-full h-full py-8 gap-2 px-1 max-w-[1408px] mx-auto">
-      {cardsImage.map((card) => (
+      {cardsImage.map((card, index) => (
         <CardImage
           imageMobile={card.imageMobile}
           imageDesktop={card.imageDesktop}
@@ -94,6 +115,8 @@ export default function ImagesAndText({ cardsImage }: Props) {
           title={card.title}
           content={card.content}
           button={card.button}
+          id={id}
+          index={index.toString()}
         />
       ))}
     </div>

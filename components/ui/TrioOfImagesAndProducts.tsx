@@ -1,3 +1,7 @@
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
@@ -67,7 +71,9 @@ function Buttons() {
   );
 }
 
-function Card({ image }: { image: CardImage }) {
+function Card(
+  { image, id, index }: { image: CardImage; id: string; index: string },
+) {
   const {
     imageMobile,
     imageDesktop,
@@ -79,10 +85,22 @@ function Card({ image }: { image: CardImage }) {
     preload,
     products,
   } = image;
-
+  console.log(href);
   return (
     <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 group ">
       <div class="relative flex justify-center items-center w-full h-full">
+        <SendEventOnView
+          id={id}
+          event={{
+            name: "view_promotion",
+            params: {
+              creative_name: title,
+              creative_slot: index,
+              promotion_id: href,
+              promotion_name: button,
+            },
+          }}
+        />
         <Picture preload={preload} class="w-full h-full">
           <Source
             media="(max-width: 767px)"
@@ -166,6 +184,8 @@ export default function TrioOfImagesAndProducts(
               >
                 <Card
                   image={image}
+                  index={index.toString()}
+                  id={id}
                 />
               </Slider.Item>
             );
