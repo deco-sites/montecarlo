@@ -46,21 +46,21 @@ function Dots(
 ) {
   return (
     <>
-    <div class="w-[60%] md:w-[90%] flex mx-auto">
-      <div class="mx-auto overflow-y-scroll md:overflow-auto">
-        <ul class="carousel col-span-full gap-3 lg:gap-5 z-10 row-start-4 w-full">
-          {images?.map((_, index) => (
-            <li class="carousel-item bg-#F5F3E7">
-              <Slider.Dot index={index}>
-                <div class="py-5">
-                  <div class="w-10 h-[0.2rem] rounded-lg lg:w-[71px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]" />
-                </div>
-              </Slider.Dot>
-            </li>
-          ))}
-        </ul>
+      <div class="w-[60%] md:w-[90%] flex mx-auto">
+        <div class="mx-auto overflow-y-scroll md:overflow-auto">
+          <ul class="carousel col-span-full gap-3 lg:gap-5 z-10 row-start-4 w-full">
+            {images?.map((_, index) => (
+              <li class="carousel-item bg-#F5F3E7">
+                <Slider.Dot index={index}>
+                  <div class="py-5">
+                    <div class="w-10 h-[0.2rem] rounded-lg lg:w-[71px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]" />
+                  </div>
+                </Slider.Dot>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
-    </div>
     </>
   );
 }
@@ -187,7 +187,7 @@ function ShelfCollection({
               </div>
             </>
           )}
-          {layout?.showDots && <Dots images={groupByNumberOfSlides} /> }
+          {layout?.showDots && <Dots images={groupByNumberOfSlides} />}
         </div>
       </div>
 
