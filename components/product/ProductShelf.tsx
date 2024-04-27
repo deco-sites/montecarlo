@@ -34,12 +34,39 @@ export interface Props {
     headerAlignment?: "center" | "left";
     headerfontSize?: "Normal" | "Large" | "Small";
     showArrows?: boolean;
+    showDots?: boolean;
     ctaCollection?: string;
     showCtaOnDesktop?: boolean;
     showCtaOnMobile?: boolean;
     hrefCollection?: string;
   };
   cardLayout?: cardLayout;
+}
+
+function Dots(
+  { products, interval = 0 }: {
+    products: Product[];
+    interval?: number;
+  },
+) {
+  return (
+    <>
+      <ul class="carousel justify-center col-span-full lg:hidden z-10 row-start-5 w-11/12 mx-auto px-2 pt-2">
+        {products?.map((_, index) => (
+          <li class="carousel-item">
+            <Slider.Dot index={index}>
+              <div class="">
+                <div
+                  class=" h-1 group-disabled:bg-[#CAC7B6] bg-[#F5F3E7] duration-1000 ease-in-out"
+                  style={{ width: `calc(91.66vw/${products.length})` }}
+                />
+              </div>
+            </Slider.Dot>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
 
 function ShelfCollection({
@@ -65,8 +92,15 @@ function ShelfCollection({
   };
 
   const slideMobile = {
-    1: "w-full",
-    2: "w-1/2",
+    1: "w-full snap-center",
+    2: "w-1/2 snap-start",
+    3: "w-1/3",
+    4: "w-1/4",
+    5: "w-1/5",
+  };
+  const containerSlider = {
+    1: "gap-5 sm:gap-2 lg:gap-0 px-14 lg:px-0",
+    2: "gap-0 px-0",
     3: "w-1/3",
     4: "w-1/4",
     5: "w-1/5",
@@ -86,12 +120,16 @@ function ShelfCollection({
           "px-0",
         )}
       >
-        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-5 sm:gap-2 lg:gap-0 px-14 lg:px-0">
+        <Slider
+          class={`row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start ${
+            containerSlider[layout?.numberOfSliders?.mobile ?? 1]
+          }`}
+        >
           {products?.map((product, index) => (
             <Slider.Item
               index={index}
               class={clx(
-                "carousel-item max-w-[246px] snap-center sm:w-1/3 sm:max-w-none lg:snap-start ",
+                "carousel-item max-w-[246px] sm:w-1/3 sm:max-w-none lg:snap-start ",
                 slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
                 slideMobile[layout?.numberOfSliders?.mobile ?? 1],
               )}
@@ -121,6 +159,7 @@ function ShelfCollection({
             </div>
           </>
         )}
+        {layout?.showDots && <Dots products={products} />}
         <SliderJS rootId={id} />
         <SendEventOnView
           id={id}

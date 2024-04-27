@@ -54,9 +54,11 @@ export default function ProductDescription({ product }: Props) {
     }
   });
 
+  const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g).join("");
+
   return (
     <div class="">
-      <div class="w-full flex flex-col gap-5 lg:gap-8 px-2 lg:px-0">
+      <div class="w-full flex flex-col gap-5 lg:gap-8">
         <Accordion
           open
           title="Descrição"
@@ -80,14 +82,10 @@ export default function ProductDescription({ product }: Props) {
             title="Informações Técnicas"
             titleClass="font-inter text-[#000000]"
           >
-            <ul class="list-disc ml-6 font-poppins text-sm text-black flex flex-col gap-2 lg:mt-5">
-              {Object.keys(technicalInfo).map((key: string) => {
-                if (
-                  key === "Altura" ||
-                  key === "RefId"
-                ) return <li>{key}: {technicalInfo[key][0]}</li>;
-                else return <li>{key}: {technicalInfo[key].join(", ")}</li>;
-              })}
+            <ul
+              class="list-disc ml-6 font-poppins text-sm text-black flex flex-col gap-2 lg:mt-5"
+              dangerouslySetInnerHTML={{ __html: listTechnical }}
+            >
             </ul>
           </Accordion>
         )}

@@ -7,6 +7,7 @@ import type { SimulationOrderForm, SKU, Sla } from "apps/vtex/utils/types.ts";
 
 export interface Props {
   items: Array<SKU>;
+  cepLink: { label: string; url: string };
 }
 
 const formatShippingEstimate = (estimate: string) => {
@@ -43,32 +44,27 @@ function ShippingContent({ simulation }: {
   }
 
   return (
-    <ul class="flex flex-col gap-4 p-4 bg-base-200 rounded-[4px]">
+    <ul class="flex flex-col gap-2 mt-7">
       {methods.map((method) => (
-        <li class="flex justify-between items-center border-base-200 not-first-child:border-t">
-          <span class="text-button text-center">
-            Entrega {method.name}
+        <li class="flex justify-between items-center border-base-200 not-first-child:border-t bg-perola-intermediario py-2 px-5">
+          <span class="text-button text-sm min-w-20 text-start">
+            {method.name}
           </span>
-          <span class="text-button">
+          <span class="text-button text-sm">
             até {formatShippingEstimate(method.shippingEstimate)}
           </span>
-          <span class="text-base font-semibold text-right">
+          <span class="text-sm font-semibold text-right">
             {method.price === 0 ? "Grátis" : (
               formatPrice(method.price / 100, currencyCode, locale)
             )}
           </span>
         </li>
       ))}
-      <span class="text-base-300">
-        Os prazos de entrega começam a contar a partir da confirmação do
-        pagamento e podem variar de acordo com a quantidade de produtos na
-        sacola.
-      </span>
     </ul>
   );
 }
 
-function ShippingSimulation({ items }: Props) {
+function ShippingSimulation({ items, cepLink }: Props) {
   const postalCode = useSignal("");
   const loading = useSignal(false);
   const simulateResult = useSignal<SimulationOrderForm | null>(null);
@@ -124,6 +120,13 @@ function ShippingSimulation({ items }: Props) {
           Calcular
         </Button>
       </form>
+
+      <a
+        href={cepLink.url}
+        class="text-sm underline-offset-2 decoration-primary underline lg:text-sm mt-2 cursor-pointer"
+      >
+        {cepLink.label}
+      </a>
 
       <div>
         <div>

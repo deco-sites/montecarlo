@@ -33,12 +33,14 @@ import ModalBonus from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx
 import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 
 import ProductDescription from "./ProductDescription.tsx";
+import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
   pixDiscont: number;
   bonus: ModalBonusProps;
   nameGuia: string;
+  cepLink: { label: string; url: string };
   benefit: Benefit;
   groups: GroupVariants[] | null;
   materialImages?: Material[];
@@ -98,7 +100,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
 
   const newName = parseInt(name) ? isVariantOf?.name : name;
 
-  // console.log("product", product);
+  const { isMobile } = useUI();
 
   const eventItem = mapProductToAnalyticsItem({
     product,
@@ -164,7 +166,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             )}
             <ProductSelector product={product} />
             <span
-              class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 ${
+              class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer ${
                 product.isVariantOf?.hasVariant.length == 1 &&
                 " w-full text-center"
               }`}
@@ -205,30 +207,23 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     seller: seller,
                   },
                 ]}
+                cepLink={extraInformations.cepLink}
               />
             )}
-            <span class="text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2">
-              Não sei o meu CEP
-            </span>
           </div>
+          {isMobile.value &&
+            <ProductDescription product={product} />}
           <BenefitsList
             title={extraInformations.benefit.title}
             benefits={extraInformations.benefit.benefits}
           />
         </div>
       </div>
-      <div class="col-start-1 xl:col-start-2 col-end-4 row-start-1 lg:px-0 w-full max-w-[770px]">
-        <ProductDescription product={product} />
-
-        {
-          /* <pre>
-          <code>
-            {JSON.stringify(product, null, "  ")}
-          </code>
-        </pre> */
-        }
-        {/* <div class="none">{JSON.stringify(product, null, 4)}</div> */}
-      </div>
+      {!isMobile.value && (
+        <div class="col-start-1 xl:col-start-2 col-end-4 row-start-1 lg:px-0 w-full max-w-[770px]">
+          <ProductDescription product={product} />
+        </div>
+      )}
     </>
   );
 }
