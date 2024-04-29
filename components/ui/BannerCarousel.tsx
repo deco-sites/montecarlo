@@ -218,8 +218,8 @@ function BannerItem({
             event={{
               name: "select_promotion",
               params: {
-                item_list_name: "banner-carousel",
-                item_list_id: "banner-carousel",
+                item_list_name: primaryImage.alt,
+                item_list_id: id,
                 promotion_name: primaryImage.promotion,
                 items: [],
               },
@@ -230,11 +230,11 @@ function BannerItem({
             event={{
               name: "view_promotion",
               params: {
-                view_promotion: "banner-carousel",
-                crative_name: "banner-carousel",
+                view_promotion: primaryImage.promotion,
+                crative_name: primaryImage.alt,
                 creative_slot: "banner-carousel",
                 promotion_id: id,
-                promotion_name: "banner-carousel",
+                promotion_name: primaryImage.promotion,
                 items: [],
               },
             }}
