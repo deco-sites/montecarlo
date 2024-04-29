@@ -8,10 +8,15 @@ export interface Material {
   name: string;
 }
 
+/** @titleBy name */
+export interface MaterialProps {
+  image: ImageWidget;
+  name: string;
+}
 /** @title Materials of Products */
 export interface Props {
   /** @title Materials of Products */
-  material: Material[];
+  material: MaterialProps[];
 }
 
 /**@title Material of Products */

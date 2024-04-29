@@ -48,7 +48,8 @@ export type AvailableIcons =
   | "AlertError"
   | "share"
   | "arrowLeft"
-  | "arrowRight";
+  | "arrowRight"
+  | "alertBonus";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

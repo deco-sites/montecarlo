@@ -27,7 +27,6 @@ function WishlistButton({
       loading={loading.value}
       inWishlist={inWishlist}
       isUserLoggedIn={isUserLoggedIn}
-      variant={variant}
       productGroupID={productGroupID}
       productID={productID}
       removeItem={() => removeItem({ productId: Number(productGroupID) })}

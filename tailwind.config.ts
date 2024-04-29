@@ -9,6 +9,7 @@ export default {
     extend: {
       fontFamily: {
         "beausiteGrand": ["BeausiteGrand"],
+        "inter": ["Inter", "sans-serif"],
         "poppins": ["Poppins", "sans-serif"],
       },
       animation: {

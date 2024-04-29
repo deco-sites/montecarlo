@@ -6,11 +6,11 @@ import { useUser } from "apps/vtex/hooks/useUser.ts";
 export interface Props {
   productID: string;
   productGroupID?: string;
-  variant?: "icon" | "full";
+  customClass: string;
 }
 
 function WishlistButton({
-  variant = "icon",
+  customClass,
   productGroupID,
   productID,
 }: Props) {
@@ -28,7 +28,7 @@ function WishlistButton({
       loading={loading.value}
       inWishlist={inWishlist}
       isUserLoggedIn={isUserLoggedIn}
-      variant={variant}
+      customClass={customClass}
       productGroupID={productGroupID}
       productID={productID}
       removeItem={() => removeItem({ id: listItem.value!.id }!)}
