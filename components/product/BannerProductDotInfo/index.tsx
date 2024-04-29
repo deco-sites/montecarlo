@@ -2,8 +2,6 @@ import { useState } from "preact/hooks";
 
 import { ImageWidget } from "apps/admin/widgets.ts";
 
-import type { ProductData } from "../../../loaders/ProductDotInfo.ts";
-
 import Banner from "./Banner.tsx";
 import ButtonDotsControl from "./ButtonDotsControl.tsx";
 import Dot from "./Dot.tsx";
@@ -20,9 +18,24 @@ interface Config {
   coordinates: string;
 }
 
+interface ProductData {
+  /** @description Defina a id do produto. Obs: Ao preencher este campo não é necessário preencher os outros campos do produto. */
+  id?: number;
+  /**
+   * @title Imagem
+   * @description Url da imagem do produto */
+  image?: string;
+  /** @title Nome do produto */
+  productName?: string;
+  /** @title De R$ */
+  listPrice?: string;
+  /** @title Por R$ */
+  price?: string;
+}
+
 interface ProductProps {
-  /** @description Defina a ID do Produto */
-  productData?: ProductData[];
+  /** @description Defina as informações do Produto */
+  productData?: ProductData;
   /** @description Configurações de exibição da Tag */
   config: {
     mobile: Config;
@@ -75,7 +88,7 @@ function BannerProductDotInfo(props: Props) {
         >
           <Info
             coordinates={position.mobile}
-            productData={productData}
+            product={productData}
           />
           <Dot />
         </div>
@@ -91,7 +104,7 @@ function BannerProductDotInfo(props: Props) {
         >
           <Info
             coordinates={position.desktop}
-            productData={productData}
+            product={productData}
           />
           <Dot />
         </div>
@@ -100,7 +113,7 @@ function BannerProductDotInfo(props: Props) {
   }
 
   return (
-    <div class="relative max-w-[100vw] w-full h-full">
+    <div class="relative lg:max-w-[80vh] w-full h-full">
       <Banner
         preload={props.preload}
         mobile={props.mobile}

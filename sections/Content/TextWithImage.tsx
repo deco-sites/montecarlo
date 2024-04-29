@@ -94,7 +94,7 @@ export default function TextWithImage({
             <a
               href={CTA.href}
               class={`
-                btn text-sm mt-5 py-2.5 px-3.5 w-fit rounded-none border-transparent self-center
+                btn text-sm mt-5 py-2.5 px-3.5 w-fit rounded-none border-transparent self-center hover:opacity-80
                 ${CTA.alignment === "left" && "lg:self-start"}
                 ${CTA.alignment === "center" && "lg:self-center"}
                 ${CTA.alignment === "right" && "lg:self-end"}
