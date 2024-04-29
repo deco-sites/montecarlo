@@ -103,6 +103,11 @@ export function SectionImage(
           href={href || ""}
           classCustom={"text-black text-sm text-black group-hover:bg-[#F5F3E7] duration-300 absolute bottom-11"}
           label={button}
+          creative_name={title}
+          creative_slot={index}
+          promotion_id={href}
+          promotion_name={alt}
+          id={id}
         />
       </div>
     </div>

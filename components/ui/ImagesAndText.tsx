@@ -96,6 +96,11 @@ function CardImage(
             href={button?.href || ""}
             classCustom={"text-black text-sm"}
             label={button?.label}
+            creative_name={title}
+            creative_slot={index}
+            promotion_id={button?.href}
+            promotion_name={button?.label}
+            id={id}
           />
         )}
       </div>

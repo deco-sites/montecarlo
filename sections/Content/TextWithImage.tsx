@@ -123,6 +123,18 @@ export default function TextWithImage({
                 color: CTA.fontColor,
               }}
             >
+              <SendEventOnClick
+                id={id}
+                event={{
+                  name: "select_promotion",
+                  params: {
+                    creative_name: title,
+                    creative_slot: "0",
+                    promotion_id: CTA?.href,
+                    promotion_name: CTA?.label,
+                  },
+                }}
+              />
               {CTA.label}
             </a>
           )}

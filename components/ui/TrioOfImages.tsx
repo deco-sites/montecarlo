@@ -114,6 +114,11 @@ function Card(
             href={href || ""}
             classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
             label={button}
+            creative_name={title}
+            creative_slot={index}
+            promotion_id={href}
+            promotion_name={alt}
+            id={id}
           />
         )}
       </div>
