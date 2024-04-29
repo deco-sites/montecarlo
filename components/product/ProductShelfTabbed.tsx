@@ -1,6 +1,6 @@
 import {
-  SendEventOnView,
   SendEventOnClick,
+  SendEventOnView,
 } from "../../components/Analytics.tsx";
 import ProductCard, {
   Layout as cardLayout,
@@ -44,10 +44,9 @@ function TabbedProductShelf({
 }: Props) {
   const id = useId();
   const platform = usePlatform();
-  const ti =
-    typeof tabIndex === "number"
-      ? Math.min(Math.max(tabIndex, 0), tabs.length)
-      : 0;
+  const ti = typeof tabIndex === "number"
+    ? Math.min(Math.max(tabIndex, 0), tabs.length)
+    : 0;
   const { products } = tabs[ti];
 
   if (!products || products.length === 0) {
@@ -114,7 +113,7 @@ function TabbedProductShelf({
           id={id}
           event={{
             name: "view_item_list",
-            item_list_name: 'TabbedProductShelf',
+            item_list_name: "TabbedProductShelf",
             params: {
               item_list_name: title,
               items: products.map((product, index) =>
@@ -133,7 +132,7 @@ function TabbedProductShelf({
             name: "select_item",
             params: {
               item: title,
-              item_list_name: 'TabbedProductShelf',
+              item_list_name: "TabbedProductShelf",
               items: [
                 ...products.map((product, index) =>
                   mapProductToAnalyticsItem({
