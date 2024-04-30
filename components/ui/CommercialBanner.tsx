@@ -59,7 +59,7 @@ function CommercialBanner(
           : `background: #F8F7F3;`}
         className={`py-10 w-full lg:w-[50%] self-stretch flex items-center px-6 md:pr-20 lg:pr-0`}
       >
-        <div className="container md:max-w-[770px] lg:mr-0">
+        <div className="container md:max-w-[770px] lg:mr-0 opacity-100">
           <h5
             dangerouslySetInnerHTML={{ __html: title }}
             className="text-2xl font-medium mb-4 leading-8 md:leading-[60px] md:text-[40px]"
