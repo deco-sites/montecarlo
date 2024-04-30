@@ -176,6 +176,17 @@ function MiniProductCard({
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
+          <SendEventOnClick
+            id={id}
+            event={{
+              name: "add_to_cart",
+              params: {
+                currency: "BRL",
+                value: price,
+                items: [eventItem]
+              },
+            }}
+          />
           <Image
             src={front.url!}
             alt={front.alternateName}

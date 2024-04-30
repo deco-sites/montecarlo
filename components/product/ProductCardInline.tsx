@@ -49,6 +49,17 @@ export default function ProductCardInline({ product, itemListName }: Props) {
       <SendEventOnClick
         id={id}
         event={{
+          name: "add_to_cart",
+          params: {
+            currency: "BRL",
+            value: price,
+            items: [eventItem]
+          },
+        }}
+      />
+      <SendEventOnClick
+        id={id}
+        event={{
           name: "select_item" as const,
           params: {
             item_list_name: itemListName,
