@@ -85,7 +85,7 @@ function Card(
     preload,
     products,
   } = image;
-  console.log(href);
+
   return (
     <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 group ">
       <div class="relative flex justify-center items-center w-full h-full">

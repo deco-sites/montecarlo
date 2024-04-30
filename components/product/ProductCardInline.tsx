@@ -46,6 +46,16 @@ export default function ProductCardInline({ product, itemListName }: Props) {
           },
         }}
       />
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_item_list",
+          params: {
+            item_list_name: itemListName,
+            items: [eventItem],
+          },
+        }}
+      />
       <SendEventOnClick
         id={id}
         event={{

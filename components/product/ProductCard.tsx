@@ -149,6 +149,16 @@ function MiniProductCard({
       class={`card card-compact group w-full px-1 gap-2 text-center h-min max-w-[260px] mx-auto md:max-w-full`}
       data-deco="view-product"
     >
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_item_list",
+          params: {
+            item_list_name: itemListName,
+            items: [eventItem],
+          },
+        }}
+      />
       <SendEventOnClick
         id={id}
         event={{
