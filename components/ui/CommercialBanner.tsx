@@ -89,6 +89,7 @@ function CommercialBanner(
             src={imageDesktop}
             alt={altText}
             style={`height: ${heightImageDesktopController}px;`}
+            height={heightImageDesktopController}
             width={1200}
             loading={preloadImage ? "eager" : "lazy"}
           />
