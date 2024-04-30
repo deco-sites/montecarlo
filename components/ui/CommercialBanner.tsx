@@ -39,16 +39,15 @@ function CommercialBanner(
     subTitle,
     backgroundColor,
     preloadImage,
-    heightImageDesktop
+    heightImageDesktop,
   }: Props,
 ) {
-
   const { isMobile } = useUI();
 
   const isMobileDevice = isMobile.value;
 
   let heightImageDesktopController = 350;
-  if(heightImageDesktop) {
+  if (heightImageDesktop) {
     heightImageDesktopController = heightImageDesktop;
   }
 
@@ -73,7 +72,27 @@ function CommercialBanner(
           </h5>
         </div>
       </div>
-        { isMobileDevice ? <Image className="w-full lg:w-[50vw] object-cover" width={600} src={imageMobile} alt={altText} style={'height: auto;'} loading={preloadImage ? "eager" : "lazy"} /> : <Image className="w-full lg:w-[50%] object-cover" src={imageDesktop} alt={altText} style={`height: ${heightImageDesktopController}px;`} width={1200} loading={preloadImage ? "eager" : "lazy"} />}
+      {isMobileDevice
+        ? (
+          <Image
+            className="w-full lg:w-[50vw] object-cover"
+            width={600}
+            src={imageMobile}
+            alt={altText}
+            style={"height: auto;"}
+            loading={preloadImage ? "eager" : "lazy"}
+          />
+        )
+        : (
+          <Image
+            className="w-full lg:w-[50%] object-cover"
+            src={imageDesktop}
+            alt={altText}
+            style={`height: ${heightImageDesktopController}px;`}
+            width={1200}
+            loading={preloadImage ? "eager" : "lazy"}
+          />
+        )}
     </div>
   );
 }
