@@ -121,6 +121,7 @@ function ProductInfo({ page, layout }: Props) {
                     variant="full"
                     productID={productID}
                     productGroupID={productGroupID}
+                    productClick={product}
                   />
                 </>
               )}
@@ -134,6 +135,7 @@ function ProductInfo({ page, layout }: Props) {
                     variant="full"
                     productID={productID}
                     productGroupID={productGroupID}
+                    productClick={product}
                   />
                 </>
               )}

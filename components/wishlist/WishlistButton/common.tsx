@@ -2,6 +2,12 @@ import { useSignal } from "@preact/signals";
 import Icon from "../../../components/ui/Icon.tsx";
 import Button from "../../../components/ui/Button.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../Analytics.tsx";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import type { Product } from "apps/commerce/types.ts";
 
 export interface Props {
   productID: string;
@@ -12,6 +18,7 @@ export interface Props {
   loading: boolean;
   inWishlist: boolean;
   isUserLoggedIn: boolean;
+  productClickValue: Product;
 }
 
 function ButtonCommon({
@@ -23,9 +30,13 @@ function ButtonCommon({
   isUserLoggedIn,
   removeItem,
   addItem,
+  productClickValue,
 }: Props) {
   const fetching = useSignal(false);
 
+  const eventItem = mapProductToAnalyticsItem({
+    product: productClickValue,
+  });
   return (
     <Button
       class={variant === "icon"
@@ -75,6 +86,15 @@ function ButtonCommon({
         }
       }}
     >
+      <SendEventOnClick
+        id=""
+        event={{
+          name: "add_to_wishlist",
+          params: {
+            items: [eventItem]
+          },
+        }}
+      />
       <Icon
         id="Heart"
         size={24}
