@@ -10,9 +10,10 @@ import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalytic
 
 export interface Props {
   product: Product;
+  itemListName?: string;
 }
 
-export default function ProductCardInline({ product }: Props) {
+export default function ProductCardInline({ product, itemListName }: Props) {
   const {
     url,
     productID,
@@ -42,6 +43,22 @@ export default function ProductCardInline({ product }: Props) {
             currency: "BRL",
             value: price,
             items: [eventItem],
+          },
+        }}
+      />
+      <SendEventOnClick
+        id={id}
+        event={{
+          name: "select_item" as const,
+          params: {
+            item_list_name: itemListName,
+            items: [
+              mapProductToAnalyticsItem({
+                product,
+                price,
+                listPrice,
+              }),
+            ],
           },
         }}
       />
