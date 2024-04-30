@@ -1,7 +1,7 @@
-import { Head } from "$fresh/runtime.ts";
-
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import { Picture, Source } from "apps/website/components/Picture.tsx";
+import Image from "apps/website/components/Image.tsx";
+
+import { useUI } from "../../sdk/useUI.ts";
 
 export interface Props {
   imageMobile: ImageWidget;
@@ -24,6 +24,10 @@ export interface Props {
    * @title if you want to pre-rendering this image (we only recommended it if this image is in first view)
    */
   preloadImage?: boolean;
+  /**
+   * @description to improve Cls metric (Web Vitals), enter the height of the image that should be shown on Desktop. Enter using pixel format. Value example: 600.
+   */
+  heightImageDesktop: number;
 }
 
 function CommercialBanner(
@@ -35,15 +39,26 @@ function CommercialBanner(
     subTitle,
     backgroundColor,
     preloadImage,
+    heightImageDesktop
   }: Props,
 ) {
+
+  const { isMobile } = useUI();
+
+  const isMobileDevice = isMobile.value;
+
+  let heightImageDesktopController = 350;
+  if(heightImageDesktop) {
+    heightImageDesktopController = heightImageDesktop;
+  }
+
   return (
-    <div className="flex items-center justify-between flex-wrap">
+    <div className={`flex items-center justify-between flex-wrap`}>
       <div
         style={backgroundColor
-          ? `background: ${backgroundColor}`
-          : "background: #F8F7F3"}
-        className="py-10 w-full md:w-[50%] self-stretch flex items-center px-6 md:pr-20  lg:pr-0"
+          ? `background: ${backgroundColor};`
+          : `background: #F8F7F3;`}
+        className={`py-10 w-full lg:w-[50%] self-stretch flex items-center px-6 md:pr-20 lg:pr-0`}
       >
         <div className="container md:max-w-[770px] lg:mr-0">
           <h5
@@ -58,26 +73,7 @@ function CommercialBanner(
           </h5>
         </div>
       </div>
-      <Picture className="w-full md:w-[50%] self-stretch">
-        <Source
-          src={imageMobile}
-          width={350}
-          height={350}
-          media="(max-width: 1023px)"
-        />
-        <Source
-          src={imageDesktop}
-          width={286}
-          height={773}
-          media="(min-width: 1024px)"
-        />
-        <img
-          className="w-full h-full object-cover"
-          src={imageDesktop}
-          alt={altText}
-          loading={preloadImage ? "eager" : "lazy"}
-        />
-      </Picture>
+        { isMobileDevice ? <Image className="w-full lg:w-[50vw] object-cover" width={600} src={imageMobile} alt={altText} style={'height: auto;'} loading={preloadImage ? "eager" : "lazy"} /> : <Image className="w-full lg:w-[50%] object-cover" src={imageDesktop} alt={altText} style={`height: ${heightImageDesktopController}px;`} width={1200} loading={preloadImage ? "eager" : "lazy"} />}
     </div>
   );
 }

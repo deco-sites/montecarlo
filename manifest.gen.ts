@@ -67,7 +67,7 @@ import * as $$$$$$51 from "./sections/Product/NotFoundChallenge.tsx";
 import * as $$$$$$52 from "./sections/Product/ProductDetails.tsx";
 import * as $$$$$$53 from "./sections/Product/ProductShelf.tsx";
 import * as $$$$$$54 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$55 from "./sections/Product/ProductShelfWithArrowBottom.tsx";
+import * as $$$$$$55 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
 import * as $$$$$$56 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$57 from "./sections/Product/ShelfCollection.tsx";
 import * as $$$$$$58 from "./sections/Product/ShelfWithImage.tsx";
@@ -150,7 +150,7 @@ const manifest = {
     "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$52,
     "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$53,
     "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$54,
-    "deco-sites/montecarlo/sections/Product/ProductShelfWithArrowBottom.tsx":
+    "deco-sites/montecarlo/sections/Product/ProductShelfWithDotsBottom.tsx":
       $$$$$$55,
     "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$56,
     "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$57,

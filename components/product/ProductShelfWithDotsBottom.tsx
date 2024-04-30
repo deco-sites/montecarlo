@@ -53,7 +53,7 @@ function Dots(
               <li class="carousel-item bg-#F5F3E7">
                 <Slider.Dot index={index}>
                   <div class="py-5">
-                    <div class="w-10 h-[0.2rem] rounded-lg lg:w-[71px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]" />
+                    <div class="w-5 h-[0.2rem] rounded-lg lg:w-[30px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]" />
                   </div>
                 </Slider.Dot>
               </li>
@@ -175,12 +175,12 @@ function ShelfCollection({
         <div class="w-[100vw] mt-10 max-w-[512px] mx-auto">
           {layout?.showArrows && (
             <>
-              <div class="z-10 col-start-1 row-start-3 absolute left-0 top-[37%] lg:block">
+              <div class="z-10 col-start-1 row-start-3 absolute left-0 top-[37%] lg:top-[42%] lg:block">
                 <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
                   <Icon size={40} id="arrowLeft" strokeWidth={3} />
                 </Slider.PrevButton>
               </div>
-              <div class="absolute right-0 top-[37%] z-10 col-start-3 row-start-3 lg:block">
+              <div class="absolute right-0 top-[37%] lg:top-[42%] z-10 col-start-3 row-start-3 lg:block">
                 <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center right-0">
                   <Icon size={40} id="arrowRight" strokeWidth={3} />
                 </Slider.NextButton>
