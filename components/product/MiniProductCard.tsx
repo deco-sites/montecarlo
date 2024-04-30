@@ -1,5 +1,8 @@
 import type { Platform } from "../../apps/site.ts";
-import { SendEventOnClick } from "../../components/Analytics.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
@@ -125,6 +128,12 @@ function MiniProductCard({
       {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
   );
+
+  const eventItem = mapProductToAnalyticsItem({
+    product,
+    price,
+    listPrice,
+  });
 
   return (
     <div
@@ -252,6 +261,17 @@ function MiniProductCard({
         </div>
         {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_item",
+          params: {
+            currency: "BRL",
+            value: price,
+            items: [eventItem],
+          },
+        }}
+      />
     </div>
   );
 }

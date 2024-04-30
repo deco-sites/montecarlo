@@ -1,7 +1,12 @@
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import Image from "apps/website/components/Image.tsx";
 import { formatPrice } from "../../sdk/format.ts";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 export interface Props {
   product: Product;
@@ -20,8 +25,26 @@ export default function ProductCardInline({ product }: Props) {
   const { listPrice, price, installments } = useOffer(offers);
   const id = `product-card-${productID}`;
   const [front] = images ?? [];
+
+  const eventItem = mapProductToAnalyticsItem({
+    product,
+    price,
+    listPrice,
+  });
+
   return (
     <a href={url} class="flex w-full flex-row opacity-1 gap-2">
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_item",
+          params: {
+            currency: "BRL",
+            value: price,
+            items: [eventItem],
+          },
+        }}
+      />
       <Image
         alt={name}
         width={112}
