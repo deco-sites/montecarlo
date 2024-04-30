@@ -145,8 +145,8 @@ function BannerItemMobile({
         event={{
           name: "select_promotion",
           params: {
-            item_list_name: "banner-carousel",
-            item_list_id: "banner-carousel",
+            item_list_name: alt,
+            item_list_id: id,
             promotion_name: promotion,
             items: [],
           },
@@ -157,11 +157,11 @@ function BannerItemMobile({
         event={{
           name: "view_promotion",
           params: {
-            view_promotion: "banner-carousel",
-            crative_name: "banner-carousel",
-            creative_slot: "banner-carousel",
+            view_promotion: promotion,
+            crative_name: alt,
+            creative_slot: alt,
             promotion_id: id,
-            promotion_name: "banner-carousel",
+            promotion_name: promotion,
             items: [],
           },
         }}
