@@ -89,12 +89,12 @@ export default function HeroTextWithImage({
       </div>
       <div class="w-full h-full flex-1 flex flex-col items-center justify-end lg:justify-center order-0">
         <div class="flex flex-col p-5 py-14 max-w-[380px] gap-3">
-          <h1 class="text-4xl lg:text-[3.438rem] block text-left leading-12 font-beausiteGrand">
+          <h1 class={`text-4xl lg:text-[3.438rem] block text-left leading-12 font-beausiteGrand text-${style.textAlign}`}>
             {title}
           </h1>
           {
             description &&
-            <p class="text-xl leading-9 font-poppins">{description}</p>
+            <p class={`text-xl leading-9 font-poppins text-${style.textAlign}`}>{description}</p>
           }
           <div
             class={`
