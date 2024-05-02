@@ -92,9 +92,10 @@ export default function HeroTextWithImage({
           <h1 class="text-4xl lg:text-[3.438rem] block text-left leading-12 font-beausiteGrand">
             {title}
           </h1>
-          <p class="text-xl leading-9 font-poppins">
-            {description}
-          </p>
+          {
+            description &&
+            <p class="text-xl leading-9 font-poppins">{description}</p>
+          }
           <div
             class={`
                 flex border border-white w-fit mt-5
