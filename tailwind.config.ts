@@ -25,6 +25,9 @@ export default {
         "perola-intermediario": "#F5F3E7",
         "perola+": "#9F9584",
       },
+      lineHeight: {
+        "12": "3.75rem",
+      }
     },
   },
 };
