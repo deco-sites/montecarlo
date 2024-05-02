@@ -20,7 +20,7 @@ interface CTAProps {
 
 export interface Props {
   title?: string;
-  description?: HTMLWidget;
+  description?: string;
   image?: {
     mobile?: ImageWidget;
     desktop?: ImageWidget;
