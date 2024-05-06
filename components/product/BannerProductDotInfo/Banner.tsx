@@ -2,34 +2,56 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface Props {
   preload?: boolean;
-  mobile: string;
-  desktop: string;
+  href?: string;
+  image?: string;
+  hoverImage?: string;
   alt?: string;
 }
 
-export default function Banner({ ...props }: Props) {
+export default function Banner(props: Props) {
+  const { image, hoverImage, alt, href } = props;
+
   return (
-    <Picture preload={props.preload} class="w-full h-full">
-      <Source
-        media="(max-width: 1023px)"
-        fetchPriority={props.preload ? "high" : "auto"}
-        src={props.mobile}
-        width={430}
-        height={590}
-      />
-      <Source
-        media="(min-width: 1024px)"
-        fetchPriority={props.preload ? "high" : "auto"}
-        src={props.desktop}
-        width={1440}
-        height={600}
-      />
-      <img
-        class="object-cover w-full h-full"
-        loading={props.preload ? "eager" : "lazy"}
-        src={props.desktop}
-        alt={props.alt}
-      />
-    </Picture>
+    <>
+      {href
+        ? (
+          <a href={href}>
+            <div class="group">
+              <img
+                class={`h-full w-full object-cover ${
+                  hoverImage ? "group-hover:hidden" : ""
+                }`}
+                src={image}
+                alt={alt}
+              />
+              {hoverImage && (
+                <img
+                  class="h-full w-full object-cover hidden group-hover:block"
+                  src={hoverImage}
+                  alt={alt}
+                />
+              )}
+            </div>
+          </a>
+        )
+        : (
+          <div class="group">
+            <img
+              class={`h-full w-full object-cover ${
+                hoverImage ? "group-hover:hidden" : ""
+              }`}
+              src={image}
+              alt={alt}
+            />
+            {hoverImage && (
+              <img
+                class="h-full w-full object-cover hidden group-hover:block"
+                src={hoverImage}
+                alt={alt}
+              />
+            )}
+          </div>
+        )}
+    </>
   );
 }

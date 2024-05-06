@@ -21,9 +21,9 @@ interface CTAProps {
 export interface Props {
   title?: string;
   description?: string;
-  image?: {
-    mobile?: ImageWidget;
-    desktop?: ImageWidget;
+  image: {
+    mobile: ImageWidget;
+    desktop: ImageWidget;
   };
   placement: "left" | "right";
   style: StyleProps;
@@ -38,31 +38,9 @@ const PLACEMENT = {
   right: "lg:order-0",
 };
 
-export default function HeroTextWithImage({
-  title = "Lorem ipsum",
-  description = "Lorem ipsum dolor sit amet consectetur",
-  image = {
-    mobile: "https://placehold.co/350x390",
-    desktop: "https://placehold.co/704x704",
-  },
-  placement = "left",
-  style = {
-    textAlign: "left",
-    backgroundColor: "#CAC7B6",
-    fontColor: "#000",
-  },
-  CTA = {
-    alignment: "right",
-    buttons: [
-      {
-        label: "Saiba mais",
-        href: "#saiba-mais",
-        backgroundColor: "#FFC72C",
-        fontColor: "#000",
-      },
-    ],
-  },
-}: Props) {
+export default function HeroTextWithImage(props: Props) {
+  const { title, description, image, placement, style, CTA } = props;
+
   return (
     <div
       class={`
@@ -87,17 +65,17 @@ export default function HeroTextWithImage({
           loading="eager"
         />
       </div>
-      <div class="w-full h-full flex-1 flex flex-col items-center justify-end lg:justify-center order-0">
-        <div class="flex flex-col p-5 py-14 max-w-[380px] gap-3">
+      <div class="w-full h-full flex-1 flex flex-col px-10 md:items-center justify-end lg:justify-center order-0">
+        <div class="flex flex-col p-5 py-14 gap-4">
           <h1
-            class={`text-4xl lg:text-[3.438rem] block text-left leading-12 font-beausiteGrand text-${style.textAlign}`}
+            class={`text-4xl md:text-5xl lg:text-[3.438rem] block text-left lg:leading-12 font-beausiteGrand text-${style.textAlign} max-w-[250px] md:max-w-[350px] lg:max-w-[380px]`}
           >
             {title}
           </h1>
           {description &&
             (
               <p
-                class={`text-xl leading-9 font-poppins text-${style.textAlign}`}
+                class={`text-xl leading-9 font-poppins text-${style.textAlign} max-w-xs`}
               >
                 {description}
               </p>
