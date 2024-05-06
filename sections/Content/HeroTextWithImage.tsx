@@ -21,9 +21,9 @@ interface CTAProps {
 export interface Props {
   title?: string;
   description?: string;
-  image?: {
-    mobile?: ImageWidget;
-    desktop?: ImageWidget;
+  image: {
+    mobile: ImageWidget;
+    desktop: ImageWidget;
   };
   placement: "left" | "right";
   style: StyleProps;
@@ -38,31 +38,9 @@ const PLACEMENT = {
   right: "lg:order-0",
 };
 
-export default function HeroTextWithImage({
-  title = "Lorem ipsum",
-  description = "Lorem ipsum dolor sit amet consectetur",
-  image = {
-    mobile: "https://placehold.co/350x390",
-    desktop: "https://placehold.co/704x704",
-  },
-  placement = "left",
-  style = {
-    textAlign: "left",
-    backgroundColor: "#CAC7B6",
-    fontColor: "#000",
-  },
-  CTA = {
-    alignment: "right",
-    buttons: [
-      {
-        label: "Saiba mais",
-        href: "#saiba-mais",
-        backgroundColor: "#FFC72C",
-        fontColor: "#000",
-      },
-    ],
-  },
-}: Props) {
+export default function HeroTextWithImage(props: Props) {
+  const {title, description, image, placement, style, CTA} = props;
+
   return (
     <div
       class={`
