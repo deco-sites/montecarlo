@@ -5,7 +5,9 @@ import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
   title: HTMLWidget;
-  /**@title Content */
+  /**
+   * @titleb Content
+   */
   content?: HTMLWidget;
   button: {
     label?: string;
@@ -13,10 +15,9 @@ export interface Props {
   };
   /** @format color-input */
   backgroundColor?: string;
+  /**@description Desktop: 756px x 750px, Mobile: 350px x 350px*/
   image: {
-    /**@description size image 756px x 750px */
     imgDesktop: ImageWidget;
-    /**@description size image 350px x 350px */
     imgMobile: ImageWidget;
     alt: string;
     preload?: boolean;

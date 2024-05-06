@@ -9,6 +9,7 @@ import Image from "apps/website/components/Image.tsx";
 
 /**@titleBy title */
 export interface Card {
+  /**@description Image size 246px x 246px */
   image: ImageWidget;
   altText?: string;
   title: string;
@@ -20,6 +21,7 @@ export interface Props {
   title?: string;
   /**
    * @format html
+   * @title Content
    */
   subTitle?: string;
   cards: Card[];
@@ -91,7 +93,7 @@ function VerticalCardsGrid(props: Props) {
   const { title, subTitle, cards } = { ...DEFAULTPROPS, ...props };
 
   return (
-    <div class=" lg:container xl:max-w-[1512px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9">
+    <div class=" lg:container xl:max-w-[1408px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9">
       <div class="flex flex-col w-full gap-1 items-center">
         <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>
         {subTitle && (
