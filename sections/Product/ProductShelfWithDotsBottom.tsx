@@ -1,4 +1,4 @@
-export { default } from "../../components/product/ProductShelfWithArrowBottom.tsx";
+export { default } from "../../components/product/ProductShelfWithDotsBottom.tsx";
 
 export function LoadingFallback() {
   return (

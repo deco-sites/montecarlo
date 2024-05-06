@@ -20,20 +20,20 @@ import * as $$$$$$3 from "./sections/Cards/IconCardsCarouselWithImage.tsx";
 import * as $$$$$$4 from "./sections/Cards/ImageCardsCarousel.tsx";
 import * as $$$$$$5 from "./sections/Cards/ImageCardsCarouselWithImage.tsx";
 import * as $$$$$$6 from "./sections/Cards/VerticalCardsGrid.tsx";
-import * as $$$$$$12 from "./sections/Category/btnTeste.tsx";
+import * as $$$$$$11 from "./sections/Category/btnTeste.tsx";
 import * as $$$$$$7 from "./sections/Category/CategoryBanner.tsx";
 import * as $$$$$$8 from "./sections/Category/CategoryGrid.tsx";
 import * as $$$$$$9 from "./sections/Category/CategoryList.tsx";
 import * as $$$$$$10 from "./sections/Category/CategoryListWithAnchor.tsx";
-import * as $$$$$$11 from "./sections/Category/CategoryWithPartials.tsx";
-import * as $$$$$$13 from "./sections/Content/Benefits.tsx";
-import * as $$$$$$14 from "./sections/Content/BlogPosts.tsx";
-import * as $$$$$$15 from "./sections/Content/CallOfQuiz.tsx";
-import * as $$$$$$16 from "./sections/Content/CallToAction.tsx";
-import * as $$$$$$17 from "./sections/Content/Faq.tsx";
-import * as $$$$$$18 from "./sections/Content/Features.tsx";
-import * as $$$$$$19 from "./sections/Content/Hero.tsx";
-import * as $$$$$$20 from "./sections/Content/HeroBanner.tsx";
+import * as $$$$$$12 from "./sections/Content/Benefits.tsx";
+import * as $$$$$$13 from "./sections/Content/BlogPosts.tsx";
+import * as $$$$$$14 from "./sections/Content/CallOfQuiz.tsx";
+import * as $$$$$$15 from "./sections/Content/CallToAction.tsx";
+import * as $$$$$$16 from "./sections/Content/Faq.tsx";
+import * as $$$$$$17 from "./sections/Content/Features.tsx";
+import * as $$$$$$18 from "./sections/Content/Hero.tsx";
+import * as $$$$$$19 from "./sections/Content/HeroBanner.tsx";
+import * as $$$$$$20 from "./sections/Content/HeroTextWithImage.tsx";
 import * as $$$$$$21 from "./sections/Content/ImageSection.tsx";
 import * as $$$$$$22 from "./sections/Content/Intro.tsx";
 import * as $$$$$$23 from "./sections/Content/Logos.tsx";
@@ -72,7 +72,7 @@ import * as $$$$$$55 from "./sections/Product/NotFoundChallenge.tsx";
 import * as $$$$$$56 from "./sections/Product/ProductDetails.tsx";
 import * as $$$$$$57 from "./sections/Product/ProductShelf.tsx";
 import * as $$$$$$58 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$59 from "./sections/Product/ProductShelfWithArrowBottom.tsx";
+import * as $$$$$$59 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
 import * as $$$$$$60 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$61 from "./sections/Product/ShelfCollection.tsx";
 import * as $$$$$$62 from "./sections/Product/ShelfWithImage.tsx";
@@ -105,22 +105,21 @@ const manifest = {
     "deco-sites/montecarlo/sections/Cards/ImageCardsCarouselWithImage.tsx":
       $$$$$$5,
     "deco-sites/montecarlo/sections/Cards/VerticalCardsGrid.tsx": $$$$$$6,
-    "deco-sites/montecarlo/sections/Category/btnTeste.tsx": $$$$$$12,
+    "deco-sites/montecarlo/sections/Category/btnTeste.tsx": $$$$$$11,
     "deco-sites/montecarlo/sections/Category/CategoryBanner.tsx": $$$$$$7,
     "deco-sites/montecarlo/sections/Category/CategoryGrid.tsx": $$$$$$8,
     "deco-sites/montecarlo/sections/Category/CategoryList.tsx": $$$$$$9,
     "deco-sites/montecarlo/sections/Category/CategoryListWithAnchor.tsx":
       $$$$$$10,
-    "deco-sites/montecarlo/sections/Category/CategoryWithPartials.tsx":
-      $$$$$$11,
-    "deco-sites/montecarlo/sections/Content/Benefits.tsx": $$$$$$13,
-    "deco-sites/montecarlo/sections/Content/BlogPosts.tsx": $$$$$$14,
-    "deco-sites/montecarlo/sections/Content/CallOfQuiz.tsx": $$$$$$15,
-    "deco-sites/montecarlo/sections/Content/CallToAction.tsx": $$$$$$16,
-    "deco-sites/montecarlo/sections/Content/Faq.tsx": $$$$$$17,
-    "deco-sites/montecarlo/sections/Content/Features.tsx": $$$$$$18,
-    "deco-sites/montecarlo/sections/Content/Hero.tsx": $$$$$$19,
-    "deco-sites/montecarlo/sections/Content/HeroBanner.tsx": $$$$$$20,
+    "deco-sites/montecarlo/sections/Content/Benefits.tsx": $$$$$$12,
+    "deco-sites/montecarlo/sections/Content/BlogPosts.tsx": $$$$$$13,
+    "deco-sites/montecarlo/sections/Content/CallOfQuiz.tsx": $$$$$$14,
+    "deco-sites/montecarlo/sections/Content/CallToAction.tsx": $$$$$$15,
+    "deco-sites/montecarlo/sections/Content/Faq.tsx": $$$$$$16,
+    "deco-sites/montecarlo/sections/Content/Features.tsx": $$$$$$17,
+    "deco-sites/montecarlo/sections/Content/Hero.tsx": $$$$$$18,
+    "deco-sites/montecarlo/sections/Content/HeroBanner.tsx": $$$$$$19,
+    "deco-sites/montecarlo/sections/Content/HeroTextWithImage.tsx": $$$$$$20,
     "deco-sites/montecarlo/sections/Content/ImageSection.tsx": $$$$$$21,
     "deco-sites/montecarlo/sections/Content/Intro.tsx": $$$$$$22,
     "deco-sites/montecarlo/sections/Content/Logos.tsx": $$$$$$23,
@@ -162,7 +161,7 @@ const manifest = {
     "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$56,
     "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$57,
     "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$58,
-    "deco-sites/montecarlo/sections/Product/ProductShelfWithArrowBottom.tsx":
+    "deco-sites/montecarlo/sections/Product/ProductShelfWithDotsBottom.tsx":
       $$$$$$59,
     "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$60,
     "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$61,
