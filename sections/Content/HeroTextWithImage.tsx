@@ -2,11 +2,11 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 interface StyleProps {
-    textAlign?: "left" | "center" | "right";
-    /** @format color-input */
-    backgroundColor?: string;
-    /** @format color-input */
-    fontColor?: string;    
+  textAlign?: "left" | "center" | "right";
+  /** @format color-input */
+  backgroundColor?: string;
+  /** @format color-input */
+  fontColor?: string;
 }
 
 interface CTAProps {
@@ -89,21 +89,27 @@ export default function HeroTextWithImage({
       </div>
       <div class="w-full h-full flex-1 flex flex-col items-center justify-end lg:justify-center order-0">
         <div class="flex flex-col p-5 py-14 max-w-[380px] gap-3">
-          <h1 class={`text-4xl lg:text-[3.438rem] block text-left leading-12 font-beausiteGrand text-${style.textAlign}`}>
+          <h1
+            class={`text-4xl lg:text-[3.438rem] block text-left leading-12 font-beausiteGrand text-${style.textAlign}`}
+          >
             {title}
           </h1>
-          {
-            description &&
-            <p class={`text-xl leading-9 font-poppins text-${style.textAlign}`}>{description}</p>
-          }
+          {description &&
+            (
+              <p
+                class={`text-xl leading-9 font-poppins text-${style.textAlign}`}
+              >
+                {description}
+              </p>
+            )}
           <div
             class={`
                 flex border border-white w-fit mt-5
                 ${
-                  (CTA?.alignment === "left" && "justify-start") ||
-                  (CTA?.alignment === "center" && "justify-center") ||
-                  (CTA?.alignment === "right" && "justify-end")
-                }
+              (CTA?.alignment === "left" && "justify-start") ||
+              (CTA?.alignment === "center" && "justify-center") ||
+              (CTA?.alignment === "right" && "justify-end")
+            }
             `}
           >
             {CTA?.buttons?.map((cta, index) => (
