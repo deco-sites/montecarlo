@@ -2,11 +2,11 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 interface StyleProps {
-    textAlign?: "left" | "center" | "right";
-    /** @format color-input */
-    backgroundColor?: string;
-    /** @format color-input */
-    fontColor?: string;    
+  textAlign?: "left" | "center" | "right";
+  /** @format color-input */
+  backgroundColor?: string;
+  /** @format color-input */
+  fontColor?: string;
 }
 
 interface CTAProps {
@@ -39,7 +39,7 @@ const PLACEMENT = {
 };
 
 export default function HeroTextWithImage(props: Props) {
-  const {title, description, image, placement, style, CTA} = props;
+  const { title, description, image, placement, style, CTA } = props;
 
   return (
     <div
@@ -67,21 +67,27 @@ export default function HeroTextWithImage(props: Props) {
       </div>
       <div class="w-full h-full flex-1 flex flex-col px-10 md:items-center justify-end lg:justify-center order-0">
         <div class="flex flex-col p-5 py-14 gap-4">
-          <h1 class={`text-4xl md:text-5xl lg:text-[3.438rem] block text-left lg:leading-12 font-beausiteGrand text-${style.textAlign} max-w-[250px] md:max-w-[350px] lg:max-w-[380px]`}>
+          <h1
+            class={`text-4xl md:text-5xl lg:text-[3.438rem] block text-left lg:leading-12 font-beausiteGrand text-${style.textAlign} max-w-[250px] md:max-w-[350px] lg:max-w-[380px]`}
+          >
             {title}
           </h1>
-          {
-            description &&
-            <p class={`text-xl leading-9 font-poppins text-${style.textAlign} max-w-xs`}>{description}</p>
-          }
+          {description &&
+            (
+              <p
+                class={`text-xl leading-9 font-poppins text-${style.textAlign} max-w-xs`}
+              >
+                {description}
+              </p>
+            )}
           <div
             class={`
                 flex border border-white w-fit mt-5
                 ${
-                  (CTA?.alignment === "left" && "justify-start") ||
-                  (CTA?.alignment === "center" && "justify-center") ||
-                  (CTA?.alignment === "right" && "justify-end")
-                }
+              (CTA?.alignment === "left" && "justify-start") ||
+              (CTA?.alignment === "center" && "justify-center") ||
+              (CTA?.alignment === "right" && "justify-end")
+            }
             `}
           >
             {CTA?.buttons?.map((cta, index) => (

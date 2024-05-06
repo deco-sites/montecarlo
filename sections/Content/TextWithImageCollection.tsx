@@ -41,8 +41,8 @@ export default function TextWithImageCollection({
   title = "Lorem ipsum",
   description =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ornare ultrices. Vestibulum gravida ligula nec ex scelerisque, sed tristique neque porttitor. ",
-  banner= {
-    image: {source: "https://placehold.co/704x704"}
+  banner = {
+    image: { source: "https://placehold.co/704x704" },
   },
   placement = "left",
   style = {
