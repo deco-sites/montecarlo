@@ -1,10 +1,11 @@
 interface Props {
+  hasTitle?: boolean;
   dotsActive: boolean;
   setDotsActive: (value: boolean) => void;
 }
 
 export default function ButtonDotsControl(
-  { dotsActive, setDotsActive }: Props,
+  { dotsActive, setDotsActive, hasTitle }: Props,
 ) {
   function handleDotsControl() {
     if (dotsActive) setDotsActive(false);
@@ -16,7 +17,7 @@ export default function ButtonDotsControl(
       onClick={handleDotsControl}
       class={`${
         dotsActive && "rotate-45"
-      } absolute flex justify-center items-center bottom-5 lg:bottom-8 left-5 lg:left-8 bg-[#FFC72C] p-2 w-10 h-10 transition-transform hover:opacity-80`}
+      } absolute flex justify-center items-center ${!hasTitle ? "bottom-5 lg:bottom-8 left-5 lg:left-8" : "top-5 lg:bottom-8 lg:top-[unset] right-5 lg:right-8"} bg-[#FFC72C] p-2 w-10 h-10 transition-transform hover:opacity-80`}
     >
       <svg
         class={`${dotsActive && "hidden"}`}
