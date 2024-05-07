@@ -98,7 +98,7 @@ function ShippingSimulation({ items, cepLink }: Props) {
           e.preventDefault();
           handleSimulation();
         }}
-        class=" flex flex-row w-full border border-l-neutral-400 pl-3 p-1 gap-2 h-10"
+        class=" flex flex-row w-full border pl-3 p-1 gap-2 h-10"
       >
         <input
           as="input"
