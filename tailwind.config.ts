@@ -27,7 +27,7 @@ export default {
       },
       lineHeight: {
         "12": "3.75rem",
-      }
+      },
     },
   },
 };

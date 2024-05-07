@@ -1,7 +1,9 @@
+import { SendEventOnView } from "../../components/Analytics.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 
 import { useUI } from "../../sdk/useUI.ts";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   imageMobile: ImageWidget;
@@ -44,6 +46,8 @@ function CommercialBanner(
 ) {
   const { isMobile } = useUI();
 
+  const id = useId();
+
   const isMobileDevice = isMobile.value;
 
   let heightImageDesktopController = 350;
@@ -52,7 +56,7 @@ function CommercialBanner(
   }
 
   return (
-    <div className={`flex items-center justify-between flex-wrap`}>
+    <div className={`flex items-center justify-between flex-wrap`} id={id}>
       <div
         style={backgroundColor
           ? `background: ${backgroundColor};`
@@ -60,6 +64,20 @@ function CommercialBanner(
         className={`py-10 w-full lg:w-[50%] self-stretch flex items-center px-6 md:pr-20 lg:pr-0`}
       >
         <div className="container md:max-w-[770px] lg:mr-0 opacity-100">
+          <SendEventOnView
+            id={id}
+            event={{
+              name: "view_promotion",
+              params: {
+                view_promotion: altText,
+                creative_name: altText,
+                creative_slot: altText,
+                promotion_id: id,
+                promotion_name: altText,
+                items: [],
+              },
+            }}
+          />
           <h5
             dangerouslySetInnerHTML={{ __html: title }}
             className="text-2xl font-medium mb-4 leading-8 md:leading-[60px] md:text-[40px]"
