@@ -2,13 +2,19 @@ import { AppContext } from "../../apps/site.ts";
 import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
 import Drawers from "../../islands/Header/Drawers.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import type { ImageWidget } from "apps/admin/widgets.ts";
+import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import type { SectionProps } from "deco/types.ts";
 import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 import { useUI } from "../../sdk/useUI.ts";
+
+export interface AlertMessage {
+  title?: HTMLWidget;
+  labelButton?: string;
+  cupom?: string;
+}
 
 export interface Logo {
   src: ImageWidget;
@@ -24,7 +30,10 @@ export interface Buttons {
 }
 
 export interface Props {
-  alerts?: string[];
+  alerts?: AlertMessage[];
+  /** @format color-input */
+  backgroundAlert: string;
+  interval?: number;
 
   /** @title Search Bar */
   searchbar?: Omit<SearchbarProps, "platform">;
@@ -45,6 +54,7 @@ export interface Props {
 
 function Header({
   alerts,
+  backgroundAlert,
   searchbar,
   navItems = [
     {
@@ -91,7 +101,9 @@ function Header({
           platform={platform}
         >
           <div class="bg-base-100 fixed w-full z-50">
-            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
+            {alerts && alerts.length > 0 && (
+              <Alert alerts={alerts} backgroundAlert={backgroundAlert} />
+            )}
             <Navbar
               device={device}
               items={items}
