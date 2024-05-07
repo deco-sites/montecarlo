@@ -26,7 +26,7 @@ interface CTAProps {
 export interface Props {
   title?: HTMLWidget;
   description?: HTMLWidget;
-  image?: BannerProductDotInfoProps;
+  banner?: BannerProductDotInfoProps;
   placement: "left" | "right";
   style: StyleProps;
   CTA?: CTAProps;
@@ -41,9 +41,8 @@ export default function TextWithImageCollection({
   title = "Lorem ipsum",
   description =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ornare ultrices. Vestibulum gravida ligula nec ex scelerisque, sed tristique neque porttitor. ",
-  image = {
-    mobile: "https://placehold.co/380x380",
-    desktop: "https://placehold.co/704x704",
+  banner = {
+    image: { source: "https://placehold.co/704x704" },
   },
   placement = "left",
   style = {
@@ -79,7 +78,7 @@ export default function TextWithImageCollection({
           }
         `}
         >
-          <BannerProductDotInfo {...image} />
+          <BannerProductDotInfo {...banner} />
         </div>
       </div>
       <div
