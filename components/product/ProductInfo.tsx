@@ -188,9 +188,25 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     Quero ganhar
                   </button>
                   <WishlistButtonVtex
+                    variant="full"
+                    productID={productID}
+                    productGroupID={productGroupID}
+                    productClick={product}
+                  />
+                </>
+              )}
+              {platform === "wake" && (
+                <>
+                  <AddToCartButtonWake
+                    eventParams={{ items: [eventItem] }}
+                    productID={productID}
+                  />
+                  <WishlistButtonWake
+                    variant="full"
                     customClass="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
                     productID={productID}
                     productGroupID={productGroupID}
+                    productClick={product}
                   />
                 </div>
               )

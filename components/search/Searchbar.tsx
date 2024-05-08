@@ -21,6 +21,10 @@ import { Suggestion } from "apps/commerce/types.ts";
 import { Resolved } from "deco/engine/core/resolver.ts";
 import { useEffect, useRef } from "preact/compat";
 import type { Platform } from "../../apps/site.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 
 // Editable props
 export interface Props {
@@ -66,12 +70,20 @@ function Searchbar({
   const { products = [], searches = [] } = payload.value ?? {};
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
+  let searchTerm = ""
 
   useEffect(() => {
     if (displaySearchPopup.value === true) {
       searchInputRef.current?.focus();
     }
   }, [displaySearchPopup.value]);
+
+  useEffect(() => {
+    const searchInput = document.getElementById("search-input") as HTMLInputElement
+    searchInput?.addEventListener("input", () => {
+      searchTerm = searchInput.value
+    })
+  })
 
   return (
     <div
@@ -86,6 +98,15 @@ function Searchbar({
           for={id}
           tabIndex={-1}
         >
+          <SendEventOnClick
+            id={id}
+            event={{
+              name: "search",
+              params: {
+                search_term: searchTerm,
+              },
+            }}
+          />
           {loading.value
             ? <span class="loading loading-spinner loading-xs" />
             : <Icon id="MagnifyingGlass" size={24} strokeWidth={0.01} />}

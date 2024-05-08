@@ -6,6 +6,10 @@ import Icon from "../../../components/ui/Icon.tsx";
 import QuantitySelector from "../../../components/ui/QuantitySelector.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
 import { formatPrice } from "../../../sdk/format.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../Analytics.tsx";
 
 export interface Item {
   image: {
@@ -57,6 +61,8 @@ function CartItem(
     [],
   );
 
+  const teste: AnalyticsItem = itemToAnalyticsItem(index)!
+
   return (
     <div
       class="grid grid-rows-1 gap-2"
@@ -91,6 +97,17 @@ function CartItem(
               });
             })}
           >
+            <SendEventOnClick
+              id=""
+              event={{
+                name: "remove_from_cart",
+                params: {
+                  currency: "BRL",
+                  value: list,
+                  items: [teste]
+                },
+              }}
+            />
             <Icon id="Trash" size={24} />
           </Button>
         </div>

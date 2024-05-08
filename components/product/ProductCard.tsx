@@ -1,5 +1,8 @@
 import type { Platform } from "../../apps/site.ts";
-import { SendEventOnClick } from "../../components/Analytics.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
@@ -134,12 +137,28 @@ function MiniProductCard({
     </a>
   );
 
+  const eventItem = mapProductToAnalyticsItem({
+    product,
+    price,
+    listPrice,
+  });
+
   return (
     <div
       id={id}
       class={`card card-compact group w-full px-1 gap-2 text-center h-min max-w-[260px] mx-auto md:max-w-full`}
       data-deco="view-product"
     >
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_item_list",
+          params: {
+            item_list_name: itemListName,
+            items: [eventItem],
+          },
+        }}
+      />
       <SendEventOnClick
         id={id}
         event={{
@@ -167,6 +186,17 @@ function MiniProductCard({
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
+          <SendEventOnClick
+            id={id}
+            event={{
+              name: "add_to_cart",
+              params: {
+                currency: "BRL",
+                value: price,
+                items: [eventItem]
+              },
+            }}
+          />
           <Image
             src={front.url!}
             alt={front.alternateName}
@@ -258,6 +288,17 @@ function MiniProductCard({
         </div>
         {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_item",
+          params: {
+            currency: "BRL",
+            value: price,
+            items: [eventItem],
+          },
+        }}
+      />
     </div>
   );
 }

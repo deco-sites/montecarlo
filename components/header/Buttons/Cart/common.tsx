@@ -3,6 +3,10 @@ import Button from "../../../../components/ui/Button.tsx";
 import Icon from "../../../../components/ui/Icon.tsx";
 import { sendEvent } from "../../../../sdk/analytics.tsx";
 import { useUI } from "../../../../sdk/useUI.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../../Analytics.tsx";
 
 interface Props {
   loading: boolean;
@@ -40,6 +44,17 @@ function CartButton({ loading, currency, total, items }: Props) {
         loading={loading}
         onClick={onClick}
       >
+        <SendEventOnClick
+          id=""
+          event={{
+            name: "view_cart",
+            params: {
+              currency: "BRL",
+              value: total,
+              items: items
+            },
+          }}
+        />
         <Icon id="ShoppingCart" size={24} strokeWidth={2} />
       </Button>
     </div>

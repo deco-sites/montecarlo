@@ -1,3 +1,8 @@
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import ButtonLink from "./ButtonLink.tsx";
@@ -28,12 +33,15 @@ export interface Props {
 }
 
 export function SectionImage(
-  { props, customClass, wrapperCustomClass, infoSectionCustomClass }: {
-    props: Image;
-    customClass?: string;
-    wrapperCustomClass?: string;
-    infoSectionCustomClass?: string;
-  },
+  { props, customClass, wrapperCustomClass, infoSectionCustomClass, id, index }:
+    {
+      props: Image;
+      customClass?: string;
+      wrapperCustomClass?: string;
+      infoSectionCustomClass?: string;
+      id?: string;
+      index?: string;
+    },
 ) {
   const { mobile, desktop, alt, content, contentTitle, button, title, href } =
     props;
@@ -49,6 +57,18 @@ export function SectionImage(
       class={`relative flex flex-col group w-full lg:w-2/4 ${wrapperCustomClass}`}
       id={id}
     >
+      <SendEventOnView
+        id={id ? id : ""}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+            creative_slot: index,
+            promotion_id: href,
+            promotion_name: alt,
+          },
+        }}
+      />
       <Picture class={customClass}>
         <Source
           src={mobile}
@@ -88,6 +108,11 @@ export function SectionImage(
           href={href || ""}
           classCustom={"text-black text-sm text-black group-hover:bg-[#F5F3E7] duration-300 absolute bottom-11"}
           label={button}
+          creative_name={title}
+          creative_slot={index}
+          promotion_id={href}
+          promotion_name={alt}
+          id={id}
         />
       </div>
       <SendEventOnView
@@ -109,10 +134,11 @@ export function SectionImage(
 }
 
 export default function ImageDuo({ primaryImage, secondImage }: Props) {
+  const id = useId();
   return (
     <div class="flex flex-col gap-5 py-8 lg:flex-row lg:gap-0">
-      <SectionImage props={primaryImage} />
-      <SectionImage props={secondImage} />
+      <SectionImage props={primaryImage} id={id} index={"0"} />
+      <SectionImage props={secondImage} id={id} index={"1"} />
     </div>
   );
 }
