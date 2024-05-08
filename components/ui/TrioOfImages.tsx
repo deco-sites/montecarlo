@@ -1,7 +1,3 @@
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
@@ -68,9 +64,7 @@ function Buttons() {
   );
 }
 
-function Card(
-  { image, id, index }: { image: CardImage; id: string; index: string },
-) {
+function Card({ image }: { image: CardImage }) {
   const {
     imageMobile,
     imageDesktop,
@@ -114,11 +108,6 @@ function Card(
             href={href || ""}
             classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
             label={button}
-            creative_name={title}
-            creative_slot={index}
-            promotion_id={href}
-            promotion_name={alt}
-            id={id}
           />
         )}
       </div>
@@ -134,18 +123,6 @@ function Card(
           </p>
         )}
       </div>
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_promotion",
-          params: {
-            creative_name: title,
-            creative_slot: index,
-            promotion_id: href,
-            promotion_name: alt,
-          },
-        }}
-      />
     </div>
   );
 }
@@ -176,8 +153,6 @@ export default function TrioOfImages(
               >
                 <Card
                   image={image}
-                  id={id}
-                  index={index.toString()}
                 />
               </Slider.Item>
             );

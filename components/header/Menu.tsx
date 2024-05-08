@@ -1,9 +1,5 @@
 import Icon from "../../components/ui/Icon.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
 
 export interface Props {
   items: SiteNavigationElement[];
@@ -17,18 +13,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
       <div class="collapse-content">
         <ul>
           <li>
-            <a class="underline text-sm" href={item.url}>
-              <SendEventOnClick
-                id=""
-                event={{
-                  name: "login",
-                  params: {
-                    method:  item.name,
-                  },
-                }}
-              />
-              Ver todos
-            </a>
+            <a class="underline text-sm" href={item.url}>Ver todos</a>
           </li>
           {item.children?.map((node) => (
             <li>

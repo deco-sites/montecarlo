@@ -106,7 +106,7 @@ function Action(
 }
 
 function BannerItemMobile(
-  { image, lcp, id, creative_name, creative_slot, promotion_id, promotion_name }: { image: ImageItem; lcp?: boolean; id: string; creative_name?: string; creative_slot?: string; promotion_id?: string; promotion_name?: string },
+  { image, lcp, id }: { image: ImageItem; lcp?: boolean; id: string },
 ) {
   const {
     mobile,
@@ -122,18 +122,6 @@ function BannerItemMobile(
         aria-label={action?.label}
         class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
       >
-        <SendEventOnClick
-          id={id}
-          event={{
-            name: "select_promotion",
-            params: {
-              creative_name: creative_name,
-              creative_slot: creative_slot,
-              promotion_id: promotion_id,
-              promotion_name: promotion_name,
-            },
-          }}
-        />
         {action &&
           <Action {...action} />}
       </a>
@@ -154,7 +142,7 @@ function BannerItemMobile(
 }
 
 function BannerItem(
-  { image, lcp, id, creative_name, creative_slot, promotion_id, promotion_name }: { image: Banner; lcp?: boolean; id: string; creative_name?: string; creative_slot?: string; promotion_id?: string; promotion_name?: string },
+  { image, lcp, id }: { image: Banner; lcp?: boolean; id: string },
 ) {
   return (
     <div class="flex flex-row w-full relative">
@@ -166,18 +154,6 @@ function BannerItem(
             aria-label={primaryImage.action?.label}
             class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
           >
-            <SendEventOnClick
-              id={id}
-              event={{
-                name: "select_promotion",
-                params: {
-                  creative_name: creative_name,
-                  creative_slot: creative_slot,
-                  promotion_id: promotion_id,
-                  promotion_name: promotion_name,
-                },
-              }}
-            />
             {primaryImage.action && <Action {...primaryImage.action} />}
           </a>
           <Picture preload={lcp} class="w-full h-full">
@@ -298,7 +274,6 @@ function BannerCarousel(props: Props) {
   }
 
   const arrayImage = isMobile.value && arrayImagesMobile();
-  const imageArray = arrayImagesMobile();
 
   return (
     <div
@@ -313,22 +288,6 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
-                creative_name = {imageArray[index].alt}
-                creative_slot = {index.toString()}
-                promotion_id = {imageArray[index].action?.href}
-                promotion_name = {imageArray[index].action?.label}
-              />
-              <SendEventOnView
-                id={id}
-                event={{
-                  name: "view_promotion",
-                  params: {
-                    creative_name: imageArray[index].alt,
-                    creative_slot: index.toString(),
-                    promotion_id: imageArray[index].action?.href,
-                    promotion_name: imageArray[index].action?.label,
-                  },
-                }}
               />
             </Slider.Item>
           ))
@@ -338,22 +297,6 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
-                creative_name = {imageArray[index].alt}
-                creative_slot = {index.toString()}
-                promotion_id = {imageArray[index].action?.href}
-                promotion_name = {imageArray[index].action?.label}
-              />
-              <SendEventOnView
-                id={id}
-                event={{
-                  name: "view_promotion",
-                  params: {
-                    creative_name: imageArray[index].alt,
-                    creative_slot: index.toString(),
-                    promotion_id: imageArray[index].action?.href,
-                    promotion_name: imageArray[index].action?.label,
-                  },
-                }}
               />
             </Slider.Item>
           ))}

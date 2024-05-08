@@ -1,8 +1,3 @@
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
-import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 
@@ -57,7 +52,6 @@ export default function TextWithImage({
     alignment: "center",
   },
 }: Props) {
-  const id = useId();
   return (
     <div
       class={`
@@ -80,19 +74,6 @@ export default function TextWithImage({
           alt={title}
           decoding="async"
           loading="lazy"
-        />
-        <p>pao</p>
-        <SendEventOnView
-          id={id}
-          event={{
-            name: "view_promotion",
-            params: {
-              creative_name: title,
-              creative_slot: "0",
-              promotion_id: CTA?.href,
-              promotion_name: CTA?.label,
-            },
-          }}
         />
       </div>
       <div class="absolute lg:relative w-full h-full flex-1 flex flex-col items-center justify-end lg:justify-center order-0 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)] lg:to-transparent">
@@ -123,18 +104,6 @@ export default function TextWithImage({
                 color: CTA.fontColor,
               }}
             >
-              <SendEventOnClick
-                id={id}
-                event={{
-                  name: "select_promotion",
-                  params: {
-                    creative_name: title,
-                    creative_slot: "0",
-                    promotion_id: CTA?.href,
-                    promotion_name: CTA?.label,
-                  },
-                }}
-              />
               {CTA.label}
             </a>
           )}
