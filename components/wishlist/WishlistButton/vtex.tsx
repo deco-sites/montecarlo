@@ -9,10 +9,11 @@ export interface Props {
   productGroupID?: string;
   variant?: "icon" | "full";
   productClick: Product;
+  customClass: string;
 }
 
 function WishlistButton({
-  variant = "icon",
+  customClass,
   productGroupID,
   productID,
   productClick
@@ -31,7 +32,7 @@ function WishlistButton({
       loading={loading.value}
       inWishlist={inWishlist}
       isUserLoggedIn={isUserLoggedIn}
-      variant={variant}
+      customClass={customClass}
       productGroupID={productGroupID}
       productID={productID}
       productClickValue={productClick}

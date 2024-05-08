@@ -12,7 +12,7 @@ import type { Product } from "apps/commerce/types.ts";
 export interface Props {
   productID: string;
   productGroupID?: string;
-  variant?: "icon" | "full";
+  customClass?: string;
   removeItem: () => Promise<void>;
   addItem: () => Promise<void>;
   loading: boolean;
@@ -22,7 +22,7 @@ export interface Props {
 }
 
 function ButtonCommon({
-  variant = "icon",
+  customClass = "",
   productGroupID,
   productID,
   loading,
@@ -39,9 +39,7 @@ function ButtonCommon({
   });
   return (
     <Button
-      class={variant === "icon"
-        ? "btn-circle btn-ghost gap-2"
-        : "btn-primary btn-outline gap-2"}
+      class={"text-black " + customClass}
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {
@@ -101,7 +99,7 @@ function ButtonCommon({
         strokeWidth={2}
         fill={inWishlist ? "black" : "none"}
       />
-      {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"}
+      Favoritar
     </Button>
   );
 }

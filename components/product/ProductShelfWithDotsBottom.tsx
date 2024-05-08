@@ -34,6 +34,7 @@ export interface Props {
     showCtaOnDesktop?: boolean;
     showCtaOnMobile?: boolean;
     hrefCollection?: string;
+    showDots?: boolean;
   };
   cardLayout?: cardLayout;
 }
@@ -45,17 +46,21 @@ function Dots(
 ) {
   return (
     <>
-      <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 w-full">
-        {images?.map((_, index) => (
-          <li class="carousel-item bg-#F5F3E7">
-            <Slider.Dot index={index}>
-              <div class="py-5">
-                <div class="w-10 h-2 rounded-lg lg:w-[71px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]" />
-              </div>
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
+      <div class="w-[60%] md:w-[90%] flex mx-auto">
+        <div class="mx-auto overflow-y-scroll md:overflow-auto">
+          <ul class="carousel col-span-full gap-3 lg:gap-5 z-10 row-start-4 w-full">
+            {images?.map((_, index) => (
+              <li class="carousel-item bg-#F5F3E7">
+                <Slider.Dot index={index}>
+                  <div class="py-5">
+                    <div class="w-5 h-[0.2rem] rounded-lg lg:w-[30px] group-disabled:bg-[#CAC7B6] bg-[#F5F3E7]" />
+                  </div>
+                </Slider.Dot>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }
@@ -106,7 +111,7 @@ function ShelfCollection({
   }
 
   return (
-    <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 px-5 md:px-0 lg:py-10 items-center container">
+    <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 md:px-0 lg:py-10 items-center container relative">
       <div class="flex flex-col w-full gap-2 lg:gap-4">
         <Title text={title} />
         <SubTitle text={subTitle} />
@@ -118,13 +123,13 @@ function ShelfCollection({
           "px-0",
         )}
       >
-        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start ">
+        <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start w-[80%] md:w-[90%] mx-auto">
           {groupByNumberOfSlides?.map((productGroup, indexOne) => {
             return (
               <Slider.Item
                 index={indexOne}
                 class={clx(
-                  "carousel-item ",
+                  "carousel-item justify-center",
                   slideDesktop[1],
                   slideMobile[1],
                 )}
@@ -167,22 +172,22 @@ function ShelfCollection({
             },
           }}
         />
-        <div class="relative w-full mt-10 max-w-[512px] mx-auto">
+        <div class="w-[100vw] mt-10 max-w-[512px] mx-auto">
           {layout?.showArrows && (
             <>
-              <div class="relative z-10 col-start-1 row-start-3 lg:block">
+              <div class="z-10 col-start-1 row-start-3 absolute left-0 top-[37%] lg:top-[42%] lg:block">
                 <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
                   <Icon size={40} id="arrowLeft" strokeWidth={3} />
                 </Slider.PrevButton>
               </div>
-              <div class="relative z-10 col-start-3 row-start-3 lg:block">
+              <div class="absolute right-0 top-[37%] lg:top-[42%] z-10 col-start-3 row-start-3 lg:block">
                 <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center right-0">
                   <Icon size={40} id="arrowRight" strokeWidth={3} />
                 </Slider.NextButton>
               </div>
             </>
           )}
-          <Dots images={groupByNumberOfSlides} />
+          {layout?.showDots && <Dots images={groupByNumberOfSlides} />}
         </div>
       </div>
 
