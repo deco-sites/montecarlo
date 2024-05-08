@@ -1,7 +1,3 @@
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
@@ -71,9 +67,7 @@ function Buttons() {
   );
 }
 
-function Card(
-  { image, id, index, titleSection }: { image: CardImage; id: string; index: string; titleSection: string },
-) {
+function Card({ image }: { image: CardImage }) {
   const {
     imageMobile,
     imageDesktop,
@@ -89,18 +83,6 @@ function Card(
   return (
     <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 group ">
       <div class="relative flex justify-center items-center w-full h-full">
-        <SendEventOnView
-          id={id}
-          event={{
-            name: "view_promotion",
-            params: {
-              creative_name: title,
-              creative_slot: index,
-              promotion_id: href,
-              promotion_name: button,
-            },
-          }}
-        />
         <Picture preload={preload} class="w-full h-full">
           <Source
             media="(max-width: 767px)"
@@ -129,7 +111,7 @@ function Card(
           <div class="flex flex-col px-6 xl:px-14 pt-14 pb-32 max-w-full">
             <div class="flex flex-col overflow-y-scroll gap-3 customScrollVertical">
               {products?.map((product) => (
-                <ProductCardInline product={product} itemListName={titleSection}/>
+                <ProductCardInline product={product} />
               ))}
             </div>
           </div>
@@ -139,11 +121,6 @@ function Card(
             href={href || ""}
             classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
             label={button}
-            creative_name={title}
-            creative_slot={index}
-            promotion_id={href}
-            promotion_name={alt}
-            id={id}
           />
         )}
       </div>
@@ -189,9 +166,6 @@ export default function TrioOfImagesAndProducts(
               >
                 <Card
                   image={image}
-                  index={index.toString()}
-                  id={id}
-                  titleSection={title ? title : ""}
                 />
               </Slider.Item>
             );
