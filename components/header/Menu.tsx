@@ -23,7 +23,7 @@ function MenuItem({ item }: { item: SiteNavigationElement }) {
                 event={{
                   name: "login",
                   params: {
-                    method:  item.name,
+                    method: item.name,
                   },
                 }}
               />

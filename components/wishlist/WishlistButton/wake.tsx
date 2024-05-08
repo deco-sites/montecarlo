@@ -15,7 +15,7 @@ function WishlistButton({
   variant = "icon",
   productGroupID,
   productID,
-  productClick
+  productClick,
 }: Props) {
   const { user } = useUser();
   const { loading, addItem, removeItem, getItem } = useWishlist();

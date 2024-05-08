@@ -2,10 +2,7 @@ import { useSignal } from "@preact/signals";
 import Icon from "../../../components/ui/Icon.tsx";
 import Button from "../../../components/ui/Button.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../Analytics.tsx";
+import { SendEventOnClick, SendEventOnView } from "../../Analytics.tsx";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import type { Product } from "apps/commerce/types.ts";
 
@@ -91,7 +88,7 @@ function ButtonCommon({
         event={{
           name: "add_to_wishlist",
           params: {
-            items: [eventItem]
+            items: [eventItem],
           },
         }}
       />

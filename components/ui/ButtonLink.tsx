@@ -8,7 +8,16 @@ export interface Props {
 }
 
 export default function ButtonLink(
-  { label, href, classCustom, creative_name, creative_slot, promotion_id, promotion_name, id }: {
+  {
+    label,
+    href,
+    classCustom,
+    creative_name,
+    creative_slot,
+    promotion_id,
+    promotion_name,
+    id,
+  }: {
     label: string;
     href: string;
     classCustom: string;

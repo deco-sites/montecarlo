@@ -106,7 +106,23 @@ function Action(
 }
 
 function BannerItemMobile(
-  { image, lcp, id, creative_name, creative_slot, promotion_id, promotion_name }: { image: ImageItem; lcp?: boolean; id: string; creative_name?: string; creative_slot?: string; promotion_id?: string; promotion_name?: string },
+  {
+    image,
+    lcp,
+    id,
+    creative_name,
+    creative_slot,
+    promotion_id,
+    promotion_name,
+  }: {
+    image: ImageItem;
+    lcp?: boolean;
+    id: string;
+    creative_name?: string;
+    creative_slot?: string;
+    promotion_id?: string;
+    promotion_name?: string;
+  },
 ) {
   const {
     mobile,
@@ -154,7 +170,23 @@ function BannerItemMobile(
 }
 
 function BannerItem(
-  { image, lcp, id, creative_name, creative_slot, promotion_id, promotion_name }: { image: Banner; lcp?: boolean; id: string; creative_name?: string; creative_slot?: string; promotion_id?: string; promotion_name?: string },
+  {
+    image,
+    lcp,
+    id,
+    creative_name,
+    creative_slot,
+    promotion_id,
+    promotion_name,
+  }: {
+    image: Banner;
+    lcp?: boolean;
+    id: string;
+    creative_name?: string;
+    creative_slot?: string;
+    promotion_id?: string;
+    promotion_name?: string;
+  },
 ) {
   return (
     <div class="flex flex-row w-full relative">
@@ -313,10 +345,10 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
-                creative_name = {imageArray[index].alt}
-                creative_slot = {index.toString()}
-                promotion_id = {imageArray[index].action?.href}
-                promotion_name = {imageArray[index].action?.label}
+                creative_name={imageArray[index].alt}
+                creative_slot={index.toString()}
+                promotion_id={imageArray[index].action?.href}
+                promotion_name={imageArray[index].action?.label}
               />
               <SendEventOnView
                 id={id}
@@ -338,10 +370,10 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
-                creative_name = {imageArray[index].alt}
-                creative_slot = {index.toString()}
-                promotion_id = {imageArray[index].action?.href}
-                promotion_name = {imageArray[index].action?.label}
+                creative_name={imageArray[index].alt}
+                creative_slot={index.toString()}
+                promotion_id={imageArray[index].action?.href}
+                promotion_name={imageArray[index].action?.label}
               />
               <SendEventOnView
                 id={id}

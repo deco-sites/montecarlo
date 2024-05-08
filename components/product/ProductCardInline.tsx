@@ -63,7 +63,7 @@ export default function ProductCardInline({ product, itemListName }: Props) {
           params: {
             currency: "BRL",
             value: price,
-            items: [eventItem]
+            items: [eventItem],
           },
         }}
       />

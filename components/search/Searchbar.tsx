@@ -70,7 +70,7 @@ function Searchbar({
   const { products = [], searches = [] } = payload.value ?? {};
   const hasProducts = Boolean(products.length);
   const hasTerms = Boolean(searches.length);
-  let searchTerm = ""
+  let searchTerm = "";
 
   useEffect(() => {
     if (displaySearchPopup.value === true) {
@@ -79,11 +79,13 @@ function Searchbar({
   }, [displaySearchPopup.value]);
 
   useEffect(() => {
-    const searchInput = document.getElementById("search-input") as HTMLInputElement
+    const searchInput = document.getElementById(
+      "search-input",
+    ) as HTMLInputElement;
     searchInput?.addEventListener("input", () => {
-      searchTerm = searchInput.value
-    })
-  })
+      searchTerm = searchInput.value;
+    });
+  });
 
   return (
     <div

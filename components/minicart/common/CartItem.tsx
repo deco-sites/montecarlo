@@ -6,10 +6,7 @@ import Icon from "../../../components/ui/Icon.tsx";
 import QuantitySelector from "../../../components/ui/QuantitySelector.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
 import { formatPrice } from "../../../sdk/format.ts";
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../Analytics.tsx";
+import { SendEventOnClick, SendEventOnView } from "../../Analytics.tsx";
 
 export interface Item {
   image: {
@@ -61,7 +58,7 @@ function CartItem(
     [],
   );
 
-  const teste: AnalyticsItem = itemToAnalyticsItem(index)!
+  const teste: AnalyticsItem = itemToAnalyticsItem(index)!;
 
   return (
     <div
@@ -104,7 +101,7 @@ function CartItem(
                 params: {
                   currency: "BRL",
                   value: list,
-                  items: [teste]
+                  items: [teste],
                 },
               }}
             />

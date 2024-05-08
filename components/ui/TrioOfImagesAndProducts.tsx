@@ -72,7 +72,12 @@ function Buttons() {
 }
 
 function Card(
-  { image, id, index, titleSection }: { image: CardImage; id: string; index: string; titleSection: string },
+  { image, id, index, titleSection }: {
+    image: CardImage;
+    id: string;
+    index: string;
+    titleSection: string;
+  },
 ) {
   const {
     imageMobile,
@@ -129,7 +134,10 @@ function Card(
           <div class="flex flex-col px-6 xl:px-14 pt-14 pb-32 max-w-full">
             <div class="flex flex-col overflow-y-scroll gap-3 customScrollVertical">
               {products?.map((product) => (
-                <ProductCardInline product={product} itemListName={titleSection}/>
+                <ProductCardInline
+                  product={product}
+                  itemListName={titleSection}
+                />
               ))}
             </div>
           </div>
