@@ -2,6 +2,11 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import ButtonLink from "./ButtonLink.tsx";
 import { Colors } from "deco-sites/montecarlo/constants.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 /**
  * @titleBy title
@@ -23,6 +28,8 @@ interface CardImage {
   /** @format color-input */
   backgrond?: string;
   variant?: "Variant 1" | "Variant 2";
+  id: string;
+  index: string;
 }
 
 export interface Props {
@@ -40,6 +47,8 @@ function CardImage(
     backgrond,
     preload,
     variant = "Variant 1",
+    id,
+    index,
   }: CardImage,
 ) {
   console.log("button", button);
@@ -161,14 +170,27 @@ function CardImage(
           <>
           </>
         )}
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+            creative_slot: index,
+            promotion_id: button?.href,
+            promotion_name: button?.label,
+          },
+        }}
+      />
     </div>
   );
 }
 
 export default function ImagesAndText({ cardsImage }: Props) {
+  const id = useId();
   return (
     <div class="flex flex-col lg:flex-row w-full h-full py-8 gap-2 px-1 max-w-[1408px] mx-auto">
-      {cardsImage.map((card) => (
+      {cardsImage.map((card, index) => (
         <CardImage
           imageMobile={card.imageMobile}
           imageDesktop={card.imageDesktop}
@@ -179,6 +201,8 @@ export default function ImagesAndText({ cardsImage }: Props) {
           variant={card.variant}
           backgrond={card.backgrond}
           preload={card.preload}
+          id={id}
+          index={index.toString()}
         />
       ))}
     </div>
