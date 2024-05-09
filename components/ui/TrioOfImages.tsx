@@ -45,7 +45,7 @@ function Buttons() {
   return (
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2 lg:hidden">
-        <Slider.PrevButton class="bg-transparent">
+        <Slider.PrevButton class="bg-transparent disabled:hidden">
           <Icon
             class="text-base-100"
             size={40}
@@ -55,7 +55,7 @@ function Buttons() {
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2 lg:hidden">
-        <Slider.NextButton class="bg-transparent">
+        <Slider.NextButton class="bg-transparent disabled:hidden ">
           <Icon
             class="text-base-100"
             size={40}
@@ -186,7 +186,7 @@ export default function TrioOfImages(
 
         {arrowsMobile && <Buttons />}
 
-        <SliderJS rootId={id} infinite />
+        <SliderJS rootId={id} />
       </div>
     </div>
   );
