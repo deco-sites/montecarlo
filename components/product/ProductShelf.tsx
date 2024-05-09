@@ -115,9 +115,9 @@ function ShelfCollection({
         id={id}
         class={clx(
           "grid max-w-[1504px] ",
-          layout?.showArrows &&
-            "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
-          "px-0",
+          layout?.showArrows
+            ? "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] px-0"
+            : "px-3",
         )}
       >
         <Slider
