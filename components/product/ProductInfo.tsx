@@ -34,11 +34,27 @@ import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/
 
 import ProductDescription from "./ProductDescription.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
+import { HTMLWidget } from "apps/admin/widgets.ts";
 
+interface Bonus {
+  text: string;
+  /**
+   * @description To position the discount add the "${bonus}"
+   */
+  message: HTMLWidget;
+  /**
+   * @description Value to discount in number example 15% = 15
+   */
+  discont: number;
+  /**
+   * @description Maximum value for discount
+   */
+  valueDiscontMax: number;
+}
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
   pixDiscont: number;
-  bonus: ModalBonusProps;
+  bonus: Bonus;
   nameGuia: string;
   cepLink: { label: string; url: string };
   benefit: Benefit;
@@ -148,7 +164,13 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
               {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
               <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
             </span>
-            <ModalBonus props={extraInformations.bonus} />
+            <ModalBonus
+              text={extraInformations.bonus.text}
+              message={extraInformations.bonus.message}
+              price={price}
+              discont={extraInformations.bonus.discont}
+              valueDiscontMax={extraInformations.bonus.valueDiscontMax}
+            />
           </div>
           {/* Sku Selector */}
           <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
