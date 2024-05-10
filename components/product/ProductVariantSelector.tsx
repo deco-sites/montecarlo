@@ -16,8 +16,12 @@ function VariantSelector({ product }: Props) {
     ? product.additionalProperty.find((r) => r.name === "Aro do Anel")?.value
     : null;
 
+  if (isVariantOf?.hasVariant.length === 1) {
+    return null;
+  }
+
   return (
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-4 order-5">
       {Object.keys(possibilities).map((name) => (
         name === "Aro do Anel"
           ? (

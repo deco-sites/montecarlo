@@ -175,7 +175,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           {/* Sku Selector */}
           <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
             {groups && (
-              <div class="flex gap-2 w-full flex-wrap">
+              <div class="flex gap-y-2 gap-6 w-full flex-wrap">
                 {groups.map((group) => (
                   <SelectVariants
                     variants={group.variants}
@@ -184,17 +184,17 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     losses={extraInformations.lossesImage}
                   />
                 ))}
+                <ProductSelector product={product} />
+                <span
+                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${
+                    product.isVariantOf?.hasVariant.length == 1 &&
+                    " "
+                  }`}
+                >
+                  {extraInformations.nameGuia}
+                </span>
               </div>
             )}
-            <ProductSelector product={product} />
-            <span
-              class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer ${
-                product.isVariantOf?.hasVariant.length == 1 &&
-                " w-full text-center"
-              }`}
-            >
-              {extraInformations.nameGuia}
-            </span>
           </div>
           {/* Add to Cart and Favorites button */}
           <div class="mt-7 flex flex-col gap-2 ">
