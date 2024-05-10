@@ -13,7 +13,7 @@ export default function Accordion(props: Props) {
       <summary
         class={`flex cursor-pointer items-center justify-between border-b border-${
           props.borderColor ? props.borderColor : "black"
-        } py-4 opacity-100 group-open:opacity-80 group-open:border-b-gray-400`}
+        } py-4 opacity-100  group-open:border-b-[#AAA89C] `}
       >
         <h3 class={props.titleClass}>{props.title}</h3>
         <ArrowSVG fill={props.chevronColor} />
