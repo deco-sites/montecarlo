@@ -1,6 +1,8 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import ButtonLink from "./ButtonLink.tsx";
+import { SendEventOnView } from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 /**
  * @titleBy title
@@ -36,6 +38,8 @@ export function SectionImage(
   const { mobile, desktop, alt, content, contentTitle, button, title, href } =
     props;
 
+  const id = useId();
+
   if (!customClass) customClass = "";
   if (!wrapperCustomClass) wrapperCustomClass = "";
   if (!infoSectionCustomClass) infoSectionCustomClass = "";
@@ -43,6 +47,7 @@ export function SectionImage(
   return (
     <div
       class={`relative flex flex-col group w-full lg:w-2/4 ${wrapperCustomClass}`}
+      id={id}
     >
       <Picture class={customClass}>
         <Source
@@ -85,6 +90,20 @@ export function SectionImage(
           label={button}
         />
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            view_promotion: alt,
+            creative_name: alt,
+            creative_slot: alt,
+            promotion_id: id,
+            promotion_name: alt,
+            items: [],
+          },
+        }}
+      />
     </div>
   );
 }

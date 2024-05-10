@@ -65,6 +65,7 @@ export default function HeroTextWithImage(props: Props) {
           loading="eager"
         />
       </div>
+
       <div class="w-full h-full flex-1 flex flex-col px-10 md:items-center justify-end lg:justify-center order-0">
         <div class="flex flex-col p-5 py-14 gap-4">
           <h1

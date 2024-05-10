@@ -25,7 +25,7 @@ export function SelectVariants(
     return (
       <div class="flex flex-col gap-1 min-w-32 order-1">
         <span class="text-xs uppercase">{type}</span>
-        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1 items-center">
+        <div class="flex w-full h-auto flex-1 min-h-4 gap-1 items-center">
           {variants?.map((item) => {
             if (
               !materialImages || materialImages === undefined
@@ -48,8 +48,8 @@ export function SelectVariants(
                 <Image
                   class="rounded-full h-min"
                   src={img.image}
-                  width={30}
-                  height={30}
+                  width={28}
+                  height={28}
                   alt={img.name}
                 />
               </a>
@@ -62,7 +62,7 @@ export function SelectVariants(
     return (
       <div class="flex flex-col gap-1 min-w-32 order-2">
         <span class="text-xs uppercase">{type}</span>
-        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1 items-center">
+        <div class="flex w-full h-auto flex-1 min-h-4 gap-1 items-center">
           {variants?.map((item) => {
             if (
               !losses || losses === undefined
@@ -85,8 +85,8 @@ export function SelectVariants(
                 <Image
                   class="rounded-full h-min"
                   src={img.image}
-                  width={30}
-                  height={30}
+                  width={28}
+                  height={28}
                   alt={img.name}
                 />
               </a>
@@ -163,7 +163,7 @@ export function SelectVariants(
     return (
       <div class="flex flex-col gap-1 w-full order-5">
         <span class="text-xs uppercase">{type}</span>
-        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1 items-center flex-wrap">
+        <div class="flex w-full h-auto flex-1 min-h-4 gap-1 items-center flex-wrap">
           {variants?.map((item) => {
             return (
               <a
@@ -183,7 +183,7 @@ export function SelectVariants(
     return (
       <div class="flex flex-col gap-1 w-full order-5">
         <span class="text-xs uppercase">Disponível em:</span>
-        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1 items-center flex-wrap">
+        <div class="flex w-full h-auto flex-1 min-h-4 gap-1 items-center flex-wrap">
           {variants?.map((item) => {
             return (
               <a
