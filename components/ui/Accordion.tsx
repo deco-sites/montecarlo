@@ -1,3 +1,5 @@
+import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
+
 interface Props {
   title: string;
   titleClass?: string;
@@ -16,7 +18,12 @@ export default function Accordion(props: Props) {
         } py-4 opacity-100  group-open:border-b-[#AAA89C] `}
       >
         <h3 class={props.titleClass}>{props.title}</h3>
-        <ArrowSVG fill={props.chevronColor} />
+        <Icon
+          class=" transform transition-transform -rotate-90 group-open:rotate-90 group-open:text-[#AAA89C]"
+          size={24}
+          id="arrowTop"
+        >
+        </Icon>
       </summary>
       <div class="py-4 lg:py-6">
         {props.children}
@@ -28,7 +35,7 @@ export default function Accordion(props: Props) {
 function ArrowSVG({ fill }: { fill?: string }) {
   return (
     <svg
-      class="w-4 h-auto transform transition-transform -rotate-180 group-open:rotate-0"
+      class="w-4 h-auto transform transition-transform -rotate-90 group-open:rotate-45 group-open:text-[#AAA89C]"
       width="17"
       height="9"
       viewBox="0 0 17 9"
