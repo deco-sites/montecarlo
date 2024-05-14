@@ -54,7 +54,6 @@ export interface Props {
 
 function Header({
   alerts,
-  backgroundAlert,
   searchbar,
   navItems = [
     {
@@ -92,6 +91,25 @@ function Header({
   const platform = usePlatform();
   const items = navItems ?? [];
 
+  const style = {
+    "show-alert-header": `@keyframes show-alert-header{
+          from{
+            transform: translateY(0px);
+          }
+          to{
+            transform: translateY(-32px);
+          }
+    }
+    
+    .show-alert-header{
+      animation: show-alert-header linear;
+      animation-timeline: scroll();
+      animation-range: 0% 1%;
+      animation-fill-mode: both;
+    }
+    `,
+  };
+
   return (
     <>
       <header style={{ height: headerHeight }}>
@@ -100,10 +118,12 @@ function Header({
           searchbar={searchbar}
           platform={platform}
         >
-          <div class="bg-base-100 fixed w-full z-50">
-            {alerts && alerts.length > 0 && (
-              <Alert alerts={alerts} backgroundAlert={backgroundAlert} />
-            )}
+          <style
+            dangerouslySetInnerHTML={{ __html: style["show-alert-header"] }}
+          >
+          </style>
+          <div class="bg-base-100 fixed w-full z-50 show-alert-header">
+            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
             <Navbar
               device={device}
               items={items}

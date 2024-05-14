@@ -4,6 +4,7 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import ButtonCopy from "deco-sites/montecarlo/islands/Header/ButtonCopy.tsx";
+import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 
 export interface Alert {
   title?: HTMLWidget;
@@ -13,8 +14,6 @@ export interface Alert {
 
 export interface Props {
   alerts?: Alert[];
-  /** @format color-input */
-  backgroundAlert: string;
   /**
    * @title Autoplay interval
    * @description time (in seconds) to start the carousel autoplay
@@ -49,15 +48,59 @@ function Buttons() {
   );
 }
 
-function Alert({ alerts = [], interval = 5, backgroundAlert }: Props) {
+const style = {
+  "show-alert": `@keyframes show-alert{
+        from{
+          transform: translateY(0px);
+        }
+        to{
+          transform: translateY(-32px);
+        }
+  }
+  
+  .show-alert{
+    animation: show-alert linear;
+    animation-timeline: scroll();
+    animation-range: 0% 1%;
+    animation-fill-mode: both;
+  }
+  `,
+
+  "show-alert-mobile": `@keyframes show-alert-mobile{
+      from{
+        transform: translateY(0px);
+      }
+      to{
+        transform: translateY(107px);
+        background: #ffffff40;
+        }
+    }
+
+  .show-alert{
+    animation: show-alert-mobile linear;
+    animation-timeline: scroll();
+    animation-range: 0% 1%;
+    animation-fill-mode: both;
+    }
+  `,
+};
+
+function Alert({ alerts = [], interval = 5 }: Props) {
   const id = useId();
+
+  const { isMobile } = useUI();
 
   return (
     <div
       id={id}
-      style={{ background: backgroundAlert }}
-      class="w-full justify-center items-center py-1 grid grid-cols-[24px_auto_24px]"
+      class="w-full justify-center items-center py-1 grid grid-cols-[24px_auto_24px] show-alert bg-primary"
     >
+      <style
+        dangerouslySetInnerHTML={{
+          __html: style[isMobile.value ? "show-alert-mobile" : "show-alert"],
+        }}
+      >
+      </style>
       <Slider class="carousel carousel-center  gap-6 col-start-2">
         {alerts.map((alert, index) => (
           <Slider.Item index={index} class="carousel-item">
