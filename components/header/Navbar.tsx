@@ -16,6 +16,23 @@ import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
 import ScrollableContainer from "deco-sites/montecarlo/islands/Header/ScrollableContainer.tsx";
 
+export interface lastChild {
+  type: "navItem" | "sizeItem";
+  label: string;
+  href?: string;
+}
+interface INavItem {
+  label: string;
+  href?: string;
+  children?: lastChild[];
+}
+export interface MenuNavItem {
+  label: string;
+  href?: string;
+  children?: INavItem[];
+  destaque?: boolean;
+}
+
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
   {
@@ -28,7 +45,7 @@ function Navbar(
     help,
     ourStores,
   }: {
-    items: SiteNavigationElement[];
+    items: MenuNavItem[];
     searchbar?: SearchbarProps;
     logo?: Logo;
     buttons?: Buttons;

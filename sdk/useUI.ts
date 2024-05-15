@@ -10,6 +10,14 @@ const displayMenu = signal(false);
 const displaySearchPopup = signal(false);
 const displaySearchDrawer = signal(false);
 const isMobile = signal(false);
+const displayMenuProducts = signal(false);
+const displayMenuProductsChild = signal(false);
+const productsChild = signal({ label: "", children: [], href: "" });
+const productsChild2 = signal({
+  label: "",
+  children: [{ type: "", label: "", href: "" }],
+  href: "",
+});
 
 const state = {
   displayCart,
@@ -17,6 +25,10 @@ const state = {
   displaySearchPopup,
   displaySearchDrawer,
   isMobile,
+  displayMenuProducts,
+  displayMenuProductsChild,
+  productsChild,
+  productsChild2,
 };
 
 // Keyboard event listeners

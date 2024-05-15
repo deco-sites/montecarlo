@@ -29,6 +29,23 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
+export interface lastChild {
+  type: "navItem" | "sizeItem";
+  label: string;
+  href?: string;
+}
+interface INavItem {
+  label: string;
+  href?: string;
+  children?: lastChild[];
+}
+export interface MenuNavItem {
+  label: string;
+  href?: string;
+  children?: INavItem[];
+  destaque?: boolean;
+}
+
 export interface Props {
   alerts?: AlertMessage[];
   interval?: number;
@@ -50,7 +67,7 @@ export interface Props {
    * @title Navigation items
    * @description Navigation items used both on mobile and desktop menus
    */
-  navItems?: SiteNavigationElement[] | null;
+  navItems?: MenuNavItem[];
 
   /** @title Logo */
   logo?: Logo;
@@ -63,28 +80,7 @@ export interface Props {
 function Header({
   alerts,
   searchbar,
-  navItems = [
-    {
-      "@type": "SiteNavigationElement",
-      name: "Feminino",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Masculino",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Sale",
-      url: "/",
-    },
-    {
-      "@type": "SiteNavigationElement",
-      name: "Linktree",
-      url: "/",
-    },
-  ],
+  navItems,
   logo = {
     src:
       "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/986b61d4-3847-4867-93c8-b550cb459cc7",
@@ -99,7 +95,7 @@ function Header({
   help,
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
-  const items = navItems ?? [];
+  const items = navItems = [];
 
   const style = {
     "show-alert-header": `@keyframes show-alert-header{
@@ -124,7 +120,7 @@ function Header({
     <>
       <header style={{ height: headerHeight }}>
         <Drawers
-          menu={{ items }}
+          menu={{ items: navItems }}
           searchbar={searchbar}
           platform={platform}
         >
