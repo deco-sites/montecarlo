@@ -33,6 +33,16 @@ export interface Props {
   alerts?: AlertMessage[];
   interval?: number;
 
+  ourStores?: {
+    label?: string;
+    href?: string;
+  };
+
+  help?: {
+    label?: string;
+    href?: string;
+  };
+
   /** @title Search Bar */
   searchbar?: Omit<SearchbarProps, "platform">;
 
@@ -85,6 +95,8 @@ function Header({
   logoPosition = "center",
   buttons,
   device,
+  ourStores,
+  help,
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const items = navItems ?? [];
@@ -126,6 +138,8 @@ function Header({
               device={device}
               items={items}
               searchbar={searchbar && { ...searchbar, platform }}
+              ourStores={ourStores}
+              help={help}
               logo={logo}
               logoPosition={logoPosition}
               buttons={buttons}

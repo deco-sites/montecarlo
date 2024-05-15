@@ -18,13 +18,30 @@ import ScrollableContainer from "deco-sites/montecarlo/islands/Header/Scrollable
 
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
-  { items, searchbar, logo, buttons, logoPosition = "left", device }: {
+  {
+    items,
+    searchbar,
+    logo,
+    buttons,
+    logoPosition = "left",
+    device,
+    help,
+    ourStores,
+  }: {
     items: SiteNavigationElement[];
     searchbar?: SearchbarProps;
     logo?: Logo;
     buttons?: Buttons;
     logoPosition?: "left" | "center";
     device: "mobile" | "desktop" | "tablet";
+    help?: {
+      label?: string;
+      href?: string;
+    };
+    ourStores?: {
+      label?: string;
+      href?: string;
+    };
   },
 ) {
   const platform = usePlatform();
@@ -73,7 +90,24 @@ function Navbar(
             logoPosition === "left" ? "justify-center" : "justify-start"
           }`}
         >
-          {items.map((item) => <NavItem item={item} />)}
+          <div class="flex flex-row gap-5 text-xs text-black">
+            {ourStores && (
+              <a
+                href={ourStores.href}
+                class="hover:font-semibold cursor-pointer"
+              >
+                <div class="flex flex-row gap-1">
+                  <Icon id="Location" width={18} height={22} />
+                  {ourStores.label}
+                </div>
+              </a>
+            )}
+            {help && (
+              <a href={help.href} class="hover:font-semibold cursor-pointer">
+                {help.label}
+              </a>
+            )}
+          </div>
         </ul>
         <div
           class={`flex ${
