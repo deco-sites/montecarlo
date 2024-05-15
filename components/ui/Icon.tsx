@@ -52,7 +52,10 @@ export type AvailableIcons =
   | "arrowLeftMin"
   | "arrowRightMin"
   | "alertBonus"
-  | "FileCopy";
+  | "FileCopy"
+  | "userAccont"
+  | "heartCustom"
+  | "ShippingCustom";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

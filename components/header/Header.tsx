@@ -31,8 +31,6 @@ export interface Buttons {
 
 export interface Props {
   alerts?: AlertMessage[];
-  /** @format color-input */
-  backgroundAlert: string;
   interval?: number;
 
   /** @title Search Bar */

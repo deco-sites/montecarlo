@@ -7,13 +7,14 @@ import CartButtonVDNA from "../../islands/Header/Cart/vnda.tsx";
 import CartButtonVTEX from "../../islands/Header/Cart/vtex.tsx";
 import CartButtonWake from "../../islands/Header/Cart/wake.tsx";
 import CartButtonNuvemshop from "../../islands/Header/Cart/nuvemshop.tsx";
-import Searchbar from "../../islands/Header/Searchbar.tsx";
+import Searchbar from "../search/Searchbar.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
+import ScrollableContainer from "deco-sites/montecarlo/islands/Header/ScrollableContainer.tsx";
 
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
@@ -33,7 +34,7 @@ function Navbar(
     return (
       <div
         style={{ height: navbarHeight }}
-        class="lg:hidden grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2"
+        class="lg:hidden grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2 "
       >
         <MenuButton />
         {logo && (
@@ -66,7 +67,7 @@ function Navbar(
   } else {
     // Desktop header
     return (
-      <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6">
+      <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6 pt-4 pb-3">
         <ul
           class={`flex gap-6 col-span-1 ${
             logoPosition === "left" ? "justify-center" : "justify-start"
@@ -92,28 +93,31 @@ function Navbar(
                 alt={logo.alt}
                 width={logo.width || 100}
                 height={logo.height || 13}
+                class="w-full h-auto max-w-64"
               />
             </a>
           )}
         </div>
-        <div class="flex-none flex items-center justify-end gap-6 col-span-1">
-          {!buttons?.hideSearchButton && (
-            <div class="flex items-center text-xs font-thin gap-1">
-              <SearchButton />SEARCH
-            </div>
-          )}
-
-          <Searchbar searchbar={searchbar} />
+        <div class="flex-none flex items-center justify-end gap-5 col-span-1">
+          {searchbar &&
+            (
+              <Searchbar
+                placeholder={searchbar.placeholder}
+                action={searchbar.action}
+                name={searchbar.name}
+                loader={searchbar.loader}
+                platform={searchbar.platform}
+              />
+            )}
           {!buttons?.hideAccountButton && (
             <a
               class="flex items-center text-xs font-thin"
               href="/account"
               aria-label="Account"
             >
-              <div class="flex btn btn-circle btn-sm btn-ghost gap-1">
-                <Icon id="User" size={20} strokeWidth={0.4} />
+              <div class="flex btn btn-circle btn-sm btn-ghost gap-1 justify-center items-center">
+                <Icon id="userAccont" size={21} strokeWidth={0.4} />
               </div>
-              ACCOUNT
             </a>
           )}
           {!buttons?.hideWishlistButton && (
@@ -126,9 +130,8 @@ function Navbar(
                 class="flex btn btn-circle btn-sm btn-ghost gap-1"
                 aria-label="Wishlist"
               >
-                <Icon id="Heart" size={24} strokeWidth={0.4} />
+                <Icon id="heartCustom" size={23} strokeWidth={1} />
               </button>
-              WISHLIST
             </a>
           )}
           {!buttons?.hideCartButton && (
@@ -142,6 +145,18 @@ function Navbar(
             </div>
           )}
         </div>
+        {items.length > 0 && device == "desktop" &&
+          (
+            <ScrollableContainer type="Menu">
+              <ul class="hidden lg:flex justify-center w-full items-center text-sm text-black min-h-[40px] bg-base-100 gap-5">
+                {items.map((item, index) => (
+                  <NavItem
+                    item={item}
+                  />
+                ))}
+              </ul>
+            </ScrollableContainer>
+          )}
       </div>
     );
   }
