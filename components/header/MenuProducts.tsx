@@ -11,6 +11,8 @@ function MenuProducts() {
     productsChild2,
   } = useUI();
 
+  console.log("click", displayMenuProducts.value, productsChild.value);
+
   return (
     <div>
       <ul class="w-full h-full flex flex-col bg-white">

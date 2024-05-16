@@ -11,6 +11,8 @@ export default function MenuButton() {
       aria-label="open menu"
       onClick={() => {
         displayMenu.value = !displayMenu.value;
+
+        console.log("open", displayMenu.value);
       }}
     >
       <Icon id="Bars3" size={20} strokeWidth={0.01} />

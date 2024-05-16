@@ -4,25 +4,41 @@ import IconUser from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/user.tsx";
 import IconChevronRight from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/chevron-right.tsx";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
+import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 
-export interface lastChild {
-  type: "navItem" | "sizeItem";
+export interface Link {
   label: string;
-  href?: string;
+  href: string;
 }
-interface INavItem {
-  label: string;
-  href?: string;
-  children?: lastChild[];
+
+export interface ListLinks {
+  title: string;
+  listLinks: Link[];
+  linkShowMore: {
+    label: string;
+    href: string;
+  };
 }
+
+export interface Image {
+  img: {
+    src: ImageWidget;
+    alt: string;
+    aspectRatio: "2/1" | "1/1";
+  };
+  href: string;
+  title: string;
+  conter: HTMLWidget;
+}
+
 export interface MenuNavItem {
   label: string;
   href?: string;
-  children?: INavItem[];
-  destaque?: boolean;
+  listlinks?: ListLinks[];
+  image?: Image[];
 }
 export interface Props {
-  items: MenuNavItem[];
+  items?: MenuNavItem[];
 }
 
 function Menu({ items }: Props) {
@@ -35,9 +51,9 @@ function Menu({ items }: Props) {
   return (
     <div class="flex flex-col h-auto w-full bg-white">
       <ul class="flex flex-col text-xs">
-        {items.map((item, index) => (
+        {items?.map((item, index) => (
           <li class="font-medium">
-            {item.children !== undefined && item.children?.length > 0
+            {item.listlinks !== undefined && item.listlinks?.length > 0
               ? (
                 <Button
                   class={`flex border-b-[1px] items-center justify-between py-3 m-auto w-full bg-white font-normal text-[14px] leading-[17.5px] ${
@@ -46,11 +62,12 @@ function Menu({ items }: Props) {
                       : "text-primary-content"
                   } hover:bg-inherit border-black border-opacity-10 border-t-0`}
                   onClick={() => {
+                    console.log("clicks");
                     displayMenuProducts.value = true;
                     displayMenu.value = false;
                     productsChild.value = {
                       label: item.label,
-                      children: item.children,
+                      children: item.listlinks,
                       href: item.href,
                       // deno-lint-ignore no-explicit-any
                     } as any;

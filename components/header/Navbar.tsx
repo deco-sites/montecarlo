@@ -15,22 +15,38 @@ import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
 import ScrollableContainer from "deco-sites/montecarlo/islands/Header/ScrollableContainer.tsx";
+import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 
-export interface lastChild {
-  type: "navItem" | "sizeItem";
+export interface Link {
   label: string;
-  href?: string;
+  href: string;
 }
-interface INavItem {
-  label: string;
-  href?: string;
-  children?: lastChild[];
+
+export interface ListLinks {
+  title: string;
+  listLinks: Link[];
+  linkShowMore: {
+    label: string;
+    href: string;
+  };
 }
+
+export interface Image {
+  img: {
+    src: ImageWidget;
+    alt: string;
+    aspectRatio: "2/1" | "1/1";
+  };
+  href: string;
+  title: string;
+  conter: HTMLWidget;
+}
+
 export interface MenuNavItem {
   label: string;
   href?: string;
-  children?: INavItem[];
-  destaque?: boolean;
+  listlinks?: ListLinks[];
+  image?: Image[];
 }
 
 // Make it sure to render it on the server only. DO NOT render it on an island
@@ -62,6 +78,8 @@ function Navbar(
   },
 ) {
   const platform = usePlatform();
+
+  console.log("header", device, items);
 
   // Mobile header
   if (device === "mobile") {

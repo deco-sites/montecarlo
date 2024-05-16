@@ -9,6 +9,7 @@ import Alert from "./Alert.tsx";
 import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 import { useUI } from "../../sdk/useUI.ts";
+import { Section } from "deco/blocks/section.ts";
 
 export interface AlertMessage {
   title?: HTMLWidget;
@@ -29,21 +30,36 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
-export interface lastChild {
-  type: "navItem" | "sizeItem";
+export interface Link {
   label: string;
-  href?: string;
+  href: string;
 }
-interface INavItem {
-  label: string;
-  href?: string;
-  children?: lastChild[];
+
+export interface ListLinks {
+  title: string;
+  listLinks: Link[];
+  linkShowMore: {
+    label: string;
+    href: string;
+  };
 }
+
+export interface Image {
+  img: {
+    src: ImageWidget;
+    alt: string;
+    aspectRatio: "2/1" | "1/1";
+  };
+  href: string;
+  title: string;
+  conter: HTMLWidget;
+}
+
 export interface MenuNavItem {
   label: string;
   href?: string;
-  children?: INavItem[];
-  destaque?: boolean;
+  listlinks?: ListLinks[];
+  image?: Image[];
 }
 
 export interface Props {
@@ -77,6 +93,10 @@ export interface Props {
   buttons?: Buttons;
 }
 
+export function Teste() {
+  return <div>teste</div>;
+}
+
 function Header({
   alerts,
   searchbar,
@@ -95,7 +115,7 @@ function Header({
   help,
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
-  const items = navItems = [];
+  const items = navItems ?? [];
 
   const style = {
     "show-alert-header": `@keyframes show-alert-header{
@@ -115,6 +135,8 @@ function Header({
     }
     `,
   };
+
+  console.log("items", items, navItems);
 
   return (
     <>
