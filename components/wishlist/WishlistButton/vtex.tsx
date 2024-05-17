@@ -2,17 +2,20 @@ import { useComputed } from "@preact/signals";
 import Button from "./common.tsx";
 import { useWishlist } from "apps/vtex/hooks/useWishlist.ts";
 import { useUser } from "apps/vtex/hooks/useUser.ts";
+import type { Product } from "apps/commerce/types.ts";
 
 export interface Props {
   productID: string;
   productGroupID?: string;
   customClass: string;
+  productClick: Product;
 }
 
 function WishlistButton({
   customClass,
   productGroupID,
   productID,
+  productClick,
 }: Props) {
   const { user } = useUser();
   const { loading, addItem, removeItem, getItem } = useWishlist();
@@ -30,6 +33,7 @@ function WishlistButton({
       isUserLoggedIn={isUserLoggedIn}
       customClass={customClass}
       productGroupID={productGroupID}
+      productClickValue={productClick}
       productID={productID}
       removeItem={() => removeItem({ id: listItem.value!.id }!)}
       addItem={() =>

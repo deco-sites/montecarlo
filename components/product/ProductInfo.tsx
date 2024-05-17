@@ -1,4 +1,3 @@
-import { SendEventOnView } from "../../components/Analytics.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import AddToCartButtonLinx from "../../islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "../../islands/AddToCartButton/shopify.tsx";
@@ -34,6 +33,11 @@ import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/
 
 import ProductDescription from "./ProductDescription.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
+
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
@@ -183,6 +187,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     eventParams={{ items: [eventItem] }}
                     productID={productID}
                     seller={seller}
+                    price={price}
                   />
                   <button class="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300">
                     Quero ganhar
@@ -191,6 +196,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     customClass="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
                     productID={productID}
                     productGroupID={productGroupID}
+                    productClick={product}
                   />
                 </div>
               )

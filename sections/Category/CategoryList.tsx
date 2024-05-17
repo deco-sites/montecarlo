@@ -4,6 +4,10 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 
 export interface Category {
   label: string;
@@ -93,10 +97,11 @@ function CategoryList(props: Props) {
       </div>
 
       <div class="flex flex-row flex-wrap gap-2 justify-center items-center w-full">
-        {list.map((category) => (
+        {list.map((category, index) => (
           <a
             href={category.href}
             class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
+            id={id + index}
           >
             <Image
               loading={"lazy"}
@@ -111,6 +116,32 @@ function CategoryList(props: Props) {
             >
             </Image>
             <h3 class="text-sm font-medium">{category.label}</h3>
+            <SendEventOnView
+              id={id + index}
+              event={{
+                name: "view_promotion",
+                params: {
+                  view_promotion: category.alt,
+                  creative_name: category.alt,
+                  creative_slot: category.alt,
+                  promotion_id: id + index,
+                  promotion_name: category.alt,
+                  items: [],
+                },
+              }}
+            />
+            <SendEventOnClick
+              id={id + index}
+              event={{
+                name: "select_promotion",
+                params: {
+                  item_list_name: category.alt,
+                  item_list_id: id + index,
+                  promotion_name: category.alt,
+                  items: [],
+                },
+              }}
+            />
           </a>
         ))}
       </div>
