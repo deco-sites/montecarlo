@@ -11,11 +11,14 @@ function MenuProducts() {
       <ul
         class={"flex flex-wrap mt-4 m-auto pl-10 pr-2 gap-10 w-full h-full"}
       >
-        {productsChild.value?.map((node) => (
+        <span class="text-base font-semibold text-black">
+          {productsChild.value?.title}
+        </span>
+        {productsChild.value?.list?.map((node) => (
           <div
-            class={"w-full rounded-full sflex items-center justify-center flex flex-col gap-3"}
+            class={"w-full rounded-full items-center justify-center flex flex-col gap-3 text-sm"}
           >
-            <a class="flex w-full font-medium text-black text-base">
+            <a class="flex w-full font-medium text-black ">
               {node.title}
             </a>
             <ul class="w-full flex flex-col gap-3">
@@ -25,6 +28,12 @@ function MenuProducts() {
                 </li>
               ))}
             </ul>
+            <a
+              class="font-semibold text-[#CAC7B6] text-start w-full"
+              href={node.linkShowMore.href}
+            >
+              {node.linkShowMore.label}
+            </a>
           </div>
         ))}
       </ul>

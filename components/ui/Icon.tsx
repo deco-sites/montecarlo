@@ -56,6 +56,7 @@ export type AvailableIcons =
   | "userAccont"
   | "heartCustom"
   | "ShippingCustom"
+  | "menu"
   | "Location";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

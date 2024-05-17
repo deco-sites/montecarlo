@@ -157,4 +157,11 @@
 		<path d="M6 3C4.34578 3 3 4.34578 3 6C3 7.65422 4.34578 9 6 9C7.65422 9 9 7.65422 9 6C9 4.34578 7.65422 3 6 3ZM6 8C4.89719 8 4 7.10282 4 6C4 4.89719 4.89719 4 6 4C7.10281 4 8 4.89719 8 6C8 7.10282 7.10281 8 6 8ZM6 0C2.68628 0 0 2.68628 0 6C0 8.41916 0.842813 9.09472 5.38338 15.6772C5.68131 16.1076 6.31866 16.1076 6.61666 15.6772C11.1572 9.09472 12 8.41916 12 6C12 2.68628 9.31372 0 6 0ZM6 14.8104C1.64703 8.51525 1 8.01544 1 6C1 4.66444 1.52009 3.40885 2.46447 2.46447C3.40884 1.52009 4.66444 1 6 1C7.33556 1 8.59116 1.52009 9.53553 2.46447C10.4799 3.40885 11 4.66444 11 6C11 8.01532 10.3534 8.51469 6 14.8104Z" fill="black"/>
 	</symbol>
 
+	<symbol id="menu" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-menu-2">
+		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+		<path d="M4 6l16 0" />
+		<path d="M4 12l16 0" />
+		<path d="M4 18l16 0" />
+	</symbol>
+
 </svg>

@@ -56,20 +56,14 @@ function Menu({ items }: Props) {
             {item.listlinks !== undefined && item.listlinks?.length > 0
               ? (
                 <Button
-                  class={`flex items-center justify-between py-3 m-auto w-full bg-white font-normal text-base ${
-                    items.length - 1 === index
-                      ? "text-primary bg-secondary"
-                      : "text-primary-content"
-                  } hover:bg-inherit `}
+                  class={`flex items-center justify-between py-3 m-auto w-full bg-white font-normal text-base text-black`}
                   onClick={() => {
                     displayMenuProducts.value = true;
                     displayMenu.value = false;
-                    productsChild.value = item.listlinks;
-                    console.log(
-                      "clicks",
-                      displayMenuProducts.value,
-                      productsChild.value,
-                    );
+                    productsChild.value = {
+                      title: item.label,
+                      list: item.listlinks,
+                    };
                   }}
                 >
                   {item.label}
