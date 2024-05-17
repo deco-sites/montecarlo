@@ -5,6 +5,20 @@
 
 import { signal } from "@preact/signals";
 
+export interface Link {
+  label: string;
+  href: string;
+}
+
+export interface ListLinks {
+  title: string;
+  listLinks: Link[];
+  linkShowMore: {
+    label: string;
+    href: string;
+  };
+}
+
 const displayCart = signal(false);
 const displayMenu = signal(false);
 const displaySearchPopup = signal(false);
@@ -12,12 +26,8 @@ const displaySearchDrawer = signal(false);
 const isMobile = signal(false);
 const displayMenuProducts = signal(false);
 const displayMenuProductsChild = signal(false);
-const productsChild = signal({ label: "", children: [], href: "" });
-const productsChild2 = signal({
-  label: "",
-  children: [{ type: "", label: "", href: "" }],
-  href: "",
-});
+const productsChild = signal<ListLinks[] | undefined>(undefined);
+const productsChild2 = signal<ListLinks | null>(null);
 
 const state = {
   displayCart,

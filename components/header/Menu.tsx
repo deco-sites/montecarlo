@@ -49,32 +49,31 @@ function Menu({ items }: Props) {
   } = useUI();
 
   return (
-    <div class="flex flex-col h-auto w-full bg-white">
-      <ul class="flex flex-col text-xs">
+    <div class="flex flex-col h-auto w-full bg-white pl-10 pr-2">
+      <ul class="flex flex-col text-xs gap-4">
         {items?.map((item, index) => (
           <li class="font-medium">
             {item.listlinks !== undefined && item.listlinks?.length > 0
               ? (
                 <Button
-                  class={`flex border-b-[1px] items-center justify-between py-3 m-auto w-full bg-white font-normal text-[14px] leading-[17.5px] ${
+                  class={`flex items-center justify-between py-3 m-auto w-full bg-white font-normal text-base ${
                     items.length - 1 === index
                       ? "text-primary bg-secondary"
                       : "text-primary-content"
-                  } hover:bg-inherit border-black border-opacity-10 border-t-0`}
+                  } hover:bg-inherit `}
                   onClick={() => {
-                    console.log("clicks");
                     displayMenuProducts.value = true;
                     displayMenu.value = false;
-                    productsChild.value = {
-                      label: item.label,
-                      children: item.listlinks,
-                      href: item.href,
-                      // deno-lint-ignore no-explicit-any
-                    } as any;
+                    productsChild.value = item.listlinks;
+                    console.log(
+                      "clicks",
+                      displayMenuProducts.value,
+                      productsChild.value,
+                    );
                   }}
                 >
                   {item.label}
-                  <IconChevronRight class="w-5 h-5" />
+                  <IconChevronRight class="w-8 h-8" stroke={1} size={30} />
                 </Button>
               )
               : (
@@ -91,48 +90,6 @@ function Menu({ items }: Props) {
               )}
           </li>
         ))}
-      </ul>
-
-      <ul class="flex flex-col text-primary">
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2 border-b-[1px]"
-            href={"/cart"}
-          >
-            <div class="gap-2 flex items-center justify-center">
-              <Icon
-                id="ShoppingCart"
-                strokeWidth={1}
-                class="w-[18px] h-[21px]"
-              />
-              <span class={`text-sm text-primary-content font-bold`}>
-                Carrinho
-              </span>
-            </div>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2 border-b-[1px]"
-            href={"/account"}
-          >
-            <div class="flex gap-2 items-center justify-center">
-              <Icon id="User" strokeWidth={1} class="w-[22px] h-[22px]" />
-            </div>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2 border-b-[1px]"
-            href={"/account/wishlist"}
-          >
-            <div class="flex gap-2 items-center justify-center">
-              <span class="text-[14px] leading-[17.5px] text-primary-content font-bold">
-                Favoritos
-              </span>
-            </div>
-          </a>
-        </li>
       </ul>
     </div>
   );
