@@ -104,7 +104,7 @@ function SearchContainer(
     <div
       class={`${
         displaySearchDrawer.value || activeS.value
-          ? "translate-y-0 h-auto w-screen absolute left-0 top-[107px]"
+          ? "translate-y-0 h-auto w-screen absolute left-0 top-full"
           : "-translate-y-36 h-0 duration-0 -z-10 hidden"
       } transition-all duration-100`}
     >

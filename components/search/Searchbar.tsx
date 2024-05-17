@@ -74,7 +74,7 @@ function Searchbar({
   }, [displaySearchPopup.value]);
 
   return (
-    <div class="w-full grid gap-8 overflow-y-hidden overflow-x-hidden h-9 lg:max-w-64">
+    <div class="w-full grid gap-8 overflow-y-hidden overflow-x-hidden h-10 lg:h-9 lg:max-w-64 relative">
       <form id={id} action={action} class="join bg-perola-intermediario ">
         <Button
           type="submit"
@@ -90,7 +90,7 @@ function Searchbar({
         <input
           ref={searchInputRef}
           id="search-input"
-          class="px-0 border-none join-item flex-grow text-xs bg-transparent h-9 outline-none text-black"
+          class="px-0 border-none join-item flex-grow text-xs bg-transparent h-full outline-none text-black"
           name={name}
           onInput={(e) => {
             const value = e.currentTarget.value;

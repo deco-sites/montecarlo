@@ -71,7 +71,7 @@ const style = {
         transform: translateY(0px);
       }
       to{
-        transform: translateY(107px);
+        transform: translateY(85px);
         background: #ffffff40;
         }
     }

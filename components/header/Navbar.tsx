@@ -49,6 +49,26 @@ export interface MenuNavItem {
   image?: Image[];
 }
 
+const style = {
+  "header-mobile": `@keyframes header-mobile{
+        from{
+          height:75px;
+          grid-template-columns: 60px 210px 60px;        }
+        to{
+          height:55px;
+          grid-template-columns: 68px 174px 68px;
+        }
+  }
+  
+  .header-mobile{
+    animation: header-mobile linear;
+    animation-timeline: scroll();
+    animation-range: 0% 1%;
+    animation-fill-mode: both;
+  }
+  `,
+};
+
 // Make it sure to render it on the server only. DO NOT render it on an island
 function Navbar(
   {
@@ -79,28 +99,25 @@ function Navbar(
 ) {
   const platform = usePlatform();
 
-  console.log("header", device, items);
-
   // Mobile header
   if (device === "mobile") {
     return (
-      <div
-        style={{ height: navbarHeight }}
-        class="lg:hidden grid grid-cols-3 justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2 "
-      >
+      <div class="lg:hidden grid grid-cols-[68px_auto_68px] justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2 header-mobile h-full ">
+        <style dangerouslySetInnerHTML={{ __html: style["header-mobile"] }}>
+        </style>
         <MenuButton />
         {logo && (
           <a
             href="/"
-            class="flex-grow inline-flex items-center justify-center"
-            style={{ minHeight: navbarHeight }}
+            class="flex-grow inline-flex items-center justify-center header-mobile h-full"
             aria-label="Store logo"
           >
             <Image
               src={logo.src}
               alt={logo.alt}
-              width={logo.width || 100}
-              height={logo.height || 13}
+              width={logo.width || 174}
+              height={logo.height || 32}
+              class="w-full"
             />
           </a>
         )}
