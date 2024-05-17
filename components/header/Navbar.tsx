@@ -193,7 +193,7 @@ function Navbar(
                 alt={logo.alt}
                 width={logo.width || 100}
                 height={logo.height || 13}
-                class="w-full h-auto max-w-64"
+                class="w-full h-auto max-w-60"
               />
             </a>
           )}

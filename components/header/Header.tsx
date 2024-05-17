@@ -136,8 +136,6 @@ function Header({
     `,
   };
 
-  console.log("items", items, navItems);
-
   return (
     <>
       <header style={{ height: headerHeight }}>

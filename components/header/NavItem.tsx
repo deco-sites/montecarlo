@@ -87,7 +87,7 @@ function NavItem({ item }: { item: MenuNavItem }) {
   return (
     <li class="group flex items-center gap-3">
       <a href={href} class="my-auto">
-        <span class="group-hover:font-semibold cursor-pointer text-sm font-thin text-black px-2">
+        <span class="group-hover:font-semibold cursor-pointer text-sm font-thin text-black px-2 py-3">
           {label}
         </span>
       </a>
@@ -95,7 +95,7 @@ function NavItem({ item }: { item: MenuNavItem }) {
         class={`fixed hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 py-16  ${
           GRIDCOLUMN[cont as keyof typeof GRIDCOLUMN]
         }`}
-        style={{ top: "37px", left: "0px", marginTop: headerHeight }}
+        style={{ top: "35px", left: "0px", marginTop: headerHeight }}
       >
         {listlinks != undefined && listlinks?.length > 0 && (
           <div

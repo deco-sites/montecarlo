@@ -23,7 +23,6 @@ export default function ScrollableContainer(
       } else {
         activeAlert.value = true;
       }
-      console.log("scroll");
     };
 
     globalThis.addEventListener("scroll", handleScroll);
@@ -89,8 +88,6 @@ function SearchContainer(
         }
         lastScrollTop.value = nowScrollTop;
       }
-
-      console.log("scroll");
     };
 
     globalThis.addEventListener("scroll", handleScroll);
@@ -136,8 +133,6 @@ function MenuContainer(
         }
         lastScrollTop.value = nowScrollTop;
       }
-
-      console.log("scroll");
     };
 
     globalThis.addEventListener("scroll", handleScroll);
@@ -150,7 +145,7 @@ function MenuContainer(
   return (
     <div
       class={`absolute left-0 w-full z-10 ${
-        active.value ? "top-[108px] duration-100" : "-top-[50px] duration-0"
+        active.value ? "top-[105px] duration-100" : "-top-[50px] duration-0"
       } `}
     >
       {children}
