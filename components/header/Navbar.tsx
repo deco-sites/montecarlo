@@ -248,7 +248,7 @@ function Navbar(
         {items.length > 0 && device == "desktop" &&
           (
             <ScrollableContainer type="Menu">
-              <ul class="hidden lg:flex justify-center w-full items-center text-sm text-black min-h-[40px] bg-base-100 gap-5">
+              <ul class="hidden lg:flex justify-center w-full items-center text-sm text-black min-h-[40px] bg-base-100 ">
                 {items.map((item, index) => (
                   <NavItem
                     item={item}
