@@ -1,5 +1,7 @@
 import type { ComponentChildren } from "preact";
 import { effect, useSignal, useSignalEffect } from "@preact/signals";
+import { search } from "apps/typesense/utils/product.ts";
+import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 
 interface MenuProps {
   activeAlert: boolean;
@@ -13,8 +15,6 @@ export default function ScrollableContainer(
   { children, type }: { children: ComponentChildren; type: string },
 ) {
   const activeAlert = useSignal(true);
-
-  console.log("entrou aqui");
 
   effect(() => {
     const handleScroll = () => {
@@ -43,6 +43,12 @@ export default function ScrollableContainer(
           {children}
         </MenuContainer>
       )}
+      {type === "search" &&
+        (
+          <SearchContainer active={activeAlert.value}>
+            {children}
+          </SearchContainer>
+        )}
     </>
   );
 }
@@ -54,6 +60,52 @@ function AlertContainer(
     <div
       class={`${
         active ? "translate-y-0 h-auto" : "-translate-y-16 h-0 duration-0"
+      } transition-all duration-100`}
+    >
+      {children}
+    </div>
+  );
+}
+function SearchContainer(
+  { children, active }: { children: ComponentChildren; active: boolean },
+) {
+  const activeS = useSignal(true);
+  const lastScrollTop = useSignal(0);
+  const delta = 5;
+  const { displaySearchDrawer } = useUI();
+
+  useSignalEffect(() => {
+    const handleScroll = () => {
+      const nowScrollTop = globalThis.scrollY ||
+        document.documentElement.scrollTop;
+
+      if (Math.abs(lastScrollTop.value - nowScrollTop) >= delta) {
+        if (nowScrollTop > lastScrollTop.value) {
+          activeS.value = false;
+          displaySearchDrawer.value = false;
+        } else {
+          activeS.value = true;
+          displaySearchDrawer.value = false;
+        }
+        lastScrollTop.value = nowScrollTop;
+      }
+
+      console.log("scroll");
+    };
+
+    globalThis.addEventListener("scroll", handleScroll);
+
+    return () => {
+      globalThis.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  return (
+    <div
+      class={`${
+        displaySearchDrawer.value || activeS.value
+          ? "translate-y-0 h-auto w-screen absolute left-0 top-[107px]"
+          : "-translate-y-36 h-0 duration-0 -z-10 hidden"
       } transition-all duration-100`}
     >
       {children}

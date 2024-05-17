@@ -74,7 +74,7 @@ function Searchbar({
   }, [displaySearchPopup.value]);
 
   return (
-    <div class="w-full grid gap-8 overflow-y-hidden overflow-x-hidden h-9 max-w-64">
+    <div class="w-full grid gap-8 overflow-y-hidden overflow-x-hidden h-9 lg:max-w-64">
       <form id={id} action={action} class="join bg-perola-intermediario ">
         <Button
           type="submit"

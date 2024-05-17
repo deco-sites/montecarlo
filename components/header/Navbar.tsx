@@ -114,6 +114,20 @@ function Navbar(
           {platform === "shopify" && <CartButtonShopify />}
           {platform === "nuvemshop" && <CartButtonNuvemshop />}
         </div>
+        <ScrollableContainer type="search">
+          <div class="bg-white px-2 py-1">
+            {searchbar &&
+              (
+                <Searchbar
+                  placeholder={searchbar.placeholder}
+                  action={searchbar.action}
+                  name={searchbar.name}
+                  loader={searchbar.loader}
+                  platform={searchbar.platform}
+                />
+              )}
+          </div>
+        </ScrollableContainer>
       </div>
     );
   } else {
