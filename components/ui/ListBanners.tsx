@@ -93,12 +93,12 @@ function VerticalCardsGrid(props: Props) {
   const { title, subTitle, cards } = { ...DEFAULTPROPS, ...props };
 
   return (
-    <div class=" lg:container xl:max-w-[1408px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9">
+    <div class=" lg:container xl:max-w-[1512px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 lg:px-14">
       <div class="flex flex-col w-full gap-1 items-center">
         <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>
         {subTitle && (
           <p
-            class=" text-center font-medium  text-sm lg:text-base"
+            class=" text-center font-medium text-sm lg:text-base"
             dangerouslySetInnerHTML={{ __html: subTitle }}
           >
           </p>
@@ -108,7 +108,7 @@ function VerticalCardsGrid(props: Props) {
         {cards.map((card, index) => (
           <Slider.Item
             index={index}
-            class={"carousel-item sm:max-w-1/2 lg:w-[calc(25%-0.5rem)] lg:max-w-none lg:snap-start md:w-1/3 snap-center "}
+            class={"carousel-item sm:max-w-1/2 lg:w-[calc(25%-0.5rem)] lg:max-w-none lg:snap-start md:w-1/3 snap-center w-full"}
           >
             <CardImage card={card} index={index} />
           </Slider.Item>

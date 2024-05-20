@@ -44,7 +44,7 @@ export default function ImageAndGrid(props: Props) {
   } = props;
 
   return (
-    <div class="container flex flex-col items-center gap-8 px-2 py-8 md:px-5 md:py-14">
+    <div class="container flex flex-col items-center gap-8 px-2 py-8 md:px-5 md:py-9">
       <div class="flex w-fit flex-col items-center gap-2 text-center font-poppins">
         {title && <h3 class="text-1.5xl font-semibold md:text-3xl">{title}</h3>}
         {description && (

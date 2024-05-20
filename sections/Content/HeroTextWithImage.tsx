@@ -44,7 +44,7 @@ export default function HeroTextWithImage(props: Props) {
   return (
     <div
       class={`
-      relative grid grid-cols-1 lg:grid-cols-2 items-center font-poppins
+      relative grid grid-cols-1 lg:grid-cols-2 items-center font-poppins mb-8
       text-${style.textAlign}
     `}
       style={{ backgroundColor: style.backgroundColor, color: style.fontColor }}

@@ -189,7 +189,7 @@ function CardImage(
 export default function ImagesAndText({ cardsImage }: Props) {
   const id = useId();
   return (
-    <div class="flex flex-col lg:flex-row w-full h-full py-8 gap-2 px-1 max-w-[1408px] mx-auto">
+    <div class="flex flex-col lg:flex-row w-full h-full py-8 lg:gap-2 gap-16 px-1 max-w-[1512px] lg:px-14 mx-auto">
       {cardsImage.map((card, index) => (
         <CardImage
           imageMobile={card.imageMobile}
