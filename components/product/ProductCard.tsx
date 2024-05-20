@@ -131,7 +131,7 @@ function MiniProductCard({
     <a
       href={url && relative(url)}
       aria-label="view product"
-      class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
+      class="w-min py-[10px] px-[14px] hidden lg:group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
     >
       {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
@@ -146,7 +146,7 @@ function MiniProductCard({
   return (
     <div
       id={id}
-      class={`card card-compact lg:group w-full px-1 gap-2 text-center h-min  mx-auto md:max-w-full`}
+      class={`card card-compact group w-full px-1 gap-2 text-center h-min  mx-auto md:max-w-full`}
       data-deco="view-product"
     >
       <SendEventOnView
@@ -263,7 +263,7 @@ function MiniProductCard({
             );
           })}
         </div>
-        <div class="flex flex-col gap-2 group-hover:hidden">
+        <div class="flex flex-col gap-2 lg:group-hover:hidden">
           <div
             class={`flex flex-col gap-0 justify-between`}
           >
