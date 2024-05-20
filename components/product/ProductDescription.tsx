@@ -62,7 +62,7 @@ export default function ProductDescription({ product }: Props) {
         <Accordion
           open
           title="Descrição"
-          titleClass="font-inter text-[#000000]"
+          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
         >
           <h3 class="font-poppins text-lg lg:text-xl text-black mb-2">
             {newName}
