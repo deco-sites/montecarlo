@@ -51,7 +51,7 @@ interface Props {
   preload?: boolean;
 
   /** @description used for analytics event */
-//   itemListName?: string;
+  //   itemListName?: string;
 
   /** @description index of the product card in the list */
   index?: number;
@@ -72,7 +72,7 @@ const PROPS_FONT_SIZE = {
 function ShelfProductCard({
   product,
   preload,
-//   itemListName,
+  //   itemListName,
   layout,
   platform,
   index,

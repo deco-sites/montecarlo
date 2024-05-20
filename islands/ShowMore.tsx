@@ -34,7 +34,9 @@ export default function ShowMore(
     >
       {children}
       <button
-        class={`btn cursor-pointer absolute ${loading.value ? "hidden" : ""} font-poppins text-sm bg-[#FFC72C] font-normal rounded-none hover:bg-[#FFC72C]`}
+        class={`btn cursor-pointer absolute ${
+          loading.value ? "hidden" : ""
+        } font-poppins text-sm bg-[#FFC72C] font-normal rounded-none hover:bg-[#FFC72C]`}
         onClick={() => {
           loading.value = true;
           const element = document.getElementById(
