@@ -103,7 +103,7 @@ function ShippingSimulation({ items, cepLink }: Props) {
         <input
           as="input"
           type="text"
-          class="w-[calc(70%-0.25rem)] text-sm outline-none font-bold text-black"
+          class="w-[calc(70%-0.25rem)] text-sm outline-none font-bold text-black placeholder:text-black"
           placeholder="00000-000"
           value={postalCode.value}
           maxLength={8}
