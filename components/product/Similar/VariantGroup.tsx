@@ -105,11 +105,13 @@ export function SelectVariants(
             <span class="left-0 z-10 -ml-4 px-6 before:left-0 before:absolute before:-z-10 before:h-5 before:w-8 before:bg-white">
               {variants.find((r) => r.active)?.message}
             </span>
-            <div class="h-2 w-2 -rotate-45 border-2 border-black duration-300 ease-in-out before:absolute before:bottom-0 before:h-2 before:w-2 before:bg-white peer-checked:rotate-[135deg]">
-            </div>
+            {variants.length > 1 && (
+              <div class="h-2 w-2 -rotate-45 border-2 border-black duration-300 ease-in-out before:absolute before:bottom-0 before:h-2 before:w-2 before:bg-white peer-checked:rotate-[135deg]">
+              </div>
+            )}
           </label>
           <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white">
-            {variants.map((variant) => {
+            {variants.length > 1 && variants.map((variant) => {
               return (
                 <a
                   href={variant.link.replace(
@@ -137,11 +139,13 @@ export function SelectVariants(
             <span class="left-0 z-10 -ml-4 px-6 before:left-0 before:absolute before:-z-10 before:h-5 before:w-8 before:bg-white">
               {variants.find((r) => r.active)?.message}
             </span>
-            <div class="h-2 w-2 -rotate-45 border-2 border-black duration-300 ease-in-out before:absolute before:bottom-0 before:h-2 before:w-2 before:bg-white peer-checked:rotate-[135deg]">
-            </div>
+            {variants.length > 1 && (
+              <div class="h-2 w-2 -rotate-45 border-2 border-black duration-300 ease-in-out before:absolute before:bottom-0 before:h-2 before:w-2 before:bg-white peer-checked:rotate-[135deg]">
+              </div>
+            )}
           </label>
           <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white">
-            {variants.map((variant) => {
+            {variants.length > 1 && variants.map((variant) => {
               return (
                 <a
                   href={variant.link.replace(

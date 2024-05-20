@@ -80,7 +80,7 @@ export default function ProductDescription({ product }: Props) {
         {Object.keys(technicalInfo).length > 0 && (
           <Accordion
             title="Informações Técnicas"
-            titleClass="font-inter text-[#000000]"
+            titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
           >
             <ul
               class="list-disc ml-6 font-poppins text-sm text-black flex flex-col gap-2 lg:mt-5"
@@ -91,7 +91,7 @@ export default function ProductDescription({ product }: Props) {
         )}
         <Accordion
           title="Coleção Tulum"
-          titleClass="font-inter text-[#000000]"
+          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
         >
           <Collection
             title="Coleção <b>Tulum</b>"
@@ -115,7 +115,7 @@ export default function ProductDescription({ product }: Props) {
         </Accordion>
         <Accordion
           title="Pedras"
-          titleClass="font-inter text-[#000000]"
+          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
         >
           <div class="flex flex-col gap-5">
             <Material
