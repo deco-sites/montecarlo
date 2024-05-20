@@ -81,7 +81,6 @@ export default function TextWithImage({
           decoding="async"
           loading="lazy"
         />
-        <p>pao</p>
         <SendEventOnView
           id={id}
           event={{
