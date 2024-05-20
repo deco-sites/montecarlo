@@ -86,7 +86,7 @@ function ShelfCollection({
     1: "md:w-full",
     2: "md:w-1/2",
     3: "md:w-1/3",
-    4: "md:w-1/4",
+    4: "md:w-1/3 lg:w-1/4",
     5: "md:w-1/5",
     6: "md:w-1/6",
   };
@@ -115,9 +115,9 @@ function ShelfCollection({
         id={id}
         class={clx(
           "grid max-w-[1504px] ",
-          layout?.showArrows &&
-            "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
-          "px-0",
+          layout?.showArrows
+            ? "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] px-0"
+            : "px-3",
         )}
       >
         <Slider
@@ -129,7 +129,7 @@ function ShelfCollection({
             <Slider.Item
               index={index}
               class={clx(
-                "carousel-item max-w-[246px] sm:w-1/3 sm:max-w-none lg:snap-start ",
+                "carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-start",
                 slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
                 slideMobile[layout?.numberOfSliders?.mobile ?? 1],
               )}
