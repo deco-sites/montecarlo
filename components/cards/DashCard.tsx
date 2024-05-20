@@ -25,12 +25,18 @@ export interface Props {
   cards: Card[];
 }
 
+const SIZECARD = {
+  4: "w-[calc(50%-0.5rem)]",
+  5: "w-[calc(33%-0.5rem)]",
+  6: "w-[calc(33%-0.5rem)]",
+};
+
 const DashCard = ({ title, subTitle, cards }: Props) => {
   const id = useId();
 
   return (
     <div
-      class="mt-12 container px-5 lg:container lg:flex lg:justify-center lg:flex-col"
+      class="mt-12 container px-2 lg:container lg:flex lg:justify-center lg:flex-col"
       id={id}
     >
       <div class="flex justify-center gap-2 lg:gap-4 flex-col mb-12">
@@ -38,14 +44,15 @@ const DashCard = ({ title, subTitle, cards }: Props) => {
         <SubTitle text={subTitle} />
       </div>
 
-      <div class="flex flex-wrap gap-5 justify-center 2xl:gap-20">
+      <div class="flex flex-wrap gap-2 justify-center 2xl:gap-20">
         {cards.map((card, index) => {
           return (
             <div
-              class="flex text-black flex-col justify-center items-center max-w-[198px] w-[calc(50%-0.7rem)] lg:w-[calc(25%-0.5rem)] h-[70px] sm:h-[100px] 2xl:h-[120px] border-2 border-primary cursor-pointer"
+              class={"flex text-black hover:bg-primary flex-col justify-center items-center max-w-[198px] lg:w-[calc(25%-0.5rem)] h-[70px] sm:h-[100px] 2xl:h-[120px] border-2 border-primary cursor-pointer group " +
+                `${SIZECARD[cards.length as keyof typeof SIZECARD]}`}
               id={id + index}
             >
-              <p class="font-normal text-sm md:text-[20px] font-medium text-center">
+              <p class=" text-sm md:text-[20px] font-medium text-center">
                 {card.text}
               </p>
               <p class="text-center text-base md:text-[25px] font-bold">

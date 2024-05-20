@@ -7,7 +7,7 @@ function SubTitle({ text }: Props) {
     return (
       <span
         dangerouslySetInnerHTML={{ __html: text }}
-        class=" font-medium text-center text-sm lg:text-base"
+        class=" font-medium text-center text-sm lg:text-base px-1 lg:px-0"
       >
       </span>
     );

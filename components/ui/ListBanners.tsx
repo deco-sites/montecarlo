@@ -67,7 +67,7 @@ function CardImage({ card, index }: { card: Card; index: number }) {
     <a
       href={card.linkToRedirect}
       title={"Ir para a página de " + card.title}
-      class="lg:w-full"
+      class="w-full hover:opacity-80"
     >
       <div
         class={`lg:w-full `}
@@ -104,14 +104,11 @@ function VerticalCardsGrid(props: Props) {
           </p>
         )}
       </div>
-      <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-center lg:flex-wrap lg:justify-center lg:gap-2 first:ml-6 lg:first:ml-0 w-full">
+      <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 px-14 lg:px-0 lg:justify-center">
         {cards.map((card, index) => (
           <Slider.Item
             index={index}
-            class={clx(
-              "carousel-item snap-center lg:w-[calc(25%-0.5rem)] sm:w-52 w-min mr-12 lg:mr-0 ",
-              index == 0 && " ml-16 lg:ml-0",
-            )}
+            class={"carousel-item sm:max-w-1/2 lg:w-[calc(25%-0.5rem)] lg:max-w-none lg:snap-start md:w-1/3 snap-center "}
           >
             <CardImage card={card} index={index} />
           </Slider.Item>
