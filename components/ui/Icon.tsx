@@ -49,7 +49,15 @@ export type AvailableIcons =
   | "share"
   | "arrowLeft"
   | "arrowRight"
+  | "arrowLeftMin"
+  | "arrowRightMin"
   | "alertBonus"
+  | "FileCopy"
+  | "userAccont"
+  | "heartCustom"
+  | "ShippingCustom"
+  | "menu"
+  | "Location"
   | "arrowTop";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

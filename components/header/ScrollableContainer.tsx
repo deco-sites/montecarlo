@@ -1,0 +1,154 @@
+import type { ComponentChildren } from "preact";
+import { effect, useSignal, useSignalEffect } from "@preact/signals";
+import { search } from "apps/typesense/utils/product.ts";
+import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
+
+interface MenuProps {
+  activeAlert: boolean;
+}
+
+export interface Props {
+  type: string;
+}
+
+export default function ScrollableContainer(
+  { children, type }: { children: ComponentChildren; type: string },
+) {
+  const activeAlert = useSignal(true);
+
+  effect(() => {
+    const handleScroll = () => {
+      if (globalThis.scrollY > 50) {
+        activeAlert.value = false;
+      } else {
+        activeAlert.value = true;
+      }
+    };
+
+    globalThis.addEventListener("scroll", handleScroll);
+
+    return () => {
+      globalThis.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  return (
+    <>
+      {type === "Alert" && (
+        <AlertContainer active={activeAlert.value}>{children}</AlertContainer>
+      )}
+      {type === "Menu" && (
+        <MenuContainer activeAlert={activeAlert.value}>
+          {children}
+        </MenuContainer>
+      )}
+      {type === "search" &&
+        (
+          <SearchContainer active={activeAlert.value}>
+            {children}
+          </SearchContainer>
+        )}
+    </>
+  );
+}
+
+function AlertContainer(
+  { children, active }: { children: ComponentChildren; active: boolean },
+) {
+  return (
+    <div
+      class={`${
+        active ? "translate-y-0 h-auto" : "-translate-y-16 h-0 duration-0"
+      } transition-all duration-100`}
+    >
+      {children}
+    </div>
+  );
+}
+function SearchContainer(
+  { children, active }: { children: ComponentChildren; active: boolean },
+) {
+  const activeS = useSignal(true);
+  const lastScrollTop = useSignal(0);
+  const delta = 5;
+  const { displaySearchDrawer } = useUI();
+
+  useSignalEffect(() => {
+    const handleScroll = () => {
+      const nowScrollTop = globalThis.scrollY ||
+        document.documentElement.scrollTop;
+
+      if (Math.abs(lastScrollTop.value - nowScrollTop) >= delta) {
+        if (nowScrollTop > lastScrollTop.value) {
+          activeS.value = false;
+          displaySearchDrawer.value = false;
+        } else {
+          activeS.value = true;
+          displaySearchDrawer.value = false;
+        }
+        lastScrollTop.value = nowScrollTop;
+      }
+    };
+
+    globalThis.addEventListener("scroll", handleScroll);
+
+    return () => {
+      globalThis.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  return (
+    <div
+      class={`${
+        displaySearchDrawer.value || activeS.value
+          ? "translate-y-0 h-auto w-screen absolute left-0 top-full"
+          : "-translate-y-36 h-0 duration-0 -z-10 hidden"
+      } transition-all duration-100`}
+    >
+      {children}
+    </div>
+  );
+}
+
+function MenuContainer(
+  { children, activeAlert }: {
+    children: ComponentChildren;
+    activeAlert: boolean;
+  },
+) {
+  const active = useSignal(true);
+  const lastScrollTop = useSignal(0);
+  const delta = 5;
+
+  useSignalEffect(() => {
+    const handleScroll = () => {
+      const nowScrollTop = globalThis.scrollY ||
+        document.documentElement.scrollTop;
+
+      if (Math.abs(lastScrollTop.value - nowScrollTop) >= delta) {
+        if (nowScrollTop > lastScrollTop.value) {
+          active.value = false;
+        } else {
+          active.value = true;
+        }
+        lastScrollTop.value = nowScrollTop;
+      }
+    };
+
+    globalThis.addEventListener("scroll", handleScroll);
+
+    return () => {
+      globalThis.removeEventListener("scroll", handleScroll);
+    };
+  });
+
+  return (
+    <div
+      class={`absolute left-0 w-full z-10 ${
+        active.value ? "top-[105px] duration-100" : "-top-[50px] duration-0"
+      } `}
+    >
+      {children}
+    </div>
+  );
+}
