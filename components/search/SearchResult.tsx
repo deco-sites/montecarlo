@@ -1,5 +1,6 @@
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { Layout as CardLayout } from "../../components/product/ProductCard.tsx";
+
 import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import SearchControls from "../../islands/SearchControls.tsx";
