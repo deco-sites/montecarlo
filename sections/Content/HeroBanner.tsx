@@ -1,5 +1,9 @@
 import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 
 export interface textProps {
   text?: HTMLWidget;
@@ -15,6 +19,8 @@ export interface textProps {
 export interface Props {
   title?: textProps;
   description?: textProps;
+  promotion: string;
+  urlBanner: string;
   image: {
     mobile?: ImageWidget;
     desktop?: ImageWidget;
@@ -25,6 +31,8 @@ export interface Props {
 export default function HeroBanner({
   title,
   description,
+  promotion,
+  urlBanner,
   image = {
     mobile: "",
     desktop: "https://placehold.co/380x380",
@@ -34,27 +42,55 @@ export default function HeroBanner({
   return (
     <div class="relative flex items-end lg:max-h-[90vh] lg:min-h-[600px]">
       <div class="bg-red w-full h-full">
-        <Picture>
-          <Source
-            media="(max-width: 768px)"
-            src={image.mobile || ""}
-            width={350}
-            height={449}
-            class="w-full object-cover"
-          />
-          <Source
-            media="(min-width: 768px)"
-            src={image.desktop || ""}
-            width={1512}
-            height={700}
-            class="w-full object-cover"
-          />
-          <img
-            class="w-full h-full object-cover"
-            src={image.desktop || ""}
-            alt={image.alt}
-          />
-        </Picture>
+        <a href={urlBanner} id={promotion}>
+          <Picture>
+            <Source
+              media="(max-width: 768px)"
+              src={image.mobile || ""}
+              width={350}
+              height={449}
+              class="w-full object-cover"
+            />
+            <Source
+              media="(min-width: 768px)"
+              src={image.desktop || ""}
+              width={1512}
+              height={700}
+              class="w-full object-cover"
+            />
+            <img
+              class="w-full h-full object-cover"
+              src={image.desktop || ""}
+              alt={image.alt}
+            />
+          </Picture>
+        </a>
+        <SendEventOnClick
+          id={promotion}
+          event={{
+            name: "select_promotion" as const,
+            params: {
+              crative_name: image.alt,
+              creative_slot: "hero-banner",
+              promotion_id: promotion,
+              promotion_name: promotion,
+              items: [],
+            },
+          }}
+        />
+        <SendEventOnView
+          id={promotion}
+          event={{
+            name: "view_promotion",
+            params: {
+              crative_name: image.alt,
+              creative_slot: "hero-banner",
+              promotion_id: promotion,
+              promotion_name: promotion,
+              items: [],
+            },
+          }}
+        />
       </div>
       <div class="absolute h-fit w-full flex flex-col justify-end items-center gap-6 px-14 py-14 lg:py-24 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)]">
         {title && titleVariant(title)}

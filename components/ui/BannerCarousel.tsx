@@ -11,6 +11,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import { useUI } from "../../sdk/useUI.ts";
 import Image from "apps/website/components/Image.tsx";
+import action from "apps/algolia/actions/setup.ts";
 
 /**
  * @titleBy alt
@@ -34,6 +35,9 @@ export interface ImageItem {
   mobile: ImageWidget;
   /** @description Image's alt text */
   alt: string;
+  /** @description Action when user clicks on the image */
+  promotion: string;
+  /** @description DL action */
   action?: {
     /** @description when user clicks on the image, go to this link */
     href?: string;
@@ -69,19 +73,17 @@ export interface Props {
 }
 
 const PROPS_FONT_SIZE = {
-  "Small": "text-[1.5rem] lg:text-[2.5rem]",
-  "Normal": "text-[2.5rem] lg:text-[3.8rem]",
-  "Large": "text-[3.5rem] lg:text-[6.3rem]",
+  Small: "text-[1.5rem] lg:text-[2.5rem]",
+  Normal: "text-[2.5rem] lg:text-[3.8rem]",
+  Large: "text-[3.5rem] lg:text-[6.3rem]",
 };
 
-function Action(
-  action: {
-    title?: string;
-    label?: string;
-    href?: string;
-    fontSize?: FontSize;
-  },
-) {
+function Action(action: {
+  title?: string;
+  label?: string;
+  href?: string;
+  fontSize?: FontSize;
+}) {
   return (
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
       {action.title && (
@@ -105,30 +107,16 @@ function Action(
   );
 }
 
-function BannerItemMobile(
-  {
-    image,
-    lcp,
-    id,
-    creative_name,
-    creative_slot,
-    promotion_id,
-    promotion_name,
-  }: {
-    image: ImageItem;
-    lcp?: boolean;
-    id: string;
-    creative_name?: string;
-    creative_slot?: string;
-    promotion_id?: string;
-    promotion_name?: string;
-  },
-) {
-  const {
-    mobile,
-    alt,
-    action,
-  } = image;
+function BannerItemMobile({
+  image,
+  lcp,
+  id,
+}: {
+  image: ImageItem;
+  lcp?: boolean;
+  id: string;
+}) {
+  const { mobile, alt, action, promotion } = image;
 
   return (
     <div class="flex flex-row w-full relative">
@@ -138,20 +126,7 @@ function BannerItemMobile(
         aria-label={action?.label}
         class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
       >
-        <SendEventOnClick
-          id={id}
-          event={{
-            name: "select_promotion",
-            params: {
-              creative_name: creative_name,
-              creative_slot: creative_slot,
-              promotion_id: promotion_id,
-              promotion_name: promotion_name,
-            },
-          }}
-        />
-        {action &&
-          <Action {...action} />}
+        {action && <Action {...action} />}
       </a>
       <Image
         class="object-cover w-full h-full"
@@ -165,29 +140,45 @@ function BannerItemMobile(
         height={450}
         fetchPriority={lcp ? "high" : "auto"}
       />
+      <SendEventOnClick
+        id={id}
+        event={{
+          name: "select_promotion",
+          params: {
+            item_list_name: alt,
+            item_list_id: id,
+            promotion_name: promotion,
+            items: [],
+          },
+        }}
+      />
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            view_promotion: promotion,
+            crative_name: alt,
+            creative_slot: alt,
+            promotion_id: id,
+            promotion_name: promotion,
+            items: [],
+          },
+        }}
+      />
     </div>
   );
 }
 
-function BannerItem(
-  {
-    image,
-    lcp,
-    id,
-    creative_name,
-    creative_slot,
-    promotion_id,
-    promotion_name,
-  }: {
-    image: Banner;
-    lcp?: boolean;
-    id: string;
-    creative_name?: string;
-    creative_slot?: string;
-    promotion_id?: string;
-    promotion_name?: string;
-  },
-) {
+function BannerItem({
+  image,
+  lcp,
+  id,
+}: {
+  image: Banner;
+  lcp?: boolean;
+  id: string;
+}) {
   return (
     <div class="flex flex-row w-full relative">
       {image.banner.map((primaryImage) => (
@@ -198,18 +189,6 @@ function BannerItem(
             aria-label={primaryImage.action?.label}
             class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
           >
-            <SendEventOnClick
-              id={id}
-              event={{
-                name: "select_promotion",
-                params: {
-                  creative_name: creative_name,
-                  creative_slot: creative_slot,
-                  promotion_id: promotion_id,
-                  promotion_name: promotion_name,
-                },
-              }}
-            />
             {primaryImage.action && <Action {...primaryImage.action} />}
           </a>
           <Picture preload={lcp} class="w-full h-full">
@@ -234,18 +213,45 @@ function BannerItem(
               alt={primaryImage.alt}
             />
           </Picture>
+          <SendEventOnClick
+            id={id}
+            event={{
+              name: "select_promotion",
+              params: {
+                item_list_name: primaryImage.alt,
+                item_list_id: id,
+                promotion_name: primaryImage.promotion,
+                items: [],
+              },
+            }}
+          />
+          <SendEventOnView
+            id={id}
+            event={{
+              name: "view_promotion",
+              params: {
+                view_promotion: primaryImage.promotion,
+                crative_name: primaryImage.alt,
+                creative_slot: "banner-carousel",
+                promotion_id: id,
+                promotion_name: primaryImage.promotion,
+                items: [],
+              },
+            }}
+          />
         </div>
       ))}
     </div>
   );
 }
 
-function Dots(
-  { images, interval = 0 }: {
-    images: Banner[] | ImageItem[];
-    interval?: number;
-  },
-) {
+function Dots({
+  images,
+  interval = 0,
+}: {
+  images: Banner[] | ImageItem[];
+  interval?: number;
+}) {
   return (
     <>
       <style
@@ -286,22 +292,12 @@ function Buttons() {
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
         <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
-          <Icon
-            class="text-white"
-            size={40}
-            id="arrowLeft"
-            strokeWidth={3}
-          />
+          <Icon class="text-white" size={40} id="arrowLeft" strokeWidth={3} />
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
         <Slider.NextButton class=" bg-transparent border-none hover:bg-transparent text-primary">
-          <Icon
-            class="text-white"
-            size={40}
-            id="arrowRight"
-            strokeWidth={3}
-          />
+          <Icon class="text-white" size={40} id="arrowRight" strokeWidth={3} />
         </Slider.NextButton>
       </div>
     </>
@@ -330,7 +326,6 @@ function BannerCarousel(props: Props) {
   }
 
   const arrayImage = isMobile.value && arrayImagesMobile();
-  const imageArray = arrayImagesMobile();
 
   return (
     <div
@@ -345,50 +340,21 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
-                creative_name={imageArray[index].alt}
-                creative_slot={index.toString()}
-                promotion_id={imageArray[index].action?.href}
-                promotion_name={imageArray[index].action?.label}
-              />
-              <SendEventOnView
-                id={id}
-                event={{
-                  name: "view_promotion",
-                  params: {
-                    creative_name: imageArray[index].alt,
-                    creative_slot: index.toString(),
-                    promotion_id: imageArray[index].action?.href,
-                    promotion_name: imageArray[index].action?.label,
-                  },
-                }}
               />
             </Slider.Item>
           ))
-          : images?.map((image, index) => (
-            <Slider.Item index={index} class="carousel-item w-full ">
-              <BannerItem
-                image={image}
-                lcp={index === 0 && preload}
-                id={`${id}::${index}`}
-                creative_name={imageArray[index].alt}
-                creative_slot={index.toString()}
-                promotion_id={imageArray[index].action?.href}
-                promotion_name={imageArray[index].action?.label}
-              />
-              <SendEventOnView
-                id={id}
-                event={{
-                  name: "view_promotion",
-                  params: {
-                    creative_name: imageArray[index].alt,
-                    creative_slot: index.toString(),
-                    promotion_id: imageArray[index].action?.href,
-                    promotion_name: imageArray[index].action?.label,
-                  },
-                }}
-              />
-            </Slider.Item>
-          ))}
+          : images?.map((image, index) => {
+            console.log(image);
+            return (
+              <Slider.Item index={index} class="carousel-item w-full ">
+                <BannerItem
+                  image={image}
+                  lcp={index === 0 && preload}
+                  id={`${id}::${index}`}
+                />
+              </Slider.Item>
+            );
+          })}
       </Slider>
 
       {props.arrows && <Buttons />}
