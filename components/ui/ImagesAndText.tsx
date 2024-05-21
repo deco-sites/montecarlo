@@ -2,10 +2,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import ButtonLink from "./ButtonLink.tsx";
 import { Colors } from "deco-sites/montecarlo/constants.tsx";
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
+import { SendEventOnView } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
 
 /**
