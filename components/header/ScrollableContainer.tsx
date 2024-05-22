@@ -78,7 +78,6 @@ function SearchContainer(
       const iconSearch = globalThis.document.querySelector(
         '[data="search-icon"]',
       );
-      console.log("scroll icon", iconSearch);
       const nowScrollTop = globalThis.scrollY ||
         document.documentElement.scrollTop;
 

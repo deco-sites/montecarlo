@@ -1,4 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
+import { SendEventOnView } from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 interface StyleProps {
@@ -40,6 +42,7 @@ const PLACEMENT = {
 
 export default function HeroTextWithImage(props: Props) {
   const { title, description, image, placement, style, CTA } = props;
+  const id = useId();
 
   return (
     <div
@@ -47,6 +50,7 @@ export default function HeroTextWithImage(props: Props) {
       relative grid grid-cols-1 lg:grid-cols-2 items-center font-poppins mb-8
       text-${style.textAlign}
     `}
+      id={id}
       style={{ backgroundColor: style.backgroundColor, color: style.fontColor }}
     >
       <div class={`h-full ${PLACEMENT[placement]}`}>
@@ -107,6 +111,20 @@ export default function HeroTextWithImage(props: Props) {
           </div>
         </div>
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            view_promotion: title,
+            creative_name: title,
+            creative_slot: title,
+            promotion_id: id,
+            promotion_name: title,
+            items: [],
+          },
+        }}
+      />
     </div>
   );
 }

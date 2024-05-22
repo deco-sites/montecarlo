@@ -3,6 +3,11 @@ import type { HTMLWidget } from "apps/admin/widgets.ts";
 import type { Props as BannerProductDotInfoProps } from "../../components/product/BannerProductDotInfo/index.tsx";
 import BannerProductDotInfo from "../../islands/BannerProductDotInfo.tsx";
 
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+
 interface StyleProps {
   textAlign?: "left" | "center" | "right";
   /** @format color-input */
@@ -30,6 +35,7 @@ export interface Props {
   placement: "left" | "right";
   style: StyleProps;
   CTA?: CTAProps;
+  promotion: string;
 }
 
 const PLACEMENT = {
@@ -39,10 +45,11 @@ const PLACEMENT = {
 
 export default function TextWithImageCollection({
   title = "Lorem ipsum",
+  promotion = "ColecaoAllure",
   description =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ornare ultrices. Vestibulum gravida ligula nec ex scelerisque, sed tristique neque porttitor. ",
   banner = {
-    image: { source: "https://placehold.co/704x704" },
+    image: { source: "https://placehold.co/704x704", alt: "alt da image" },
   },
   placement = "left",
   style = {
@@ -99,6 +106,7 @@ export default function TextWithImageCollection({
           />
           {CTA?.href && (
             <a
+              id={promotion}
               href={CTA.href}
               class={`
                 btn text-sm py-2.5 px-3.5 w-fit rounded-none border-transparent hover:opacity-80
@@ -114,6 +122,32 @@ export default function TextWithImageCollection({
               {CTA.label}
             </a>
           )}
+          <SendEventOnClick
+            id={promotion}
+            event={{
+              name: "select_promotion" as const,
+              params: {
+                crative_name: banner.image.alt,
+                creative_slot: "TextWithImageCollection",
+                promotion_id: promotion,
+                promotion_name: promotion,
+                items: [],
+              },
+            }}
+          />
+          <SendEventOnView
+            id={promotion}
+            event={{
+              name: "view_promotion",
+              params: {
+                crative_name: banner.image.alt,
+                creative_slot: "TextWithImageCollection",
+                promotion_id: promotion,
+                promotion_name: promotion,
+                items: [],
+              },
+            }}
+          />
         </div>
       </div>
     </div>

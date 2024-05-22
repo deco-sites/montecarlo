@@ -1,4 +1,7 @@
-import { SendEventOnView } from "../../components/Analytics.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 import ProductCard, {
   Layout as cardLayout,
 } from "../../components/product/ProductCard.tsx";
@@ -110,15 +113,35 @@ function TabbedProductShelf({
           id={id}
           event={{
             name: "view_item_list",
+            item_list_name: "TabbedProductShelf",
             params: {
               item_list_name: title,
               items: products.map((product, index) =>
                 mapProductToAnalyticsItem({
                   index,
                   product,
-                  ...(useOffer(product.offers)),
+                  ...useOffer(product.offers),
                 })
               ),
+            },
+          }}
+        />
+        <SendEventOnClick
+          id={id}
+          event={{
+            name: "select_item",
+            params: {
+              item: title,
+              item_list_name: "TabbedProductShelf",
+              items: [
+                ...products.map((product, index) =>
+                  mapProductToAnalyticsItem({
+                    index,
+                    product,
+                    ...useOffer(product.offers),
+                  })
+                ),
+              ],
             },
           }}
         />
