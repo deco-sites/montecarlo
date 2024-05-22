@@ -5,6 +5,8 @@ import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
+import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
+import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 
 export interface Category {
   label: string;
@@ -92,8 +94,8 @@ function CategoryListWithAnchor(props: Props) {
       class=" py-7 lg:py- flex flex-col justify-center items-center gap-5 lg:gap-10 text-base-content lg:py-10 text-center px-1"
     >
       <div class="flex flex-col w-full gap-1">
-        <h2 class=" font-semibold text-xl lg:text-3xl">{header.title}</h2>
-        <p class=" font-medium  text-sm lg:text-base">{header.description}</p>
+        <Title text={header.title} />
+        <SubTitle text={header.description} />
       </div>
 
       <div class="flex flex-row flex-wrap gap-2 justify-center items-center w-full">
