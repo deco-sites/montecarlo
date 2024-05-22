@@ -145,7 +145,7 @@ export default function TrioOfImages(
         {title && <Title text={title} />}
         {subTitle && <SubTitle text={subTitle} />}
       </div>
-      <div class="flex flex-col w-full h-full gap-2 lg:flex-row lg:justify-center max-w-[1408px]">
+      <div class="flex flex-col w-full h-full gap-2 lg:flex-row lg:justify-center max-w-[1512px] lg:px-14">
         {cards?.map((image, index) => (
           <Card
             image={image}
