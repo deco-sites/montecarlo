@@ -44,7 +44,7 @@ const DashCard = ({ title, subTitle, cards }: Props) => {
         <SubTitle text={subTitle} />
       </div>
 
-      <div class="flex flex-wrap gap-2 justify-center 2xl:gap-20">
+      <div class="flex flex-wrap gap-2 justify-center 2xl:gap-20 lg:justify-between">
         {cards.map((card, index) => {
           return (
             <div

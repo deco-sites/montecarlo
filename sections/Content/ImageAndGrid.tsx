@@ -2,6 +2,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 
 import type { Props as BannerProductDotInfoProps } from "../../components/product/BannerProductDotInfo/index.tsx";
 import BannerProductDotInfo from "../../islands/BannerProductDotInfo.tsx";
+import { keys } from "https://denopkg.com/deco-cx/durable@0.5.3/security/keys.ts";
 
 interface CTAProps {
   label?: string;
