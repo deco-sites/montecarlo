@@ -29,6 +29,7 @@ export default function SearchButton() {
         class="btn-circle btn-sm btn-ghost sm:hidden disabled:hidden"
         aria-label="search icon button"
         data="search-icon"
+        disabled
         ref={refSearch}
         onClick={() => actiiveSearch()}
       >
