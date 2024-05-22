@@ -75,6 +75,10 @@ function SearchContainer(
 
   useSignalEffect(() => {
     const handleScroll = () => {
+      const iconSearch = globalThis.document.querySelector(
+        '[data="search-icon"]',
+      );
+      console.log("scroll icon", iconSearch);
       const nowScrollTop = globalThis.scrollY ||
         document.documentElement.scrollTop;
 
@@ -82,9 +86,11 @@ function SearchContainer(
         if (nowScrollTop > lastScrollTop.value) {
           activeS.value = false;
           displaySearchDrawer.value = false;
+          iconSearch?.removeAttribute("disabled");
         } else {
           activeS.value = true;
           displaySearchDrawer.value = false;
+          iconSearch?.setAttribute("disabled", "");
         }
         lastScrollTop.value = nowScrollTop;
       }
