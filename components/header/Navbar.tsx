@@ -53,10 +53,11 @@ const style = {
   "header-mobile": `@keyframes header-mobile{
         from{
           height:75px;
-          grid-template-columns: 60px 210px 60px;        }
+          grid-template-columns: 18% 53% 18%;        
+        }
         to{
           height:55px;
-          grid-template-columns: 68px 174px 68px;
+          grid-template-columns: 22% 46% 22%;
         }
   }
   
@@ -102,7 +103,7 @@ function Navbar(
   // Mobile header
   if (device === "mobile") {
     return (
-      <div class="lg:hidden grid grid-cols-[68px_auto_68px] justify-between items-center border-b border-base-200 w-full px-6 pb-6 gap-2 header-mobile h-full ">
+      <div class="lg:hidden grid grid-cols-[68px_auto_68px] justify-between items-center border-b border-base-200 w-full px-4 pb-6 gap-2 header-mobile h-full ">
         <style dangerouslySetInnerHTML={{ __html: style["header-mobile"] }}>
         </style>
         <MenuButton />
@@ -122,7 +123,7 @@ function Navbar(
           </a>
         )}
 
-        <div class="flex justify-end gap-1">
+        <div class="flex justify-end gap-2">
           <SearchButton />
           {platform === "vtex" && <CartButtonVTEX />}
           {platform === "vnda" && <CartButtonVDNA />}

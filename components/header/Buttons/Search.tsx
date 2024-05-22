@@ -26,14 +26,14 @@ export default function SearchButton() {
         <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
       </Button>
       <Button
-        class="btn-circle btn-sm btn-ghost sm:hidden disabled:hidden"
+        class="btn-circle btn-sm btn-ghost sm:hidden disabled:hidden flex justify-center items-center w-auto"
         aria-label="search icon button"
         data="search-icon"
         disabled
         ref={refSearch}
         onClick={() => actiiveSearch()}
       >
-        <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
+        <Icon id="SearchIcon" size={22} strokeWidth={0.05} />
       </Button>
     </>
   );
