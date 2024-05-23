@@ -71,7 +71,7 @@ function Result({
   const isFirstPage = !pageInfo.previousPage;
 
   let minPrice = 1;
-  let maxPrice = 1;
+  let maxPrice = 500000;
 
   products.forEach(product => {
     product?.offers?.offers.forEach(offer => {

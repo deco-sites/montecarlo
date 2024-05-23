@@ -104,9 +104,8 @@ function Filters({ filters, layout }: Props) {
       {filters
         .filter(isRange)
           .map((filter) => {
-
             return (
-              <RangeSlider classProps="max-w-[600px]" sliderClass="max-w-[300px] bg-red-500" label={filter.label} min={filter.values.min} max={filter.values.max} />
+              <RangeSlider classProps="max-w-[600px]" sliderClass="max-w-[300px] bg-red-500" name={filter.key} label={filter.label} min={filter.values.min} max={filter.values.max} />
             )
           }
         )}

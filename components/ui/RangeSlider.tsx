@@ -4,21 +4,26 @@ import { useEffect, useRef, useState } from "preact/hooks";
 export interface Props { 
     classProps?: string,
     sliderClass?: string,
+    name?: string,
     label?: string,
     min: number,
     max: number,
 }
 
 function RangeSlider(props: Props) {
-    const { classProps, min, max, sliderClass, label } = props;
+    const { classProps, min, max, sliderClass, label, name } = props;
 
     const rangeSliderRef = useRef<HTMLDivElement>(null);
     const leftKnobRef = useRef<HTMLButtonElement>(null);
     const rightKnobRef = useRef<HTMLButtonElement>(null);
     const rangeFillRef = useRef<HTMLDivElement>(null);
 
-    const [leftValue, setLeftValue] = useState(min);
-    const [rightValue, setRightValue] = useState(max);
+    const queryParams = new URLSearchParams(window.location.search);
+    const filter = queryParams.get(`filter.${name}`);
+    const [initialMin, initialMax] = filter ? filter.split(':').map(Number) : [min, max];
+
+    const [leftValue, setLeftValue] = useState(initialMin);
+    const [rightValue, setRightValue] = useState(initialMax);
 
     const leftValueRef = useRef(leftValue);
     const rightValueRef = useRef(rightValue);
@@ -38,6 +43,17 @@ function RangeSlider(props: Props) {
         const rightKnob = rightKnobRef.current!;
         const rangeFill = rangeFillRef.current!;
 
+        const rangeBarRect = rangeBar.getBoundingClientRect();
+        const valuePerPixel = (max - min) / rangeBarRect.width;
+
+        const initialLeftPosition = (initialMin - min) / valuePerPixel;
+        const initialRightPosition = (initialMax - min) / valuePerPixel;
+
+        leftKnob.style.left = initialLeftPosition + 'px';
+        rightKnob.style.left = initialRightPosition - leftKnob.offsetWidth + 'px';
+        rangeFill.style.width = rightKnob.offsetLeft - leftKnob.offsetLeft + leftKnob.offsetWidth + 'px';
+        rangeFill.style.left = leftKnob.offsetLeft + 'px';
+
         let isDraggingLeft = false;
         let isDraggingRight = false;
 
@@ -47,6 +63,11 @@ function RangeSlider(props: Props) {
         const stopDragging = () => {
             isDraggingLeft = false;
             isDraggingRight = false;
+
+            const queryParams = new URLSearchParams(window.location.search);
+            queryParams.set(`filter.${name}`, `${leftValueRef.current}:${rightValueRef.current}`);
+
+            window.location.href = `${window.location.origin}${window.location.pathname}?${queryParams}`;
         };
 
         const handleDragSlider = (event: MouseEvent | Touch) => {
@@ -114,13 +135,13 @@ function RangeSlider(props: Props) {
             });
             rangeSlider.removeEventListener('touchend', stopDragging);
         };
-    }, []);
+    }, [min, max, initialMin, initialMax, name]);
 
     return (
         <>
             <span class="font-poppins text-sm">{label}</span>
             <div class={`relative ${classProps}`}
-                ref={rangeSliderRef} data-range-slider min={min} max={max}>
+                ref={rangeSliderRef} data-range-slider min={min} max={max} name={name}>
                 <div class={`range-slider ${sliderClass}`}>
                     <div class="range-bar">
                         <div ref={rangeFillRef} class="range-fill"></div>
