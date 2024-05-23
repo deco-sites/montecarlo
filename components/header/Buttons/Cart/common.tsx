@@ -35,12 +35,13 @@ function CartButton({ loading, currency, total, items }: Props) {
       </span>
 
       <Button
-        class="btn-circle btn-sm btn-ghost"
+        class="btn-circle btn-sm btn-ghost flex justify-center items-center"
         aria-label="open cart"
         data-deco={displayCart.value && "open-cart"}
         loading={loading}
         onClick={onClick}
       >
+        <Icon id="ShippingCustom" width={18} height={22} strokeWidth={2} />
         <SendEventOnClick
           id=""
           event={{
@@ -52,7 +53,6 @@ function CartButton({ loading, currency, total, items }: Props) {
             },
           }}
         />
-        <Icon id="ShoppingCart" size={24} strokeWidth={2} />
       </Button>
     </div>
   );

@@ -1,56 +1,125 @@
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { headerHeight } from "./constants.ts";
+import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import ListLinksOurImage from "deco-sites/montecarlo/components/header/ComponentMenu.tsx";
+import { Images } from "https://deno.land/x/openai@v4.19.1/resources/mod.ts";
 
-function NavItem({ item }: { item: SiteNavigationElement }) {
-  const { url, name, children } = item;
-  const image = item?.image?.[0];
+export interface Link {
+  label: string;
+  href: string;
+}
+
+export interface ListLinks {
+  title: string;
+  listLinks: Link[];
+  linkShowMore: {
+    label: string;
+    href: string;
+  };
+}
+
+export interface Image {
+  img: {
+    src: ImageWidget;
+    alt: string;
+    aspectRatio: "2/1" | "1/1";
+  };
+  href: string;
+  title: string;
+  conter: HTMLWidget;
+}
+
+export interface MenuNavItem {
+  label: string;
+  href?: string;
+  /**
+   * @maximum 5
+   */
+  listlinks?: ListLinks[];
+  /**
+   * @maximum 5
+   */
+  image?: Image[];
+}
+
+const GRIDCOLUMN = {
+  1: "grid-cols-1",
+  2: "grid-cols-2",
+  3: "grid-cols-[auto_auto_auto]",
+  4: "grid-cols-[auto_auto_auto_auto]",
+  5: "grid-cols-[auto_auto_auto_auto]",
+  6: "grid-cols-[auto_auto_auto_auto_auto]",
+};
+
+const COLUMNSTARTIMG = {
+  1: "col-start-5 col-end-6",
+  2: "col-start-3 col-end-6",
+  3: "col-start-3 col-end-6",
+  4: "col-start-2 col-end-6",
+  5: "col-start-1 col-end-6",
+  6: "col-start-1 col-end-6",
+};
+const COLUMNSTARTLINKS = {
+  1: "col-start-1 col-end-2",
+  2: "col-start-1 col-end-3",
+  3: "col-start-1 col-end-3",
+  4: "col-start-1 col-end-5",
+  5: "col-start-1 col-end-5",
+};
+
+function NavItem({ item }: { item: MenuNavItem }) {
+  const { href, label, listlinks, image } = item;
+
+  let cont: number = 0;
+  let contLinks: number = 0;
+  let contImages: number = 0;
+  if (listlinks != undefined) {
+    contLinks = listlinks.length;
+  }
+  if (image != undefined) {
+    image.map((img) => {
+      contImages += img.img.aspectRatio == "2/1" ? 2 : 1;
+    });
+  }
+  cont = contLinks + contImages;
 
   return (
-    <li class="group flex items-center">
-      <a href={url} class="py-6">
-        <span class="group-hover:underline text-xs font-thin">
-          {name}
+    <li class="group flex items-center gap-3">
+      <a href={href} class="my-auto">
+        <span class="group-hover:font-semibold cursor-pointer text-sm font-thin text-black px-5 py-3">
+          {label}
         </span>
       </a>
-
-      {children && children.length > 0 &&
-        (
+      <div
+        class={`fixed hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 py-16 duration-200  ${
+          GRIDCOLUMN[cont as keyof typeof GRIDCOLUMN]
+        }`}
+        style={{ top: "35px", left: "0px", marginTop: headerHeight }}
+      >
+        {listlinks != undefined && listlinks?.length > 0 && (
           <div
-            class="fixed hidden hover:flex group-hover:flex bg-base-100 z-50 items-start justify-center gap-6 border-t border-b-2 border-base-200 w-screen"
-            style={{ top: "0px", left: "0px", marginTop: headerHeight }}
+            class={`flex flex-row justify-between gap-5 ${
+              COLUMNSTARTLINKS[contLinks as keyof typeof COLUMNSTARTLINKS]
+            }`}
           >
-            {image?.url && (
-              <Image
-                class="p-6"
-                src={image.url}
-                alt={image.alternateName}
-                width={300}
-                height={332}
-                loading="lazy"
-              />
-            )}
-            <ul class="flex items-start justify-center gap-6">
-              {children.map((node) => (
-                <li class="p-6">
-                  <a class="hover:underline" href={node.url}>
-                    <span>{node.name}</span>
-                  </a>
-
-                  <ul class="flex flex-col gap-1 mt-4">
-                    {node.children?.map((leaf) => (
-                      <li>
-                        <a class="hover:underline" href={leaf.url}>
-                          <span class="text-xs">{leaf.name}</span>
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
+            {listlinks.map((links, index) => (
+              <ListLinksOurImage listlinks={links} index={index + 1} />
+            ))}
           </div>
         )}
+        {image != undefined && image?.length > 0 && (
+          <div
+            class={`grid justify-start gap-2 ${
+              COLUMNSTARTIMG[contImages as keyof typeof GRIDCOLUMN]
+            }`}
+          >
+            {image?.map((img, index) => (
+              <ListLinksOurImage image={img} index={index + 1} />
+            ))}
+          </div>
+        )}
+      </div>
     </li>
   );
 }

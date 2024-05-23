@@ -88,14 +88,11 @@ function Searchbar({
   });
 
   return (
-    <div
-      class="w-full grid gap-8 px-4 py-6 overflow-y-hidden"
-      style={{ gridTemplateRows: "min-content auto" }}
-    >
-      <form id={id} action={action} class="join">
+    <div class="w-full grid gap-8 overflow-y-hidden overflow-x-hidden h-10 lg:h-9 lg:max-w-64 relative">
+      <form id={id} action={action} class="join bg-perola-intermediario ">
         <Button
           type="submit"
-          class="join-item btn-square"
+          class="join-item flex justify-center items-center px-3"
           aria-label="Search"
           for={id}
           tabIndex={-1}
@@ -111,12 +108,12 @@ function Searchbar({
           />
           {loading.value
             ? <span class="loading loading-spinner loading-xs" />
-            : <Icon id="MagnifyingGlass" size={24} strokeWidth={0.01} />}
+            : <Icon id="MagnifyingGlass" size={20} strokeWidth={0.01} />}
         </Button>
         <input
           ref={searchInputRef}
           id="search-input"
-          class="input input-bordered join-item flex-grow"
+          class="px-0 border-none join-item flex-grow text-xs bg-transparent h-full outline-none text-black placeholder:text-black"
           name={name}
           onInput={(e) => {
             const value = e.currentTarget.value;
@@ -137,14 +134,6 @@ function Searchbar({
           aria-expanded={displaySearchPopup.value}
           autocomplete="off"
         />
-        <Button
-          type="button"
-          class="join-item btn-ghost btn-square hidden sm:inline-flex"
-          onClick={() => displaySearchPopup.value = false}
-          ariaLabel={displaySearchPopup.value ? "open search" : "search closed"}
-        >
-          <Icon id="XMark" size={24} strokeWidth={2} />
-        </Button>
       </form>
 
       <div

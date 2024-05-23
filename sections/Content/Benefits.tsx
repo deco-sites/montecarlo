@@ -41,7 +41,7 @@ export default function Benefits({
 }: Props) {
   const listOfBenefits = benefits.map((benefit, index) => {
     return (
-      <div class="flex flex-col h-full max-w-[127px]">
+      <div class="flex flex-col h-full max-w-[127px] mx-auto">
         <div class="
             relative flex justify-center items-center mb-4 min-h-[100px]
             before:absolute before:w-[70px] before:h-[70px] before:border-2 before:border-black before:rotate-45
@@ -64,7 +64,7 @@ export default function Benefits({
   });
 
   return (
-    <div class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-5 lg:gap-16">
+    <div class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-7 lg:gap-14">
       <div class="flex flex-col gap-3 container px-5">
         {title?.mobile && (
           <h2
@@ -79,10 +79,10 @@ export default function Benefits({
           />
         )}
       </div>
-      <div class="hidden lg:flex container flex-row flex-wrap gap-10 justify-evenly items-start max-w-[1080px]">
+      <div class="hidden md:flex container flex-row flex-wrap gap-10 justify-evenly items-start max-w-[1080px]">
         {listOfBenefits}
       </div>
-      <div class="block lg:hidden mx-5">
+      <div class="block md:hidden">
         <Carousel {...slider} children={listOfBenefits} />
       </div>
     </div>

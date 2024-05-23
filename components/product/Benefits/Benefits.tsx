@@ -42,7 +42,7 @@ function Benefit({ props }: { props: Benefit }) {
 export default function BenefitsList({ title, benefits }: Props) {
   return (
     <div class="w-full flex-col gap-3 flex mt-7 ">
-      <span class=" uppercase text-xs">
+      <span class=" uppercase text-sm">
         {title}
       </span>
       <div class="flex flex-col gap-3">

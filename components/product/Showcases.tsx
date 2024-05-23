@@ -86,9 +86,9 @@ function Showcase({
         id={id + "1"}
         class={clx(
           "grid max-w-[1504px]",
-          layout?.showArrows &&
-            "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
-          "px-0",
+          layout?.showArrows
+            ? "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] px-0"
+            : "lg:px-3",
         )}
       >
         <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start">
@@ -131,9 +131,9 @@ function Showcase({
         id={id + "2"}
         class={clx(
           "grid max-w-[1504px] pt-6 lg:pt-12",
-          layout?.showArrows &&
-            "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
-          "px-0",
+          layout?.showArrows
+            ? "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] px-0"
+            : "lg:px-3",
         )}
       >
         <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start">

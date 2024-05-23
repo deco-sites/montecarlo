@@ -16,15 +16,19 @@ function VariantSelector({ product }: Props) {
     ? product.additionalProperty.find((r) => r.name === "Aro do Anel")?.value
     : null;
 
+  if (isVariantOf?.hasVariant.length === 1) {
+    return null;
+  }
+
   return (
-    <ul class="flex flex-col gap-4">
+    <ul class="flex flex-col gap-4 order-5">
       {Object.keys(possibilities).map((name) => (
         name === "Aro do Anel"
           ? (
             <div class="flex flex-col gap-1">
               <span class="text-xs uppercase">Tamanho</span>
               <div class="relative w-fit">
-                <label class="peer relative flex flex-row items-center justify-between border px-3 py-1">
+                <label class="peer relative flex flex-row items-center justify-between border px-3 py-1 cursor-pointer">
                   <input type="checkbox" name="todo[1]" class="peer" />
                   <span class="left-0 z-10 -ml-4 px-6 before:left-0 before:absolute before:-z-10 before:h-5 before:w-8 before:bg-white">
                     {size}

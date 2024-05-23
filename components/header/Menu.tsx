@@ -1,94 +1,89 @@
-import Icon from "../../components/ui/Icon.tsx";
-import type { SiteNavigationElement } from "apps/commerce/types.ts";
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
+import Button from "deco-sites/montecarlo/components/ui/Button.tsx";
+import IconHeart from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/heart.tsx";
+import IconUser from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/user.tsx";
+import IconChevronRight from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/chevron-right.tsx";
+import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
+import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
+import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 
-export interface Props {
-  items: SiteNavigationElement[];
+export interface Link {
+  label: string;
+  href: string;
 }
 
-function MenuItem({ item }: { item: SiteNavigationElement }) {
-  return (
-    <div class="collapse collapse-plus">
-      <input type="checkbox" />
-      <div class="collapse-title">{item.name}</div>
-      <div class="collapse-content">
-        <ul>
-          <li>
-            <a class="underline text-sm" href={item.url}>
-              <SendEventOnClick
-                id=""
-                event={{
-                  name: "login",
-                  params: {
-                    method: item.name,
-                  },
-                }}
-              />
-              Ver todos
-            </a>
-          </li>
-          {item.children?.map((node) => (
-            <li>
-              <MenuItem item={node} />
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  );
+export interface ListLinks {
+  title: string;
+  listLinks: Link[];
+  linkShowMore: {
+    label: string;
+    href: string;
+  };
+}
+
+export interface Image {
+  img: {
+    src: ImageWidget;
+    alt: string;
+    aspectRatio: "2/1" | "1/1";
+  };
+  href: string;
+  title: string;
+  conter: HTMLWidget;
+}
+
+export interface MenuNavItem {
+  label: string;
+  href?: string;
+  listlinks?: ListLinks[];
+  image?: Image[];
+}
+export interface Props {
+  items?: MenuNavItem[];
 }
 
 function Menu({ items }: Props) {
+  const {
+    displayMenuProducts,
+    displayMenu,
+    productsChild,
+  } = useUI();
+
   return (
-    <div class="flex flex-col h-full">
-      <ul class="px-4 flex-grow flex flex-col divide-y divide-base-200">
-        {items.map((item) => (
-          <li>
-            <MenuItem item={item} />
+    <div class="flex flex-col h-auto w-full bg-white pl-10 pr-2">
+      <ul class="flex flex-col text-xs gap-4">
+        {items?.map((item, index) => (
+          <li class="font-medium">
+            {item.listlinks !== undefined && item.listlinks?.length > 0
+              ? (
+                <Button
+                  class={`flex items-center justify-between py-3 m-auto w-full bg-white font-normal text-base text-black`}
+                  onClick={() => {
+                    displayMenuProducts.value = true;
+                    displayMenu.value = false;
+                    productsChild.value = {
+                      title: item.label,
+                      list: item.listlinks,
+                    };
+                  }}
+                >
+                  {item.label}
+                  <IconChevronRight class="w-8 h-8" stroke={1} size={30} />
+                </Button>
+              )
+              : (
+                <a
+                  href={item.href}
+                  class={`flex border-b-[1px] items-center justify-between px-4 py-4 m-auto w-full font-normal text-[14px] leading-[17.5px] ${
+                    index === items.length - 1
+                      ? "text-primary bg-secondary"
+                      : "text-primary-content"
+                  }`}
+                >
+                  {item.label}
+                </a>
+              )}
           </li>
         ))}
-      </ul>
-
-      <ul class="flex flex-col py-2 bg-base-200">
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="/wishlist"
-          >
-            <Icon id="Heart" size={24} strokeWidth={2} />
-            <span class="text-sm">Lista de desejos</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="MapPin" size={24} strokeWidth={2} />
-            <span class="text-sm">Nossas lojas</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="Phone" size={24} strokeWidth={2} />
-            <span class="text-sm">Fale conosco</span>
-          </a>
-        </li>
-        <li>
-          <a
-            class="flex items-center gap-4 px-4 py-2"
-            href="https://www.deco.cx"
-          >
-            <Icon id="User" size={24} strokeWidth={2} />
-            <span class="text-sm">Minha conta</span>
-          </a>
-        </li>
       </ul>
     </div>
   );

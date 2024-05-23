@@ -33,16 +33,32 @@ import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/
 
 import ProductDescription from "./ProductDescription.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
-
+import { HTMLWidget } from "apps/admin/widgets.ts";
 import {
   SendEventOnClick,
   SendEventOnView,
 } from "../../components/Analytics.tsx";
 
+interface Bonus {
+  text: string;
+  /**
+   * @description To position the discount add the "${bonus}"
+   */
+  message: HTMLWidget;
+  /**
+   * @description Value to discount in number example 15% = 15
+   */
+  discont: number;
+  /**
+   * @description Maximum value for discount
+   */
+  valueDiscontMax: number;
+}
+
 export interface ExtraInformation {
   /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
   pixDiscont: number;
-  bonus: ModalBonusProps;
+  bonus: Bonus;
   nameGuia: string;
   cepLink: { label: string; url: string };
   benefit: Benefit;
@@ -152,12 +168,18 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
               {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
               <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
             </span>
-            <ModalBonus props={extraInformations.bonus} />
+            <ModalBonus
+              text={extraInformations.bonus.text}
+              message={extraInformations.bonus.message}
+              price={price}
+              discont={extraInformations.bonus.discont}
+              valueDiscontMax={extraInformations.bonus.valueDiscontMax}
+            />
           </div>
           {/* Sku Selector */}
           <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
             {groups && (
-              <div class="flex gap-2 w-full flex-wrap">
+              <div class="flex gap-y-2 gap-6 w-full flex-wrap">
                 {groups.map((group) => (
                   <SelectVariants
                     variants={group.variants}
@@ -166,17 +188,23 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     losses={extraInformations.lossesImage}
                   />
                 ))}
+                <ProductSelector product={product} />
+                <span
+                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${
+                    product.isVariantOf?.hasVariant.length == 1 &&
+                    " "
+                  }`}
+                >
+                  {groups.findIndex((r) => r.type == "Pedras")
+                    ? "Guia de pedras"
+                    : isVariantOf?.hasVariant.length === 1
+                    ? "Guia de medidas"
+                    : isVariantOf?.hasVariant.length === 1 &&
+                      groups.findIndex((r) => r.type == "Pedras") &&
+                      "Guia de Medidas e Pedras "}
+                </span>
               </div>
             )}
-            <ProductSelector product={product} />
-            <span
-              class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer ${
-                product.isVariantOf?.hasVariant.length == 1 &&
-                " w-full text-center"
-              }`}
-            >
-              {extraInformations.nameGuia}
-            </span>
           </div>
           {/* Add to Cart and Favorites button */}
           <div class="mt-7 flex flex-col gap-2 ">
