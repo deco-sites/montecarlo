@@ -77,7 +77,7 @@ export default function HeroTextWithImage(props: Props) {
           >
             {title}
           </h1>
-          {description &&
+          {description !== "" &&
             (
               <p
                 class={`text-xl leading-9 font-poppins text-${style.textAlign} max-w-xs`}
@@ -85,30 +85,36 @@ export default function HeroTextWithImage(props: Props) {
                 {description}
               </p>
             )}
-          <div
-            class={`
-                flex border border-white w-fit mt-5
-                ${
-              (CTA?.alignment === "left" && "justify-start") ||
-              (CTA?.alignment === "center" && "justify-center") ||
-              (CTA?.alignment === "right" && "justify-end")
-            }
-            `}
-          >
-            {CTA?.buttons?.map((cta, index) => (
-              <a
-                key={index}
-                href={cta.href}
-                class={`btn text-xl py-2.5 px-3.5 w-fit rounded-none border-transparent self-center hover:opacity-80 font-light`}
-                style={{
-                  backgroundColor: cta.backgroundColor,
-                  color: cta.fontColor,
-                }}
+
+          {
+            CTA?.buttons && CTA?.buttons?.length > 0 ? (
+              <div
+                class={`
+                    flex border border-white w-fit mt-5
+                    ${
+                  (CTA?.alignment === "left" && "justify-start") ||
+                  (CTA?.alignment === "center" && "justify-center") ||
+                  (CTA?.alignment === "right" && "justify-end")
+                }
+                `}
               >
-                {cta.label}
-              </a>
-            ))}
-          </div>
+                {CTA?.buttons?.map((cta, index) => (
+                  <a
+                    key={index}
+                    href={cta.href}
+                    class={`btn text-xl py-2.5 px-3.5 w-fit rounded-none border-transparent self-center hover:opacity-80 font-light`}
+                    style={{
+                      backgroundColor: cta.backgroundColor,
+                      color: cta.fontColor,
+                    }}
+                  >
+                    {cta.label}
+                  </a>
+                ))}
+              </div>
+            ) : null
+          }
+          
         </div>
       </div>
       <SendEventOnView

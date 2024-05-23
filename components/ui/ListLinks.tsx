@@ -33,7 +33,7 @@ function ListLinks(props: Props) {
   }
 
   return (
-    <div class="container flex flex-col gap-4 md:grid md:grid-cols-3 lg:flex lg:gap-8 lg:flex-row flex-wrap lg:px-10 py-10 lg:py-20 justify-center max-w-[80vw] md:items-center w-full md:max-w-fit">
+    <div class="container flex flex-col gap-4 md:grid md:grid-cols-3 lg:flex lg:gap-8 lg:flex-row flex-wrap md:px-10 lg:px-10 py-10 lg:py-20 justify-center max-w-[80vw] md:items-center w-full md:max-w-fit">
       {links.map((link, index) => (
         <a 
           key={index}
