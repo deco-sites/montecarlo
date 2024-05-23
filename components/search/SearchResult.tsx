@@ -70,20 +70,33 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
-  // const collapsed = useSignal(false);
+  let minPrice = 0;
+  let maxPrice = 500000;
 
-  // const columnsState = useState(layout?.columns || {
-  //   desktop: 3,
-  //   mobile: 2
-  // });
-  // const columnsState : any = useSignal(layout?.columns);
+  products.forEach(product => {
+    product?.offers?.offers.forEach(offer => {
+      const price = offer.price;
+      if (price < minPrice) {
+        minPrice = price;
+      }
+      if (price > maxPrice) {
+        maxPrice = price;
+      }
+    });
+  });
+
+  filters.push({
+      "@type": "FilterRange",
+      key: "price-range",
+      label: "Faixa de Preço",
+      values: {
+        min: minPrice,
+        max: maxPrice
+      }
+  });
 
   return (
     <>
-      {/* <pre>
-        <code>{JSON.stringify(page)}</code>
-      </pre> */}
-
       <div class={`m-auto max-w-[1408px] px-4 ${isFirstPage ? "py-10" : "pt-0"} ${pageInfo?.nextPage ? "pb-0" : ""}`}>
         {(isFirstPage || !isPartial) && (
           <SearchControls

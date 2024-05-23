@@ -4,12 +4,13 @@ import { useEffect, useRef, useState } from "preact/hooks";
 export interface Props { 
     classProps?: string,
     sliderClass?: string,
+    label?: string,
     min: number,
     max: number,
 }
 
 function RangeSlider(props: Props) {
-    const { classProps, min, max, sliderClass } = props;
+    const { classProps, min, max, sliderClass, label } = props;
 
     const rangeSliderRef = useRef<HTMLDivElement>(null);
     const leftKnobRef = useRef<HTMLButtonElement>(null);
@@ -105,20 +106,23 @@ function RangeSlider(props: Props) {
     }, []);
 
     return (
-        <div class={`relative ${classProps}`}
-            ref={rangeSliderRef} data-range-slider min={min} max={max}>
-            <div class={`range-slider ${sliderClass}`}>
-                <div class="range-bar">
-                    <div ref={rangeFillRef} class="range-fill"></div>
+        <>
+            <span class="font-poppins text-sm">{label}</span>
+            <div class={`relative ${classProps}`}
+                ref={rangeSliderRef} data-range-slider min={min} max={max}>
+                <div class={`range-slider ${sliderClass}`}>
+                    <div class="range-bar">
+                        <div ref={rangeFillRef} class="range-fill"></div>
+                    </div>
+                    <button ref={leftKnobRef} class="knob left"></button>
+                    <button ref={rightKnobRef} class="knob right"></button>
                 </div>
-                <button ref={leftKnobRef} class="knob left"></button>
-                <button ref={rightKnobRef} class="knob right"></button>
-            </div>
 
-            <div class="flex gap-2 w-[200px] font-poppins text-sm text-[#AAA89C]">
-                <span class="range-min-interval">{formatPrice(leftValue)}</span> - <span class="range-max-interval">{formatPrice(rightValue)}</span>
+                <div class="flex gap-2 w-[200px] font-poppins text-sm text-[#AAA89C]">
+                    <span class="range-min-interval">{formatPrice(leftValue ? leftValue : 1)}</span> - <span class="range-max-interval">{formatPrice(rightValue ? rightValue : 1)}</span>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

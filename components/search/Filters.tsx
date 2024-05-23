@@ -3,11 +3,14 @@ import { formatPrice } from "../../sdk/format.ts";
 import type {
   Filter,
   FilterToggle,
+  FilterRange,
   FilterToggleValue,
   ProductListingPage,
 } from "apps/commerce/types.ts";
 import { parseRange } from "apps/commerce/utils/filters.ts";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
+
+import RangeSlider from "../../islands/RangeSlider.tsx";
 
 interface Props {
   filters: ProductListingPage["filters"];
@@ -16,6 +19,9 @@ interface Props {
 
 const isToggle = (filter: Filter): filter is FilterToggle =>
   filter["@type"] === "FilterToggle";
+
+const isRange = (filter: Filter): filter is FilterRange =>
+  filter["@type"] === "FilterRange";
 
 function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
@@ -91,6 +97,16 @@ function Filters({ filters, layout }: Props) {
                   </div>
                 </details>
               </li>
+            )
+          }
+        )}
+
+      {filters
+        .filter(isRange)
+          .map((filter) => {
+
+            return (
+              <RangeSlider classProps="max-w-[600px]" sliderClass="max-w-[300px] bg-red-500" label={filter.label} min={filter.values.min} max={filter.values.max} />
             )
           }
         )}

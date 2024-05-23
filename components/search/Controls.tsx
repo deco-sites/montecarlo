@@ -26,10 +26,10 @@ function SearchControls(
 
   const columnsMobile = useSignal(2);
 
-  const priceFilter = filters.find(item => item.key === "price");
+  const priceFilter = filters.find(item => item.key === "price-range");
   const priceArray =  priceFilter ? [priceFilter] : [];
 
-  // console.log({filters});
+  filters = filters.filter(item => item.key !== "price-range");
 
   const moreFilters = useSignal(false);
   const showButton = useSignal(false);
@@ -76,7 +76,7 @@ function SearchControls(
         layout === "horizontal" ? (
           <>
             <div class="hidden md:flex flex-col gap-2">
-              <div class="flex flex-row justify-between">
+              <div class="flex flex-row flex-wrap justify-between gap-5">
                 {
                   title && title.length > 0 ? (
                     <h6 class={"font-poppins text-sm font-semibold"}>{title}</h6>
@@ -84,10 +84,8 @@ function SearchControls(
                 }
                 <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
                 <div class="flex flex-row justify-end font-poppins text-sm min-w-[40vw] gap-10 relative">
-                  <span class="font-poppins text-sm">Faixa de Preço</span>
-                    <RangeSlider classProps="max-w-[600px]" sliderClass="max-w-[300px] bg-red-500" min={290} max={12930} />
+                    <Filters filters={priceArray} layout={layout}/>
                 </div>
-                    {/* <Filters filters={priceArray} layout={layout}/> */}
               </div>
 
               <div class={`flex ${layout === "horizontal" ? "flex-row gap-4" : "flex-col gap-6"} p-4 md:pl-0`}>
