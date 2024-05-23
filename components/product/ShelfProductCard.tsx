@@ -80,7 +80,7 @@ function ShelfProductCard({
   const {
     url,
     productID,
-    name,
+    name = "",
     image: images,
     offers,
     isVariantOf,
@@ -96,6 +96,8 @@ function ShelfProductCard({
   const variants = Object.entries(Object.values(possibilities)[0] ?? {});
   const materials = isVariantOf &&
     useMaterialProducts(isVariantOf.additionalProperty);
+
+  const newName = parseInt(name) ? isVariantOf?.name : name;
 
   const l = layout;
   const align = "center";
@@ -190,7 +192,7 @@ function ShelfProductCard({
             class={`truncate font-normal ${
               PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
             }`}
-            dangerouslySetInnerHTML={{ __html: name ?? "" }}
+            dangerouslySetInnerHTML={{ __html: newName ?? "" }}
           />
         </div>
         <div class="flex w-full h-auto flex-1 py-1 min-h-4">
