@@ -91,7 +91,7 @@ function CategoryList(props: Props) {
   return (
     <div
       id={id}
-      class=" py-7 lg:py- flex flex-col justify-center items-center gap-5 lg:gap-10 text-base-content lg:py-10 text-center px-1"
+      class="container py-7 lg:py- flex flex-col justify-center items-center gap-5 lg:gap-10 text-base-content lg:py-10 text-center px-1"
     >
       <div class="flex flex-col w-full gap-1">
         <Title text={header.title} />
