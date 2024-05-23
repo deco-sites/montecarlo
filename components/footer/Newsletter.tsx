@@ -2,6 +2,12 @@ import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
 
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
+
 interface Form {
   fields: Field[];
   termsAndConditions?: HTMLWidget;
@@ -194,9 +200,12 @@ function Newsletter({
     </div>
   );
 
+  const id = useId();
+
   return (
     <div
       class="px-5 py-10"
+      id={id}
       style={{ backgroundColor: layout.bgColor, color: layout.textColor }}
     >
       <div class="flex flex-col items-center container gap-5 lg:gap-7 max-w-[700px]">
@@ -258,6 +267,15 @@ function Newsletter({
           </div>
         </form>
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+          },
+        }}
+      />
     </div>
   );
 }

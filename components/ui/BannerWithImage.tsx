@@ -2,6 +2,11 @@ import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import ButtonLink from "deco-sites/montecarlo/components/ui/ButtonLink.tsx";
 import Image from "apps/website/components/Image.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   title: HTMLWidget;
@@ -66,8 +71,10 @@ export default function BannerWithImage(props: Props) {
     orderMobile,
   } = { ...DEFAULTPROPS, ...props };
 
+  const id = useId();
+
   return (
-    <div class="w-full lg:my-9 my-4" style={{ background: backgroundColor }}>
+    <div id={id} class="w-full lg:my-9 my-4" style={{ background: backgroundColor }}>
       <div
         class={`flex w-full max-w-[1512px] mx-auto  ${
           ORDER[orderDesktop || "Imagem a Direita"]
@@ -122,6 +129,15 @@ export default function BannerWithImage(props: Props) {
           )}
         </div>
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+          },
+        }}
+      />
     </div>
   );
 }
