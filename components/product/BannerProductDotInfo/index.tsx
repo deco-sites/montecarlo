@@ -51,7 +51,7 @@ interface ConfigProps {
 interface ImageProps {
   source: ImageWidget;
   hoverImage?: ImageWidget;
-  alt?: string;
+  alt: string;
 }
 
 export interface Props {

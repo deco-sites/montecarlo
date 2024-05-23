@@ -59,6 +59,7 @@ export type AvailableIcons =
   | "menu"
   | "Location"
   | "arrowTop"
+  | "SearchIcon"
   | "columnOne"
   | "columnTwo";
 

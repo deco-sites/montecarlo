@@ -11,6 +11,8 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import ProductCardInline from "../product/ProductCardInline.tsx";
 import ButtonLink from "./ButtonLink.tsx";
+import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
+import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 
 /**
  * @titleBy title
@@ -179,14 +181,12 @@ export default function TrioOfImagesAndProducts(
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8">
       <div class="flex flex-col w-full gap-1">
-        {title && <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>}
-        {subTitle && (
-          <p class=" font-medium  text-sm lg:text-base">{subTitle}</p>
-        )}
+        <Title text={title} />
+        <SubTitle text={subTitle} />
       </div>
       <div
         id={id}
-        class="grid grid-cols-[48px_1fr_48px] lg:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] h-auto max-w-[1408px] w-full"
+        class="grid grid-cols-[48px_1fr_48px] lg:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] h-auto max-w-[1512px] lg:px-14 w-full"
       >
         <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-2 lg:justify-center">
           {cards?.map((image, index) => {

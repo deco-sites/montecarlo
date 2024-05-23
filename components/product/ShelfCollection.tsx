@@ -13,6 +13,8 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import { clx } from "../../sdk/clx.ts";
 import ButtonLink from "../ui/ButtonLink.tsx";
+import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
+import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 
 export interface Props {
   products: Product[] | null;
@@ -93,18 +95,8 @@ function ShelfCollection({
   return (
     <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 bg-[#E0DFD6] items-center">
       <div class="flex flex-col w-full gap-1">
-        {title && (
-          <h2 class=" font-semibold text-center text-xl lg:text-3xl">
-            {title}
-          </h2>
-        )}
-        {subTitle && (
-          <span
-            dangerouslySetInnerHTML={{ __html: subTitle }}
-            class=" font-medium text-center text-sm lg:text-base"
-          >
-          </span>
-        )}
+        {title && <Title text={title} />}
+        {subTitle && <SubTitle text={subTitle} />}
       </div>
       <div
         id={id}
