@@ -70,8 +70,8 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
-  let minPrice = 0;
-  let maxPrice = 500000;
+  let minPrice = 1;
+  let maxPrice = 1;
 
   products.forEach(product => {
     product?.offers?.offers.forEach(offer => {
@@ -87,7 +87,7 @@ function Result({
 
   filters.push({
       "@type": "FilterRange",
-      key: "price-range",
+      key: "price",
       label: "Faixa de Preço",
       values: {
         min: minPrice,

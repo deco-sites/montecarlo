@@ -26,10 +26,10 @@ function SearchControls(
 
   const columnsMobile = useSignal(2);
 
-  const priceFilter = filters.find(item => item.key === "price-range");
+  const priceFilter = filters.find(item => item.key === "price" && item["@type"] === "FilterRange");
   const priceArray =  priceFilter ? [priceFilter] : [];
 
-  filters = filters.filter(item => item.key !== "price-range");
+  filters = filters.filter(item => item.key !== "price");
 
   const moreFilters = useSignal(false);
   const showButton = useSignal(false);

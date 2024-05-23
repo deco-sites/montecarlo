@@ -20,6 +20,17 @@ function RangeSlider(props: Props) {
     const [leftValue, setLeftValue] = useState(min);
     const [rightValue, setRightValue] = useState(max);
 
+    const leftValueRef = useRef(leftValue);
+    const rightValueRef = useRef(rightValue);
+
+    useEffect(() => {
+        leftValueRef.current = leftValue;
+    }, [leftValue]);
+
+    useEffect(() => {
+        rightValueRef.current = rightValue;
+    }, [rightValue]);
+
     useEffect(() => {
         const rangeSlider = rangeSliderRef.current!;
         const rangeBar = rangeSlider.querySelector('.range-bar') as HTMLDivElement;
@@ -76,8 +87,8 @@ function RangeSlider(props: Props) {
 
         leftKnob.addEventListener('mousedown', startDragLeft);
         rightKnob.addEventListener('mousedown', startDragRight);
-        document.addEventListener('mousemove', handleDragSlider as EventListener);
-        document.addEventListener('mouseup', stopDragging);
+        rangeSlider.addEventListener('mousemove', handleDragSlider as EventListener);
+        rangeSlider.addEventListener('mouseup', stopDragging);
 
         leftKnob.addEventListener('touchstart', (event) => {
             startDragLeft();
@@ -85,23 +96,23 @@ function RangeSlider(props: Props) {
         rightKnob.addEventListener('touchstart', (event) => {
             startDragRight();
         });
-        document.addEventListener('touchmove', (event) => {
+        rangeSlider.addEventListener('touchmove', (event) => {
             handleDragSlider(event.touches[0]);
         });
-        document.addEventListener('touchend', stopDragging);
+        rangeSlider.addEventListener('touchend', stopDragging);
 
         return () => {
             leftKnob.removeEventListener('mousedown', startDragLeft);
             rightKnob.removeEventListener('mousedown', startDragRight);
-            document.removeEventListener('mousemove', handleDragSlider as EventListener);
-            document.removeEventListener('mouseup', stopDragging);
+            rangeSlider.removeEventListener('mousemove', handleDragSlider as EventListener);
+            rangeSlider.removeEventListener('mouseup', stopDragging);
 
             leftKnob.removeEventListener('touchstart', startDragLeft);
             rightKnob.removeEventListener('touchstart', startDragRight);
-            document.removeEventListener('touchmove', (event) => {
+            rangeSlider.removeEventListener('touchmove', (event) => {
                 handleDragSlider(event.touches[0]);
             });
-            document.removeEventListener('touchend', stopDragging);
+            rangeSlider.removeEventListener('touchend', stopDragging);
         };
     }, []);
 
