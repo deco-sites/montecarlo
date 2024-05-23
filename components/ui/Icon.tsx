@@ -49,7 +49,10 @@ export type AvailableIcons =
   | "share"
   | "arrowLeft"
   | "arrowRight"
-  | "alertBonus";
+  | "alertBonus"
+  | "arrowTop"
+  | "columnOne"
+  | "columnTwo";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

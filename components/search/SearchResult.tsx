@@ -16,7 +16,7 @@ export interface Layout {
   /**
    * @description Use drawer for mobile like behavior on desktop. Aside for rendering the filters alongside the products
    */
-  variant?: "aside" | "drawer";
+  variant?: "aside" | "horizontal";
   /**
    * @description Number of products per line on grid
    */
@@ -28,7 +28,7 @@ export interface Layout {
 }
 
 export interface Props {
-  /** @title Integration */
+  title?: string;
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
@@ -51,6 +51,7 @@ function Result({
   cardLayout,
   startingPage = 0,
   url: _url,
+  title,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   url: string;
@@ -69,26 +70,42 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
+  // const collapsed = useSignal(false);
+
+  // const columnsState = useState(layout?.columns || {
+  //   desktop: 3,
+  //   mobile: 2
+  // });
+  // const columnsState : any = useSignal(layout?.columns);
+
   return (
     <>
-      <div class="container px-4 sm:py-10">
+      {/* <pre>
+        <code>{JSON.stringify(page)}</code>
+      </pre> */}
+
+      <div class={`m-auto max-w-[1408px] px-4 ${isFirstPage ? "py-10" : "pt-0"} ${pageInfo?.nextPage ? "pb-0" : ""}`}>
         {(isFirstPage || !isPartial) && (
           <SearchControls
             sortOptions={sortOptions}
             filters={filters}
             breadcrumb={breadcrumb}
-            displayFilter={layout?.variant === "drawer"}
+            // displayFilter={layout?.variant === "drawer"}
+            layout={layout?.variant}
+            title={title}
           />
         )}
 
         <div class="flex flex-row">
           {layout?.variant === "aside" && filters.length > 0 &&
             (isFirstPage || !isPartial) && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
+            <aside class="hidden md:block w-min min-w-[250px]">
+              <ul class={`flex flex-col gap-6 p-4 md:pl-0`}>
+                <Filters filters={filters} />
+              </ul>
             </aside>
           )}
-          <div class="flex-grow" id={id}>
+          <div class="flex-grow mt-4 relative" id={id}>
             <ProductGallery
               products={products}
               offset={offset}
@@ -155,7 +172,11 @@ function SearchResult(
     return <NotFound />;
   }
 
-  return <Result {...props} page={page} />;
+  return (
+    <>
+      <Result {...props} page={page} />
+    </>
+  )
 }
 
 export const loader = (props: Props, req: Request) => {

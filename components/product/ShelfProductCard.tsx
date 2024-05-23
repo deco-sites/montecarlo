@@ -138,11 +138,11 @@ function ShelfProductCard({
   return (
     <div
       id={id}
-      class={`card card-compact group w-full px-1 gap-2 text-center rounded-none`}
+      class={`card-compact group w-full h-full gap-2 text-center rounded-none my-4`}
       data-deco="view-product"
     >
       <figure
-        class="relative overflow-hidden"
+        class="relative overflow-hidden mb-2"
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
       >
         {/* Product Images */}

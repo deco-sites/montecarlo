@@ -41,6 +41,7 @@ const DESKTOP_COLUMNS = {
 function ProductGallery(
   { products, pageInfo, layout, offset, url }: Props,
 ) {
+
   const platform = usePlatform();
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
   const desktop = DESKTOP_COLUMNS[layout?.columns?.desktop ?? 4];
@@ -55,7 +56,7 @@ function ProductGallery(
 
   return (
     <div
-      class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}
+      class={`grid ${mobile} gap-4 items-center ${desktop}`}
     >
       {layout?.format == "Show More" && (
         <Head>
