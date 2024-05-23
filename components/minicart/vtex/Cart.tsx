@@ -28,7 +28,7 @@ function Cart() {
       locale={locale}
       currency={currency}
       loading={loading.value}
-      freeShippingTarget={1000}
+      freeShippingTarget={400}
       coupon={coupon}
       onAddCoupon={(text) => addCouponsToCart({ text })}
       onUpdateQuantity={(quantity, index) =>

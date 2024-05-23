@@ -13,6 +13,7 @@ import * as $BannerProductDotInfo from "./islands/BannerProductDotInfo.tsx";
 import * as $FormStore_Form from "./islands/FormStore/Form.tsx";
 import * as $Header_ButtonCopy from "./islands/Header/ButtonCopy.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
+import * as $Header_Cart_itemsCartVtex from "./islands/Header/Cart/itemsCartVtex.tsx";
 import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
 import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
 import * as $Header_Cart_shopify from "./islands/Header/Cart/shopify.tsx";
@@ -50,6 +51,7 @@ const manifest = {
     "./islands/FormStore/Form.tsx": $FormStore_Form,
     "./islands/Header/ButtonCopy.tsx": $Header_ButtonCopy,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
+    "./islands/Header/Cart/itemsCartVtex.tsx": $Header_Cart_itemsCartVtex,
     "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
     "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,
     "./islands/Header/Cart/shopify.tsx": $Header_Cart_shopify,

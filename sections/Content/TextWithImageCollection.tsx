@@ -49,7 +49,7 @@ export default function TextWithImageCollection({
   description =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ornare ultrices. Vestibulum gravida ligula nec ex scelerisque, sed tristique neque porttitor. ",
   banner = {
-    image: { source: "https://placehold.co/704x704" },
+    image: { source: "https://placehold.co/704x704", alt: "monte carlo" },
   },
   placement = "left",
   style = {
@@ -127,7 +127,7 @@ export default function TextWithImageCollection({
             event={{
               name: "select_promotion" as const,
               params: {
-                crative_name: image.alt,
+                crative_name: banner.image.alt,
                 creative_slot: "TextWithImageCollection",
                 promotion_id: promotion,
                 promotion_name: promotion,
@@ -140,7 +140,7 @@ export default function TextWithImageCollection({
             event={{
               name: "view_promotion",
               params: {
-                crative_name: image.alt,
+                crative_name: banner.image.alt,
                 creative_slot: "TextWithImageCollection",
                 promotion_id: promotion,
                 promotion_name: promotion,
