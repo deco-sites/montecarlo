@@ -97,7 +97,7 @@ function Result({
 
   return (
     <>
-      <div class={`m-auto max-w-[1408px] px-4 ${isFirstPage ? "py-10" : "pt-0"} ${pageInfo?.nextPage ? "pb-0" : ""}`}>
+      <div class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${isFirstPage ? "py-10" : "pt-0"} ${pageInfo?.nextPage ? "pb-0" : ""}`}>
         {(isFirstPage || !isPartial) && (
           <SearchControls
             sortOptions={sortOptions}
