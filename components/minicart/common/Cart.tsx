@@ -75,10 +75,13 @@ function Cart({
             {/* Cart Items */}
             <ul
               role="list"
-              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col gap-6 w-full"
+              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col w-full"
             >
               {items.map((item, index) => (
-                <li key={index}>
+                <li
+                  key={index}
+                  class="first:pt-0 first:border-none first:mt-0 py-6 border-t border-[#CAC7B6] mt-4"
+                >
                   <CartItem
                     item={item}
                     index={index}

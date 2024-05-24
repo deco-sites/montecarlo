@@ -21,6 +21,7 @@ function Cart() {
           sale: item.sellingPrice / 100,
           list: item.listPrice / 100,
         },
+        skuName: item.skuName,
       }))}
       total={(total - discounts) / 100}
       subtotal={total / 100}

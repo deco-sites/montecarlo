@@ -19,6 +19,7 @@ export interface Item {
     sale: number;
     list: number;
   };
+  skuName?: string;
 }
 
 export interface Props {
@@ -42,9 +43,11 @@ function CartItem(
     itemToAnalyticsItem,
   }: Props,
 ) {
-  const { image, name, price: { sale, list }, quantity } = item;
+  const { image, name, price: { sale, list }, quantity, skuName } = item;
   const isGift = sale < 0.01;
   const [loading, setLoading] = useState(false);
+
+  const numberAro = skuName && parseInt(skuName);
 
   const withLoading = useCallback(
     <A,>(cb: (args: A) => Promise<void>) => async (e: A) => {
@@ -62,7 +65,7 @@ function CartItem(
 
   return (
     <div
-      class="grid grid-rows-1 gap-2"
+      class="grid grid-rows-1 gap-3"
       style={{
         gridTemplateColumns: "auto 1fr",
       }}
@@ -70,19 +73,18 @@ function CartItem(
       <Image
         {...image}
         src={image.src.replace("55-55", "255-255")}
-        style={{ aspectRatio: "108 / 150" }}
-        width={108}
-        height={150}
-        class="h-full object-contain"
+        width={89}
+        height={89}
+        class="h-full object-contain aspect-square border border-[#E0DFD6]"
       />
 
-      <div class="flex flex-col gap-2">
-        <div class="flex justify-between items-center">
-          <span>{name}</span>
+      <div class="flex flex-col justify-between">
+        <div class="flex justify-between items-center gap-1">
+          <span class=" text-xs line-clamp-2 leading-4 text-black">{name}</span>
           <Button
             disabled={loading || isGift}
             loading={loading}
-            class="btn-ghost btn-square"
+            class="w-auto h-auto self-start"
             onClick={withLoading(async () => {
               const analyticsItem = itemToAnalyticsItem(index);
 
@@ -105,37 +107,45 @@ function CartItem(
                 },
               }}
             />
-            <Icon id="Trash" size={24} />
+            <Icon id="Delete" width={16} height={18} class={"text-[#CAC7B6]"} />
           </Button>
         </div>
-        <div class="flex items-center gap-2">
-          <span class="line-through text-sm">
-            {formatPrice(list, currency, locale)}
-          </span>
-          <span class="text-sm text-secondary">
-            {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
-          </span>
+        <div>
+          {!Number.isNaN(numberAro) && (
+            <span class="text-xs font-medium">Aro do anel: {numberAro}</span>
+          )}
         </div>
+        <div class="flex justify-between">
+          <QuantitySelector
+            disabled={loading || isGift}
+            quantity={quantity}
+            onChange={withLoading(async (quantity) => {
+              const analyticsItem = itemToAnalyticsItem(index);
+              const diff = quantity - item.quantity;
 
-        <QuantitySelector
-          disabled={loading || isGift}
-          quantity={quantity}
-          onChange={withLoading(async (quantity) => {
-            const analyticsItem = itemToAnalyticsItem(index);
-            const diff = quantity - item.quantity;
+              await onUpdateQuantity(quantity, index);
 
-            await onUpdateQuantity(quantity, index);
-
-            if (analyticsItem) {
-              sendEvent({
-                name: diff < 0 ? "remove_from_cart" : "add_to_cart",
-                params: {
-                  items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
-                },
-              });
-            }
-          })}
-        />
+              if (analyticsItem) {
+                sendEvent({
+                  name: diff < 0 ? "remove_from_cart" : "add_to_cart",
+                  params: {
+                    items: [{ ...analyticsItem, quantity: Math.abs(diff) }],
+                  },
+                });
+              }
+            })}
+          />
+          <div class="flex flex-col justify-end items-end">
+            {sale != list && (
+              <span class="text-[#AAA89C] text-xs line-through">
+                {formatPrice(list, currency, locale)}
+              </span>
+            )}
+            <span class="text-base text-black font-semibold self-end">
+              {isGift ? "Grátis" : formatPrice(sale, currency, locale)}
+            </span>
+          </div>
+        </div>
       </div>
     </div>
   );

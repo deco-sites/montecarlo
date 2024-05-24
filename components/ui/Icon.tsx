@@ -58,7 +58,8 @@ export type AvailableIcons =
   | "ShippingCustom"
   | "menu"
   | "Location"
-  | "arrowTop";
+  | "arrowTop"
+  | "Delete";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
