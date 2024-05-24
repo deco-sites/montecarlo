@@ -1,7 +1,12 @@
 import { itemToAnalyticsItem, useCart } from "apps/vtex/hooks/useCart.ts";
 import BaseCart from "../common/Cart.tsx";
+import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
 
-function Cart() {
+interface Props {
+  bonus?: PropsBonus;
+}
+
+function Cart({ bonus }: Props) {
   const { cart, loading, updateItems, addCouponsToCart } = useCart();
   const { items, totalizers } = cart.value ?? { items: [] };
   const total = totalizers?.find((item) => item.id === "Items")?.value || 0;
@@ -40,6 +45,7 @@ function Cart() {
         return item && itemToAnalyticsItem({ ...item, coupon }, index);
       }}
       checkoutHref="/checkout"
+      bonus={bonus}
     />
   );
 }

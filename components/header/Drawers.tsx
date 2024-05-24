@@ -13,6 +13,8 @@ import { useId } from "deco-sites/montecarlo/sdk/useId.ts";
 import MenuProductsChild from "deco-sites/montecarlo/components/header/MenuProductsChild.tsx";
 import CartButtonVTEX from "../../islands/Header/Cart/vtex.tsx";
 import ItemsCartVtex from "deco-sites/montecarlo/islands/Header/Cart/itemsCartVtex.tsx";
+import { ProductPublishedOnPublicationArgs } from "apps/shopify/utils/admin/admin.graphql.gen.ts";
+import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
 
 const Menu = lazy(() => import("../../components/header/Menu.tsx"));
 const Searchbar = lazy(() => import("../../components/search/Searchbar.tsx"));
@@ -25,6 +27,7 @@ export interface Props {
    */
   children?: ComponentChildren;
   platform: ReturnType<typeof usePlatform>;
+  bonus?: PropsBonus;
 }
 
 const Aside = (
@@ -146,7 +149,7 @@ const Aside = (
   }
 };
 
-function Drawers({ menu, searchbar, children, platform }: Props) {
+function Drawers({ menu, searchbar, children, platform, bonus }: Props) {
   const {
     displayCart,
     displayMenu,
@@ -208,6 +211,7 @@ function Drawers({ menu, searchbar, children, platform }: Props) {
               >
                 <Cart
                   platform={platform}
+                  bonus={bonus}
                 />
               </Aside>
             }
