@@ -4,6 +4,12 @@ import Carousel, {
   Props as CarouselProps,
 } from "../../components/layout/Carousel.tsx";
 
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
+
 interface Benefit {
   label?: string;
   icon: ImageWidget;
@@ -63,8 +69,10 @@ export default function Benefits({
     );
   });
 
+  const id = useId();
+
   return (
-    <div class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-7 lg:gap-14">
+    <div id={id} class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-7 lg:gap-14">
       <div class="flex flex-col gap-3 container px-5">
         {title?.mobile && (
           <h2
@@ -85,6 +93,15 @@ export default function Benefits({
       <div class="block md:hidden">
         <Carousel {...slider} children={listOfBenefits} />
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title.mobile ? title.mobile : title.desktop,
+          },
+        }}
+      />
     </div>
   );
 }

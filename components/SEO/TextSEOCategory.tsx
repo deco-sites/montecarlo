@@ -1,4 +1,9 @@
 import { HTMLWidget } from "apps/admin/widgets.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   title?: HTMLWidget;
@@ -21,8 +26,10 @@ const DEFAULTPROPS = {
 export default function TextSEOCategory(props: Props) {
   const { title, content } = { ...DEFAULTPROPS, ...props };
 
+  const id = useId();
+
   return (
-    <div class="peer flex w-full flex-col items-center justify-center px-2 py-9 lg:py-24 gap-5 max-w-[700px] mx-auto">
+    <div id={id} class="peer flex w-full flex-col items-center justify-center px-2 py-9 lg:py-24 gap-5 max-w-[700px] mx-auto">
       <label class="bg-primary peer relative order-3 flex cursor-pointer select-none items-center justify-center px-[14px] py-[10px] mt-3">
         <input type="checkbox" name="todo[1]" class="peer" />
         <span class="before:bg-primary left-0 z-10 -ml-3 text-sm before:absolute peer-checked:after:content-['Ler_Menos'] after:content-['Continuar_Lendo'] before:left-0 before:-z-10 before:h-6 before:w-8 lg:text-sm">
@@ -42,6 +49,15 @@ export default function TextSEOCategory(props: Props) {
         >
         </span>
       )}
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+          },
+        }}
+      />
     </div>
   );
 }
