@@ -86,8 +86,8 @@ export default function HeroTextWithImage(props: Props) {
               </p>
             )}
 
-          {
-            CTA?.buttons && CTA?.buttons?.length > 0 ? (
+          {CTA?.buttons && CTA?.buttons?.length > 0
+            ? (
               <div
                 class={`
                     flex border border-white w-fit mt-5
@@ -112,9 +112,8 @@ export default function HeroTextWithImage(props: Props) {
                   </a>
                 ))}
               </div>
-            ) : null
-          }
-          
+            )
+            : null}
         </div>
       </div>
       <SendEventOnView
