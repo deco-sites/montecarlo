@@ -2,6 +2,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 
 import type { Props as BannerProductDotInfoProps } from "../../components/product/BannerProductDotInfo/index.tsx";
 import BannerProductDotInfo from "../../islands/BannerProductDotInfo.tsx";
+import { keys } from "https://denopkg.com/deco-cx/durable@0.5.3/security/keys.ts";
 
 interface CTAProps {
   label?: string;
@@ -44,8 +45,8 @@ export default function ImageAndGrid(props: Props) {
   } = props;
 
   return (
-    <div class="container flex flex-col items-center gap-8 px-2 py-8 md:px-5 md:py-14">
-      <div class="flex w-fit max-w-3/5 flex-col items-center gap-2 text-center font-poppins">
+    <div class="container flex flex-col items-center gap-8 px-2 py-8 md:px-5 md:py-9">
+      <div class="flex w-fit flex-col items-center gap-2 text-center font-poppins">
         {title && <h3 class="text-1.5xl font-semibold md:text-3xl">{title}</h3>}
         {description && (
           <p class="text-sm font-medium md:text-base">{description}</p>
@@ -86,20 +87,20 @@ export default function ImageAndGrid(props: Props) {
               )}
 
               {item.image && (
-                <div class="group">
+                <div class="group relative">
                   {item.href
                     ? (
                       <a href={item.href}>
                         <img
                           class={`h-full w-full object-cover ${
-                            item.image.hoverImage ? "group-hover:hidden" : ""
+                            item.image.hoverImage ? "" : ""
                           }`}
                           src={item.image.source}
                           alt={item.image.alt}
                         />
                         {item.image.hoverImage && (
                           <img
-                            class="h-full w-full object-cover hidden group-hover:block opacity-8"
+                            class="h-full w-full object-cover hidden group-hover:block opacity-95 absolute top-0 left-0 right-0 bottom-0 "
                             src={item.image.hoverImage}
                             alt={item.image.alt}
                           />
@@ -110,14 +111,14 @@ export default function ImageAndGrid(props: Props) {
                       <>
                         <img
                           class={`h-full w-full object-cover ${
-                            item.image.hoverImage ? "group-hover:hidden" : ""
+                            item.image.hoverImage ? "" : ""
                           }`}
                           src={item.image.source}
                           alt={item.image.alt}
                         />
                         {item.image.hoverImage && (
                           <img
-                            class="h-full w-full object-cover hidden group-hover:block opacity-8"
+                            class="h-full w-full object-cover hidden group-hover:block opacity-95 absolute top-0 left-0 right-0 bottom-0 "
                             src={item.image.hoverImage}
                             alt={item.image.alt}
                           />

@@ -75,12 +75,12 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
   const result = grouperCodes && await getSimilarProducts(grouperCodes);
 
   // deno-lint-ignore no-explicit-any
-  const currentProduct = result.find((product: any) =>
+  const currentProduct = result?.find((product: any) =>
     product.productId == inProductGroupWithID
   );
 
   //Pega a categoria
-  const currentCategory: number = parseInt(currentProduct.categoryId);
+  const currentCategory: number = parseInt(currentProduct?.categoryId);
 
   //Define as variações
 

@@ -22,10 +22,13 @@ import * as $Header_Cart_wake from "./islands/Header/Cart/wake.tsx";
 import * as $Header_Drawers from "./islands/Header/Drawers.tsx";
 import * as $Header_ScrollableContainer from "./islands/Header/ScrollableContainer.tsx";
 import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
+import * as $ListLinks from "./islands/ListLinks.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
-import * as $Product_Zoom_ZoomImage from "./islands/Product/Zoom/ZoomImage.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
+import * as $Product_Zoom_ZoomImage from "./islands/Product/Zoom/ZoomImage.tsx";
+import * as $RangeSlider from "./islands/RangeSlider.tsx";
+import * as $SearchContent from "./islands/SearchContent.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $ShowMore from "./islands/ShowMore.tsx";
@@ -59,10 +62,13 @@ const manifest = {
     "./islands/Header/Drawers.tsx": $Header_Drawers,
     "./islands/Header/ScrollableContainer.tsx": $Header_ScrollableContainer,
     "./islands/Header/Searchbar.tsx": $Header_Searchbar,
+    "./islands/ListLinks.tsx": $ListLinks,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
-    "./islands/Product/Zoom/ZoomImage.tsx": $Product_Zoom_ZoomImage,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,
+    "./islands/Product/Zoom/ZoomImage.tsx": $Product_Zoom_ZoomImage,
+    "./islands/RangeSlider.tsx": $RangeSlider,
+    "./islands/SearchContent.tsx": $SearchContent,
     "./islands/SearchControls.tsx": $SearchControls,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/ShowMore.tsx": $ShowMore,

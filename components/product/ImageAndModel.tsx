@@ -5,6 +5,8 @@ import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import ButtonLink from "../ui/ButtonLink.tsx";
+import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
+import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 
 /**
  * @titleBy altProduct
@@ -140,16 +142,10 @@ export default function TrioOfImages(
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8 gap-5 lg:gap-10">
       <div class="flex flex-col w-full gap-1 items-center">
-        {title && <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>}
-        {subTitle && (
-          <span
-            dangerouslySetInnerHTML={{ __html: subTitle }}
-            class=" font-medium  text-sm lg:text-base"
-          >
-          </span>
-        )}
+        {title && <Title text={title} />}
+        {subTitle && <SubTitle text={subTitle} />}
       </div>
-      <div class="flex flex-col w-full h-full gap-2 lg:flex-row lg:justify-center max-w-[1408px]">
+      <div class="flex flex-col w-full h-full gap-2 lg:flex-row lg:justify-center max-w-[1512px] lg:px-14">
         {cards?.map((image, index) => (
           <Card
             image={image}
