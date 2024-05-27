@@ -13,8 +13,6 @@ export type Props =
     ariaLabel?: string;
   };
 
-const id = useId();
-
 const Button = forwardRef<HTMLButtonElement, Props>(({
   type = "button",
   class: _class = "",
@@ -23,28 +21,32 @@ const Button = forwardRef<HTMLButtonElement, Props>(({
   ariaLabel,
   children,
   ...props
-}, ref) => (
-  <button
-    {...props}
-    className={` no-animation ${_class}`}
-    disabled={disabled || loading}
-    aria-label={ariaLabel || props["aria-label"]}
-    type={type}
-    ref={ref}
-  >
-    {loading ? <span class="loading loading-spinner" /> : children}
-    <SendEventOnClick
-      id={id}
-      event={{
-        name: "select_promotion",
-        params: {
-          item_list_name: ariaLabel,
-          item_list_id: id,
-          promotion_name: ariaLabel,
-        },
-      }}
-    />
-  </button>
-));
+}, ref) => {
+  const id = useId();
+
+  return (
+    <button
+      {...props}
+      className={` no-animation ${_class}`}
+      disabled={disabled || loading}
+      aria-label={ariaLabel || props["aria-label"]}
+      type={type}
+      ref={ref}
+    >
+      {loading ? <span class="loading loading-spinner" /> : children}
+      <SendEventOnClick
+        id={id}
+        event={{
+          name: "select_promotion",
+          params: {
+            item_list_name: ariaLabel,
+            item_list_id: id,
+            promotion_name: ariaLabel,
+          },
+        }}
+      />
+    </button>
+  );
+});
 
 export default Button;
