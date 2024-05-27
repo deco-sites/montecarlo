@@ -58,7 +58,10 @@ export type AvailableIcons =
   | "ShippingCustom"
   | "menu"
   | "Location"
-  | "arrowTop";
+  | "arrowTop"
+  | "SearchIcon"
+  | "columnOne"
+  | "columnTwo";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

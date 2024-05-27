@@ -63,8 +63,6 @@ const DEFAULTPROPS = {
       linkToRedirect: "#",
     },
   ],
-  title: "Diga sim à aliança perfeita",
-  subTitle: "<p>Encontre todo brilho que a ocasião merece</p>",
 };
 
 function CardImage({ card, index }: { card: Card; index: number }) {
@@ -73,7 +71,7 @@ function CardImage({ card, index }: { card: Card; index: number }) {
     <a
       href={card.linkToRedirect}
       title={"Ir para a página de " + card.title}
-      class="lg:w-full"
+      class="w-full hover:opacity-80"
       id={id}
     >
       <div
@@ -126,25 +124,20 @@ function VerticalCardsGrid(props: Props) {
   const { title, subTitle, cards } = { ...DEFAULTPROPS, ...props };
 
   return (
-    <div class=" lg:container xl:max-w-[1408px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9">
-      <div class="flex flex-col w-full gap-1 items-center">
-        <h2 class=" font-semibold text-xl lg:text-3xl">{title}</h2>
-        {subTitle && (
-          <p
-            class=" text-center font-medium  text-sm lg:text-base"
-            dangerouslySetInnerHTML={{ __html: subTitle }}
-          >
-          </p>
-        )}
-      </div>
-      <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-center lg:flex-wrap lg:justify-center lg:gap-2 first:ml-6 lg:first:ml-0 w-full">
+    <div class=" lg:container xl:max-w-[1512px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 lg:px-14">
+      {
+        title !== "" || subTitle !== "" ? (
+          <div class="flex flex-col w-full gap-1 items-center">
+            {title !== "" ? (<Title text={title} />) : null}
+            {subTitle !== "" ? (<SubTitle text={subTitle} />) : null}
+          </div>
+        ) : null
+      }
+      <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 px-14 lg:px-0 lg:justify-center">
         {cards.map((card, index) => (
           <Slider.Item
             index={index}
-            class={clx(
-              "carousel-item snap-center lg:w-[calc(25%-0.5rem)] sm:w-52 w-min mr-12 lg:mr-0 ",
-              index == 0 && " ml-16 lg:ml-0",
-            )}
+            class={"carousel-item sm:max-w-1/2 lg:w-[calc(25%-0.5rem)] lg:max-w-none lg:snap-start md:w-1/3 snap-center w-full"}
           >
             <CardImage card={card} index={index} />
           </Slider.Item>

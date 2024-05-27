@@ -29,12 +29,14 @@ export default function ShowMore(
   return (
     <div
       class={(isAtPage && pageInfo.nextPage)
-        ? "flex justify-center col-span-full"
+        ? "flex justify-center col-span-full my-5"
         : "hidden"}
     >
       {children}
       <button
-        class={`btn cursor-pointer absolute ${loading.value ? "hidden" : ""}`}
+        class={`btn cursor-pointer absolute ${
+          loading.value ? "hidden" : ""
+        } font-poppins text-sm bg-[#FFC72C] font-normal rounded-none hover:bg-[#FFC72C]`}
         onClick={() => {
           loading.value = true;
           const element = document.getElementById(
@@ -50,7 +52,7 @@ export default function ShowMore(
           }
         }}
       >
-        Show More
+        Carregar mais Produtos
       </button>
     </div>
   );

@@ -1,9 +1,18 @@
 import Button from "../../../components/ui/Button.tsx";
 import Icon from "../../../components/ui/Icon.tsx";
 import { useUI } from "../../../sdk/useUI.ts";
+import { useRef } from "preact/compat";
 
 export default function SearchButton() {
   const { displaySearchDrawer, displaySearchPopup } = useUI();
+  const refSearch = useRef<HTMLButtonElement>(null);
+
+  function actiiveSearch() {
+    displaySearchDrawer.value = !displaySearchDrawer.value;
+    if (refSearch.current) {
+      refSearch.current.disabled = displaySearchDrawer.value;
+    }
+  }
 
   return (
     <>
@@ -17,13 +26,14 @@ export default function SearchButton() {
         <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
       </Button>
       <Button
-        class="btn-circle btn-sm btn-ghost sm:hidden"
+        class="btn-circle btn-sm btn-ghost sm:hidden disabled:hidden flex justify-center items-center w-auto"
         aria-label="search icon button"
-        onClick={() => {
-          displaySearchDrawer.value = !displaySearchDrawer.value;
-        }}
+        data="search-icon"
+        disabled
+        ref={refSearch}
+        onClick={() => actiiveSearch()}
       >
-        <Icon id="MagnifyingGlass" size={20} strokeWidth={0.1} />
+        <Icon id="SearchIcon" size={22} strokeWidth={0.05} />
       </Button>
     </>
   );

@@ -51,7 +51,23 @@ export interface Props {
    * @description select a style variante for the Commercial Banner
    */
   variant?: "variant-1" | "variant-2";
+  paddingMobile?: "Small" | "Normal" | "Large";
+  paddingDesktop?: "Small" | "Normal" | "Large";
 }
+
+const PADDINGDESKTOP = {
+  " ": " ",
+  "Small": "lg:py-9",
+  "Normal": "lg:py-16",
+  "Large": "lg:py-24",
+};
+
+const PADDINGMOBILE = {
+  " ": " ",
+  "Small": "lg:py-9",
+  "Normal": "lg:py-16",
+  "Large": "lg:py-24",
+};
 
 function CommercialBanner(
   {
@@ -65,6 +81,8 @@ function CommercialBanner(
     heightImageDesktop,
     CTA,
     variant,
+    paddingMobile,
+    paddingDesktop,
   }: Props,
 ) {
   const { isMobile } = useUI();
@@ -79,7 +97,12 @@ function CommercialBanner(
   }
 
   return (
-    <div className={`flex items-center justify-between flex-wrap`} id={id}>
+    <div
+      className={`flex items-center justify-between flex-wrap ${
+        PADDINGMOBILE[paddingMobile || " "]
+      }  ${PADDINGDESKTOP[paddingDesktop || " "]}`}
+      id={id}
+    >
       <div
         style={backgroundColor
           ? `background: ${backgroundColor};`

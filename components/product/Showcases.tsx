@@ -70,7 +70,7 @@ function Showcase({
     <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 items-center">
       <div class="flex flex-col w-full gap-1">
         {title && (
-          <h2 class=" font-semibold text-center text-xl lg:text-3xl">
+          <h2 class=" font-semibold text-center text-1.5xl lg:text-3xl">
             {title}
           </h2>
         )}
