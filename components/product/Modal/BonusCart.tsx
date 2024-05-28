@@ -6,10 +6,14 @@ export interface Props {
   text: HTMLWidget;
   discont: number;
   valueDiscontMax: number;
+  infoBonus?: HTMLWidget;
 }
 
-export default function BonusCart(
-  { text, discont, valueDiscontMax, price }: Props & { price: number },
+export function BonusCart(
+  { text, discont, valueDiscontMax, price, class: _class = "" }: Props & {
+    price: number;
+    class?: string;
+  },
 ) {
   const priceBonus = price * (discont / 100);
 
@@ -20,7 +24,7 @@ export default function BonusCart(
   const formatValue = formatPrice(bonusValue) || " ";
 
   return (
-    <div class="relative w-fit flex flex-row gap-1 items-center">
+    <div class={`relative w-fit flex flex-row gap-1 items-center ${_class}`}>
       <Icon id="alertBonus" size={15} />
       <span
         class="text-sm text-black"
@@ -30,5 +34,18 @@ export default function BonusCart(
       >
       </span>
     </div>
+  );
+}
+
+export function InfoBonus({ infoBonus }: { infoBonus?: HTMLWidget }) {
+  if (!infoBonus) {
+    return null;
+  }
+  return (
+    <span
+      class="text-sm py-3 border-t border-[#CAC7B6] w-full block text-black mt-8"
+      dangerouslySetInnerHTML={{ __html: infoBonus }}
+    >
+    </span>
   );
 }
