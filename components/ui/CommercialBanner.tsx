@@ -114,20 +114,6 @@ function CommercialBanner(
             variant === "variant-2" ? "flex flex-col w-fit px-10 lg:px-16" : ""
           }`}
         >
-          <SendEventOnView
-            id={id}
-            event={{
-              name: "view_promotion",
-              params: {
-                view_promotion: altText,
-                creative_name: altText,
-                creative_slot: altText,
-                promotion_id: id,
-                promotion_name: altText,
-                items: [],
-              },
-            }}
-          />
           <h5
             dangerouslySetInnerHTML={{ __html: title }}
             className={`
@@ -194,7 +180,22 @@ function CommercialBanner(
             width={1200}
             loading={preloadImage ? "eager" : "lazy"}
           />
-        )}
+        )
+      }
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            view_promotion: altText,
+            creative_name: altText,
+            creative_slot: altText,
+            promotion_id: id,
+            promotion_name: altText,
+            items: [],
+          },
+        }}
+      />
     </div>
   );
 }

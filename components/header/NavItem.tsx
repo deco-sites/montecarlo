@@ -102,9 +102,11 @@ function NavItem({ item }: { item: MenuNavItem }) {
           event={{
             name: "select_promotion",
             params: {
-              item_list_name: label,
-              item_list_id: id,
+              creative_name: label,
+              creative_slot: id,
+              promotion_id: href,
               promotion_name: label,
+              items: [],
             },
           }}
         />

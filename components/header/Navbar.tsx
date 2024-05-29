@@ -132,11 +132,9 @@ function Navbar(
             <SendEventOnClick
               id={id}
               event={{
-                name: "select_promotion",
+                name: "login",
                 params: {
-                  item_list_name: logo.alt,
-                  item_list_id: id,
-                  promotion_name: logo.alt,
+                  method: "/",
                 },
               }}
             />
@@ -191,11 +189,9 @@ function Navbar(
                 <SendEventOnClick
                   id={id + "ourStores"}
                   event={{
-                    name: "select_promotion",
+                    name: "login",
                     params: {
-                      item_list_name: ourStores.label,
-                      item_list_id: id + "ourStores",
-                      promotion_name: ourStores.href,
+                      method: ourStores.href,
                     },
                   }}
                 />
@@ -211,11 +207,9 @@ function Navbar(
                 <SendEventOnClick
                   id={id + "help"}
                   event={{
-                    name: "select_promotion",
+                    name: "login",
                     params: {
-                      item_list_name: help.label,
-                      item_list_id: id + "help",
-                      promotion_name: help.href,
+                      method: help.href,
                     },
                   }}
                 />
@@ -247,11 +241,9 @@ function Navbar(
               <SendEventOnClick
                 id={id + "logo"}
                 event={{
-                  name: "select_promotion",
+                  name: "login",
                   params: {
-                    item_list_name: logo.alt,
-                    item_list_id: id + "logo",
-                    promotion_name: logo.alt,
+                    method: "/",
                   },
                 }}
               />
@@ -282,11 +274,9 @@ function Navbar(
               <SendEventOnClick
                 id={id + "account"}
                 event={{
-                  name: "select_promotion",
+                  name: "login",
                   params: {
-                    item_list_name: "account",
-                    item_list_id: id + "account",
-                    promotion_name: "account",
+                    method: "/account",
                   },
                 }}
               />
@@ -308,11 +298,9 @@ function Navbar(
               <SendEventOnClick
                 id={id + "wishlist"}
                 event={{
-                  name: "select_promotion",
+                  name: "login",
                   params: {
-                    item_list_name: "wishlist",
-                    item_list_id: id + "wishlist",
-                    promotion_name: "wishlist",
+                    method: "/wishlist",
                   },
                 }}
               />
