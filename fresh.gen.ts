@@ -34,6 +34,7 @@ import * as $SliderDotsJS from "./islands/SliderDotsJS.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
+import * as $miniCart_InputCep from "./islands/miniCart/InputCep.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -72,6 +73,7 @@ const manifest = {
     "./islands/SliderJS.tsx": $SliderJS,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
+    "./islands/miniCart/InputCep.tsx": $miniCart_InputCep,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;

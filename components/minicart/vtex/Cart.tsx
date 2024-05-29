@@ -16,6 +16,8 @@ function Cart({ bonus }: Props) {
   const currency = cart.value?.storePreferencesData.currencyCode ?? "BRL";
   const coupon = cart.value?.marketingData?.coupon ?? undefined;
 
+  console.log("orderFormId", cart.value?.orderFormId);
+
   return (
     <BaseCart
       items={items.map((item) => ({
@@ -27,7 +29,10 @@ function Cart({ bonus }: Props) {
           list: item.listPrice / 100,
         },
         skuName: item.skuName,
+        id: item.id,
+        seller: item.seller,
       }))}
+      orderFormId={cart.value?.orderFormId}
       total={(total - discounts) / 100}
       subtotal={total / 100}
       discounts={discounts / 100}

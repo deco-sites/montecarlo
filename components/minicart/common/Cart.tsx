@@ -13,9 +13,17 @@ import {
   BonusCart,
   InfoBonus,
 } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
+import InputCep from "deco-sites/montecarlo/islands/miniCart/InputCep.tsx";
+
+interface MiniCart {
+  id: string;
+  quantity: number;
+  seller: string;
+}
 
 interface Props {
   items: Item[];
+  orderFormId?: string;
   loading: boolean;
   total: number;
   subtotal: number;
@@ -34,6 +42,7 @@ interface Props {
 
 function Cart({
   items,
+  orderFormId,
   total,
   subtotal,
   locale,
@@ -53,6 +62,16 @@ function Cart({
   const isEmtpy = items.length === 0;
 
   const maxInstallments = total > 50000 ? 10 : Math.floor(total / 5000);
+
+  const itemsMiniCart: MiniCart[] = [];
+
+  items.map((r) => {
+    itemsMiniCart.push({
+      id: r.id,
+      quantity: r.quantity,
+      seller: r.seller,
+    });
+  });
 
   return (
     <div
@@ -139,6 +158,7 @@ function Cart({
                         type="checkbox"
                         name="todo[1]"
                         class="peer group opacity-0"
+                        checked={true}
                       />
                       <span class="left-0 -ml-4 bg-primary w-8 h-8 flex justify-center items-center peer-checked:translate-y-[-47px] z-30 translate-y-[-316px] duration-300 ease-in-out">
                       </span>
@@ -186,18 +206,12 @@ function Cart({
                               Receba em casa
                             </span>
                           </label>
-                          <div class="text-black w-full h-10 grid grid-cols-[45%_25%_30%] gap-1 justify-between items-center bg-perola-intermediario px-2">
-                            <span class=" text-sm">
-                              Opções de <b>frete:</b>
-                            </span>
-                            <input
-                              class="h-full outline-none text-sm text-black placeholder:text-black bg-perola-intermediario "
-                              placeholder={"00000-000"}
+                          {itemsMiniCart.length > 0 && (
+                            <InputCep
+                              orderFormId={orderFormId}
+                              items={itemsMiniCart}
                             />
-                            <button class=" min-w-24 text-sm relative after:w-3/4 after:h-[1px] after:bg-primary after:absolute after:top-5 after:left-[0.8rem]">
-                              Alterar CEP
-                            </button>
-                          </div>
+                          )}
                           {bonus?.infoBonus && (
                             <InfoBonus infoBonus={bonus?.infoBonus} />
                           )}

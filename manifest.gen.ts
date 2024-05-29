@@ -2,6 +2,8 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $$$$$$$$$0 from "./actions/miniCart/getlistCEP.ts";
+import * as $$$$$$$$$1 from "./actions/miniCart/removeCEP.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$7 from "./loaders/availableIcons.ts";
@@ -174,6 +176,10 @@ const manifest = {
     "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$67,
     "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$68,
     "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$69,
+  },
+  "actions": {
+    "deco-sites/montecarlo/actions/miniCart/getlistCEP.ts": $$$$$$$$$0,
+    "deco-sites/montecarlo/actions/miniCart/removeCEP.ts": $$$$$$$$$1,
   },
   "apps": {
     "deco-sites/montecarlo/apps/decohub.ts": $$$$$$$$$$$0,
