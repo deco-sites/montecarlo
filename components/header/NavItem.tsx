@@ -4,6 +4,11 @@ import { headerHeight } from "./constants.ts";
 import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import ListLinksOurImage from "deco-sites/montecarlo/components/header/ComponentMenu.tsx";
 import { Images } from "https://deno.land/x/openai@v4.19.1/resources/mod.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Link {
   label: string;
@@ -84,12 +89,25 @@ function NavItem({ item }: { item: MenuNavItem }) {
   }
   cont = contLinks + contImages;
 
+  const id = useId();
+
   return (
     <li class="group flex items-center gap-3">
-      <a href={href} class="my-auto">
+      <a href={href} class="my-auto" id={id}>
         <span class="group-hover:font-semibold cursor-pointer text-sm font-thin text-black px-5 py-3">
           {label}
         </span>
+        <SendEventOnClick
+          id={id}
+          event={{
+            name: "select_promotion",
+            params: {
+              item_list_name: label,
+              item_list_id: id,
+              promotion_name: label,
+            },
+          }}
+        />
       </a>
       <div
         class={`fixed hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 py-16 duration-200  ${

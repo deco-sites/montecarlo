@@ -125,14 +125,14 @@ function VerticalCardsGrid(props: Props) {
 
   return (
     <div class=" lg:container xl:max-w-[1512px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 lg:px-14">
-      {
-        title !== "" || subTitle !== "" ? (
+      {title !== "" || subTitle !== ""
+        ? (
           <div class="flex flex-col w-full gap-1 items-center">
-            {title !== "" ? (<Title text={title} />) : null}
-            {subTitle !== "" ? (<SubTitle text={subTitle} />) : null}
+            {title !== "" ? <Title text={title} /> : null}
+            {subTitle !== "" ? <SubTitle text={subTitle} /> : null}
           </div>
-        ) : null
-      }
+        )
+        : null}
       <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 px-14 lg:px-0 lg:justify-center">
         {cards.map((card, index) => (
           <Slider.Item

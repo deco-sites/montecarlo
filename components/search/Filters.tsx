@@ -2,8 +2,8 @@ import Avatar from "../../components/ui/Avatar.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import type {
   Filter,
-  FilterToggle,
   FilterRange,
+  FilterToggle,
   FilterToggleValue,
   ProductListingPage,
 } from "apps/commerce/types.ts";
@@ -36,9 +36,7 @@ function ValueItem(
 }
 
 function FilterValues({ key, values }: FilterToggle) {
-  const flexDirection = key === "tamanho"
-    ? "flex-row"
-    : "flex-col";
+  const flexDirection = key === "tamanho" ? "flex-row" : "flex-col";
 
   return (
     <ul class={`flex flex-wrap gap-4 my-2 ${flexDirection}`}>
@@ -78,38 +76,60 @@ function Filters({ filters, layout }: Props) {
     <>
       {filters
         .filter(isToggle)
-          .map((filter) => {
-            if (filter.key === "codigo-agrupador" || filter.key === "price") return
-
-            return (
-              <li class={`flex flex-col gap-4 text-black font-poppins text-sm cursor-pointer ${layout !== "horizontal" ? "pb-2" : ""}`}>
-                <details class={`${layout !== "horizontal" ? "border-b border-black pb-2" : ""}`}>
-                  <summary class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap">
-                    {filter.label}
-                    <Icon
-                      class="rotate-90"
-                      size={24}
-                      id="arrowTop"
-                    ></Icon>
-                  </summary>
-                  <div class={`${layout === "horizontal" ? "absolute bg-white z-10 px-3 py-2 min-w-[150px]" : ""}`}>
-                    <FilterValues {...filter} />
-                  </div>
-                </details>
-              </li>
-            )
+        .map((filter) => {
+          if (filter.key === "codigo-agrupador" || filter.key === "price") {
+            return;
           }
-        )}
+
+          return (
+            <li
+              class={`flex flex-col gap-4 text-black font-poppins text-sm cursor-pointer ${
+                layout !== "horizontal" ? "pb-2" : ""
+              }`}
+            >
+              <details
+                class={`${
+                  layout !== "horizontal" ? "border-b border-black pb-2" : ""
+                }`}
+              >
+                <summary class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap">
+                  {filter.label}
+                  <Icon
+                    class="rotate-90"
+                    size={24}
+                    id="arrowTop"
+                  >
+                  </Icon>
+                </summary>
+                <div
+                  class={`${
+                    layout === "horizontal"
+                      ? "absolute bg-white z-10 px-3 py-2 min-w-[150px]"
+                      : ""
+                  }`}
+                >
+                  <FilterValues {...filter} />
+                </div>
+              </details>
+            </li>
+          );
+        })}
 
       {filters
         .filter(isRange)
-          .map((filter) => {
-            return (
-              <RangeSlider classProps="max-w-[600px]" sliderClass="max-w-[300px] bg-red-500" name={filter.key} label={filter.label} min={filter.values.min} max={filter.values.max} />
-            )
-          }
-        )}
-      </>
+        .map((filter) => {
+          return (
+            <RangeSlider
+              classProps="max-w-[600px]"
+              sliderClass="max-w-[300px] bg-red-500"
+              name={filter.key}
+              label={filter.label}
+              min={filter.values.min}
+              max={filter.values.max}
+            />
+          );
+        })}
+    </>
   );
 }
 

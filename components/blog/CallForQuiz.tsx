@@ -27,7 +27,10 @@ export default function CallForQuiz(props: Props) {
   const id = useId();
 
   return (
-    <div id={id} class="flex flex-col w-full py-9 gap-7 lg:gap-10 px-2 items-center">
+    <div
+      id={id}
+      class="flex flex-col w-full py-9 gap-7 lg:gap-10 px-2 items-center"
+    >
       <h3
         class="text-2xl font-semibold text-center lg:text-3xl"
         dangerouslySetInnerHTML={{ __html: title }}
