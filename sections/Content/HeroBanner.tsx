@@ -41,7 +41,7 @@ export default function HeroBanner({
 }: Props) {
   return (
     <div class="relative flex items-end lg:max-h-[90vh] lg:min-h-[600px]">
-      <div class="bg-red w-full h-full">
+      <div class="bg-red w-full h-full" id={promotion+"div"}>
         <a href={urlBanner} id={promotion}>
           <Picture>
             <Source
@@ -79,7 +79,7 @@ export default function HeroBanner({
           }}
         />
         <SendEventOnView
-          id={promotion}
+          id={promotion+"div"}
           event={{
             name: "view_promotion",
             params: {

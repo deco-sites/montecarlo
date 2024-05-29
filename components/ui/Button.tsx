@@ -39,8 +39,9 @@ const Button = forwardRef<HTMLButtonElement, Props>(({
         event={{
           name: "select_promotion",
           params: {
-            item_list_name: ariaLabel,
-            item_list_id: id,
+            creative_name: ariaLabel,
+            creative_slot: id,
+            promotion_id: "",
             promotion_name: ariaLabel,
           },
         }}
