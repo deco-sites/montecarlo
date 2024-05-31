@@ -72,7 +72,10 @@ export default function Benefits({
   const id = useId();
 
   return (
-    <div id={id} class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-7 lg:gap-14">
+    <div
+      id={id}
+      class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-7 lg:gap-14"
+    >
       <div class="flex flex-col gap-3 container px-5">
         {title?.mobile && (
           <h2

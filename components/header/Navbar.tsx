@@ -182,19 +182,19 @@ function Navbar(
               <a
                 href={ourStores.href}
                 class="hover:font-semibold cursor-pointer"
-                id={id+"ourStores"}
+                id={id + "ourStores"}
               >
                 <div class="flex flex-row gap-1">
                   <Icon id="Location" width={18} height={22} />
                   {ourStores.label}
                 </div>
                 <SendEventOnClick
-                  id={id+"ourStores"}
+                  id={id + "ourStores"}
                   event={{
                     name: "select_promotion",
                     params: {
                       item_list_name: ourStores.label,
-                      item_list_id: id+"ourStores",
+                      item_list_id: id + "ourStores",
                       promotion_name: ourStores.href,
                     },
                   }}
@@ -202,15 +202,19 @@ function Navbar(
               </a>
             )}
             {help && (
-              <a href={help.href} class="hover:font-semibold cursor-pointer" id={id+"help"}>
+              <a
+                href={help.href}
+                class="hover:font-semibold cursor-pointer"
+                id={id + "help"}
+              >
                 {help.label}
                 <SendEventOnClick
-                  id={id+"help"}
+                  id={id + "help"}
                   event={{
                     name: "select_promotion",
                     params: {
                       item_list_name: help.label,
-                      item_list_id: id+"help",
+                      item_list_id: id + "help",
                       promotion_name: help.href,
                     },
                   }}
@@ -231,7 +235,7 @@ function Navbar(
               href="/"
               aria-label="Store logo"
               class="block"
-              id={id+"logo"}
+              id={id + "logo"}
             >
               <Image
                 src={logo.src}
@@ -241,12 +245,12 @@ function Navbar(
                 class="w-full h-auto max-w-60"
               />
               <SendEventOnClick
-                id={id+"logo"}
+                id={id + "logo"}
                 event={{
                   name: "select_promotion",
                   params: {
                     item_list_name: logo.alt,
-                    item_list_id: id+"logo",
+                    item_list_id: id + "logo",
                     promotion_name: logo.alt,
                   },
                 }}
@@ -270,18 +274,18 @@ function Navbar(
               class="flex items-center text-xs font-thin"
               href="/account"
               aria-label="Account"
-              id={id+"account"}
+              id={id + "account"}
             >
               <div class="flex btn btn-circle btn-sm btn-ghost gap-1 justify-center items-center">
                 <Icon id="userAccont" size={21} strokeWidth={0.4} />
               </div>
               <SendEventOnClick
-                id={id+"account"}
+                id={id + "account"}
                 event={{
                   name: "select_promotion",
                   params: {
                     item_list_name: "account",
-                    item_list_id: id+"account",
+                    item_list_id: id + "account",
                     promotion_name: "account",
                   },
                 }}
@@ -293,7 +297,7 @@ function Navbar(
               class="flex items-center text-xs font-thin"
               href="/wishlist"
               aria-label="Wishlist"
-              id={id+"wishlist"}
+              id={id + "wishlist"}
             >
               <button
                 class="flex btn btn-circle btn-sm btn-ghost gap-1"
@@ -302,12 +306,12 @@ function Navbar(
                 <Icon id="heartCustom" size={23} strokeWidth={1} />
               </button>
               <SendEventOnClick
-                id={id+"wishlist"}
+                id={id + "wishlist"}
                 event={{
                   name: "select_promotion",
                   params: {
                     item_list_name: "wishlist",
-                    item_list_id: id+"wishlist",
+                    item_list_id: id + "wishlist",
                     promotion_name: "wishlist",
                   },
                 }}

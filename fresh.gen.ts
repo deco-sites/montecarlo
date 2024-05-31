@@ -24,6 +24,7 @@ import * as $Header_ScrollableContainer from "./islands/Header/ScrollableContain
 import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
 import * as $ListLinks from "./islands/ListLinks.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
+import * as $NewsletterForm_NewsletterPopup from "./islands/NewsletterForm/NewsletterPopup.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $Product_Zoom_ZoomImage from "./islands/Product/Zoom/ZoomImage.tsx";
@@ -64,6 +65,8 @@ const manifest = {
     "./islands/Header/Searchbar.tsx": $Header_Searchbar,
     "./islands/ListLinks.tsx": $ListLinks,
     "./islands/Newsletter.tsx": $Newsletter,
+    "./islands/NewsletterForm/NewsletterPopup.tsx":
+      $NewsletterForm_NewsletterPopup,
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/Product/Zoom/ZoomImage.tsx": $Product_Zoom_ZoomImage,

@@ -73,8 +73,8 @@ function Result({
   let minPrice = 1;
   let maxPrice = 500000;
 
-  products.forEach(product => {
-    product?.offers?.offers.forEach(offer => {
+  products.forEach((product) => {
+    product?.offers?.offers.forEach((offer) => {
       const price = offer.price;
       if (price < minPrice) {
         minPrice = price;
@@ -86,18 +86,22 @@ function Result({
   });
 
   filters.push({
-      "@type": "FilterRange",
-      key: "price",
-      label: "Faixa de Preço",
-      values: {
-        min: minPrice,
-        max: maxPrice
-      }
+    "@type": "FilterRange",
+    key: "price",
+    label: "Faixa de Preço",
+    values: {
+      min: minPrice,
+      max: maxPrice,
+    },
   });
 
   return (
     <>
-      <div class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${isFirstPage ? "py-10" : "pt-0"} ${pageInfo?.nextPage ? "pb-0" : ""}`}>
+      <div
+        class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${
+          isFirstPage ? "py-10" : "pt-0"
+        } ${pageInfo?.nextPage ? "pb-0" : ""}`}
+      >
         {(isFirstPage || !isPartial) && (
           <SearchControls
             sortOptions={sortOptions}
@@ -189,7 +193,7 @@ function SearchResult(
     <>
       <Result {...props} page={page} />
     </>
-  )
+  );
 }
 
 export const loader = (props: Props, req: Request) => {

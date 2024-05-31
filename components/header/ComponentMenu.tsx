@@ -55,7 +55,7 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
       <a
         href={image.href}
         class="cursor-pointer hover:opacity-70 flex"
-        id={id+"image"}
+        id={id + "image"}
         style={{
           gridColumnStart: index.toString(),
           gridColumnEnd: image.img.aspectRatio == "2/1"
@@ -78,12 +78,12 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
           <span dangerouslySetInnerHTML={{ __html: image.conter }}></span>
         </div>
         <SendEventOnClick
-          id={id+"image"}
+          id={id + "image"}
           event={{
             name: "select_promotion",
             params: {
               item_list_name: image.img.alt,
-              item_list_id: id+"image",
+              item_list_id: id + "image",
               promotion_name: image.img.alt,
             },
           }}
@@ -99,15 +99,15 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
         <ul class={"flex flex-col gap-5"}>
           {listlinks?.listLinks.map((links) => (
             <li>
-              <a href={links.href} class="hover:opacity-70" id={id+"links"}>
+              <a href={links.href} class="hover:opacity-70" id={id + "links"}>
                 {links.label}
                 <SendEventOnClick
-                  id={id+"links"}
+                  id={id + "links"}
                   event={{
                     name: "select_promotion",
                     params: {
                       item_list_name: links.label,
-                      item_list_id: id+"links",
+                      item_list_id: id + "links",
                       promotion_name: links.label,
                     },
                   }}
@@ -119,16 +119,16 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
         <a
           href={listlinks?.linkShowMore.href}
           class="text-[#A7A59B] hover:underline"
-          id={id+"showMoreshowMore"}
+          id={id + "showMoreshowMore"}
         >
           {listlinks?.linkShowMore.label}
           <SendEventOnClick
-            id={id+"showMoreshowMore"}
+            id={id + "showMoreshowMore"}
             event={{
               name: "select_promotion",
               params: {
                 item_list_name: listlinks?.linkShowMore.label,
-                item_list_id: id+"showMore",
+                item_list_id: id + "showMore",
                 promotion_name: listlinks?.linkShowMore.label,
               },
             }}
