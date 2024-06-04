@@ -110,7 +110,7 @@ function CardImage({ card, index }: { card: Card; index: number }) {
           name: "select_promotion",
           params: {
             creative_name: card.altText,
-            creative_slot: id+index,
+            creative_slot: id + index,
             promotion_id: card.linkToRedirect,
             promotion_name: card.altText,
             items: [],
