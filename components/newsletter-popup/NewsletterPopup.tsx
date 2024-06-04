@@ -1,8 +1,9 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import NewsletterPopupForm from "../../islands/NewsletterForm/NewsletterPopup.tsx";
+import { useUI } from "../../sdk/useUI.ts";
 
-interface Props {
+interface PropsNewsletterPopup {
   /*
    * @description Titulo do popup
    */
@@ -19,52 +20,53 @@ interface Props {
    * @description ativar campo de telefone
    */
   phone?: boolean;
+  /*
+   * @description primeiro texto
+   */
+  primaryMessageSucess?: string;
+  /*
+   * @description Nome do cupom
+   */
+  cupom?: string;
+  /*
+   * @description texto abaixo do cupom
+   */
+  secordMessageSucess?: string;
+  /*
+   * @description Texto acima do CTA
+   */
+  thirdMessageSucess?: string;
 }
 
-function NewsletterPopup({ title, image, alt, phone }: Props) {
-  const isVisible = true; // Sempre visível
+function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
+  // const isVisible = true; // Sempre visível
 
-  if (!isVisible) return null;
+  // if (!isVisible) return null;
+
+  const { showPopup } = useUI();
 
   return (
-    <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 w-full h-full">
-      <div
-        class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
-        style="max-width: 760px;"
-      >
-        {/* Left side with image */}
-        <div
-          class="w-full min-w-[340px]"
-          style={{
-            backgroundImage: image ? `url(${image})` : "",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        {/* Right side with form */}
-        <div class="max-w-[480px] bg-[#FFC72C] flex flex-col items-center self-center p-16 relative h-[480px]">
-          <button
-            class="absolute top-1 right-2 text-[#F8F7F3] font-bold"
-            onClick={() => {
-              /* função que pode desativar o popup */
-            }}
+    <>
+      {showPopup.value && (
+        <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 w-full h-full">
+          <div
+            class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
+            style="max-width: 760px;"
           >
-            ✕
-          </button>
-          <h1 class="text-3xl font-bold text-center text-black mb-4 px-8">
-            {title ? title : "10% OFF DE PRESENTE"}
-            {" "}
-          </h1>
-          <p class="text-black mb-4 text-center text-sm">
-            Muito bom te ver por aqui!
-            <br />
-            Cadastre-se pra brilhar na sua primeira compra e acompanhar nossas
-            novidades.
-          </p>
-          <NewsletterPopupForm phone={phone} />
+            {/* Left side with image */}
+            <div
+              class="w-full min-w-[340px]"
+              style={{
+                backgroundImage: image ? `url(${image})` : "",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }}
+            />
+            <NewsletterPopupForm phone={phone} />
+          </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 }
 
