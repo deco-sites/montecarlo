@@ -25,8 +25,8 @@ import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
 import * as $ListLinks from "./islands/ListLinks.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
-import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $Product_Zoom_ZoomImage from "./islands/Product/Zoom/ZoomImage.tsx";
+import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $RangeSlider from "./islands/RangeSlider.tsx";
 import * as $SearchContent from "./islands/SearchContent.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
@@ -65,8 +65,8 @@ const manifest = {
     "./islands/ListLinks.tsx": $ListLinks,
     "./islands/Newsletter.tsx": $Newsletter,
     "./islands/OutOfStock.tsx": $OutOfStock,
-    "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/Product/Zoom/ZoomImage.tsx": $Product_Zoom_ZoomImage,
+    "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/RangeSlider.tsx": $RangeSlider,
     "./islands/SearchContent.tsx": $SearchContent,
     "./islands/SearchControls.tsx": $SearchControls,

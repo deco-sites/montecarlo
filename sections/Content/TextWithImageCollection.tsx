@@ -95,7 +95,7 @@ export default function TextWithImageCollection({
           color: style.fontColor,
         }}
       >
-        <div class="flex flex-col p-5 py-20 max-w-[340px] gap-10">
+        <div class="flex flex-col p-5 py-20 max-w-[340px] gap-10" id={promotion+"div"}>
           <h3
             class="text-5xl"
             dangerouslySetInnerHTML={{ __html: title || "" }}
@@ -136,7 +136,7 @@ export default function TextWithImageCollection({
             }}
           />
           <SendEventOnView
-            id={promotion}
+            id={promotion+"div"}
             event={{
               name: "view_promotion",
               params: {

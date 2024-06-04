@@ -94,20 +94,8 @@ function Card(
   } = image;
 
   return (
-    <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 group ">
+    <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 group " id={id}>
       <div class="relative flex justify-center items-center w-full h-full">
-        <SendEventOnView
-          id={id}
-          event={{
-            name: "view_promotion",
-            params: {
-              creative_name: title,
-              creative_slot: index,
-              promotion_id: href,
-              promotion_name: button,
-            },
-          }}
-        />
         <Picture preload={preload} class="w-full h-full">
           <Source
             media="(max-width: 767px)"
@@ -169,6 +157,18 @@ function Card(
           </p>
         )}
       </div>
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+            creative_slot: index,
+            promotion_id: href,
+            promotion_name: button,
+          },
+        }}
+      />
     </div>
   );
 }

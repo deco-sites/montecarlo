@@ -85,7 +85,7 @@ function Card(
   } = image;
 
   return (
-    <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 ">
+    <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 " id={id}>
       <div class="relative flex justify-center items-center w-full h-full">
         <Picture preload={preload} class="w-full h-full">
           <Source

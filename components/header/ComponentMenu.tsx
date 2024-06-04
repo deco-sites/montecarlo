@@ -1,5 +1,10 @@
 import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Link {
   label: string;
@@ -43,11 +48,14 @@ const ASPECTRATIO = {
 };
 
 export default function ListLinksOurImage({ listlinks, image, index }: Props) {
+  const id = useId();
+
   if (image) {
     return (
       <a
         href={image.href}
         class="cursor-pointer hover:opacity-70 flex"
+        id={id + "image"}
         style={{
           gridColumnStart: index.toString(),
           gridColumnEnd: image.img.aspectRatio == "2/1"
@@ -69,6 +77,15 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
           <span class=" text-base font-semibold">{image.title}</span>
           <span dangerouslySetInnerHTML={{ __html: image.conter }}></span>
         </div>
+        <SendEventOnClick
+          id={id + "image"}
+          event={{
+            name: "login",
+              params: {
+                method: image.href,
+              },
+          }}
+        />
       </a>
     );
   } else if (listlinks) {
@@ -80,8 +97,17 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
         <ul class={"flex flex-col gap-5"}>
           {listlinks?.listLinks.map((links) => (
             <li>
-              <a href={links.href} class="hover:opacity-70">
+              <a href={links.href} class="hover:opacity-70" id={id + "links"}>
                 {links.label}
+                <SendEventOnClick
+                  id={id + "links"}
+                  event={{
+                    name: "login",
+                    params: {
+                      method: links.href,
+                    },
+                  }}
+                />
               </a>
             </li>
           ))}
@@ -89,8 +115,18 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
         <a
           href={listlinks?.linkShowMore.href}
           class="text-[#A7A59B] hover:underline"
+          id={id + "showMoreshowMore"}
         >
           {listlinks?.linkShowMore.label}
+          <SendEventOnClick
+            id={id + "showMoreshowMore"}
+            event={{
+              name: "login",
+              params: {
+                method: listlinks?.linkShowMore.href,
+              },
+            }}
+          />
         </a>
       </div>
     );

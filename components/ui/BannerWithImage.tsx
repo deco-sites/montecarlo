@@ -74,7 +74,11 @@ export default function BannerWithImage(props: Props) {
   const id = useId();
 
   return (
-    <div id={id} class="w-full lg:my-9 my-4" style={{ background: backgroundColor }}>
+    <div
+      id={id}
+      class="w-full lg:my-9 my-4"
+      style={{ background: backgroundColor }}
+    >
       <div
         class={`flex w-full max-w-[1512px] mx-auto  ${
           ORDER[orderDesktop || "Imagem a Direita"]

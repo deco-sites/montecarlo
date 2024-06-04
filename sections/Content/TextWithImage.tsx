@@ -66,7 +66,7 @@ export default function TextWithImage({
     `}
       style={{ backgroundColor: style.backgroundColor, color: style.fontColor }}
     >
-      <div class={`h-full ${PLACEMENT[placement]}`}>
+      <div class={`h-full ${PLACEMENT[placement]}`} id={id}>
         <img
           class="w-full object-cover block md:hidden"
           src={image.mobile}

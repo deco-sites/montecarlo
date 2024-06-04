@@ -16,6 +16,11 @@ import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
 import ScrollableContainer from "deco-sites/montecarlo/islands/Header/ScrollableContainer.tsx";
 import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Link {
   label: string;
@@ -100,18 +105,22 @@ function Navbar(
 ) {
   const platform = usePlatform();
 
+  const id = useId();
+
   // Mobile header
   if (device === "mobile") {
     return (
       <div class="lg:hidden grid grid-cols-[68px_auto_68px] justify-between items-center border-b border-base-200 w-full px-4 pb-6 gap-2 header-mobile h-full ">
         <style dangerouslySetInnerHTML={{ __html: style["header-mobile"] }}>
         </style>
+        {/* DL click em button.tsx */}
         <MenuButton />
         {logo && (
           <a
             href="/"
             class="flex-grow inline-flex items-center justify-center header-mobile h-full"
             aria-label="Store logo"
+            id={id}
           >
             <Image
               src={logo.src}
@@ -119,6 +128,15 @@ function Navbar(
               width={logo.width || 174}
               height={logo.height || 32}
               class="w-full"
+            />
+            <SendEventOnClick
+              id={id}
+              event={{
+                name: "login",
+                params: {
+                  method: "/",
+                },
+              }}
             />
           </a>
         )}
@@ -162,16 +180,39 @@ function Navbar(
               <a
                 href={ourStores.href}
                 class="hover:font-semibold cursor-pointer"
+                id={id + "ourStores"}
               >
                 <div class="flex flex-row gap-1">
                   <Icon id="Location" width={18} height={22} />
                   {ourStores.label}
                 </div>
+                <SendEventOnClick
+                  id={id + "ourStores"}
+                  event={{
+                    name: "login",
+                    params: {
+                      method: ourStores.href,
+                    },
+                  }}
+                />
               </a>
             )}
             {help && (
-              <a href={help.href} class="hover:font-semibold cursor-pointer">
+              <a
+                href={help.href}
+                class="hover:font-semibold cursor-pointer"
+                id={id + "help"}
+              >
                 {help.label}
+                <SendEventOnClick
+                  id={id + "help"}
+                  event={{
+                    name: "login",
+                    params: {
+                      method: help.href,
+                    },
+                  }}
+                />
               </a>
             )}
           </div>
@@ -188,6 +229,7 @@ function Navbar(
               href="/"
               aria-label="Store logo"
               class="block"
+              id={id + "logo"}
             >
               <Image
                 src={logo.src}
@@ -195,6 +237,15 @@ function Navbar(
                 width={logo.width || 100}
                 height={logo.height || 13}
                 class="w-full h-auto max-w-60"
+              />
+              <SendEventOnClick
+                id={id + "logo"}
+                event={{
+                  name: "login",
+                  params: {
+                    method: "/",
+                  },
+                }}
               />
             </a>
           )}
@@ -215,10 +266,20 @@ function Navbar(
               class="flex items-center text-xs font-thin"
               href="/account"
               aria-label="Account"
+              id={id + "account"}
             >
               <div class="flex btn btn-circle btn-sm btn-ghost gap-1 justify-center items-center">
                 <Icon id="userAccont" size={21} strokeWidth={0.4} />
               </div>
+              <SendEventOnClick
+                id={id + "account"}
+                event={{
+                  name: "login",
+                  params: {
+                    method: "/account",
+                  },
+                }}
+              />
             </a>
           )}
           {!buttons?.hideWishlistButton && (
@@ -226,6 +287,7 @@ function Navbar(
               class="flex items-center text-xs font-thin"
               href="/wishlist"
               aria-label="Wishlist"
+              id={id + "wishlist"}
             >
               <button
                 class="flex btn btn-circle btn-sm btn-ghost gap-1"
@@ -233,6 +295,15 @@ function Navbar(
               >
                 <Icon id="heartCustom" size={23} strokeWidth={1} />
               </button>
+              <SendEventOnClick
+                id={id + "wishlist"}
+                event={{
+                  name: "login",
+                  params: {
+                    method: "/wishlist",
+                  },
+                }}
+              />
             </a>
           )}
           {!buttons?.hideCartButton && (
@@ -250,6 +321,7 @@ function Navbar(
           (
             <ScrollableContainer type="Menu">
               <ul class="hidden lg:flex justify-center w-full items-center text-sm text-black min-h-[40px] bg-base-100 ">
+                {/* DL click navItem */}
                 {items.map((item, index) => (
                   <NavItem
                     item={item}

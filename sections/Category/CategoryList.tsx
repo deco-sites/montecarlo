@@ -137,8 +137,9 @@ function CategoryList(props: Props) {
               event={{
                 name: "select_promotion",
                 params: {
-                  item_list_name: category.alt,
-                  item_list_id: id + index,
+                  creative_name: category.alt,
+                  creative_slot: id + index,
+                  promotion_id: category.href,
                   promotion_name: category.alt,
                   items: [],
                 },
