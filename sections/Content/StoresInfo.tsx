@@ -158,7 +158,7 @@ function State(props: InfoProps) {
         </h4>
         <Icon
           class={`transform transition-transform rotate-45 group-open/State:rotate-90`}
-          size={24}
+          size={15}
           id="Close"
         >
         </Icon>
@@ -183,7 +183,7 @@ function City(props: InfoProps) {
         </h4>
         <Icon
           class={`transform transition-transform rotate-45 group-open/City:rotate-90`}
-          size={24}
+          size={15}
           id="Close"
         >
         </Icon>
