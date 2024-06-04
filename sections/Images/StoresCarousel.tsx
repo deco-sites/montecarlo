@@ -17,6 +17,8 @@ export interface ImageItem {
   mobile: ImageWidget;
   /** @description Image's alt text */
   alt?: string;
+  /** @description Link to redirect */
+  href: string;
 }
 
 export interface Props {
@@ -52,36 +54,38 @@ function BannerItemMobile({
   const { mobile, alt } = image;
 
   return (
-    <div class="flex flex-row w-full relative">
-      {image.label !== ""
-        ? (
-          <div class="absolute left-0 bottom-0 w-full h-fit pb-16 pt-16 px-5 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)]">
-            <div class="flex flex-col items-center justify-center gap-2 text-white">
-              <Icon
-                size={24}
-                stroke-width={1}
-                id="StorePin"
-              >
-              </Icon>
-              <span class="font-poppins text-base">
-                {image.label}
-              </span>
+    <div class="flex flex-row w-full">
+      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer">
+        {image.label !== ""
+          ? (
+            <div class="absolute left-0 bottom-0 w-full h-fit pb-16 pt-16 px-10 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)]">
+              <div class="flex flex-col items-center justify-center gap-2 text-white">
+                <Icon
+                  size={24}
+                  stroke-width={1}
+                  id="StorePin"
+                >
+                </Icon>
+                <span class="font-poppins text-base">
+                  {image.label}
+                </span>
+              </div>
             </div>
-          </div>
-        )
-        : null}
-      <Image
-        class="object-cover w-full h-full"
-        loading={lcp ? "eager" : "lazy"}
-        decoding="async"
-        sizes="(max-width: 640px) 100vw"
-        preload={lcp}
-        src={mobile}
-        alt={alt}
-        width={350}
-        height={450}
-        fetchPriority={lcp ? "high" : "auto"}
-      />
+          )
+          : null}
+        <Image
+          class="object-cover w-full h-full"
+          loading={lcp ? "eager" : "lazy"}
+          decoding="async"
+          sizes="(max-width: 640px) 100vw"
+          preload={lcp}
+          src={mobile}
+          alt={alt}
+          width={350}
+          height={450}
+          fetchPriority={lcp ? "high" : "auto"}
+        />
+      </a>
     </div>
   );
 }
@@ -94,46 +98,49 @@ function BannerItem({
   lcp?: boolean;
 }) {
   return (
-    <div class="flex flex-row w-full relative">
-      {image.label !== ""
-        ? (
-          <div class="absolute left-0 bottom-0 w-full h-fit pb-16 pt-10 px-10 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)]">
-            <div class="flex items-center gap-2 text-white">
-              <Icon
-                size={24}
-                stroke-width={1}
-                id="StorePin"
-              >
-              </Icon>
-              <span class="font-poppins text-base">
-                {image.label}
-              </span>
+    <div class="flex flex-row w-full">
+      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer">
+        {image.label !== ""
+          ? (
+            <div class="absolute left-0 bottom-0 w-full h-fit pb-16 pt-10 px-10 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)]">
+              <div class="flex items-center gap-2 text-white">
+                <Icon
+                  size={24}
+                  stroke-width={1}
+                  id="StorePin"
+                >
+                </Icon>
+                <span class="font-poppins text-base">
+                  {image.label}
+                </span>
+              </div>
             </div>
-          </div>
-        )
-        : null}
-      <Picture preload={lcp} class="w-full h-full">
-        <Source
-          media="(max-width: 1366px)"
-          fetchPriority={lcp ? "high" : "auto"}
-          src={image.desktop}
-          width={1263}
-          height={492}
-        />
-        <Source
-          media="(min-width: 1367px)"
-          fetchPriority={lcp ? "high" : "auto"}
-          src={image.desktop}
-          width={1495}
-          height={583}
-        />
-        <img
-          class="object-cover w-full"
-          loading={lcp ? "eager" : "lazy"}
-          src={image.desktop}
-          alt={image.alt}
-        />
-      </Picture>
+          )
+          : null}
+        
+        <Picture preload={lcp} class="w-full h-full">
+          <Source
+            media="(max-width: 1366px)"
+            fetchPriority={lcp ? "high" : "auto"}
+            src={image.desktop}
+            width={1263}
+            height={492}
+          />
+          <Source
+            media="(min-width: 1367px)"
+            fetchPriority={lcp ? "high" : "auto"}
+            src={image.desktop}
+            width={1495}
+            height={583}
+          />
+          <img
+            class="object-cover w-full"
+            loading={lcp ? "eager" : "lazy"}
+            src={image.desktop}
+            alt={image.alt}
+          />
+        </Picture>
+      </a>
     </div>
   );
 }
