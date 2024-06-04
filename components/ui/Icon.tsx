@@ -61,7 +61,9 @@ export type AvailableIcons =
   | "arrowTop"
   | "SearchIcon"
   | "columnOne"
-  | "columnTwo";
+  | "columnTwo"
+  | "Close"
+  | "StorePin";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**
