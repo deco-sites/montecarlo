@@ -1,7 +1,7 @@
 import { useRef } from "preact/compat";
 import { invoke } from "deco-sites/montecarlo/runtime.ts";
 import { useState } from "preact/hooks";
-import { useUI } from "../../sdk/useUI.ts";
+import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 
 interface PropsNewsletterPopup {
   /*
@@ -48,6 +48,7 @@ const NewsletterPopupForm = ({
 
   const { showPopup } = useUI();
 
+
   const getCurrentDate = () => {
     const dataAtual = new Date();
     const ano = dataAtual.getFullYear();
@@ -93,7 +94,6 @@ const NewsletterPopupForm = ({
         class="absolute top-1 right-2 text-[#F8F7F3] font-bold"
         onClick={() => {
           showPopup.value = false;
-          console.log(showPopup.value);
         }}
       >
         ✕

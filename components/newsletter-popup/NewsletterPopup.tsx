@@ -1,7 +1,7 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import NewsletterPopupForm from "../../islands/NewsletterForm/NewsletterPopup.tsx";
-import { useUI } from "../../sdk/useUI.ts";
+import ClosedPopup from "../../islands/NewsletterForm/ButtonClosePopup.tsx";
 
 interface PropsNewsletterPopup {
   /*
@@ -39,15 +39,10 @@ interface PropsNewsletterPopup {
 }
 
 function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
-  // const isVisible = true; // Sempre visível
-
-  // if (!isVisible) return null;
-
-  const { showPopup } = useUI();
 
   return (
     <>
-      {showPopup.value && (
+      <ClosedPopup>
         <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 w-full h-full">
           <div
             class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
@@ -65,7 +60,7 @@ function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
             <NewsletterPopupForm phone={phone} />
           </div>
         </div>
-      )}
+      </ClosedPopup>
     </>
   );
 }
