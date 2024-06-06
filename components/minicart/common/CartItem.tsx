@@ -20,8 +20,8 @@ export interface Item {
     list: number;
   };
   skuName?: string;
-  id: string;
-  seller: string;
+  id?: string;
+  seller?: string;
 }
 
 export interface Props {

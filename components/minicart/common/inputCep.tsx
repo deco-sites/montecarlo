@@ -32,6 +32,7 @@ export default function InputCep({ orderFormId, items }: Props) {
   const responseCep = useSignal<Options[] | null>(null);
   const cepSelected = useSignal<Options | null>(null);
   const cep = useSignal<string>("");
+  const type = useSignal<"delivery" | "pickup-in-point">("delivery");
 
   async function handlerRemove() {
     const response = await invoke["deco-sites/montecarlo"].actions.miniCart
@@ -89,8 +90,41 @@ export default function InputCep({ orderFormId, items }: Props) {
     }
   });
 
+  function handlerCheck() {
+    if (type.value === "delivery") {
+      type.value = "pickup-in-point";
+      cepSelected.value = responseCep.value?.find((r) =>
+        r.type === "pickup-in-point"
+      ) || null;
+    } else {
+      type.value = "delivery";
+      cepSelected.value = responseCep.value?.find((r) =>
+        r.type === "delivery"
+      ) || null;
+    }
+  }
+
+  function selectCep(option: Options) {
+    responseCep.value = responseCep.value &&
+      responseCep.value.filter((obj) =>
+        obj.options[0].value !== option.options[0].value
+      );
+    cepSelected.value = option;
+  }
+
   return (
     <>
+      <label class="peer relative flex flex-row items-center justify-start cursor-pointer select-none py-2">
+        <input
+          type="checkbox"
+          name="todo[1]"
+          class="peer opacity-0"
+          onChange={() => handlerCheck()}
+        />
+        <span class="left-0 ml-3 text-black text-sm font-semibold before:absolute before:left-0 after:z-10 after:absolute after:left-1 after:top-3 after:rounded-full after:w-3 after:h-3 before:h-5 before:w-5  before:bg-white before:rounded-full before:border before:border-black peer-checked:after:bg-black lg:text-sm">
+          Receba em casa
+        </span>
+      </label>
       {isCep.value
         ? (
           <div class="flex flex-col gap-2 relative">
@@ -142,15 +176,13 @@ export default function InputCep({ orderFormId, items }: Props) {
                   </>
                 )}
               </label>
-              <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white gap-2">
+              <div class="relative top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-auto max-h-52 bg-white gap-2">
                 {responseCep.value !== null && responseCep.value.length > 0 &&
                   responseCep.value.map((item) => {
-                    if (item.type == "delivery") {
+                    if (item.type == type.value) {
                       return (
                         <button
-                          onClick={() => {
-                            cepSelected.value = item;
-                          }}
+                          onClick={() => selectCep(item)}
                         >
                           <div class="flex justify-between items-center border-base-200 not-first-child:border-t bg-perola-intermediario py-2 px-2">
                             <span class="text-button text-sm min-w-20 text-start">
@@ -179,7 +211,7 @@ export default function InputCep({ orderFormId, items }: Props) {
           <div class="border border-[#CAC7B6] pl-3 flex justify-between h-9">
             <input
               class="w-full h-full outline-none text-sm text-black placeholder:text-black"
-              placeholder={"Cupom do vendedor"}
+              placeholder={"00000-000"}
               ref={refCep}
             />{" "}
             <button

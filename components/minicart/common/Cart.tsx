@@ -67,9 +67,9 @@ function Cart({
 
   items.map((r) => {
     itemsMiniCart.push({
-      id: r.id,
+      id: r.id || "1",
       quantity: r.quantity,
-      seller: r.seller,
+      seller: r.seller || "1",
     });
   });
 
@@ -165,7 +165,7 @@ function Cart({
                       <div class=" h-4 w-4 -rotate-45 border-2 left-[47.5%] absolute peer-checked:translate-y-[-47px] z-30 translate-y-[-316px] border-black duration-300 ease-in-out before:absolute before:bottom-0 before:h-4 before:w-4 before:bg-primary top-3 peer-checked:top-[15px] peer-checked:rotate-[135deg]">
                       </div>
 
-                      <div class="peer-checked:translate-y-[40%] translate-y-[-140px] absolute duration-300 ease-in-out bg-white shadow-[0_-20px_30px_-15px_rgba(0,0,0,0.3)] px-2 z-10 pt-2 after:w-[95.5%] after:h-[1px] after:bg-[#CAC7B6] after:peer-checked:block after:top-11 after:absolute after:hidden">
+                      <div class="peer-checked:translate-y-[40%] translate-y-[-140px] absolute duration-300 ease-in-out bg-white shadow-[0_-20px_30px_-15px_rgba(0,0,0,0.3)] px-2 z-10 pt-2 after:w-[95.5%] after:h-[1px] after:bg-[#CAC7B6] after:peer-checked:block after:top-11 after:absolute after:hidden max-h-[318px] overflow-y-auto">
                         {bonus && (
                           <BonusCart
                             class="py-2"
@@ -196,16 +196,6 @@ function Cart({
                           </div>
                         </div>
                         <div>
-                          <label class="peer relative flex flex-row items-center justify-start cursor-pointer select-none py-2">
-                            <input
-                              type="checkbox"
-                              name="todo[1]"
-                              class="peer opacity-0"
-                            />
-                            <span class="left-0 ml-3 text-black text-sm font-semibold before:absolute before:left-0 after:z-10 after:absolute after:left-1 after:top-3 after:rounded-full after:w-3 after:h-3 before:h-5 before:w-5  before:bg-white before:rounded-full before:border before:border-black peer-checked:after:bg-black lg:text-sm">
-                              Receba em casa
-                            </span>
-                          </label>
                           {itemsMiniCart.length > 0 && (
                             <InputCep
                               orderFormId={orderFormId}
