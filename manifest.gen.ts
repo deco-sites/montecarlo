@@ -67,7 +67,7 @@ import * as $$$$$$49 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$50 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$51 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$52 from "./sections/Miscellaneous/Slide.tsx";
-import * as $$$$$$72 from "./sections/newsletter-popup/NewsletterPopup.tsx";
+import * as $$$$$$73 from "./sections/newsletter-popup/NewsletterPopup.tsx";
 import * as $$$$$$53 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$54 from "./sections/Pinterest/CodeValidation.tsx";
 import * as $$$$$$55 from "./sections/Product/BannerProductDotInfo.tsx";
@@ -161,7 +161,7 @@ const manifest = {
     "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$51,
     "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$52,
     "deco-sites/montecarlo/sections/newsletter-popup/NewsletterPopup.tsx":
-      $$$$$$72,
+      $$$$$$73,
     "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$53,
     "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$54,
     "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$55,
