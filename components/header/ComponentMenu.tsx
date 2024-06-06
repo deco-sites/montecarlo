@@ -81,9 +81,9 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
           id={id + "image"}
           event={{
             name: "login",
-              params: {
-                method: image.href,
-              },
+            params: {
+              method: image.href,
+            },
           }}
         />
       </a>

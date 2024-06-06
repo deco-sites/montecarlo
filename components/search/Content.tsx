@@ -23,7 +23,10 @@ export default function Content(props: Props) {
   const id = useId();
 
   return (
-    <div class="container flex flex-col mx-auto max-w-[753px] py-12 px-5 pt-2 gap-2" id={id}>
+    <div
+      class="container flex flex-col mx-auto max-w-[753px] py-12 px-5 pt-2 gap-2"
+      id={id}
+    >
       {content?.title
         ? <h6 class="font-poppins text-xl text-black mb-2">{content.title}</h6>
         : null}
@@ -45,10 +48,10 @@ export default function Content(props: Props) {
         class={`btn cursor-pointer font-poppins text-sm bg-[#FFC72C] font-normal rounded-none hover:bg-[#FFC72C] w-fit mt-2 self-center ${
           collapsed.value === true ? "hidden" : ""
         }`}
-        id={id+"_button"}
+        id={id + "_button"}
       >
         <SendEventOnClick
-          id={id+"_button"}
+          id={id + "_button"}
           event={{
             name: "select_promotion",
             params: {

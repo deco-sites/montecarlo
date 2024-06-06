@@ -1,1 +1,1 @@
-export { default } from '../../components/pinterest/CodeValidation.tsx';
+export { default } from "../../components/pinterest/CodeValidation.tsx";
