@@ -10,7 +10,7 @@ export default function ClosedPopup({ children }: Props) {
 
   setTimeout(() => {
     showPopup.value = false;
-  }, 5000);
+  }, 25000);
 
   return <>{showPopup.value ? <div>{children}</div> : null}</>;
 }
