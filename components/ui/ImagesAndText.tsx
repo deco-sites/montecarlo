@@ -54,6 +54,7 @@ function CardImage(
     <div
       class="w-full lg:w-2/4 flex flex-col "
       style={{ background: backgrond }}
+      id={id}
     >
       {variant == "Variant 1"
         ? (

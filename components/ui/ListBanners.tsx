@@ -109,8 +109,9 @@ function CardImage({ card, index }: { card: Card; index: number }) {
         event={{
           name: "select_promotion",
           params: {
-            item_list_name: card.altText,
-            item_list_id: id,
+            creative_name: card.altText,
+            creative_slot: id+index,
+            promotion_id: card.linkToRedirect,
             promotion_name: card.altText,
             items: [],
           },

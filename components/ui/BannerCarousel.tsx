@@ -119,7 +119,7 @@ function BannerItemMobile({
   const { mobile, alt, action, promotion } = image;
 
   return (
-    <div class="flex flex-row w-full relative">
+    <div class="flex flex-row w-full relative" id={id+"div"}>
       <a
         id={id}
         href={action?.href ?? "#"}
@@ -145,15 +145,16 @@ function BannerItemMobile({
         event={{
           name: "select_promotion",
           params: {
-            item_list_name: alt,
-            item_list_id: id,
+            creative_name: alt,
+            creative_slot: id,
+            promotion_id: action?.href,
             promotion_name: promotion,
             items: [],
           },
         }}
       />
       <SendEventOnView
-        id={id}
+        id={id+"div"}
         event={{
           name: "view_promotion",
           params: {
@@ -218,8 +219,9 @@ function BannerItem({
             event={{
               name: "select_promotion",
               params: {
-                item_list_name: primaryImage.alt,
-                item_list_id: id,
+                creative_name: primaryImage.alt,
+                creative_slot: id,
+                promotion_id: primaryImage.action?.href,
                 promotion_name: primaryImage.promotion,
                 items: [],
               },

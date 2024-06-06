@@ -67,24 +67,25 @@ import * as $$$$$$50 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$51 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$52 from "./sections/Miscellaneous/Slide.tsx";
 import * as $$$$$$53 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$54 from "./sections/Product/BannerProductDotInfo.tsx";
-import * as $$$$$$55 from "./sections/Product/ImageAndModel.tsx";
-import * as $$$$$$56 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$57 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$58 from "./sections/Product/NotFoundChallenge.tsx";
-import * as $$$$$$59 from "./sections/Product/ProductDetails.tsx";
-import * as $$$$$$60 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$61 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$62 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
-import * as $$$$$$63 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$64 from "./sections/Product/ShelfCollection.tsx";
-import * as $$$$$$65 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$66 from "./sections/Product/Showcases.tsx";
-import * as $$$$$$67 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$68 from "./sections/SEO/TextSEOCategory.tsx";
-import * as $$$$$$69 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$70 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$71 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$54 from "./sections/Pinterest/CodeValidation.tsx";
+import * as $$$$$$55 from "./sections/Product/BannerProductDotInfo.tsx";
+import * as $$$$$$56 from "./sections/Product/ImageAndModel.tsx";
+import * as $$$$$$57 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$58 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$59 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$60 from "./sections/Product/ProductDetails.tsx";
+import * as $$$$$$61 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$62 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$63 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
+import * as $$$$$$64 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$65 from "./sections/Product/ShelfCollection.tsx";
+import * as $$$$$$66 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$67 from "./sections/Product/Showcases.tsx";
+import * as $$$$$$68 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$69 from "./sections/SEO/TextSEOCategory.tsx";
+import * as $$$$$$70 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$71 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$72 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -158,26 +159,27 @@ const manifest = {
     "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$51,
     "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$52,
     "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$53,
-    "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$54,
-    "deco-sites/montecarlo/sections/Product/ImageAndModel.tsx": $$$$$$55,
+    "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$54,
+    "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$55,
+    "deco-sites/montecarlo/sections/Product/ImageAndModel.tsx": $$$$$$56,
     "deco-sites/montecarlo/sections/Product/ImageGalleryFrontBack.tsx":
-      $$$$$$56,
-    "deco-sites/montecarlo/sections/Product/NotFound.tsx": $$$$$$57,
-    "deco-sites/montecarlo/sections/Product/NotFoundChallenge.tsx": $$$$$$58,
-    "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$59,
-    "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$60,
-    "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$61,
+      $$$$$$57,
+    "deco-sites/montecarlo/sections/Product/NotFound.tsx": $$$$$$58,
+    "deco-sites/montecarlo/sections/Product/NotFoundChallenge.tsx": $$$$$$59,
+    "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$60,
+    "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$61,
+    "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$62,
     "deco-sites/montecarlo/sections/Product/ProductShelfWithDotsBottom.tsx":
-      $$$$$$62,
-    "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$63,
-    "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$64,
-    "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$65,
-    "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$66,
-    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$67,
-    "deco-sites/montecarlo/sections/SEO/TextSEOCategory.tsx": $$$$$$68,
-    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$69,
-    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$70,
-    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$71,
+      $$$$$$63,
+    "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$64,
+    "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$65,
+    "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$66,
+    "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$67,
+    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$68,
+    "deco-sites/montecarlo/sections/SEO/TextSEOCategory.tsx": $$$$$$69,
+    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$70,
+    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$71,
+    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$72,
   },
   "apps": {
     "deco-sites/montecarlo/apps/decohub.ts": $$$$$$$$$$$0,
