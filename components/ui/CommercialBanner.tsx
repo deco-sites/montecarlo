@@ -51,7 +51,23 @@ export interface Props {
    * @description select a style variante for the Commercial Banner
    */
   variant?: "variant-1" | "variant-2";
+  paddingMobile?: "Small" | "Normal" | "Large";
+  paddingDesktop?: "Small" | "Normal" | "Large";
 }
+
+const PADDINGDESKTOP = {
+  " ": " ",
+  "Small": "lg:py-9",
+  "Normal": "lg:py-16",
+  "Large": "lg:py-24",
+};
+
+const PADDINGMOBILE = {
+  " ": " ",
+  "Small": "lg:py-9",
+  "Normal": "lg:py-16",
+  "Large": "lg:py-24",
+};
 
 function CommercialBanner(
   {
@@ -65,6 +81,8 @@ function CommercialBanner(
     heightImageDesktop,
     CTA,
     variant,
+    paddingMobile,
+    paddingDesktop,
   }: Props,
 ) {
   const { isMobile } = useUI();
@@ -79,7 +97,12 @@ function CommercialBanner(
   }
 
   return (
-    <div className={`flex items-center justify-between flex-wrap`} id={id}>
+    <div
+      className={`flex items-center justify-between flex-wrap ${
+        PADDINGMOBILE[paddingMobile || " "]
+      }  ${PADDINGDESKTOP[paddingDesktop || " "]}`}
+      id={id}
+    >
       <div
         style={backgroundColor
           ? `background: ${backgroundColor};`
@@ -91,20 +114,6 @@ function CommercialBanner(
             variant === "variant-2" ? "flex flex-col w-fit px-10 lg:px-16" : ""
           }`}
         >
-          <SendEventOnView
-            id={id}
-            event={{
-              name: "view_promotion",
-              params: {
-                view_promotion: altText,
-                creative_name: altText,
-                creative_slot: altText,
-                promotion_id: id,
-                promotion_name: altText,
-                items: [],
-              },
-            }}
-          />
           <h5
             dangerouslySetInnerHTML={{ __html: title }}
             className={`
@@ -172,6 +181,20 @@ function CommercialBanner(
             loading={preloadImage ? "eager" : "lazy"}
           />
         )}
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            view_promotion: altText,
+            creative_name: altText,
+            creative_slot: altText,
+            promotion_id: id,
+            promotion_name: altText,
+            items: [],
+          },
+        }}
+      />
     </div>
   );
 }

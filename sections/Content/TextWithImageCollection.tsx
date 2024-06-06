@@ -49,7 +49,7 @@ export default function TextWithImageCollection({
   description =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ornare ultrices. Vestibulum gravida ligula nec ex scelerisque, sed tristique neque porttitor. ",
   banner = {
-    image: { source: "https://placehold.co/704x704", alt: "monte carlo" },
+    image: { source: "https://placehold.co/704x704", alt: "alt da image" },
   },
   placement = "left",
   style = {
@@ -95,7 +95,10 @@ export default function TextWithImageCollection({
           color: style.fontColor,
         }}
       >
-        <div class="flex flex-col p-5 py-20 max-w-[340px] gap-10">
+        <div
+          class="flex flex-col p-5 py-20 max-w-[340px] gap-10"
+          id={promotion + "div"}
+        >
           <h3
             class="text-5xl"
             dangerouslySetInnerHTML={{ __html: title || "" }}
@@ -136,7 +139,7 @@ export default function TextWithImageCollection({
             }}
           />
           <SendEventOnView
-            id={promotion}
+            id={promotion + "div"}
             event={{
               name: "view_promotion",
               params: {

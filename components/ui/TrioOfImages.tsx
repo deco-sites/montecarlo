@@ -9,6 +9,8 @@ import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import ButtonLink from "./ButtonLink.tsx";
+import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
+import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 
 /**
  * @titleBy title
@@ -83,7 +85,7 @@ function Card(
   } = image;
 
   return (
-    <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 ">
+    <div class="w-full flex flex-col px-2 lg:p-0 items-center gap-4 " id={id}>
       <div class="relative flex justify-center items-center w-full h-full">
         <Picture preload={preload} class="w-full h-full">
           <Source
@@ -158,14 +160,12 @@ export default function TrioOfImages(
   return (
     <div class="flex w-full flex-col py-8 items-center lg:py-8">
       <div class="flex flex-col w-full gap-1">
-        {title && <h3 class=" font-semibold text-xl lg:text-3xl">{title}</h3>}
-        {subTitle && (
-          <p class=" font-medium  text-sm lg:text-base">{subTitle}</p>
-        )}
+        <Title text={title} />
+        <SubTitle text={subTitle} />
       </div>
       <div
         id={id}
-        class="grid grid-cols-[48px_1fr_48px] lg:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] h-auto max-w-[1408px] w-full"
+        class="grid grid-cols-[48px_1fr_48px] lg:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] h-auto max-w-[1512px] lg:px-14 w-full"
       >
         <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-2 lg:justify-center">
           {cards?.map((image, index) => {

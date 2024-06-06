@@ -1,5 +1,6 @@
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { Layout as CardLayout } from "../../components/product/ProductCard.tsx";
+
 import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import SearchControls from "../../islands/SearchControls.tsx";
@@ -15,7 +16,7 @@ export interface Layout {
   /**
    * @description Use drawer for mobile like behavior on desktop. Aside for rendering the filters alongside the products
    */
-  variant?: "aside" | "drawer";
+  variant?: "aside" | "horizontal";
   /**
    * @description Number of products per line on grid
    */
@@ -27,7 +28,7 @@ export interface Layout {
 }
 
 export interface Props {
-  /** @title Integration */
+  title?: string;
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
@@ -50,6 +51,7 @@ function Result({
   cardLayout,
   startingPage = 0,
   url: _url,
+  title,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   url: string;
@@ -68,26 +70,59 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
+  let minPrice = 1;
+  let maxPrice = 500000;
+
+  products.forEach((product) => {
+    product?.offers?.offers.forEach((offer) => {
+      const price = offer.price;
+      if (price < minPrice) {
+        minPrice = price;
+      }
+      if (price > maxPrice) {
+        maxPrice = price;
+      }
+    });
+  });
+
+  filters.push({
+    "@type": "FilterRange",
+    key: "price",
+    label: "Faixa de Preço",
+    values: {
+      min: minPrice,
+      max: maxPrice,
+    },
+  });
+
   return (
     <>
-      <div class="container px-4 sm:py-10">
+      <div
+        class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${
+          isFirstPage ? "py-10" : "pt-0"
+        } ${pageInfo?.nextPage ? "pb-0" : ""}`}
+      >
         {(isFirstPage || !isPartial) && (
           <SearchControls
             sortOptions={sortOptions}
             filters={filters}
             breadcrumb={breadcrumb}
-            displayFilter={layout?.variant === "drawer"}
+            // displayFilter={layout?.variant === "drawer"}
+            layout={layout?.variant}
+            title={title}
           />
         )}
 
         <div class="flex flex-row">
           {layout?.variant === "aside" && filters.length > 0 &&
             (isFirstPage || !isPartial) && (
-            <aside class="hidden sm:block w-min min-w-[250px]">
-              <Filters filters={filters} />
+            <aside class="hidden md:block w-min min-w-[250px]">
+              <ul class={`flex flex-col gap-6 p-4 md:pl-0`}>
+                <Filters filters={filters} />
+              </ul>
             </aside>
           )}
-          <div class="flex-grow" id={id}>
+          <div class="flex-grow mt-4 relative" id={id}>
             <ProductGallery
               products={products}
               offset={offset}
@@ -154,7 +189,11 @@ function SearchResult(
     return <NotFound />;
   }
 
-  return <Result {...props} page={page} />;
+  return (
+    <>
+      <Result {...props} page={page} />
+    </>
+  );
 }
 
 export const loader = (props: Props, req: Request) => {

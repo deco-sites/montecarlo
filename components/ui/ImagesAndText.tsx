@@ -54,6 +54,7 @@ function CardImage(
     <div
       class="w-full lg:w-2/4 flex flex-col "
       style={{ background: backgrond }}
+      id={id}
     >
       {variant == "Variant 1"
         ? (
@@ -86,7 +87,7 @@ function CardImage(
             <div class="flex flex-col w-full items-center gap-6 lg:py-11 py-6 lg:px-20 px-8">
               <div class="flex flex-col w-full gap-1">
                 {title && (
-                  <h2 class=" font-semibold text-center text-xl lg:text-3xl">
+                  <h2 class=" font-semibold text-center text-1.5xl lg:text-3xl">
                     {title}
                   </h2>
                 )}
@@ -145,7 +146,7 @@ function CardImage(
                 )}
               </div>
             </div>
-            <div class="flex flex-col w-full items-center gap-6 lg:pt-7 lg:pb-4 py-6 lg:px-8 px-10">
+            <div class="flex flex-col w-full items-center gap-6 lg:pt-7 lg:pb-4 py-6 lg:px-16 px-10">
               {content && (
                 <span
                   dangerouslySetInnerHTML={{ __html: content }}
@@ -186,7 +187,7 @@ function CardImage(
 export default function ImagesAndText({ cardsImage }: Props) {
   const id = useId();
   return (
-    <div class="flex flex-col lg:flex-row w-full h-full py-8 gap-2 px-1 max-w-[1408px] mx-auto">
+    <div class="flex flex-col lg:flex-row w-full h-full py-8 lg:gap-2 gap-16 max-w-[1512px] lg:px-14 mx-auto">
       {cardsImage.map((card, index) => (
         <CardImage
           imageMobile={card.imageMobile}

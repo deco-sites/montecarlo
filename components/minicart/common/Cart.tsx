@@ -20,6 +20,8 @@ interface MiniCart {
   quantity: number;
   seller: string;
 }
+import { SendEventOnClick, SendEventOnView } from "../../Analytics.tsx";
+import { useId } from "../../../sdk/useId.ts";
 
 interface Props {
   items: Item[];
@@ -72,11 +74,13 @@ function Cart({
       seller: r.seller || "1",
     });
   });
+  const id = useId();
 
   return (
     <div
       class="flex flex-col justify-center items-center overflow-hidden"
       style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
+      id={id}
     >
       {isEmtpy
         ? (
@@ -280,6 +284,17 @@ function Cart({
             </footer>
           </>
         )}
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_cart",
+          params: {
+            currency: "BRL",
+            value: total,
+            items: [],
+          },
+        }}
+      />
     </div>
   );
 }

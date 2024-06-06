@@ -1,5 +1,10 @@
 import { HTMLWidget } from "apps/admin/widgets.ts";
 import ButtonLink from "deco-sites/montecarlo/components/ui/ButtonLink.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
   title: HTMLWidget;
@@ -19,9 +24,13 @@ const DEFAULTPROPS = {
 
 export default function CallForQuiz(props: Props) {
   const { title, button } = { ...DEFAULTPROPS, ...props };
+  const id = useId();
 
   return (
-    <div class="flex flex-col w-full py-9 gap-7 lg:gap-10 px-2 items-center">
+    <div
+      id={id}
+      class="flex flex-col w-full py-9 gap-7 lg:gap-10 px-2 items-center"
+    >
       <h3
         class="text-2xl font-semibold text-center lg:text-3xl"
         dangerouslySetInnerHTML={{ __html: title }}
@@ -29,6 +38,15 @@ export default function CallForQuiz(props: Props) {
       </h3>
 
       <ButtonLink label={button.label} href={button.href} classCustom="" />
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_promotion",
+          params: {
+            creative_name: title,
+          },
+        }}
+      />
     </div>
   );
 }

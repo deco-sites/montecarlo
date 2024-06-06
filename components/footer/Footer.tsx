@@ -122,7 +122,7 @@ function Footer({
     >
       <div class="bg-primary w-full lg:mx-auto pt-12 sm">
         <div class="flex flex-col gap-10">
-          <div class="flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between px-2 max-w-[1408px] w-full lg:mx-auto">
+          <div class="container flex flex-col lg:flex-row gap-10 lg:gap-20 lg:justify-between px-2 md:px-10 max-w-[1408px] w-full lg:mx-auto">
             <FooterItems
               sections={sections}
               justify={false}
@@ -152,7 +152,7 @@ function Footer({
             </div>
           </div>
           <div class="w-full bg-white">
-            <div class="flex flex-col md:flex-row md:justify-between gap-10 md:items-center bg-white px-2 pt-8 pb-12 max-w-[1408px] w-full lg:mx-auto">
+            <div class="container flex flex-col md:flex-row md:justify-between gap-10 md:items-center bg-white px-2 md:px-10 pt-8 pb-12 max-w-[1408px] w-full lg:mx-auto">
               <Securitys content={security} />
               <Stacks content={stacks} />
               <PaymentMethods content={payments} />
