@@ -180,8 +180,7 @@ function CommercialBanner(
             width={1200}
             loading={preloadImage ? "eager" : "lazy"}
           />
-        )
-      }
+        )}
       <SendEventOnView
         id={id}
         event={{

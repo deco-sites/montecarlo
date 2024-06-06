@@ -2,6 +2,7 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $$$$$$$$$0 from "./actions/newsletter/sendForm.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$7 from "./loaders/availableIcons.ts";
@@ -66,6 +67,7 @@ import * as $$$$$$49 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$50 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$51 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$52 from "./sections/Miscellaneous/Slide.tsx";
+import * as $$$$$$72 from "./sections/newsletter-popup/NewsletterPopup.tsx";
 import * as $$$$$$53 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$54 from "./sections/Pinterest/CodeValidation.tsx";
 import * as $$$$$$55 from "./sections/Product/BannerProductDotInfo.tsx";
@@ -158,6 +160,8 @@ const manifest = {
     "deco-sites/montecarlo/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$50,
     "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$51,
     "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$52,
+    "deco-sites/montecarlo/sections/newsletter-popup/NewsletterPopup.tsx":
+      $$$$$$72,
     "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$53,
     "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$54,
     "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$55,
@@ -180,6 +184,9 @@ const manifest = {
     "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$70,
     "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$71,
     "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$72,
+  },
+  "actions": {
+    "deco-sites/montecarlo/actions/newsletter/sendForm.ts": $$$$$$$$$0,
   },
   "apps": {
     "deco-sites/montecarlo/apps/decohub.ts": $$$$$$$$$$$0,
