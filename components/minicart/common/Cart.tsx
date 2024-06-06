@@ -95,7 +95,7 @@ function Cart({
         : (
           <>
             {/* Free Shipping Bar */}
-            <div class="px-2 py-4 w-full">
+            <div class="px-2 py-4 w-full lg:px-8">
               <FreeShippingProgressBar
                 total={total}
                 locale={locale}
@@ -107,7 +107,7 @@ function Cart({
             {/* Cart Items */}
             <ul
               role="list"
-              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col w-full"
+              class="mt-6 px-2 flex-grow overflow-y-auto flex flex-col w-full lg:px-8"
             >
               {items.map((item, index) => (
                 <li
@@ -162,10 +162,10 @@ function Cart({
                       />
                       <span class="left-0 -ml-4 bg-primary w-8 h-8 flex justify-center items-center peer-checked:translate-y-[-47px] z-30 translate-y-[-316px] duration-300 ease-in-out">
                       </span>
-                      <div class=" h-4 w-4 -rotate-45 border-2 left-[47.5%] absolute peer-checked:translate-y-[-47px] z-30 translate-y-[-316px] border-black duration-300 ease-in-out before:absolute before:bottom-0 before:h-4 before:w-4 before:bg-primary top-3 peer-checked:top-[15px] peer-checked:rotate-[135deg]">
+                      <div class=" h-4 w-4 -rotate-45 border-2 left-[47.7%] absolute peer-checked:translate-y-[-47px] z-30 translate-y-[-316px] border-black duration-300 ease-in-out before:absolute before:bottom-0 before:h-4 before:w-4 before:bg-primary top-3 peer-checked:top-[15px] peer-checked:rotate-[135deg]">
                       </div>
 
-                      <div class="peer-checked:translate-y-[40%] translate-y-[-140px] absolute duration-300 ease-in-out bg-white shadow-[0_-20px_30px_-15px_rgba(0,0,0,0.3)] px-2 z-10 pt-2 after:w-[95.5%] after:h-[1px] after:bg-[#CAC7B6] after:peer-checked:block after:top-11 after:absolute after:hidden max-h-[318px] overflow-y-auto">
+                      <div class="peer-checked:translate-y-[40%] translate-y-[-140px] absolute duration-300 ease-in-out bg-white shadow-[0_-20px_30px_-15px_rgba(0,0,0,0.3)] px-2 z-10 pt-2 after:w-[95.5%] after:h-[1px] after:bg-[#CAC7B6] after:peer-checked:block after:top-11 after:absolute after:hidden max-h-[318px] overflow-y-auto lg:px-8 cursor-default">
                         {bonus && (
                           <BonusCart
                             class="py-2"
@@ -215,7 +215,7 @@ function Cart({
               {/* Total */}
               {variant === "variant1"
                 ? (
-                  <div class=" pt-2 flex flex-col justify-end items-end px-2 text-black  relative z-20 bg-white">
+                  <div class=" pt-2 flex flex-col justify-end items-end px-2 text-black  relative z-20 bg-white lg:px-8">
                     <div class="flex justify-between items-center w-full ">
                       <span class=" text-lg font-semibold">Total</span>
                       <span class="text-lg font-semibold">
@@ -231,7 +231,7 @@ function Cart({
                   </div>
                 )
                 : (
-                  <div class=" pt-2 flex flex-col justify-end items-end px-2 text-black  relative z-20 bg-white">
+                  <div class=" pt-2 flex flex-col justify-end items-end px-2 text-black  relative z-20 bg-white lg:px-8">
                     <div class="flex justify-between items-center w-full ">
                       <span class=" text-lg font-semibold">Total</span>
                       <span class="text-lg font-semibold">
@@ -253,7 +253,7 @@ function Cart({
                   </div>
                 )}
 
-              <div class="p-2 relative z-20 bg-white">
+              <div class="p-2 relative z-20 bg-white lg:px-8 lg:pb-8">
                 <a class="inline-block w-full" href={checkoutHref}>
                   <Button
                     data-deco="buy-button"

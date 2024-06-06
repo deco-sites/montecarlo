@@ -82,7 +82,9 @@ function CartItem(
 
       <div class="flex flex-col justify-between">
         <div class="flex justify-between items-center gap-1">
-          <span class=" text-xs line-clamp-2 leading-4 text-black">{name}</span>
+          <span class=" text-xs line-clamp-2 leading-4 text-black lg:text-sm">
+            {name}
+          </span>
           <Button
             disabled={loading || isGift}
             loading={loading}

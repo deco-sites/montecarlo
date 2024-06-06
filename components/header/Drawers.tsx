@@ -49,7 +49,7 @@ const Aside = (
     return (
       <div class="bg-white grid grid-rows-[auto_1fr] max-w-[425px] min-h-[100%] max-h-[100vh] overflow-y-auto w-full">
         <div
-          class={`p-2 relative flex flex-col`}
+          class={`p-2 relative flex flex-col lg:p-8 lg:pb-2`}
         >
           <div
             class={`flex h-full justify-between items-center w-full`}
