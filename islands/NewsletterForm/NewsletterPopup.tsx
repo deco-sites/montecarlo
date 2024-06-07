@@ -88,7 +88,7 @@ const NewsletterPopupForm = ({
   };
 
   return (
-    <div class="max-w-[480px] bg-[#FFC72C] flex flex-col items-center self-center p-16 relative h-[480px]">
+    <div class="max-w-[380px] md:max-w-[480px] bg-[#FFC72C] flex flex-col items-center self-center px-4 py-12 md:p-16 relative h-[480px]">
       <button
         class="absolute top-1 right-2 text-[#F8F7F3] font-bold"
         onClick={() => {
