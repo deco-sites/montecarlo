@@ -45,7 +45,7 @@ function ListLinks(props: Props) {
         <a
           key={index}
           href={handleHref(link.href)}
-          id={id+index}
+          id={id + index}
           class="flex gap-3 group border border-transparent hover:border-[#FFC72C] transition-all p-2"
         >
           <SendEventOnClick
@@ -78,7 +78,7 @@ function ListLinks(props: Props) {
             <span class="text-base font-medium font-poppins">{link.label}</span>
           </div>
           <SendEventOnView
-            id={id+index}
+            id={id + index}
             event={{
               name: "view_promotion",
               params: {

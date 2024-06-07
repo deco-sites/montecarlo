@@ -112,6 +112,7 @@ function CardImage({ card, index }: { card: Card; index: number }) {
             creative_slot: card.altText ? card.altText : '',
             promotion_id: id+index,
             promotion_name: card.title,
+
             items: [],
           },
         }}
