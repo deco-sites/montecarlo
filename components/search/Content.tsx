@@ -55,7 +55,6 @@ export default function Content(props: Props) {
           event={{
             name: "select_promotion",
             params: {
-              creative_name: content?.title ? content.title : "",
               promotion_name: "Continue lendo",
             },
           }}

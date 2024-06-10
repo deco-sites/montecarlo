@@ -80,9 +80,11 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
         <SendEventOnClick
           id={id + "image"}
           event={{
-            name: "login",
+            name: "select_promotion",
             params: {
-              method: image.href,
+              item_list_name: image.img.alt,
+              item_list_id: id + "image",
+              promotion_name: image.img.alt,
             },
           }}
         />
@@ -104,7 +106,9 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
                   event={{
                     name: "login",
                     params: {
-                      method: links.href,
+                      item_list_name: links.label,
+                      item_list_id: id + "links",
+                      promotion_name: links.label,
                     },
                   }}
                 />
@@ -123,7 +127,9 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
             event={{
               name: "login",
               params: {
-                method: listlinks?.linkShowMore.href,
+                item_list_name: listlinks?.linkShowMore.label,
+                item_list_id: id + "showMore",
+                promotion_name: listlinks?.linkShowMore.label,
               },
             }}
           />
