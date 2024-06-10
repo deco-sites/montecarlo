@@ -117,11 +117,10 @@ function CardImage(
         class={`lg:w-full justify-center items-center flex flex-col `}
       >
         <Image
-          class={` h-auto aspect-square ${
-            aspectRatio == "1:1"
-              ? "min-w-[246px] object-cover w-full"
-              : "w-[102px] object-contain"
-          } `}
+          class={` h-auto aspect-square ${aspectRatio == "1:1"
+            ? "min-w-[246px] object-cover w-full"
+            : "w-[102px] object-contain"
+            } `}
           src={card.image}
           alt={card.altText}
           width={WIDTH[aspectRatio]}
@@ -165,15 +164,15 @@ function CardImage(
 }
 
 const ITEMSSLIDE = {
-  4: "lg:w-[calc(25%-0.5rem)]",
-  5: "lg:w-[calc(20%-0.5rem)]",
-  6: "lg:w-[calc(16.66%-0.5rem)]",
-  7: "lg:w-[calc(14.28%-0.5rem)]",
+  4: "lg:w-[calc(25%-0.25rem)]",
+  5: "lg:w-[calc(20%-0.25rem)]",
+  6: "lg:w-[calc(16.66%-0.25rem)]",
+  7: "lg:w-[calc(14.28%-0.25rem)]",
 };
 
 const ITEMSSLIDEMOBILE = {
-  1: "w-full",
-  3.5: "w-[calc(30%-2.25rem)]",
+  1: "w-full snap-center",
+  3.5: "w-[calc(30%-2.25rem)] snap-start",
 };
 
 function VerticalCardsGrid(props: Props) {
@@ -190,11 +189,10 @@ function VerticalCardsGrid(props: Props) {
 
   return (
     <div
-      class={`  ${
-        variant === "noSlide"
-          ? "xl:max-w-[1512px] lg:container lg:px-14 "
-          : "w-full lg:px-0"
-      } flex lg:justify-center flex-col gap-5 lg:gap-10 py-9`}
+      class={`  ${variant === "noSlide"
+        ? " lg:container lg:px-14 "
+        : "w-full lg:px-0"
+        } flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 xl:max-w-[1512px] mx-auto`}
     >
       {title !== "" || subTitle !== ""
         ? (
@@ -210,15 +208,13 @@ function VerticalCardsGrid(props: Props) {
             {cards.map((card, index) => (
               <Slider.Item
                 index={index}
-                class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3 snap-center ${
-                  ITEMSSLIDEMOBILE[
-                    sliderItemsMobile as keyof typeof sliderItemsMobile || 1
+                class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3 snap-center ${ITEMSSLIDEMOBILE[
+                  sliderItemsMobile as keyof typeof sliderItemsMobile || 1
+                ]
+                  } ${ITEMSSLIDE[
+                  sliderItemsDesktop as keyof typeof sliderItemsDesktop || 4
                   ]
-                } ${
-                  ITEMSSLIDE[
-                    sliderItemsDesktop as keyof typeof sliderItemsDesktop || 4
-                  ]
-                }`}
+                  }`}
               >
                 <CardImage
                   card={card}
@@ -230,57 +226,53 @@ function VerticalCardsGrid(props: Props) {
           </Slider>
         )
         : variant == "Slider"
-        ? (
-          <div
-            id={id}
-            class={`grid lg:grid-cols-[48px_1fr_48px] ${
-              aspectRatio == "1:2"
+          ? (
+            <div
+              id={id}
+              class={`grid lg:grid-cols-[48px_1fr_48px] ${aspectRatio == "1:2"
                 ? " grid-rows-[1fr_30%]"
                 : " grid-rows-[1fr_40%]"
-            } px-0`}
-          >
-            <Slider
-              class={`row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 lg:px-0 ${
-                sliderItemsMobile == 1 ? "px-14" : "px-0"
-              }`}
+                } px-0`}
             >
-              {cards.map((card, index) => (
-                <Slider.Item
-                  index={index}
-                  class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3 snap-start ${
-                    ITEMSSLIDEMOBILE[
+              <Slider
+                class={`row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 lg:px-0 ${sliderItemsMobile == 1 ? "px-14" : "px-0"
+                  }`}
+              >
+                {cards.map((card, index) => (
+                  <Slider.Item
+                    index={index}
+                    class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3  ${ITEMSSLIDEMOBILE[
                       sliderItemsMobile as keyof typeof sliderItemsMobile || 1
                     ]
-                  } ${
-                    ITEMSSLIDE[
+                      } ${ITEMSSLIDE[
                       sliderItemsDesktop as keyof typeof sliderItemsDesktop || 4
-                    ]
-                  }`}
-                >
-                  <CardImage
-                    card={card}
-                    index={index}
-                    aspectRatio={aspectRatio || "1:1"}
-                  />
-                </Slider.Item>
-              ))}
-            </Slider>
-            <>
-              <div class="relative z-10 col-start-1 row-start-3 hidden lg:block">
-                <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-                  <Icon size={40} id="arrowLeft" strokeWidth={3} />
-                </Slider.PrevButton>
-              </div>
-              <div class="relative z-10 col-start-3 row-start-3 hidden lg:block">
-                <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
-                  <Icon size={40} id="arrowRight" strokeWidth={3} />
-                </Slider.NextButton>
-              </div>
-            </>
-            <SliderJS rootId={id} />
-          </div>
-        )
-        : null}
+                      ]
+                      }`}
+                  >
+                    <CardImage
+                      card={card}
+                      index={index}
+                      aspectRatio={aspectRatio || "1:1"}
+                    />
+                  </Slider.Item>
+                ))}
+              </Slider>
+              <>
+                <div class="relative z-10 col-start-1 row-start-3 hidden lg:block">
+                  <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
+                    <Icon size={40} id="arrowLeft" strokeWidth={3} />
+                  </Slider.PrevButton>
+                </div>
+                <div class="relative z-10 col-start-3 row-start-3 hidden lg:block">
+                  <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
+                    <Icon size={40} id="arrowRight" strokeWidth={3} />
+                  </Slider.NextButton>
+                </div>
+              </>
+              <SliderJS rootId={id} />
+            </div>
+          )
+          : null}
     </div>
   );
 }
