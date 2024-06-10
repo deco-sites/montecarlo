@@ -50,7 +50,7 @@ function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
         <ClosedPopup>
           <div
             class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-            style="background: hsla(0, 0%, 0%, 0.5);"
+            style="background: hsla(0, 0%, 0%, 0.5);z-index: 9999;"
           >
             <div
               class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
