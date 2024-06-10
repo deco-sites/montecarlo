@@ -1,4 +1,7 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
+import Slider from "./Slider.tsx";
+import Icon from "../../components/ui/Icon.tsx";
+import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import {
   SendEventOnClick,
@@ -8,7 +11,6 @@ import {
 import Title from "./../product/Shelf/Title.tsx";
 import SubTitle from "./../product/Shelf/SubTitle.tsx";
 
-import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
 import Image from "apps/website/components/Image.tsx";
 
@@ -30,6 +32,11 @@ export interface Props {
    */
   subTitle?: string;
   cards: Card[];
+  /**
+   * @title Show arrows
+   * @description show arrows to navigate through the images
+   */
+  arrows?: boolean;
 }
 
 const DEFAULTPROPS = {
@@ -124,6 +131,8 @@ function CardImage({ card, index }: { card: Card; index: number }) {
 function VerticalCardsGrid(props: Props) {
   const { title, subTitle, cards } = { ...DEFAULTPROPS, ...props };
 
+  const id = useId();
+
   return (
     <div class=" lg:container xl:max-w-[1512px] flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 lg:px-14">
       {title !== "" || subTitle !== ""
@@ -134,17 +143,40 @@ function VerticalCardsGrid(props: Props) {
           </div>
         )
         : null}
-      <Slider class="row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 px-14 lg:px-0 lg:justify-center">
-        {cards.map((card, index) => (
-          <Slider.Item
-            index={index}
-            class={"carousel-item sm:max-w-1/2 lg:w-[calc(25%-0.5rem)] lg:max-w-none lg:snap-start md:w-1/3 snap-center w-full"}
-          >
-            <CardImage card={card} index={index} />
-          </Slider.Item>
-        ))}
-      </Slider>
+      <div id={id} class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min px-2 sm:px-10 md:px-14 lg:px-0">   
+        <Slider class={`carousel carousel-center w-full row-span-full gap-2 ${props.arrows ? "" : "col-span-full"}`}>
+          {cards.map((card, index) => (
+            <Slider.Item
+              index={index}
+              class={"carousel-item sm:max-w-1/2 lg:w-[calc(25%-0.5rem)] lg:max-w-none lg:snap-start md:w-1/3 snap-center w-full"}
+            >
+              <CardImage card={card} index={index} />
+            </Slider.Item>
+          ))}
+        </Slider>
+
+        {props.arrows && <Buttons />}
+
+        <SliderJS rootId={id} interval={0} infinite />
+      </div>
     </div>
+  );
+}
+
+function Buttons() {
+  return (
+    <>
+      <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
+        <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
+          <Icon class="text-black" size={40} id="arrowLeft" strokeWidth={3} />
+        </Slider.PrevButton>
+      </div>
+      <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
+        <Slider.NextButton class=" bg-transparent border-none hover:bg-transparent text-primary">
+          <Icon class="text-black" size={40} id="arrowRight" strokeWidth={3} />
+        </Slider.NextButton>
+      </div>
+    </>
   );
 }
 

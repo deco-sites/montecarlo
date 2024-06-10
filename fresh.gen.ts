@@ -30,6 +30,7 @@ import * as $Product_Zoom_ZoomImage from "./islands/Product/Zoom/ZoomImage.tsx";
 import * as $RangeSlider from "./islands/RangeSlider.tsx";
 import * as $SearchContent from "./islands/SearchContent.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
+import * as $Search_Filters from "./islands/Search/Filters.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $ShowMore from "./islands/ShowMore.tsx";
 import * as $SliderDotsJS from "./islands/SliderDotsJS.tsx";
@@ -70,6 +71,7 @@ const manifest = {
     "./islands/RangeSlider.tsx": $RangeSlider,
     "./islands/SearchContent.tsx": $SearchContent,
     "./islands/SearchControls.tsx": $SearchControls,
+    "./islands/Search/Filters.tsx": $Search_Filters,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/ShowMore.tsx": $ShowMore,
     "./islands/SliderDotsJS.tsx": $SliderDotsJS,
