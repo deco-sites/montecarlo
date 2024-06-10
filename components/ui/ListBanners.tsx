@@ -85,7 +85,7 @@ function CardImage({ card, index }: { card: Card; index: number }) {
         class={`lg:w-full `}
       >
         <Image
-          class="w-full h object-cover aspect-square min-w-[246px] lg:min-w-full"
+          class="w-full h object-cover aspect-square lg:min-w-full"
           src={card.image}
           alt={card.altText}
           width={246}
@@ -143,7 +143,7 @@ function VerticalCardsGrid(props: Props) {
           </div>
         )
         : null}
-      <div id={id} class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min px-2 sm:px-10 md:px-14 lg:px-0">   
+      <div id={id} class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min px-14 lg:px-0">   
         <Slider class={`carousel carousel-center w-full row-span-full gap-2 ${props.arrows ? "" : "col-span-full"}`}>
           {cards.map((card, index) => (
             <Slider.Item
@@ -166,7 +166,7 @@ function VerticalCardsGrid(props: Props) {
 function Buttons() {
   return (
     <>
-      <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
+      <div class="hidden lg:flex items-center justify-center z-10 col-start-1 row-start-2">
         <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
           <Icon class="text-black" size={40} id="arrowLeft" strokeWidth={3} />
         </Slider.PrevButton>
