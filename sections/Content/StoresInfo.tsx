@@ -10,6 +10,7 @@ export interface State {
 export interface City {
   /** @title City */
   label: string;
+  startsOpen?: boolean;
   stores?: StoreInfo[];
 }
 
@@ -63,7 +64,7 @@ export default function StoresInfo(props: Props) {
               <State key={index} title={state.label}>
                 <div class="flex flex-col gap-2 mt-2 mb-3">
                   {state.cities?.map((city, index) => (
-                    <City key={index} title={city.label}>
+                    <City key={index} title={city.label} startsOpen={city.startsOpen}>
                       {city.stores?.map((store, index) => (
                         <>
                           <div key={index} class="flex flex-col gap-5 mx-5">
@@ -142,6 +143,7 @@ export default function StoresInfo(props: Props) {
 
 interface InfoProps {
   title: string;
+  startsOpen?: boolean;
   children?: preact.ComponentChildren;
 }
 
@@ -171,10 +173,10 @@ function State(props: InfoProps) {
 }
 
 function City(props: InfoProps) {
-  const { title, children } = props;
+  const { title, children, startsOpen } = props;
 
   return (
-    <details class={`group/City`} open>
+    <details class={`group/City`} open={startsOpen}>
       <summary
         class={`flex cursor-pointer items-center justify-between bg-[#F8F7F3] py-2 px-3`}
       >
