@@ -174,7 +174,7 @@ function City(props: InfoProps) {
   const { title, children } = props;
 
   return (
-    <details class={`group/City`}>
+    <details class={`group/City`} open>
       <summary
         class={`flex cursor-pointer items-center justify-between bg-[#F8F7F3] py-2 px-3`}
       >

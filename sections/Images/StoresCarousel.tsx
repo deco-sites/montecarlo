@@ -54,7 +54,7 @@ function BannerItemMobile({
   const { mobile, alt } = image;
 
   return (
-    <div class="flex flex-row w-full">
+    <div class="flex flex-row w-full lg:max-h-[90vh] lg:min-h-[600px]">
       <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer">
         {image.label !== ""
           ? (
