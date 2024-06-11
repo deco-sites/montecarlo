@@ -68,7 +68,7 @@ import * as $$$$$$50 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$51 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$52 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$53 from "./sections/Miscellaneous/Slide.tsx";
-import * as $$$$$$75 from "./sections/newsletter-popup/NewsletterPopup.tsx";
+import * as $$$$$$76 from "./sections/newsletter-popup/NewsletterPopup.tsx";
 import * as $$$$$$54 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$55 from "./sections/Pinterest/CodeValidation.tsx";
 import * as $$$$$$56 from "./sections/Product/BannerProductDotInfo.tsx";
@@ -90,6 +90,7 @@ import * as $$$$$$71 from "./sections/SEO/TextSEOCategory.tsx";
 import * as $$$$$$72 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$73 from "./sections/Social/WhatsApp.tsx";
 import * as $$$$$$74 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$75 from "./sections/Video/FullVideo.tsx";
 
 const manifest = {
   "loaders": {
@@ -164,7 +165,7 @@ const manifest = {
     "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$52,
     "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$53,
     "deco-sites/montecarlo/sections/newsletter-popup/NewsletterPopup.tsx":
-      $$$$$$75,
+      $$$$$$76,
     "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$54,
     "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$55,
     "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$56,
@@ -188,6 +189,7 @@ const manifest = {
     "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$72,
     "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$73,
     "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$74,
+    "deco-sites/montecarlo/sections/Video/FullVideo.tsx": $$$$$$75,
   },
   "actions": {
     "deco-sites/montecarlo/actions/newsletter/sendForm.ts": $$$$$$$$$0,
