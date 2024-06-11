@@ -2,6 +2,7 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
+import * as $$$$$$$$$0 from "./actions/newsletter/sendForm.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$7 from "./loaders/availableIcons.ts";
@@ -41,45 +42,46 @@ import * as $$$$$$24 from "./sections/Content/Logos.tsx";
 import * as $$$$$$25 from "./sections/Content/Partners.tsx";
 import * as $$$$$$26 from "./sections/Content/RichText.tsx";
 import * as $$$$$$27 from "./sections/Content/SearchContent.tsx";
-import * as $$$$$$28 from "./sections/Content/StoresInfo.tsx";
-import * as $$$$$$29 from "./sections/Content/Table.tsx";
-import * as $$$$$$30 from "./sections/Content/Testimonials.tsx";
-import * as $$$$$$31 from "./sections/Content/TextWithImage.tsx";
-import * as $$$$$$32 from "./sections/Content/TextWithImageCollection.tsx";
-import * as $$$$$$33 from "./sections/Footer/Footer.tsx";
-import * as $$$$$$34 from "./sections/Gallery.tsx";
-import * as $$$$$$35 from "./sections/Header/Header.tsx";
-import * as $$$$$$36 from "./sections/Images/BannerGrid.tsx";
-import * as $$$$$$37 from "./sections/Images/BannerWithImage.tsx";
-import * as $$$$$$38 from "./sections/Images/Carousel.tsx";
-import * as $$$$$$39 from "./sections/Images/ComercialBanner.tsx";
-import * as $$$$$$40 from "./sections/Images/DuoOfImagesAndText.tsx";
-import * as $$$$$$41 from "./sections/Images/ImageDuo.tsx";
-import * as $$$$$$42 from "./sections/Images/ImageGallery.tsx";
-import * as $$$$$$43 from "./sections/Images/ImageQuad.tsx";
-import * as $$$$$$44 from "./sections/Images/ListBanners.tsx";
-import * as $$$$$$45 from "./sections/Images/ShoppableBanner.tsx";
-import * as $$$$$$46 from "./sections/Images/StoresCarousel.tsx";
-import * as $$$$$$47 from "./sections/Images/TrioOfImages.tsx";
-import * as $$$$$$48 from "./sections/Images/TrioOfImagesAndProducts.tsx";
-import * as $$$$$$49 from "./sections/Links/LinkTree.tsx";
-import * as $$$$$$50 from "./sections/Links/ListLinks.tsx";
-import * as $$$$$$51 from "./sections/Links/Shortcuts.tsx";
-import * as $$$$$$52 from "./sections/Miscellaneous/CampaignTimer.tsx";
-import * as $$$$$$53 from "./sections/Miscellaneous/CookieConsent.tsx";
-import * as $$$$$$54 from "./sections/Miscellaneous/Slide.tsx";
-import * as $$$$$$55 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$56 from "./sections/Product/BannerProductDotInfo.tsx";
-import * as $$$$$$57 from "./sections/Product/ImageAndModel.tsx";
-import * as $$$$$$58 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$59 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$60 from "./sections/Product/NotFoundChallenge.tsx";
-import * as $$$$$$61 from "./sections/Product/ProductDetails.tsx";
-import * as $$$$$$62 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$63 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$64 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
-import * as $$$$$$65 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$66 from "./sections/Product/ShelfCollection.tsx";
+import * as $$$$$$28 from "./sections/Content/Table.tsx";
+import * as $$$$$$29 from "./sections/Content/Testimonials.tsx";
+import * as $$$$$$30 from "./sections/Content/TextWithImage.tsx";
+import * as $$$$$$31 from "./sections/Content/TextWithImageCollection.tsx";
+import * as $$$$$$32 from "./sections/Footer/Footer.tsx";
+import * as $$$$$$33 from "./sections/Gallery.tsx";
+import * as $$$$$$34 from "./sections/Header/Header.tsx";
+import * as $$$$$$35 from "./sections/Images/BannerGrid.tsx";
+import * as $$$$$$36 from "./sections/Images/BannerWithImage.tsx";
+import * as $$$$$$37 from "./sections/Images/Carousel.tsx";
+import * as $$$$$$38 from "./sections/Images/ComercialBanner.tsx";
+import * as $$$$$$39 from "./sections/Images/DuoOfImagesAndText.tsx";
+import * as $$$$$$40 from "./sections/Images/ImageDuo.tsx";
+import * as $$$$$$41 from "./sections/Images/ImageGallery.tsx";
+import * as $$$$$$42 from "./sections/Images/ImageQuad.tsx";
+import * as $$$$$$43 from "./sections/Images/ListBanners.tsx";
+import * as $$$$$$44 from "./sections/Images/ShoppableBanner.tsx";
+import * as $$$$$$45 from "./sections/Images/TrioOfImages.tsx";
+import * as $$$$$$46 from "./sections/Images/TrioOfImagesAndProducts.tsx";
+import * as $$$$$$47 from "./sections/Links/LinkTree.tsx";
+import * as $$$$$$48 from "./sections/Links/ListLinks.tsx";
+import * as $$$$$$49 from "./sections/Links/Shortcuts.tsx";
+import * as $$$$$$50 from "./sections/Miscellaneous/CampaignTimer.tsx";
+import * as $$$$$$51 from "./sections/Miscellaneous/CookieConsent.tsx";
+import * as $$$$$$52 from "./sections/Miscellaneous/Slide.tsx";
+import * as $$$$$$74 from "./sections/newsletter-popup/NewsletterPopup.tsx";
+import * as $$$$$$53 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$54 from "./sections/Pinterest/CodeValidation.tsx";
+import * as $$$$$$55 from "./sections/Product/BannerProductDotInfo.tsx";
+import * as $$$$$$56 from "./sections/Product/ImageAndModel.tsx";
+import * as $$$$$$57 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$58 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$59 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$60 from "./sections/Product/ProductDetails.tsx";
+import * as $$$$$$61 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$62 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$63 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
+import * as $$$$$$64 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$65 from "./sections/Product/ShelfCollection.tsx";
+import * as $$$$$$66 from "./sections/Product/ShelfWithBanner.tsx";
 import * as $$$$$$67 from "./sections/Product/ShelfWithImage.tsx";
 import * as $$$$$$68 from "./sections/Product/Showcases.tsx";
 import * as $$$$$$69 from "./sections/Product/Wishlist.tsx";
@@ -154,27 +156,31 @@ const manifest = {
     "deco-sites/montecarlo/sections/Images/StoresCarousel.tsx": $$$$$$46,
     "deco-sites/montecarlo/sections/Images/TrioOfImages.tsx": $$$$$$47,
     "deco-sites/montecarlo/sections/Images/TrioOfImagesAndProducts.tsx":
-      $$$$$$48,
-    "deco-sites/montecarlo/sections/Links/LinkTree.tsx": $$$$$$49,
-    "deco-sites/montecarlo/sections/Links/ListLinks.tsx": $$$$$$50,
-    "deco-sites/montecarlo/sections/Links/Shortcuts.tsx": $$$$$$51,
-    "deco-sites/montecarlo/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$52,
-    "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$53,
-    "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$54,
-    "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$55,
-    "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$56,
-    "deco-sites/montecarlo/sections/Product/ImageAndModel.tsx": $$$$$$57,
+      $$$$$$46,
+    "deco-sites/montecarlo/sections/Links/LinkTree.tsx": $$$$$$47,
+    "deco-sites/montecarlo/sections/Links/ListLinks.tsx": $$$$$$48,
+    "deco-sites/montecarlo/sections/Links/Shortcuts.tsx": $$$$$$49,
+    "deco-sites/montecarlo/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$50,
+    "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$51,
+    "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$52,
+    "deco-sites/montecarlo/sections/newsletter-popup/NewsletterPopup.tsx":
+      $$$$$$74,
+    "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$53,
+    "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$54,
+    "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$55,
+    "deco-sites/montecarlo/sections/Product/ImageAndModel.tsx": $$$$$$56,
     "deco-sites/montecarlo/sections/Product/ImageGalleryFrontBack.tsx":
-      $$$$$$58,
-    "deco-sites/montecarlo/sections/Product/NotFound.tsx": $$$$$$59,
-    "deco-sites/montecarlo/sections/Product/NotFoundChallenge.tsx": $$$$$$60,
-    "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$61,
-    "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$62,
-    "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$63,
+      $$$$$$57,
+    "deco-sites/montecarlo/sections/Product/NotFound.tsx": $$$$$$58,
+    "deco-sites/montecarlo/sections/Product/NotFoundChallenge.tsx": $$$$$$59,
+    "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$60,
+    "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$61,
+    "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$62,
     "deco-sites/montecarlo/sections/Product/ProductShelfWithDotsBottom.tsx":
-      $$$$$$64,
-    "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$65,
-    "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$66,
+      $$$$$$63,
+    "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$64,
+    "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$65,
+    "deco-sites/montecarlo/sections/Product/ShelfWithBanner.tsx": $$$$$$66,
     "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$67,
     "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$68,
     "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$69,
@@ -182,6 +188,9 @@ const manifest = {
     "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$71,
     "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$72,
     "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$73,
+  },
+  "actions": {
+    "deco-sites/montecarlo/actions/newsletter/sendForm.ts": $$$$$$$$$0,
   },
   "apps": {
     "deco-sites/montecarlo/apps/decohub.ts": $$$$$$$$$$$0,
