@@ -2,6 +2,8 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import NewsletterPopupForm from "../../islands/NewsletterForm/NewsletterPopup.tsx";
 import ClosedPopup from "../../islands/NewsletterForm/ButtonClosePopup.tsx";
+import { useUI } from "../../sdk/useUI.ts";
+
 
 interface PropsNewsletterPopup {
   /*
@@ -39,30 +41,58 @@ interface PropsNewsletterPopup {
 }
 
 function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
+  const { isMobile } = useUI();
+
   return (
     <>
-      <ClosedPopup>
-        <div
-          class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-          style="background: hsla(0, 0%, 0%, 0.5);"
-        >
+      {/* Mobile view */}
+      {!isMobile.value ? (
+        <ClosedPopup>
           <div
-            class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
-            style="max-width: 760px;"
+            class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            style="background: hsla(0, 0%, 0%, 0.5);z-index: 9999;"
           >
-            {/* Left side with image */}
             <div
-              class="w-full min-w-[340px]"
-              style={{
-                backgroundImage: image ? `url(${image})` : "",
-                backgroundSize: "cover",
-                backgroundPosition: "center",
-              }}
-            />
-            <NewsletterPopupForm phone={phone} />
+              class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
+              style={{ maxWidth: '760px' }}
+            >
+              {/* Left side with image */}
+              <div
+                class="w-full min-w-[340px]"
+                style={{
+                  backgroundImage: image ? `url(${image})` : '',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+              <NewsletterPopupForm phone={phone} />
+            </div>
           </div>
-        </div>
-      </ClosedPopup>
+        </ClosedPopup>
+      ) : (
+        <ClosedPopup>
+          <div
+            class="fixed top-0 left-0 right-0 bottom-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
+            style="background: hsla(0, 0%, 0%, 0.5);"
+          >
+            <div
+              class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
+              style={{ maxWidth: '380px' }}
+            >
+              {/* Left side with image */}
+              <div
+                class="hidden"
+                style={{
+                  backgroundImage: image ? `url(${image})` : '',
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              />
+              <NewsletterPopupForm phone={phone} />
+            </div>
+          </div>
+        </ClosedPopup>
+      )}
     </>
   );
 }
