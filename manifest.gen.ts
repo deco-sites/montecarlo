@@ -81,13 +81,14 @@ import * as $$$$$$62 from "./sections/Product/ProductShelfTabbed.tsx";
 import * as $$$$$$63 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
 import * as $$$$$$64 from "./sections/Product/SearchResult.tsx";
 import * as $$$$$$65 from "./sections/Product/ShelfCollection.tsx";
-import * as $$$$$$66 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$67 from "./sections/Product/Showcases.tsx";
-import * as $$$$$$68 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$69 from "./sections/SEO/TextSEOCategory.tsx";
-import * as $$$$$$70 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$71 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$72 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$66 from "./sections/Product/ShelfWithBanner.tsx";
+import * as $$$$$$67 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$68 from "./sections/Product/Showcases.tsx";
+import * as $$$$$$69 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$70 from "./sections/SEO/TextSEOCategory.tsx";
+import * as $$$$$$71 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$72 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$73 from "./sections/Theme/Theme.tsx";
 
 const manifest = {
   "loaders": {
@@ -177,13 +178,14 @@ const manifest = {
       $$$$$$63,
     "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$64,
     "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$65,
-    "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$66,
-    "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$67,
-    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$68,
-    "deco-sites/montecarlo/sections/SEO/TextSEOCategory.tsx": $$$$$$69,
-    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$70,
-    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$71,
-    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$72,
+    "deco-sites/montecarlo/sections/Product/ShelfWithBanner.tsx": $$$$$$66,
+    "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$67,
+    "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$68,
+    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$69,
+    "deco-sites/montecarlo/sections/SEO/TextSEOCategory.tsx": $$$$$$70,
+    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$71,
+    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$72,
+    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$73,
   },
   "actions": {
     "deco-sites/montecarlo/actions/newsletter/sendForm.ts": $$$$$$$$$0,
