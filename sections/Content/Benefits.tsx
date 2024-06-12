@@ -76,10 +76,10 @@ export default function Benefits({
       id={id}
       class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-7 lg:gap-14"
     >
-      <div class="flex flex-col gap-3 container px-5">
+      <div class="flex flex-col gap-3 container px-14">
         {title?.mobile && (
           <h2
-            class="text-sm font-poppins block lg:hidden"
+            class="text-xl font-poppins block lg:hidden"
             dangerouslySetInnerHTML={{ __html: title.mobile }}
           />
         )}
