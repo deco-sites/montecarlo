@@ -29,18 +29,18 @@ export interface Props {
 
 const GRIDLAYOUT = {
   "variant1":
-    "lg:col-start-1 lg:row-start-1 lg:col-end-3 lg:row-end-1 flex object-cover",
+    "sm:col-start-1 sm:row-start-1 sm:col-end-3 sm:row-end-1 flex object-cover",
   "variant2":
-    "lg:col-start-2 lg:row-start-3 lg:col-end-3 lg:row-end-2 flex object-cover",
+    "sm:col-start-2 sm:row-start-3 sm:col-end-3 sm:row-end-2 flex object-cover",
   "variant3":
-    "lg:col-start-2 lg:row-start-2 lg:col-end-3 lg:row-end-2 flex object-cover",
+    "sm:col-start-2 sm:row-start-2 sm:col-end-3 sm:row-end-2 flex object-cover",
   "variant4":
-    "lg:col-start-1 lg:row-start-1 lg:col-end-2 lg:row-end-2 flex object-cover",
+    "sm:col-start-1 sm:row-start-1 sm:col-end-2 sm:row-end-2 flex object-cover",
 };
 
 const GRIDCONTAINER = {
-  "variant1": "lg:grid-rows-[70%_30%]",
-  "variant2": "lg:grid-rows-[30%_70%]",
+  "variant1": "sm:grid-rows-[70%_30%]",
+  "variant2": "sm:grid-rows-[30%_70%]",
 };
 
 export default function ImagesWithContent(props: Props) {
@@ -56,10 +56,13 @@ export default function ImagesWithContent(props: Props) {
   const { isMobile } = useUI();
 
   return (
-    <div style={{ background: background }} class="flex flex-col lg:flex-row">
-      <div class="flex flex-col lg:flex-row max-w-[1512px] mx-auto">
+    <div
+      style={{ background: background }}
+      class="flex flex-col lg:flex-row w-full h-full"
+    >
+      <div class="flex flex-col lg:flex-row max-w-[1512px] mx-auto w-full">
         <div
-          class={`grid grid-cols-1 lg:grid-cols-2 ${
+          class={`grid grid-cols-1 sm:grid-cols-2 ${
             GRIDCONTAINER[layout]
           } lg:w-2/4`}
         >
@@ -111,15 +114,15 @@ export default function ImagesWithContent(props: Props) {
               />
             )}
         </div>
-        <div class="pt-16 xl:pt-28 pl-14 xl:pl-24 pr-6 pb-16 xl:pb-28 text-black lg:w-2/4 xl:max-w-[560px]">
-          <h2 class="font-beausiteGrand text-4xl mb-8 xl:text-[3.3rem] xl:leading-12 xl:mb-9">
+        <div class="pt-16 xl:pt-28 pl-14 xl:pl-24 pr-6 pb-16 xl:pb-28 text-black lg:w-2/4 ">
+          <h2 class="font-beausiteGrand text-4xl mb-8 xl:text-[3.3rem] xl:leading-12 xl:mb-9 xl:max-w-[500px] ">
             {title}
           </h2>
-          <h4 class="text-xl font-medium mb-6 xl:text-2xl xl:mb-5">
+          <h4 class="text-xl font-medium mb-6 xl:text-2xl xl:mb-5 xl:max-w-[500px] ">
             {subTitle}
           </h4>
           <span
-            class="text-xl xl:text-lg"
+            class="text-xl xl:text-lg xl:max-w-[500px] block "
             dangerouslySetInnerHTML={{ __html: content }}
           >
           </span>

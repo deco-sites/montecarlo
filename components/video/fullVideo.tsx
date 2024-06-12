@@ -73,15 +73,15 @@ export default function FullVideo(props: Props) {
           />
         )}
       {!autoPlay && (
-        <div class="absolute top-0 bottom-0 left-0 right-0 flex items-center gap-2 ml-[42.5%] sm:ml-[50%] lg:ml-[48%] lg:gap-12 sm:gap-8 ">
+        <div class="absolute top-0 bottom-0 left-0 right-0 flex items-center gap-2 ml-[calc(50%-0.75rem)] lg:ml-[calc(50%-2rem)] lg:gap-12 sm:gap-8 ">
           <button
             class="flex h-6 w-6 items-center justify-center rounded-full bg-primary lg:w-16 lg:h-16 cursor-pointer sm:w-10 sm:h-10"
             {...usePartialSection({ props: { autoPlay: true } })}
             type={"button"}
           >
             <div class="h-2 w-2 rotate-45 bg-black before:absolute before:-left-[4px] before:top-[2px] 
-                    before:h-[8px] before:rounded-e-full before:w-[13px] before:rotate-45 before:bg-primary before:content-['']
-                     -translate-x-[2px] lg:-translate-x-[6px]  xl:text-[3.3rem] xl:leading-12 lg:scale-[3] sm:scale-[2]">
+                    before:h-[8px] before:rounded-b-full before:w-[12px] before:rotate-45 before:bg-primary before:content-['']
+                     -translate-x-[2px] sm:-translate-x-[5px] lg:-translate-x-[9px]  xl:text-[3.3rem] xl:leading-12 lg:scale-[3] sm:scale-[2]">
             </div>
           </button>
           <span class="text-white text-2xl font-beausiteGrand w-min lg:text-[3.3rem] lg:leading-12 sm:w-auto sm:text-3xl">
