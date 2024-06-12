@@ -111,8 +111,21 @@ function CardImage(
       href={card.linkToRedirect}
       title={"Ir para a página de " + card.title}
       class="w-full hover:opacity-80"
-      id={id}
+      id={id + index}
     >
+      <SendEventOnClick
+        id={id + index}
+        event={{
+          name: "select_promotion",
+          params: {
+            creative_name: card.title,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
+            promotion_name: card.title,
+            items: [],
+          },
+        }}
+      />
       <div
         class={`lg:w-full justify-center items-center flex flex-col `}
       >
@@ -133,28 +146,15 @@ function CardImage(
         </div>
       </div>
       <SendEventOnView
-        id={id}
+        id={id + index}
         event={{
           name: "view_promotion",
           params: {
-            view_promotion: card.altText,
-            creative_name: card.altText,
-            creative_slot: card.altText,
-            promotion_id: id,
-            promotion_name: card.altText,
-            items: [],
-          },
-        }}
-      />
-      <SendEventOnClick
-        id={id}
-        event={{
-          name: "select_promotion",
-          params: {
-            creative_name: card.altText,
-            creative_slot: id + index,
-            promotion_id: card.linkToRedirect,
-            promotion_name: card.altText,
+            creative_name: card.title,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
+            promotion_name: card.title,
+
             items: [],
           },
         }}

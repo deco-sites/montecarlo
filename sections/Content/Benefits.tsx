@@ -102,6 +102,10 @@ export default function Benefits({
           name: "view_promotion",
           params: {
             creative_name: title.mobile ? title.mobile : title.desktop,
+            creative_slot: id,
+            promotion_id: id,
+            promotion_name: title.mobile ? title.mobile : title.desktop,
+            items: [],
           },
         }}
       />

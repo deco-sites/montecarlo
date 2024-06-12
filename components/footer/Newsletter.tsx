@@ -273,6 +273,10 @@ function Newsletter({
           name: "view_promotion",
           params: {
             creative_name: title,
+            creative_slot: id,
+            promotion_id: id,
+            promotion_name: title,
+            items: [],
           },
         }}
       />
