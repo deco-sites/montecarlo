@@ -154,6 +154,19 @@ function CategoryList(props: Props) {
                     alignment={layout?.categoryCard?.textAlignment}
                   />
                 )}
+              <SendEventOnClick
+                  id={id + index}
+                  event={{
+                    name: "select_promotion",
+                    params: {
+                      creative_name: label,
+                      creative_slot: id,
+                      promotion_id: id + index,
+                      promotion_name: label,
+                      items: [],
+                    },
+                  }}
+                />
               {image &&
                 (
                   <figure>
@@ -176,6 +189,19 @@ function CategoryList(props: Props) {
                     alignment={layout?.categoryCard?.textAlignment}
                   />
                 )}
+              <SendEventOnView
+                id={id + index}
+                event={{
+                  name: "view_promotion",
+                  params: {
+                    creative_name: label,
+                    creative_slot: id,
+                    promotion_id: id + index,
+                    promotion_name: label,
+                    items: [],
+                  },
+                }}
+              />
             </a>
             {buttonText &&
               <a href={href} class="btn">{buttonText}</a>}

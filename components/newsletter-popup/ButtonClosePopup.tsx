@@ -8,9 +8,9 @@ export interface Props {
 export default function ClosedPopup({ children }: Props) {
   const { showPopup } = useUI();
 
-  setTimeout(() => {
-    showPopup.value = false;
-  }, 25000);
+  // setTimeout(() => {
+  //   showPopup.value = false;
+  // }, 25000);
 
   return <>{showPopup.value ? <div>{children}</div> : null}</>;
 }

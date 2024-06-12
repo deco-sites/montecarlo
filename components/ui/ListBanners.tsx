@@ -111,16 +111,30 @@ function CardImage(
       href={card.linkToRedirect}
       title={"Ir para a página de " + card.title}
       class="w-full hover:opacity-80"
-      id={id}
+      id={id + index}
     >
+      <SendEventOnClick
+        id={id + index}
+        event={{
+          name: "select_promotion",
+          params: {
+            creative_name: card.title,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
+            promotion_name: card.title,
+            items: [],
+          },
+        }}
+      />
       <div
         class={`lg:w-full justify-center items-center flex flex-col `}
       >
         <Image
-          class={` h-auto aspect-square ${aspectRatio == "1:1"
-            ? "min-w-[246px] object-cover w-full"
-            : "w-[102px] object-contain"
-            } `}
+          class={` h-auto aspect-square ${
+            aspectRatio == "1:1"
+              ? "min-w-[246px] object-cover w-full"
+              : "w-[102px] object-contain"
+          } `}
           src={card.image}
           alt={card.altText}
           width={WIDTH[aspectRatio]}
@@ -133,28 +147,15 @@ function CardImage(
         </div>
       </div>
       <SendEventOnView
-        id={id}
+        id={id + index}
         event={{
           name: "view_promotion",
           params: {
-            view_promotion: card.altText,
-            creative_name: card.altText,
-            creative_slot: card.altText,
-            promotion_id: id,
-            promotion_name: card.altText,
-            items: [],
-          },
-        }}
-      />
-      <SendEventOnClick
-        id={id}
-        event={{
-          name: "select_promotion",
-          params: {
-            creative_name: card.altText,
-            creative_slot: id + index,
-            promotion_id: card.linkToRedirect,
-            promotion_name: card.altText,
+            creative_name: card.title,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
+            promotion_name: card.title,
+
             items: [],
           },
         }}
@@ -189,10 +190,9 @@ function VerticalCardsGrid(props: Props) {
 
   return (
     <div
-      class={`  ${variant === "noSlide"
-        ? " lg:container lg:px-14 "
-        : "w-full lg:px-0"
-        } flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 xl:max-w-[1512px] mx-auto`}
+      class={`  ${
+        variant === "noSlide" ? " lg:container lg:px-14 " : "w-full lg:px-0"
+      } flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 xl:max-w-[1512px] mx-auto`}
     >
       {title !== "" || subTitle !== ""
         ? (
@@ -208,13 +208,15 @@ function VerticalCardsGrid(props: Props) {
             {cards.map((card, index) => (
               <Slider.Item
                 index={index}
-                class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3 snap-center ${ITEMSSLIDEMOBILE[
-                  sliderItemsMobile as keyof typeof sliderItemsMobile || 1
-                ]
-                  } ${ITEMSSLIDE[
-                  sliderItemsDesktop as keyof typeof sliderItemsDesktop || 4
+                class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3 snap-center ${
+                  ITEMSSLIDEMOBILE[
+                    sliderItemsMobile as keyof typeof sliderItemsMobile || 1
                   ]
-                  }`}
+                } ${
+                  ITEMSSLIDE[
+                    sliderItemsDesktop as keyof typeof sliderItemsDesktop || 4
+                  ]
+                }`}
               >
                 <CardImage
                   card={card}
@@ -226,53 +228,57 @@ function VerticalCardsGrid(props: Props) {
           </Slider>
         )
         : variant == "Slider"
-          ? (
-            <div
-              id={id}
-              class={`grid lg:grid-cols-[48px_1fr_48px] ${aspectRatio == "1:2"
+        ? (
+          <div
+            id={id}
+            class={`grid lg:grid-cols-[48px_1fr_48px] ${
+              aspectRatio == "1:2"
                 ? " grid-rows-[1fr_30%]"
                 : " grid-rows-[1fr_40%]"
-                } px-0`}
+            } px-0`}
+          >
+            <Slider
+              class={`row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 lg:px-0 ${
+                sliderItemsMobile == 1 ? "px-14" : "px-0"
+              }`}
             >
-              <Slider
-                class={`row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start gap-9 sm:gap-2 lg:px-0 ${sliderItemsMobile == 1 ? "px-14" : "px-0"
-                  }`}
-              >
-                {cards.map((card, index) => (
-                  <Slider.Item
-                    index={index}
-                    class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3  ${ITEMSSLIDEMOBILE[
+              {cards.map((card, index) => (
+                <Slider.Item
+                  index={index}
+                  class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3  ${
+                    ITEMSSLIDEMOBILE[
                       sliderItemsMobile as keyof typeof sliderItemsMobile || 1
                     ]
-                      } ${ITEMSSLIDE[
+                  } ${
+                    ITEMSSLIDE[
                       sliderItemsDesktop as keyof typeof sliderItemsDesktop || 4
-                      ]
-                      }`}
-                  >
-                    <CardImage
-                      card={card}
-                      index={index}
-                      aspectRatio={aspectRatio || "1:1"}
-                    />
-                  </Slider.Item>
-                ))}
-              </Slider>
-              <>
-                <div class="relative z-10 col-start-1 row-start-3 hidden lg:block">
-                  <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
-                    <Icon size={40} id="arrowLeft" strokeWidth={3} />
-                  </Slider.PrevButton>
-                </div>
-                <div class="relative z-10 col-start-3 row-start-3 hidden lg:block">
-                  <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
-                    <Icon size={40} id="arrowRight" strokeWidth={3} />
-                  </Slider.NextButton>
-                </div>
-              </>
-              <SliderJS rootId={id} />
-            </div>
-          )
-          : null}
+                    ]
+                  }`}
+                >
+                  <CardImage
+                    card={card}
+                    index={index}
+                    aspectRatio={aspectRatio || "1:1"}
+                  />
+                </Slider.Item>
+              ))}
+            </Slider>
+            <>
+              <div class="relative z-10 col-start-1 row-start-3 hidden lg:block">
+                <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
+                  <Icon size={40} id="arrowLeft" strokeWidth={3} />
+                </Slider.PrevButton>
+              </div>
+              <div class="relative z-10 col-start-3 row-start-3 hidden lg:block">
+                <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
+                  <Icon size={40} id="arrowRight" strokeWidth={3} />
+                </Slider.NextButton>
+              </div>
+            </>
+            <SliderJS rootId={id} />
+          </div>
+        )
+        : null}
     </div>
   );
 }
