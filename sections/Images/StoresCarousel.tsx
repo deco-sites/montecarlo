@@ -7,6 +7,10 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import { useUI } from "../../sdk/useUI.ts";
 import Image from "apps/website/components/Image.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 
 export interface ImageItem {
   /** @title Store Name */
@@ -53,9 +57,22 @@ function BannerItemMobile({
 }) {
   const { mobile, alt } = image;
 
+  const id = useId();
+
   return (
     <div class="flex flex-row w-full lg:max-h-[90vh] lg:min-h-[600px]">
-      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer">
+      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer" id={id + "mobile"}>
+        <SendEventOnClick
+          id={id + "mobile"}
+          event={{
+            name: "select_item",
+            params: {
+              item_list_id: id + "mobile",
+              item_list_name: image.label,
+              items: [],
+            },
+          }}
+        />
         {image.label !== ""
           ? (
             <div class="absolute left-0 bottom-0 w-full h-fit pb-16 pt-16 px-10 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)]">
@@ -85,6 +102,17 @@ function BannerItemMobile({
           height={450}
           fetchPriority={lcp ? "high" : "auto"}
         />
+        <SendEventOnView
+          id={id + "mobile"}
+          event={{
+            name: "view_item_list",
+            params: {
+              item_list_id: id + "mobile",
+              item_list_name: image.label,
+              items: [],
+            },
+          }}
+        />
       </a>
     </div>
   );
@@ -97,9 +125,23 @@ function BannerItem({
   image: ImageItem;
   lcp?: boolean;
 }) {
+
+  const id = useId();
+
   return (
     <div class="flex flex-row w-full">
-      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer">
+      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer" id={id + "desktop"}>
+        <SendEventOnClick
+          id={id + "desktop"}
+          event={{
+            name: "select_item",
+            params: {
+              item_list_id: id + "desktop",
+              item_list_name: image.label,
+              items: [],
+            },
+          }}
+        />
         {image.label !== ""
           ? (
             <div class="absolute left-0 bottom-0 w-full h-fit pb-16 pt-10 px-10 bg-gradient-to-b from-transparent to-[rgba(0,0,0,0.4)]">
@@ -140,6 +182,17 @@ function BannerItem({
             alt={image.alt}
           />
         </Picture>
+        <SendEventOnView
+          id={id + "desktop"}
+          event={{
+            name: "view_item_list",
+            params: {
+              item_list_id: id + "desktop",
+              item_list_name: image.label,
+              items: [],
+            },
+          }}
+        />
       </a>
     </div>
   );

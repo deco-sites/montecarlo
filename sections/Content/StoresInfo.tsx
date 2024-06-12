@@ -1,5 +1,11 @@
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import { HTMLWidget } from "apps/admin/widgets.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+import { useUI } from "../../sdk/useUI.ts";
+import { useId } from "deco-sites/montecarlo/sdk/useId.ts";
 
 export interface State {
   /** @title State */
@@ -37,6 +43,8 @@ export interface Props {
 
 export default function StoresInfo(props: Props) {
   const { title, description, sac, info } = props;
+  
+  const id = useId();
 
   return (
     <div class="flex flex-col gap-5 container py-10 px-5 md:grid md:grid-cols-2 md:px-14 md:py-14 max-w-[1440px]">
@@ -67,7 +75,7 @@ export default function StoresInfo(props: Props) {
                     <City key={index} title={city.label} startsOpen={city.startsOpen}>
                       {city.stores?.map((store, index) => (
                         <>
-                          <div key={index} class="flex flex-col gap-5 mx-5">
+                          <div key={index} class="flex flex-col gap-5 mx-5" id={id + index}>
                             <h5 class="font-poppins font-semibold text-sm">
                               {store.label}
                             </h5>
@@ -111,11 +119,34 @@ export default function StoresInfo(props: Props) {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   class="font-poppins text-sm w-fit border-b border-[#FFC72C]"
+                                  id={id + index + "link"}
                                 >
+                                  <SendEventOnClick
+                                    id={id + index}
+                                    event={{
+                                      name: "select_item",
+                                      params: {
+                                        item_list_id: id + index + "link",
+                                        item_list_name: store.mapLink,
+                                        items: [],
+                                      },
+                                    }}
+                                  />
                                   Traçar Rotas
                                 </a>
                               )
                               : null}
+                            <SendEventOnView
+                              id={id + index}
+                              event={{
+                                name: "view_item_list",
+                                params: {
+                                  item_list_id: id + index,
+                                  item_list_name: store.label,
+                                  items: [],
+                                },
+                              }}
+                            />
                           </div>
                           <hr class="h-px bg-gray-200 border-0 last:hidden" />
                         </>
