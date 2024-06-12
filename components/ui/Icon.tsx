@@ -62,6 +62,8 @@ export type AvailableIcons =
   | "SearchIcon"
   | "columnOne"
   | "columnTwo"
+  | "Close"
+  | "StorePin"
   | "instagramIcon";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {

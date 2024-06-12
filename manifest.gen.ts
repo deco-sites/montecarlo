@@ -43,55 +43,57 @@ import * as $$$$$$25 from "./sections/Content/Logos.tsx";
 import * as $$$$$$26 from "./sections/Content/Partners.tsx";
 import * as $$$$$$27 from "./sections/Content/RichText.tsx";
 import * as $$$$$$28 from "./sections/Content/SearchContent.tsx";
-import * as $$$$$$29 from "./sections/Content/Table.tsx";
-import * as $$$$$$30 from "./sections/Content/Testimonials.tsx";
-import * as $$$$$$31 from "./sections/Content/TextWithImage.tsx";
-import * as $$$$$$32 from "./sections/Content/TextWithImageCollection.tsx";
-import * as $$$$$$33 from "./sections/Footer/Footer.tsx";
-import * as $$$$$$34 from "./sections/Gallery.tsx";
-import * as $$$$$$35 from "./sections/Header/Header.tsx";
-import * as $$$$$$36 from "./sections/Images/BannerGrid.tsx";
-import * as $$$$$$37 from "./sections/Images/BannerWithImage.tsx";
-import * as $$$$$$38 from "./sections/Images/Carousel.tsx";
-import * as $$$$$$39 from "./sections/Images/ComercialBanner.tsx";
-import * as $$$$$$40 from "./sections/Images/DuoOfImagesAndText.tsx";
-import * as $$$$$$41 from "./sections/Images/ImageDuo.tsx";
-import * as $$$$$$42 from "./sections/Images/ImageGallery.tsx";
-import * as $$$$$$43 from "./sections/Images/ImageQuad.tsx";
-import * as $$$$$$44 from "./sections/Images/ListBanners.tsx";
-import * as $$$$$$45 from "./sections/Images/ShoppableBanner.tsx";
-import * as $$$$$$46 from "./sections/Images/TrioOfImages.tsx";
-import * as $$$$$$47 from "./sections/Images/TrioOfImagesAndProducts.tsx";
-import * as $$$$$$48 from "./sections/Instagram/ListPosts.tsx";
-import * as $$$$$$49 from "./sections/Links/LinkTree.tsx";
-import * as $$$$$$50 from "./sections/Links/ListLinks.tsx";
-import * as $$$$$$51 from "./sections/Links/Shortcuts.tsx";
-import * as $$$$$$52 from "./sections/Miscellaneous/CampaignTimer.tsx";
-import * as $$$$$$53 from "./sections/Miscellaneous/CookieConsent.tsx";
-import * as $$$$$$54 from "./sections/Miscellaneous/Slide.tsx";
-import * as $$$$$$77 from "./sections/newsletter-popup/NewsletterPopup.tsx";
-import * as $$$$$$55 from "./sections/Newsletter/Newsletter.tsx";
-import * as $$$$$$56 from "./sections/Pinterest/CodeValidation.tsx";
-import * as $$$$$$57 from "./sections/Product/BannerProductDotInfo.tsx";
-import * as $$$$$$58 from "./sections/Product/ImageAndModel.tsx";
-import * as $$$$$$59 from "./sections/Product/ImageGalleryFrontBack.tsx";
-import * as $$$$$$60 from "./sections/Product/NotFound.tsx";
-import * as $$$$$$61 from "./sections/Product/NotFoundChallenge.tsx";
-import * as $$$$$$62 from "./sections/Product/ProductDetails.tsx";
-import * as $$$$$$63 from "./sections/Product/ProductShelf.tsx";
-import * as $$$$$$64 from "./sections/Product/ProductShelfTabbed.tsx";
-import * as $$$$$$65 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
-import * as $$$$$$66 from "./sections/Product/SearchResult.tsx";
-import * as $$$$$$67 from "./sections/Product/ShelfCollection.tsx";
-import * as $$$$$$68 from "./sections/Product/ShelfWithBanner.tsx";
-import * as $$$$$$69 from "./sections/Product/ShelfWithImage.tsx";
-import * as $$$$$$70 from "./sections/Product/Showcases.tsx";
-import * as $$$$$$71 from "./sections/Product/Wishlist.tsx";
-import * as $$$$$$72 from "./sections/SEO/TextSEOCategory.tsx";
-import * as $$$$$$73 from "./sections/Social/InstagramPosts.tsx";
-import * as $$$$$$74 from "./sections/Social/WhatsApp.tsx";
-import * as $$$$$$75 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$76 from "./sections/Video/FullVideo.tsx";
+import * as $$$$$$29 from "./sections/Content/StoresInfo.tsx";
+import * as $$$$$$30 from "./sections/Content/Table.tsx";
+import * as $$$$$$31 from "./sections/Content/Testimonials.tsx";
+import * as $$$$$$32 from "./sections/Content/TextWithImage.tsx";
+import * as $$$$$$33 from "./sections/Content/TextWithImageCollection.tsx";
+import * as $$$$$$34 from "./sections/Footer/Footer.tsx";
+import * as $$$$$$35 from "./sections/Gallery.tsx";
+import * as $$$$$$36 from "./sections/Header/Header.tsx";
+import * as $$$$$$37 from "./sections/Images/BannerGrid.tsx";
+import * as $$$$$$38 from "./sections/Images/BannerWithImage.tsx";
+import * as $$$$$$39 from "./sections/Images/Carousel.tsx";
+import * as $$$$$$40 from "./sections/Images/ComercialBanner.tsx";
+import * as $$$$$$41 from "./sections/Images/DuoOfImagesAndText.tsx";
+import * as $$$$$$42 from "./sections/Images/ImageDuo.tsx";
+import * as $$$$$$43 from "./sections/Images/ImageGallery.tsx";
+import * as $$$$$$44 from "./sections/Images/ImageQuad.tsx";
+import * as $$$$$$45 from "./sections/Images/ListBanners.tsx";
+import * as $$$$$$46 from "./sections/Images/ShoppableBanner.tsx";
+import * as $$$$$$47 from "./sections/Images/StoresCarousel.tsx";
+import * as $$$$$$48 from "./sections/Images/TrioOfImages.tsx";
+import * as $$$$$$49 from "./sections/Images/TrioOfImagesAndProducts.tsx";
+import * as $$$$$$50 from "./sections/Instagram/ListPosts.tsx";
+import * as $$$$$$51 from "./sections/Links/LinkTree.tsx";
+import * as $$$$$$52 from "./sections/Links/ListLinks.tsx";
+import * as $$$$$$53 from "./sections/Links/Shortcuts.tsx";
+import * as $$$$$$54 from "./sections/Miscellaneous/CampaignTimer.tsx";
+import * as $$$$$$55 from "./sections/Miscellaneous/CookieConsent.tsx";
+import * as $$$$$$56 from "./sections/Miscellaneous/Slide.tsx";
+import * as $$$$$$79 from "./sections/newsletter-popup/NewsletterPopup.tsx";
+import * as $$$$$$57 from "./sections/Newsletter/Newsletter.tsx";
+import * as $$$$$$58 from "./sections/Pinterest/CodeValidation.tsx";
+import * as $$$$$$59 from "./sections/Product/BannerProductDotInfo.tsx";
+import * as $$$$$$60 from "./sections/Product/ImageAndModel.tsx";
+import * as $$$$$$61 from "./sections/Product/ImageGalleryFrontBack.tsx";
+import * as $$$$$$62 from "./sections/Product/NotFound.tsx";
+import * as $$$$$$63 from "./sections/Product/NotFoundChallenge.tsx";
+import * as $$$$$$64 from "./sections/Product/ProductDetails.tsx";
+import * as $$$$$$65 from "./sections/Product/ProductShelf.tsx";
+import * as $$$$$$66 from "./sections/Product/ProductShelfTabbed.tsx";
+import * as $$$$$$67 from "./sections/Product/ProductShelfWithDotsBottom.tsx";
+import * as $$$$$$68 from "./sections/Product/SearchResult.tsx";
+import * as $$$$$$69 from "./sections/Product/ShelfCollection.tsx";
+import * as $$$$$$70 from "./sections/Product/ShelfWithBanner.tsx";
+import * as $$$$$$71 from "./sections/Product/ShelfWithImage.tsx";
+import * as $$$$$$72 from "./sections/Product/Showcases.tsx";
+import * as $$$$$$73 from "./sections/Product/Wishlist.tsx";
+import * as $$$$$$74 from "./sections/SEO/TextSEOCategory.tsx";
+import * as $$$$$$75 from "./sections/Social/InstagramPosts.tsx";
+import * as $$$$$$76 from "./sections/Social/WhatsApp.tsx";
+import * as $$$$$$77 from "./sections/Theme/Theme.tsx";
+import * as $$$$$$78 from "./sections/Video/FullVideo.tsx";
 
 const manifest = {
   "loaders": {
@@ -138,60 +140,62 @@ const manifest = {
     "deco-sites/montecarlo/sections/Content/Partners.tsx": $$$$$$26,
     "deco-sites/montecarlo/sections/Content/RichText.tsx": $$$$$$27,
     "deco-sites/montecarlo/sections/Content/SearchContent.tsx": $$$$$$28,
-    "deco-sites/montecarlo/sections/Content/Table.tsx": $$$$$$29,
-    "deco-sites/montecarlo/sections/Content/Testimonials.tsx": $$$$$$30,
-    "deco-sites/montecarlo/sections/Content/TextWithImage.tsx": $$$$$$31,
+    "deco-sites/montecarlo/sections/Content/StoresInfo.tsx": $$$$$$29,
+    "deco-sites/montecarlo/sections/Content/Table.tsx": $$$$$$30,
+    "deco-sites/montecarlo/sections/Content/Testimonials.tsx": $$$$$$31,
+    "deco-sites/montecarlo/sections/Content/TextWithImage.tsx": $$$$$$32,
     "deco-sites/montecarlo/sections/Content/TextWithImageCollection.tsx":
-      $$$$$$32,
-    "deco-sites/montecarlo/sections/Footer/Footer.tsx": $$$$$$33,
-    "deco-sites/montecarlo/sections/Gallery.tsx": $$$$$$34,
-    "deco-sites/montecarlo/sections/Header/Header.tsx": $$$$$$35,
-    "deco-sites/montecarlo/sections/Images/BannerGrid.tsx": $$$$$$36,
-    "deco-sites/montecarlo/sections/Images/BannerWithImage.tsx": $$$$$$37,
-    "deco-sites/montecarlo/sections/Images/Carousel.tsx": $$$$$$38,
-    "deco-sites/montecarlo/sections/Images/ComercialBanner.tsx": $$$$$$39,
-    "deco-sites/montecarlo/sections/Images/DuoOfImagesAndText.tsx": $$$$$$40,
-    "deco-sites/montecarlo/sections/Images/ImageDuo.tsx": $$$$$$41,
-    "deco-sites/montecarlo/sections/Images/ImageGallery.tsx": $$$$$$42,
-    "deco-sites/montecarlo/sections/Images/ImageQuad.tsx": $$$$$$43,
-    "deco-sites/montecarlo/sections/Images/ListBanners.tsx": $$$$$$44,
-    "deco-sites/montecarlo/sections/Images/ShoppableBanner.tsx": $$$$$$45,
-    "deco-sites/montecarlo/sections/Images/TrioOfImages.tsx": $$$$$$46,
+      $$$$$$33,
+    "deco-sites/montecarlo/sections/Footer/Footer.tsx": $$$$$$34,
+    "deco-sites/montecarlo/sections/Gallery.tsx": $$$$$$35,
+    "deco-sites/montecarlo/sections/Header/Header.tsx": $$$$$$36,
+    "deco-sites/montecarlo/sections/Images/BannerGrid.tsx": $$$$$$37,
+    "deco-sites/montecarlo/sections/Images/BannerWithImage.tsx": $$$$$$38,
+    "deco-sites/montecarlo/sections/Images/Carousel.tsx": $$$$$$39,
+    "deco-sites/montecarlo/sections/Images/ComercialBanner.tsx": $$$$$$40,
+    "deco-sites/montecarlo/sections/Images/DuoOfImagesAndText.tsx": $$$$$$41,
+    "deco-sites/montecarlo/sections/Images/ImageDuo.tsx": $$$$$$42,
+    "deco-sites/montecarlo/sections/Images/ImageGallery.tsx": $$$$$$43,
+    "deco-sites/montecarlo/sections/Images/ImageQuad.tsx": $$$$$$44,
+    "deco-sites/montecarlo/sections/Images/ListBanners.tsx": $$$$$$45,
+    "deco-sites/montecarlo/sections/Images/ShoppableBanner.tsx": $$$$$$46,
+    "deco-sites/montecarlo/sections/Images/StoresCarousel.tsx": $$$$$$47,
+    "deco-sites/montecarlo/sections/Images/TrioOfImages.tsx": $$$$$$48,
     "deco-sites/montecarlo/sections/Images/TrioOfImagesAndProducts.tsx":
-      $$$$$$47,
-    "deco-sites/montecarlo/sections/Instagram/ListPosts.tsx": $$$$$$48,
-    "deco-sites/montecarlo/sections/Links/LinkTree.tsx": $$$$$$49,
-    "deco-sites/montecarlo/sections/Links/ListLinks.tsx": $$$$$$50,
-    "deco-sites/montecarlo/sections/Links/Shortcuts.tsx": $$$$$$51,
-    "deco-sites/montecarlo/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$52,
-    "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$53,
-    "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$54,
+      $$$$$$49,
+    "deco-sites/montecarlo/sections/Instagram/ListPosts.tsx": $$$$$$50,
+    "deco-sites/montecarlo/sections/Links/LinkTree.tsx": $$$$$$51,
+    "deco-sites/montecarlo/sections/Links/ListLinks.tsx": $$$$$$52,
+    "deco-sites/montecarlo/sections/Links/Shortcuts.tsx": $$$$$$53,
+    "deco-sites/montecarlo/sections/Miscellaneous/CampaignTimer.tsx": $$$$$$54,
+    "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$55,
+    "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$56,
     "deco-sites/montecarlo/sections/newsletter-popup/NewsletterPopup.tsx":
-      $$$$$$77,
-    "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$55,
-    "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$56,
-    "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$57,
-    "deco-sites/montecarlo/sections/Product/ImageAndModel.tsx": $$$$$$58,
+      $$$$$$79,
+    "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$57,
+    "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$58,
+    "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$59,
+    "deco-sites/montecarlo/sections/Product/ImageAndModel.tsx": $$$$$$60,
     "deco-sites/montecarlo/sections/Product/ImageGalleryFrontBack.tsx":
-      $$$$$$59,
-    "deco-sites/montecarlo/sections/Product/NotFound.tsx": $$$$$$60,
-    "deco-sites/montecarlo/sections/Product/NotFoundChallenge.tsx": $$$$$$61,
-    "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$62,
-    "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$63,
-    "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$64,
+      $$$$$$61,
+    "deco-sites/montecarlo/sections/Product/NotFound.tsx": $$$$$$62,
+    "deco-sites/montecarlo/sections/Product/NotFoundChallenge.tsx": $$$$$$63,
+    "deco-sites/montecarlo/sections/Product/ProductDetails.tsx": $$$$$$64,
+    "deco-sites/montecarlo/sections/Product/ProductShelf.tsx": $$$$$$65,
+    "deco-sites/montecarlo/sections/Product/ProductShelfTabbed.tsx": $$$$$$66,
     "deco-sites/montecarlo/sections/Product/ProductShelfWithDotsBottom.tsx":
-      $$$$$$65,
-    "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$66,
-    "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$67,
-    "deco-sites/montecarlo/sections/Product/ShelfWithBanner.tsx": $$$$$$68,
-    "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$69,
-    "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$70,
-    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$71,
-    "deco-sites/montecarlo/sections/SEO/TextSEOCategory.tsx": $$$$$$72,
-    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$73,
-    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$74,
-    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$75,
-    "deco-sites/montecarlo/sections/Video/FullVideo.tsx": $$$$$$76,
+      $$$$$$67,
+    "deco-sites/montecarlo/sections/Product/SearchResult.tsx": $$$$$$68,
+    "deco-sites/montecarlo/sections/Product/ShelfCollection.tsx": $$$$$$69,
+    "deco-sites/montecarlo/sections/Product/ShelfWithBanner.tsx": $$$$$$70,
+    "deco-sites/montecarlo/sections/Product/ShelfWithImage.tsx": $$$$$$71,
+    "deco-sites/montecarlo/sections/Product/Showcases.tsx": $$$$$$72,
+    "deco-sites/montecarlo/sections/Product/Wishlist.tsx": $$$$$$73,
+    "deco-sites/montecarlo/sections/SEO/TextSEOCategory.tsx": $$$$$$74,
+    "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$75,
+    "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$76,
+    "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$77,
+    "deco-sites/montecarlo/sections/Video/FullVideo.tsx": $$$$$$78,
   },
   "actions": {
     "deco-sites/montecarlo/actions/newsletter/sendForm.ts": $$$$$$$$$0,
