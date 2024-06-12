@@ -191,9 +191,7 @@ function Navbar(
                   event={{
                     name: "login",
                     params: {
-                      item_list_name: ourStores.label,
-                      item_list_id: id + "ourStores",
-                      promotion_name: ourStores.href,
+                      method: ourStores.href,
                     },
                   }}
                 />
@@ -211,9 +209,7 @@ function Navbar(
                   event={{
                     name: "login",
                     params: {
-                      item_list_name: help.label,
-                      item_list_id: id + "help",
-                      promotion_name: help.href,
+                      method: help.href,
                     },
                   }}
                 />
@@ -247,9 +243,7 @@ function Navbar(
                 event={{
                   name: "login",
                   params: {
-                    item_list_name: logo.alt,
-                    item_list_id: id + "logo",
-                    promotion_name: logo.alt,
+                    method: "/",
                   },
                 }}
               />
@@ -282,9 +276,7 @@ function Navbar(
                 event={{
                   name: "login",
                   params: {
-                    item_list_name: "account",
-                    item_list_id: id + "account",
-                    promotion_name: "account",
+                    method: "/account",
                   },
                 }}
               />
@@ -308,9 +300,7 @@ function Navbar(
                 event={{
                   name: "login",
                   params: {
-                    item_list_name: "wishlist",
-                    item_list_id: id + "wishlist",
-                    promotion_name: "wishlist",
+                    method: "/wishlist",
                   },
                 }}
               />

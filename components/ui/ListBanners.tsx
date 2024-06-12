@@ -72,16 +72,16 @@ function CardImage({ card, index }: { card: Card; index: number }) {
       href={card.linkToRedirect}
       title={"Ir para a página de " + card.title}
       class="w-full hover:opacity-80"
-      id={id+index}
+      id={id + index}
     >
       <SendEventOnClick
-        id={id+index}
+        id={id + index}
         event={{
           name: "select_promotion",
           params: {
             creative_name: card.title,
-            creative_slot: card.altText ? card.altText : '',
-            promotion_id: id+index,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
             promotion_name: card.title,
             items: [],
           },
@@ -104,13 +104,13 @@ function CardImage({ card, index }: { card: Card; index: number }) {
         </div>
       </div>
       <SendEventOnView
-        id={id+index}
+        id={id + index}
         event={{
           name: "view_promotion",
           params: {
             creative_name: card.title,
-            creative_slot: card.altText ? card.altText : '',
-            promotion_id: id+index,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
             promotion_name: card.title,
 
             items: [],

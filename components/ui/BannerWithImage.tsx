@@ -138,10 +138,10 @@ export default function BannerWithImage(props: Props) {
         event={{
           name: "view_promotion",
           params: {
-            creative_name: title.replace('<p>','').replace('</p>',''),
+            creative_name: title.replace("<p>", "").replace("</p>", ""),
             creative_slot: id,
             promotion_id: id,
-            promotion_name: title.replace('<p>','').replace('</p>',''),
+            promotion_name: title.replace("<p>", "").replace("</p>", ""),
             items: [],
           },
         }}
