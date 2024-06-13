@@ -73,7 +73,7 @@ function ButtonWhatsapp() {
         >
           <a
             href={`https://wa.me/55${whatsapp}`}
-            class="fixed flex bottom-6 right-6 z-40 bg-[#45D268] text-white w-40 h-12 flex-row items-center p-3 md:py-0 md:px-4 rounded-full no-underline cursor-pointer transition gap-1 ease-in"
+            class="fixed flex bottom-6 right-6 z-40 bg-[#45D268] text-white w-40 h-12 flex-row items-center justify-center p-3 md:py-0 md:px-4 rounded-full no-underline cursor-pointer transition gap-1 ease-in"
             aria-label="Chat on WhatsApp"
           >
             <button
