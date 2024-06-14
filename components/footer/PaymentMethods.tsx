@@ -5,6 +5,9 @@ import Image from "apps/website/components/Image.tsx";
  * @titleBy alt
  */
 export interface PaymentItem {
+  /**
+   * @description recommended img size 20x12
+   */
   src: ImageWidget;
   alt: string;
 }

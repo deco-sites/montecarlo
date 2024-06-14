@@ -23,6 +23,9 @@ interface CTAProps {
 export interface Props {
   title?: string;
   description?: string;
+  /**
+   * @description Mobile image size 375×293 and desktop size Image 756×590
+   */
   image: {
     mobile: ImageWidget;
     desktop: ImageWidget;

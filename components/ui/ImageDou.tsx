@@ -9,7 +9,13 @@ import { useId } from "../../sdk/useId.ts";
  */
 interface Image {
   title: string;
+  /**
+   * @description size Image 350x350
+   */
   mobile: ImageWidget;
+  /**
+   * @description size Image 631x631
+   */
   desktop: ImageWidget;
   alt?: string;
   button: string;

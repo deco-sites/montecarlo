@@ -59,6 +59,9 @@ export interface Props {
   description?: string;
   href?: string;
   preload?: boolean;
+  /**
+   * @description size Image 375x418
+   */
   image: ImageProps;
   /** @description Adicione Tags para identificar produtos na imagem */
   tags?: Tag;

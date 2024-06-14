@@ -9,7 +9,13 @@ import { useId } from "../../sdk/useId.ts";
  * @titleBy title
  */
 interface CardImage {
+  /**
+   * @description size Image 375x184
+   */
   imageMobile: ImageWidget;
+  /**
+   * @description size Image 572x280
+   */
   imageDesktop: ImageWidget;
   preload?: boolean;
   alt: string;

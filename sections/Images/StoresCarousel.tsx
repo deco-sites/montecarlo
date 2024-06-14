@@ -61,7 +61,13 @@ function BannerItemMobile({
 
   return (
     <div class="flex flex-row w-full lg:max-h-[90vh] lg:min-h-[600px]">
-      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer" id={id + "mobile"}>
+      <a
+        class="w-full h-full relative"
+        href={image.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        id={id + "mobile"}
+      >
         <SendEventOnClick
           id={id + "mobile"}
           event={{
@@ -125,12 +131,17 @@ function BannerItem({
   image: ImageItem;
   lcp?: boolean;
 }) {
-
   const id = useId();
 
   return (
     <div class="flex flex-row w-full">
-      <a class="w-full h-full relative" href={image.href} target="_blank" rel="noopener noreferrer" id={id + "desktop"}>
+      <a
+        class="w-full h-full relative"
+        href={image.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        id={id + "desktop"}
+      >
         <SendEventOnClick
           id={id + "desktop"}
           event={{
@@ -159,7 +170,7 @@ function BannerItem({
             </div>
           )
           : null}
-        
+
         <Picture preload={lcp} class="w-full h-full">
           <Source
             media="(max-width: 1366px)"
