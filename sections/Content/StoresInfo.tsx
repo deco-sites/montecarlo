@@ -43,7 +43,7 @@ export interface Props {
 
 export default function StoresInfo(props: Props) {
   const { title, description, sac, info } = props;
-  
+
   const id = useId();
 
   return (
@@ -72,10 +72,18 @@ export default function StoresInfo(props: Props) {
               <State key={index} title={state.label}>
                 <div class="flex flex-col gap-2 mt-2 mb-3">
                   {state.cities?.map((city, index) => (
-                    <City key={index} title={city.label} startsOpen={city.startsOpen}>
+                    <City
+                      key={index}
+                      title={city.label}
+                      startsOpen={city.startsOpen}
+                    >
                       {city.stores?.map((store, index) => (
                         <>
-                          <div key={index} class="flex flex-col gap-5 mx-5" id={id + index}>
+                          <div
+                            key={index}
+                            class="flex flex-col gap-5 mx-5"
+                            id={id + index}
+                          >
                             <h5 class="font-poppins font-semibold text-sm">
                               {store.label}
                             </h5>

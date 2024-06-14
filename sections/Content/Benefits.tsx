@@ -12,6 +12,9 @@ import { useId } from "../../sdk/useId.ts";
 
 interface Benefit {
   label?: string;
+  /**
+   * @description recommended image size 32x16
+   */
   icon: ImageWidget;
   iconAlt?: string;
   description?: string;

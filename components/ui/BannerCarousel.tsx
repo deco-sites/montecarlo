@@ -29,9 +29,9 @@ interface FontSize {
 }
 
 export interface ImageItem {
-  /** @description desktop otimized image */
+  /** @description desktop-optimized single image size 1263x493 or two 632x493 images or three 421x528 images*/
   desktop: ImageWidget;
-  /** @description mobile otimized image */
+  /** @description mobile otimized image 350×449 */
   mobile: ImageWidget;
   /** @description Image's alt text */
   alt: string;

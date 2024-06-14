@@ -10,7 +10,13 @@ interface CTAProps {
 }
 
 interface ImageProps {
+  /**
+   * @description size Image 176x176
+   */
   source: ImageWidget;
+  /**
+   * @description size Image 176x176
+   */
   hoverImage?: ImageWidget;
   alt?: string;
 }
@@ -30,6 +36,9 @@ interface ConfigProps {
 export interface Props {
   title?: string;
   description?: string;
+  /**
+   * @description size Image 360x360
+   */
   banner: BannerProductDotInfoProps;
   grid: ItemProps[];
   config?: ConfigProps;
