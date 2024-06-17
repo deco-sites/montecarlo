@@ -106,9 +106,7 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
                   event={{
                     name: "login",
                     params: {
-                      item_list_name: links.label,
-                      item_list_id: id + "links",
-                      promotion_name: links.label,
+                      method: links.href,
                     },
                   }}
                 />
@@ -127,9 +125,7 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
             event={{
               name: "login",
               params: {
-                item_list_name: listlinks?.linkShowMore.label,
-                item_list_id: id + "showMore",
-                promotion_name: listlinks?.linkShowMore.label,
+                method: listlinks?.linkShowMore.href,
               },
             }}
           />

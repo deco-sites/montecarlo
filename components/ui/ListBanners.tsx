@@ -111,8 +111,21 @@ function CardImage(
       href={card.linkToRedirect}
       title={"Ir para a página de " + card.title}
       class="w-full hover:opacity-80"
-      id={id}
+      id={id + index}
     >
+      <SendEventOnClick
+        id={id + index}
+        event={{
+          name: "select_promotion",
+          params: {
+            creative_name: card.title,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
+            promotion_name: card.title,
+            items: [],
+          },
+        }}
+      />
       <div
         class={`lg:w-full justify-center items-center flex flex-col `}
       >
@@ -134,28 +147,15 @@ function CardImage(
         </div>
       </div>
       <SendEventOnView
-        id={id}
+        id={id + index}
         event={{
           name: "view_promotion",
           params: {
-            view_promotion: card.altText,
-            creative_name: card.altText,
-            creative_slot: card.altText,
-            promotion_id: id,
-            promotion_name: card.altText,
-            items: [],
-          },
-        }}
-      />
-      <SendEventOnClick
-        id={id}
-        event={{
-          name: "select_promotion",
-          params: {
-            creative_name: card.altText,
-            creative_slot: id + index,
-            promotion_id: card.linkToRedirect,
-            promotion_name: card.altText,
+            creative_name: card.title,
+            creative_slot: card.altText ? card.altText : "",
+            promotion_id: id + index,
+            promotion_name: card.title,
+
             items: [],
           },
         }}
@@ -165,15 +165,15 @@ function CardImage(
 }
 
 const ITEMSSLIDE = {
-  4: "lg:w-[calc(25%-0.5rem)]",
-  5: "lg:w-[calc(20%-0.5rem)]",
-  6: "lg:w-[calc(16.66%-0.5rem)]",
-  7: "lg:w-[calc(14.28%-0.5rem)]",
+  4: "lg:w-[calc(25%-0.25rem)]",
+  5: "lg:w-[calc(20%-0.25rem)]",
+  6: "lg:w-[calc(16.66%-0.25rem)]",
+  7: "lg:w-[calc(14.28%-0.25rem)]",
 };
 
 const ITEMSSLIDEMOBILE = {
-  1: "w-full",
-  3.5: "w-[calc(30%-2.25rem)]",
+  1: "w-full snap-center",
+  3.5: "w-[calc(30%-2.25rem)] snap-start",
 };
 
 function VerticalCardsGrid(props: Props) {
@@ -191,10 +191,8 @@ function VerticalCardsGrid(props: Props) {
   return (
     <div
       class={`  ${
-        variant === "noSlide"
-          ? "xl:max-w-[1512px] lg:container lg:px-14 "
-          : "w-full lg:px-0"
-      } flex lg:justify-center flex-col gap-5 lg:gap-10 py-9`}
+        variant === "noSlide" ? " lg:container lg:px-14 " : "w-full lg:px-0"
+      } flex lg:justify-center flex-col gap-5 lg:gap-10 py-9 xl:max-w-[1512px] mx-auto`}
     >
       {title !== "" || subTitle !== ""
         ? (
@@ -247,7 +245,7 @@ function VerticalCardsGrid(props: Props) {
               {cards.map((card, index) => (
                 <Slider.Item
                   index={index}
-                  class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3 snap-start ${
+                  class={`carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-center md:w-1/3  ${
                     ITEMSSLIDEMOBILE[
                       sliderItemsMobile as keyof typeof sliderItemsMobile || 1
                     ]

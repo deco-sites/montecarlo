@@ -19,7 +19,14 @@ interface CTAProps {
 }
 
 export interface Props {
+  /**
+   * @description size Image 375x268
+   */
   imageMobile: ImageWidget;
+  /**
+   * @description size Image 632x375
+   */
+
   imageDesktop: ImageWidget;
   altText?: string;
   /**

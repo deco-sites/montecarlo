@@ -67,6 +67,10 @@ export default function Content(props: Props) {
           name: "view_promotion",
           params: {
             creative_name: content?.title ? content.title : "",
+            creative_slot: content?.description ? content.description : "",
+            promotion_id: id,
+            promotion_name: content?.title ? content.title : "",
+            items: [],
           },
         }}
       />

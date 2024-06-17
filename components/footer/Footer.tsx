@@ -46,11 +46,17 @@ export interface Props {
     title?: string;
     items: SocialItem[];
   };
+  /**
+   * @description Icon size 25 x 25
+   */
   formState?: FormStoreProps;
   /**
    * @format html
    */
   copyWrite?: string;
+  /**
+   * @description Icon size 25 x 25
+   */
   logo: {
     src: ImageWidget;
     alt?: string;
