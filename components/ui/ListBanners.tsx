@@ -132,7 +132,7 @@ function CardImage(
         <Image
           class={` h-auto aspect-square ${
             aspectRatio == "1:1"
-              ? "min-w-[246px] object-cover w-full"
+              ? "object-cover w-full"
               : "w-[102px] object-contain"
           } `}
           src={card.image}

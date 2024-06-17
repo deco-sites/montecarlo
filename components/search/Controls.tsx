@@ -82,6 +82,7 @@ function SearchControls(
           <>
             <div class="hidden md:flex flex-col gap-2">
               <div class="flex flex-row flex-wrap justify-between gap-5">
+                <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
                 {title && title.length > 0
                   ? (
                     <h6 class={"font-poppins text-sm font-semibold"}>
@@ -89,7 +90,6 @@ function SearchControls(
                     </h6>
                   )
                   : null}
-                <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
                 <div class="flex flex-row justify-end font-poppins text-sm min-w-[40vw] gap-10 relative">
                   <Filters filters={priceArray} layout={layout} />
                 </div>
@@ -120,6 +120,7 @@ function SearchControls(
                     </button>
                   )
                   : null}
+                  {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
               </div>
             </div>
 
