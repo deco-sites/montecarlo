@@ -27,6 +27,7 @@ import type { Props as Benefit } from "deco-sites/montecarlo/components/product/
 import type { GroupVariants } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts";
 import { SelectVariants } from "deco-sites/montecarlo/components/product/Similar/VariantGroup.tsx";
 import { Material } from "deco-sites/montecarlo/loaders/Layouts/MaterialProduct.tsx";
+import { Collection } from "deco-sites/montecarlo/loaders/Layouts/BannerCollection.tsx";
 import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
 import ModalBonus from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
@@ -65,6 +66,7 @@ export interface ExtraInformation {
   groups: GroupVariants[] | null;
   materialImages?: Material[];
   lossesImage?: Losses[];
+  collectionBanners?: Collection[];
 }
 interface Props {
   page: ProductDetailsPage | null;
@@ -82,7 +84,7 @@ interface Props {
 function ProductInfo({ page, layout, extraInformations }: Props) {
   const platform = usePlatform();
   const id = useId();
-  const { groups } = extraInformations;
+  const { groups, collectionBanners } = extraInformations;
 
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
@@ -129,6 +131,16 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     listPrice,
   });
 
+  const complementName =
+    additionalProperty.find((item) => item.name == "complementName") || null;
+
+  const formattedComplementNameForLink = complementName?.complementName &&
+    complementName.complementName
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(" ", "-");
+
   return (
     <>
       <div class="col-start-4 row-span-2">
@@ -136,12 +148,15 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           <Breadcrumb itemListElement={breadcrumb.itemListElement} />
           {/* Code and name */}
           <div class="flex flex-row gap-2 flex-wrap mb-5">
-            {collections &&
-              collections.map((item) => (
-                <span class="text-xs underline-offset-2 decoration-primary underline lg:text-sm">
-                  {"Coleção " + item.value}
-                </span>
-              ))}
+            {complementName &&
+              (
+                <a
+                  href={`/${formattedComplementNameForLink}`}
+                  class="text-xs underline-offset-2 decoration-primary underline lg:text-sm"
+                >
+                  {complementName.complementName}
+                </a>
+              )}
           </div>
           <h1>
             <span class="font-medium text-base capitalize lg:text-xl">
@@ -251,6 +266,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                 product={product}
                 variants={groups}
                 losses={extraInformations.lossesImage}
+                collectionBanners={collectionBanners}
+                complementName={complementName?.complementName}
               />
             )}
           <BenefitsList
@@ -265,6 +282,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             product={product}
             variants={groups}
             losses={extraInformations.lossesImage}
+            collectionBanners={collectionBanners}
+            complementName={complementName?.complementName}
           />
         </div>
       )}

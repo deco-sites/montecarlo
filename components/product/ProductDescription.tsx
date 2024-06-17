@@ -5,6 +5,7 @@ import Accordion from "../ui/Accordion.tsx";
 import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
 import { ImageWidget } from "apps/admin/widgets.ts";
 import { GroupVariants } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts";
+import type { Collection } from "deco-sites/montecarlo/loaders/Layouts/BannerCollection.tsx";
 
 interface Variants {
   link: string;
@@ -18,6 +19,8 @@ interface Props {
   product: any | null;
   losses?: Losses[];
   variants: GroupVariants[] | null;
+  collectionBanners?: Collection[];
+  complementName?: string | null;
 }
 
 interface AdditionalPropertyProps {
@@ -28,7 +31,7 @@ interface AdditionalPropertyProps {
 }
 
 export default function ProductDescription(
-  { product, losses, variants }: Props,
+  { product, losses, variants, collectionBanners, complementName }: Props,
 ) {
   const {
     name = "",
@@ -73,6 +76,11 @@ export default function ProductDescription(
   const Arraylosses: GroupVariants | undefined =
     variants && variants.find((group) => group.type === "Pedras") || undefined;
 
+  const banner = complementName && collectionBanners &&
+      collectionBanners.find((banner) =>
+        banner.collectionName == complementName
+      ) || null;
+
   return (
     <div class="">
       <div class="w-full flex flex-col gap-5 lg:gap-8">
@@ -106,31 +114,34 @@ export default function ProductDescription(
             </ul>
           </Accordion>
         )}
-        <Accordion
-          title="Coleção Tulum"
-          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
-        >
-          <Collection
-            title="Coleção <b>Tulum</b>"
-            description="Joias em <b>Prata</b> com banho de Ouro Rosé 18k e pedras preciosas que capturam as cores do entardecer."
-            image={{
-              mobile: "https://placehold.co/334x357",
-              desktop: "https://placehold.co/377x403",
-              alt: "",
-            }}
-            cta={{
-              text: "Explore",
-              href: "#",
-              color: "#000000",
-              backgroundColor: "#FFFFFF",
-            }}
-            style={{
-              color: "#000000",
-              backgroundColor: "#F5F3E7",
-            }}
-          />
-        </Accordion>
+        {banner && (
+          <Accordion
+            title={banner.Banner?.titleAccordion || banner.Banner.title}
+            titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+          >
+            <Collection
+              title={banner.Banner.title}
+              description={banner.Banner.description}
+              image={{
+                mobile: banner.Banner.image?.mobile,
+                desktop: banner.Banner.image?.desktop,
+                alt: banner.Banner.image?.alt,
+              }}
+              cta={{
+                text: banner.Banner.cta?.text,
+                href: banner.Banner.cta?.href,
+                color: banner.Banner.cta?.color,
+                backgroundColor: banner.Banner.cta?.backgroundColor,
+              }}
+              style={{
+                color: banner.Banner.style?.color,
+                backgroundColor: banner.Banner.style?.backgroundColor,
+              }}
+            />
+          </Accordion>
+        )}
         {Arraylosses != undefined && Arraylosses != null &&
+          Arraylosses.variants.length > 0 &&
           (
             <Accordion
               title="Pedras"
@@ -191,10 +202,12 @@ interface CollectionProps {
 function Collection(props: CollectionProps) {
   return (
     <div
-      class={`flex flex-col-reverse bg-[${props.style?.backgroundColor}] lg:grid lg:grid-cols-2`}
+      style={{ background: props.style?.backgroundColor }}
+      class={`flex flex-col-reverse lg:grid lg:grid-cols-2`}
     >
       <div
-        class={`font-poppins text-[${props.style?.color}] flex flex-col gap-5 p-16 justify-center`}
+        class={`font-poppins flex flex-col gap-5 p-16 justify-center`}
+        style={{ color: props.style?.color }}
       >
         {props.title && (
           <h3
@@ -211,7 +224,11 @@ function Collection(props: CollectionProps) {
 
         <a class="text-sm" href={props.cta?.href}>
           <button
-            class={`px-3 py-2 bg-[${props.cta?.backgroundColor}] text-[${props.cta?.color}] transition-opacity hover:opacity-80`}
+            class={`px-3 py-2 transition-opacity hover:opacity-80`}
+            style={{
+              background: props.cta?.backgroundColor,
+              color: props.cta?.color,
+            }}
           >
             {props.cta?.text}
           </button>
