@@ -1,3 +1,4 @@
+import { useState } from "preact/hooks";
 import Avatar from "../../components/ui/Avatar.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import type {
@@ -12,7 +13,7 @@ import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
 import RangeSlider from "../../islands/RangeSlider.tsx";
 
-interface Props {
+export interface Props {
   filters: ProductListingPage["filters"];
   layout?: "aside" | "drawer" | "horizontal";
 }
@@ -72,11 +73,18 @@ function FilterValues({ key, values }: FilterToggle) {
 }
 
 function Filters({ filters, layout }: Props) {
+  const [openFilter, setOpenFilter] = useState<string | null>(null);
+
+  const handleToggle = (id : string) => {
+    event?.preventDefault();
+    setOpenFilter(openFilter === id ? null : id);
+  };
+
   return (
     <>
       {filters
         .filter(isToggle)
-        .map((filter) => {
+        .map((filter, index) => {
           if (filter.key === "codigo-agrupador" || filter.key === "price") {
             return;
           }
@@ -88,6 +96,8 @@ function Filters({ filters, layout }: Props) {
               }`}
             >
               <details
+                open={openFilter === `filter-${index}`}
+                onClick={() => handleToggle(`filter-${index}`)}
                 class={`${
                   layout !== "horizontal" ? "border-b border-black pb-2" : ""
                 }`}
