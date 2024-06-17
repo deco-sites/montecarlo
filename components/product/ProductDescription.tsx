@@ -2,10 +2,25 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 import Accordion from "../ui/Accordion.tsx";
+import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
+import { ImageWidget } from "apps/admin/widgets.ts";
+import { GroupVariants } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts";
+import type { Collection } from "deco-sites/montecarlo/loaders/Layouts/BannerCollection.tsx";
 
+interface Variants {
+  link: string;
+  message: string;
+  urlImage?: ImageWidget;
+  productId: number;
+  active: boolean;
+}
 interface Props {
   // deno-lint-ignore no-explicit-any
   product: any | null;
+  losses?: Losses[];
+  variants: GroupVariants[] | null;
+  collectionBanners?: Collection[];
+  complementName?: string | null;
 }
 
 interface AdditionalPropertyProps {
@@ -15,7 +30,9 @@ interface AdditionalPropertyProps {
   valueReference: string;
 }
 
-export default function ProductDescription({ product }: Props) {
+export default function ProductDescription(
+  { product, losses, variants, collectionBanners, complementName }: Props,
+) {
   const {
     name = "",
     description,
@@ -56,6 +73,14 @@ export default function ProductDescription({ product }: Props) {
 
   const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g).join("");
 
+  const Arraylosses: GroupVariants | undefined =
+    variants && variants.find((group) => group.type === "Pedras") || undefined;
+
+  const banner = complementName && collectionBanners &&
+      collectionBanners.find((banner) =>
+        banner.collectionName == complementName
+      ) || null;
+
   return (
     <div class="">
       <div class="w-full flex flex-col gap-5 lg:gap-8">
@@ -89,53 +114,66 @@ export default function ProductDescription({ product }: Props) {
             </ul>
           </Accordion>
         )}
-        <Accordion
-          title="Coleção Tulum"
-          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
-        >
-          <Collection
-            title="Coleção <b>Tulum</b>"
-            description="Joias em <b>Prata</b> com banho de Ouro Rosé 18k e pedras preciosas que capturam as cores do entardecer."
-            image={{
-              mobile: "https://placehold.co/334x357",
-              desktop: "https://placehold.co/377x403",
-              alt: "",
-            }}
-            cta={{
-              text: "Explore",
-              href: "#",
-              color: "#000000",
-              backgroundColor: "#FFFFFF",
-            }}
-            style={{
-              color: "#000000",
-              backgroundColor: "#F5F3E7",
-            }}
-          />
-        </Accordion>
-        <Accordion
-          title="Pedras"
-          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
-        >
-          <div class="flex flex-col gap-5">
-            <Material
-              name="lolita"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non leo eu erat viverra dignissim. Nam commodo justo purus, at tincidunt nibh eleifend non. Ut leo massa, accumsan non odio ut, auctor laoreet risus. Suspendisse ut nunc quis eros ullamcorper semper sit amet vel nulla. Proin ac nulla luctus, placerat erat non."
+        {banner && (
+          <Accordion
+            title={banner.Banner?.titleAccordion || banner.Banner.title}
+            titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+          >
+            <Collection
+              title={banner.Banner.title}
+              description={banner.Banner.description}
               image={{
-                source: "https://placehold.co/45x45",
-                alt: "",
+                mobile: banner.Banner.image?.mobile,
+                desktop: banner.Banner.image?.desktop,
+                alt: banner.Banner.image?.alt,
+              }}
+              cta={{
+                text: banner.Banner.cta?.text,
+                href: banner.Banner.cta?.href,
+                color: banner.Banner.cta?.color,
+                backgroundColor: banner.Banner.cta?.backgroundColor,
+              }}
+              style={{
+                color: banner.Banner.style?.color,
+                backgroundColor: banner.Banner.style?.backgroundColor,
               }}
             />
-            <Material
-              name="Amestia"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non leo eu erat viverra dignissim. Nam commodo justo purus, at tincidunt nibh eleifend non. Ut leo massa, accumsan non odio ut, auctor laoreet risus. Suspendisse ut nunc quis eros ullamcorper semper sit amet vel nulla. Proin ac nulla luctus, placerat erat non."
-              image={{
-                source: "https://placehold.co/45x45",
-                alt: "",
-              }}
-            />
-          </div>
-        </Accordion>
+          </Accordion>
+        )}
+        {Arraylosses != undefined && Arraylosses != null &&
+          Arraylosses.variants.length > 0 &&
+          (
+            <Accordion
+              title="Pedras"
+              titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+            >
+              <div class="flex flex-col gap-5">
+                {Arraylosses?.variants.map((item) => {
+                  if (
+                    !losses || losses === undefined
+                  ) {
+                    return null;
+                  }
+
+                  const img = losses.find((img) => img.name === item.message);
+
+                  if (!img || img === undefined) {
+                    return null;
+                  }
+                  return (
+                    <Material
+                      name={img.name}
+                      description={img.description}
+                      image={{
+                        source: img.imageLarge || img.image,
+                        alt: img.name,
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            </Accordion>
+          )}
       </div>
     </div>
   );
@@ -164,10 +202,12 @@ interface CollectionProps {
 function Collection(props: CollectionProps) {
   return (
     <div
-      class={`flex flex-col-reverse bg-[${props.style?.backgroundColor}] lg:grid lg:grid-cols-2`}
+      style={{ background: props.style?.backgroundColor }}
+      class={`flex flex-col-reverse lg:grid lg:grid-cols-2`}
     >
       <div
-        class={`font-poppins text-[${props.style?.color}] flex flex-col gap-5 p-16 justify-center`}
+        class={`font-poppins flex flex-col gap-5 p-16 justify-center`}
+        style={{ color: props.style?.color }}
       >
         {props.title && (
           <h3
@@ -184,7 +224,11 @@ function Collection(props: CollectionProps) {
 
         <a class="text-sm" href={props.cta?.href}>
           <button
-            class={`px-3 py-2 bg-[${props.cta?.backgroundColor}] text-[${props.cta?.color}] transition-opacity hover:opacity-80`}
+            class={`px-3 py-2 transition-opacity hover:opacity-80`}
+            style={{
+              background: props.cta?.backgroundColor,
+              color: props.cta?.color,
+            }}
           >
             {props.cta?.text}
           </button>
@@ -247,7 +291,7 @@ function Material(props: MaterialProps) {
         )}
       </div>
       {props.description && (
-        <p
+        <span
           class="font-light text-sm ml-[51px] lg:ml-[97px]"
           dangerouslySetInnerHTML={{ __html: props.description }}
         />
