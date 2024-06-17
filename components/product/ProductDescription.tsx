@@ -2,10 +2,22 @@ import { Picture, Source } from "apps/website/components/Picture.tsx";
 import Image from "apps/website/components/Image.tsx";
 
 import Accordion from "../ui/Accordion.tsx";
+import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
+import { ImageWidget } from "apps/admin/widgets.ts";
+import { GroupVariants } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts";
 
+interface Variants {
+  link: string;
+  message: string;
+  urlImage?: ImageWidget;
+  productId: number;
+  active: boolean;
+}
 interface Props {
   // deno-lint-ignore no-explicit-any
   product: any | null;
+  losses?: Losses[];
+  variants: GroupVariants[] | null;
 }
 
 interface AdditionalPropertyProps {
@@ -15,7 +27,9 @@ interface AdditionalPropertyProps {
   valueReference: string;
 }
 
-export default function ProductDescription({ product }: Props) {
+export default function ProductDescription(
+  { product, losses, variants }: Props,
+) {
   const {
     name = "",
     description,
@@ -55,6 +69,9 @@ export default function ProductDescription({ product }: Props) {
   });
 
   const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g).join("");
+
+  const Arraylosses: GroupVariants | undefined =
+    variants && variants.find((group) => group.type === "Pedras") || undefined;
 
   return (
     <div class="">
@@ -113,29 +130,39 @@ export default function ProductDescription({ product }: Props) {
             }}
           />
         </Accordion>
-        <Accordion
-          title="Pedras"
-          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
-        >
-          <div class="flex flex-col gap-5">
-            <Material
-              name="lolita"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non leo eu erat viverra dignissim. Nam commodo justo purus, at tincidunt nibh eleifend non. Ut leo massa, accumsan non odio ut, auctor laoreet risus. Suspendisse ut nunc quis eros ullamcorper semper sit amet vel nulla. Proin ac nulla luctus, placerat erat non."
-              image={{
-                source: "https://placehold.co/45x45",
-                alt: "",
-              }}
-            />
-            <Material
-              name="Amestia"
-              description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam non leo eu erat viverra dignissim. Nam commodo justo purus, at tincidunt nibh eleifend non. Ut leo massa, accumsan non odio ut, auctor laoreet risus. Suspendisse ut nunc quis eros ullamcorper semper sit amet vel nulla. Proin ac nulla luctus, placerat erat non."
-              image={{
-                source: "https://placehold.co/45x45",
-                alt: "",
-              }}
-            />
-          </div>
-        </Accordion>
+        {Arraylosses != undefined && Arraylosses != null &&
+          (
+            <Accordion
+              title="Pedras"
+              titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+            >
+              <div class="flex flex-col gap-5">
+                {Arraylosses?.variants.map((item) => {
+                  if (
+                    !losses || losses === undefined
+                  ) {
+                    return null;
+                  }
+
+                  const img = losses.find((img) => img.name === item.message);
+
+                  if (!img || img === undefined) {
+                    return null;
+                  }
+                  return (
+                    <Material
+                      name={img.name}
+                      description={img.description}
+                      image={{
+                        source: img.imageLarge || img.image,
+                        alt: img.name,
+                      }}
+                    />
+                  );
+                })}
+              </div>
+            </Accordion>
+          )}
       </div>
     </div>
   );
@@ -247,7 +274,7 @@ function Material(props: MaterialProps) {
         )}
       </div>
       {props.description && (
-        <p
+        <span
           class="font-light text-sm ml-[51px] lg:ml-[97px]"
           dangerouslySetInnerHTML={{ __html: props.description }}
         />

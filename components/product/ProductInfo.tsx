@@ -153,14 +153,14 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           )}
           {/* Prices */}
           <div class="mt-5 flex flex-col gap-3">
-            <div class="flex flex-row gap-1 items-center text-base lg:text-xl">
-              <span class=" font-semibold ">
+            <div class="flex flex-row gap-1 items-center text-base lg:text-[1.15rem]">
+              <span class=" font-medium">
                 {formatPrice(price, offers?.priceCurrency)}
               </span>
               {stringIstallments && (
                 <>
                   <span class=" text-sm">em</span>
-                  <span class=" font-semibold ">{stringIstallments}</span>
+                  <span class=" font-medium ">{stringIstallments}</span>
                 </>
               )}
             </div>
@@ -246,7 +246,13 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             )}
           </div>
           {isMobile.value &&
-            <ProductDescription product={product} />}
+            (
+              <ProductDescription
+                product={product}
+                variants={groups}
+                losses={extraInformations.lossesImage}
+              />
+            )}
           <BenefitsList
             title={extraInformations.benefit.title}
             benefits={extraInformations.benefit.benefits}
@@ -255,7 +261,11 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
       </div>
       {!isMobile.value && (
         <div class="col-start-1 xl:col-start-2 col-end-4 row-start-1 lg:px-0 w-full max-w-[770px]">
-          <ProductDescription product={product} />
+          <ProductDescription
+            product={product}
+            variants={groups}
+            losses={extraInformations.lossesImage}
+          />
         </div>
       )}
     </>
