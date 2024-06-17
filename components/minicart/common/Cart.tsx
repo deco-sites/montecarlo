@@ -6,6 +6,8 @@ import { useUI } from "../../../sdk/useUI.ts";
 import CartItem, { Item, Props as ItemProps } from "./CartItem.tsx";
 import Coupon, { Props as CouponProps } from "./Coupon.tsx";
 import FreeShippingProgressBar from "./FreeShippingProgressBar.tsx";
+import { SendEventOnClick, SendEventOnView } from "../../Analytics.tsx";
+import { useId } from "../../../sdk/useId.ts";
 
 interface Props {
   items: Item[];
@@ -41,10 +43,13 @@ function Cart({
   const { displayCart } = useUI();
   const isEmtpy = items.length === 0;
 
+  const id = useId();
+
   return (
     <div
       class="flex flex-col justify-center items-center overflow-hidden"
       style={{ minWidth: "calc(min(100vw, 425px))", maxWidth: "425px" }}
+      id={id}
     >
       {isEmtpy
         ? (
@@ -154,6 +159,19 @@ function Cart({
             </footer>
           </>
         )}
+      <SendEventOnView
+        id={id}
+        event={{
+          name: "view_cart",
+          params: {
+            currency: "BRL",
+            value: total,
+            items: items
+              .map((_, index) => itemToAnalyticsItem(index))
+              .filter((x): x is AnalyticsItem => Boolean(x)),
+          },
+        }}
+      />
     </div>
   );
 }

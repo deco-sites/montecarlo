@@ -1,9 +1,9 @@
 import { Head } from "$fresh/runtime.ts";
 import { PageInfo, Product } from "apps/commerce/types.ts";
 import { usePartialSection } from "deco/hooks/usePartialSection.ts";
-import ProductCard, {
+import ShelfProductCard, {
   Layout as CardLayout,
-} from "../../components/product/ProductCard.tsx";
+} from "../../components/product/ShelfProductCard.tsx";
 import { Format } from "../../components/search/SearchResult.tsx";
 import Spinner from "../../components/ui/Spinner.tsx";
 import ShowMore from "../../islands/ShowMore.tsx";
@@ -55,7 +55,7 @@ function ProductGallery(
 
   return (
     <div
-      class={`grid ${mobile} gap-2 items-center ${desktop} sm:gap-10`}
+      class={`grid ${mobile} gap-2 items-center ${desktop}`}
     >
       {layout?.format == "Show More" && (
         <Head>
@@ -67,7 +67,7 @@ function ProductGallery(
       )}
 
       {products?.map((product, index) => (
-        <ProductCard
+        <ShelfProductCard
           key={`product-card-${product.productID}`}
           product={product}
           preload={index === 0}
@@ -83,19 +83,19 @@ function ProductGallery(
             pageInfo={pageInfo}
           >
             {partialUrl && (
-              <div>
+              <div class="hover:opacity-80">
                 <div class="mt-2">
                   <Spinner size={24} />
                 </div>
                 <button
                   id={`show-more-button-${pageInfo.currentPage}`}
-                  class="btn cursor-pointer hidden w-0 h-0 absolute"
+                  class="btn cursor-pointer hidden w-0 h-0 absolute font-poppins text-sm bg-[#FFC72C] font-normal rounded-none hover:bg-[#FFC72C]"
                   {...usePartialSection({
                     href: partialUrl.href,
                     mode: "append",
                   })}
                 >
-                  Show More
+                  Carregar mais Produtos
                 </button>
               </div>
             )}

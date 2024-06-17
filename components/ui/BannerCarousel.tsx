@@ -9,27 +9,43 @@ import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import { useUI } from "../../sdk/useUI.ts";
 import Image from "apps/website/components/Image.tsx";
+import action from "apps/algolia/actions/setup.ts";
 
 /**
  * @titleBy alt
  */
 export interface Banner {
-  /** @description desktop otimized image */
+  banner: ImageItem[];
+}
+
+interface FontSize {
+  /**
+   * @format button-group
+   * @options deco-sites/montecarlo/loaders/icons.ts
+   */
+  fontSize?: "Small" | "Normal" | "Large";
+}
+
+export interface ImageItem {
+  /** @description desktop-optimized single image size 1263x493 or two 632x493 images or three 421x528 images*/
   desktop: ImageWidget;
-  /** @description mobile otimized image */
+  /** @description mobile otimized image 350×449 */
   mobile: ImageWidget;
   /** @description Image's alt text */
   alt: string;
+  /** @description Action when user clicks on the image */
+  promotion: string;
+  /** @description DL action */
   action?: {
     /** @description when user clicks on the image, go to this link */
-    href: string;
+    href?: string;
     /** @description Image text title */
-    title: string;
-    /** @description Image text subtitle */
-    subTitle: string;
+    title?: string;
+    fontSize?: FontSize;
     /** @description Button label */
-    label: string;
+    label?: string;
   };
 }
 
@@ -56,111 +72,188 @@ export interface Props {
   interval?: number;
 }
 
-const DEFAULT_PROPS = {
-  images: [
-    {
-      alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
-        href: "/",
-      },
-      mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-      desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
-    },
-    {
-      alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
-        href: "/",
-      },
-      mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-      desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
-    },
-    {
-      alt: "/feminino",
-      action: {
-        title: "New collection",
-        subTitle: "Main title",
-        label: "Explore collection",
-        href: "/",
-      },
-      mobile:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/c007e481-b1c6-4122-9761-5c3e554512c1",
-      desktop:
-        "https://ozksgdmyrqcxcwhnbepg.supabase.co/storage/v1/object/public/assets/2291/d057fc10-5616-4f12-8d4c-201bb47a81f5",
-    },
-  ],
-  preload: true,
+const PROPS_FONT_SIZE = {
+  Small: "text-[1.5rem] lg:text-[2.5rem]",
+  Normal: "text-[2.5rem] lg:text-[3.8rem]",
+  Large: "text-[3.5rem] lg:text-[6.3rem]",
 };
 
-function BannerItem(
-  { image, lcp, id }: { image: Banner; lcp?: boolean; id: string },
-) {
-  const {
-    alt,
-    mobile,
-    desktop,
-    action,
-  } = image;
-
+function Action(action: {
+  title?: string;
+  label?: string;
+  href?: string;
+  fontSize?: FontSize;
+}) {
   return (
-    <a
-      id={id}
-      href={action?.href ?? "#"}
-      aria-label={action?.label}
-      class="relative overflow-y-hidden w-full"
-    >
-      {action && (
-        <div class="absolute top-0 md:bottom-0 bottom-1/2 left-0 right-0 sm:right-auto max-w-[407px] flex flex-col justify-end gap-4 px-8 py-12">
-          <span class="text-2xl font-light text-base-100">
-            {action.title}
-          </span>
-          <span class="font-normal text-4xl text-base-100">
-            {action.subTitle}
-          </span>
-          <Button
-            class="bg-base-100 text-sm font-light py-4 px-6 w-fit"
-            aria-label={action.label}
-          >
-            {action.label}
-          </Button>
-        </div>
+    <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
+      {action.title && (
+        <span
+          class={`${
+            PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
+          } font-light text-primary text-center font-beausiteGrand`}
+        >
+          {action.title}
+        </span>
       )}
-      <Picture preload={lcp}>
-        <Source
-          media="(max-width: 767px)"
-          fetchPriority={lcp ? "high" : "auto"}
-          src={mobile}
-          width={430}
-          height={590}
-        />
-        <Source
-          media="(min-width: 768px)"
-          fetchPriority={lcp ? "high" : "auto"}
-          src={desktop}
-          width={1440}
-          height={600}
-        />
-        <img
-          class="object-cover w-full h-full"
-          loading={lcp ? "eager" : "lazy"}
-          src={desktop}
-          alt={alt}
-        />
-      </Picture>
-    </a>
+      {action.label && (
+        <Button
+          class="bg-primary text-sm py-4 px-6 w-fit hover:bg-primary border-none hover:opacity-80"
+          aria-label={action.label}
+        >
+          {action?.label}
+        </Button>
+      )}
+    </div>
   );
 }
 
-function Dots({ images, interval = 0 }: Props) {
+function BannerItemMobile({
+  image,
+  lcp,
+  id,
+}: {
+  image: ImageItem;
+  lcp?: boolean;
+  id: string;
+}) {
+  const { mobile, alt, action, promotion } = image;
+
+  return (
+    <div class="flex flex-row w-full relative" id={id + "div"}>
+      <a
+        id={id}
+        href={action?.href ?? "#"}
+        aria-label={action?.label}
+        class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
+      >
+        {action && <Action {...action} />}
+      </a>
+      <Image
+        class="object-cover w-full h-full"
+        loading={lcp ? "eager" : "lazy"}
+        decoding="async"
+        sizes="(max-width: 640px) 100vw"
+        preload={lcp}
+        src={mobile}
+        alt={alt}
+        width={350}
+        height={450}
+        fetchPriority={lcp ? "high" : "auto"}
+      />
+      <SendEventOnClick
+        id={id}
+        event={{
+          name: "select_promotion",
+          params: {
+            creative_name: alt,
+            creative_slot: id,
+            promotion_id: action?.href,
+            promotion_name: promotion,
+            items: [],
+          },
+        }}
+      />
+      <SendEventOnView
+        id={id + "div"}
+        event={{
+          name: "view_promotion",
+          params: {
+            view_promotion: promotion,
+            crative_name: alt,
+            creative_slot: alt,
+            promotion_id: id,
+            promotion_name: promotion,
+            items: [],
+          },
+        }}
+      />
+    </div>
+  );
+}
+
+function BannerItem({
+  image,
+  lcp,
+  id,
+}: {
+  image: Banner;
+  lcp?: boolean;
+  id: string;
+}) {
+  return (
+    <div class="flex flex-row w-full relative">
+      {image.banner.map((primaryImage) => (
+        <div class="flex flex-row w-full relative">
+          <a
+            id={id}
+            href={primaryImage.action?.href ?? "#"}
+            aria-label={primaryImage.action?.label}
+            class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
+          >
+            {primaryImage.action && <Action {...primaryImage.action} />}
+          </a>
+          <Picture preload={lcp} class="w-full h-full">
+            <Source
+              media="(max-width: 1366px)"
+              fetchPriority={lcp ? "high" : "auto"}
+              src={primaryImage.desktop}
+              width={image.banner.length > 1 ? 631 : 1263}
+              height={492}
+            />
+            <Source
+              media="(min-width: 1367px)"
+              fetchPriority={lcp ? "high" : "auto"}
+              src={primaryImage.desktop}
+              width={image.banner.length > 1 ? 748 : 1495}
+              height={583}
+            />
+            <img
+              class="object-cover w-full"
+              loading={lcp ? "eager" : "lazy"}
+              src={primaryImage.desktop}
+              alt={primaryImage.alt}
+            />
+          </Picture>
+          <SendEventOnClick
+            id={id}
+            event={{
+              name: "select_promotion",
+              params: {
+                creative_name: primaryImage.alt,
+                creative_slot: id,
+                promotion_id: primaryImage.action?.href,
+                promotion_name: primaryImage.promotion,
+                items: [],
+              },
+            }}
+          />
+          <SendEventOnView
+            id={id}
+            event={{
+              name: "view_promotion",
+              params: {
+                view_promotion: primaryImage.promotion,
+                crative_name: primaryImage.alt,
+                creative_slot: "banner-carousel",
+                promotion_id: id,
+                promotion_name: primaryImage.promotion,
+                items: [],
+              },
+            }}
+          />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Dots({
+  images,
+  interval = 0,
+}: {
+  images: Banner[] | ImageItem[];
+  interval?: number;
+}) {
   return (
     <>
       <style
@@ -174,13 +267,17 @@ function Dots({ images, interval = 0 }: Props) {
           `,
         }}
       />
-      <ul class="carousel justify-center col-span-full gap-6 z-10 row-start-4">
+      <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4">
         {images?.map((_, index) => (
           <li class="carousel-item">
             <Slider.Dot index={index}>
               <div class="py-5">
                 <div
-                  class="w-16 sm:w-20 h-0.5 rounded group-disabled:animate-progress bg-gradient-to-r from-base-100 from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  class={`w-12 h-1 lg:w-[71px] ${
+                    !interval
+                      ? "bg-[rgba(255,255,255,0.4)] group-disabled:bg-primary"
+                      : "group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  }`}
                   style={{ animationDuration: `${interval}s` }}
                 />
               </div>
@@ -196,23 +293,13 @@ function Buttons() {
   return (
     <>
       <div class="flex items-center justify-center z-10 col-start-1 row-start-2">
-        <Slider.PrevButton class="btn btn-circle glass">
-          <Icon
-            class="text-base-100"
-            size={24}
-            id="ChevronLeft"
-            strokeWidth={3}
-          />
+        <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
+          <Icon class="text-white" size={40} id="arrowLeft" strokeWidth={3} />
         </Slider.PrevButton>
       </div>
       <div class="flex items-center justify-center z-10 col-start-3 row-start-2">
-        <Slider.NextButton class="btn btn-circle glass">
-          <Icon
-            class="text-base-100"
-            size={24}
-            id="ChevronRight"
-            strokeWidth={3}
-          />
+        <Slider.NextButton class=" bg-transparent border-none hover:bg-transparent text-primary">
+          <Icon class="text-white" size={40} id="arrowRight" strokeWidth={3} />
         </Slider.NextButton>
       </div>
     </>
@@ -221,39 +308,60 @@ function Buttons() {
 
 function BannerCarousel(props: Props) {
   const id = useId();
-  const { images, preload, interval } = { ...DEFAULT_PROPS, ...props };
+  const { images, preload, interval } = props;
+  const { isMobile } = useUI();
+
+  if (!images || images.length === 0) {
+    return null;
+  }
+
+  function arrayImagesMobile() {
+    const array: Array<ImageItem> = [];
+    images?.map((img) => {
+      if (img?.banner) {
+        img.banner.map((item) => {
+          array.push(item);
+        });
+      }
+    });
+    return array;
+  }
+
+  const arrayImage = isMobile.value && arrayImagesMobile();
 
   return (
     <div
       id={id}
-      class="grid grid-cols-[48px_1fr_48px] sm:grid-cols-[120px_1fr_120px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min min-h-[660px]"
+      class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min"
     >
       <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
-        {images?.map((image, index) => {
-          const params = { promotion_name: image.alt };
-          return (
-            <Slider.Item index={index} class="carousel-item w-full">
-              <BannerItem
+        {isMobile.value && arrayImage
+          ? arrayImage?.map((image, index) => (
+            <Slider.Item index={index} class="carousel-item w-full ">
+              <BannerItemMobile
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
               />
-              <SendEventOnClick
-                id={`${id}::${index}`}
-                event={{ name: "select_promotion", params }}
-              />
-              <SendEventOnView
-                id={`${id}::${index}`}
-                event={{ name: "view_promotion", params }}
-              />
             </Slider.Item>
-          );
-        })}
+          ))
+          : images?.map((image, index) => {
+            console.log(image);
+            return (
+              <Slider.Item index={index} class="carousel-item w-full ">
+                <BannerItem
+                  image={image}
+                  lcp={index === 0 && preload}
+                  id={`${id}::${index}`}
+                />
+              </Slider.Item>
+            );
+          })}
       </Slider>
 
       {props.arrows && <Buttons />}
 
-      {props.dots && <Dots images={images} interval={interval} />}
+      {props.dots && <Dots images={arrayImage || images} interval={interval} />}
 
       <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
     </div>

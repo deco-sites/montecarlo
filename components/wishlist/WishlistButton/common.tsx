@@ -2,20 +2,24 @@ import { useSignal } from "@preact/signals";
 import Icon from "../../../components/ui/Icon.tsx";
 import Button from "../../../components/ui/Button.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
+import { SendEventOnClick, SendEventOnView } from "../../Analytics.tsx";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
+import { Product } from "apps/commerce/types.ts";
 
 export interface Props {
   productID: string;
   productGroupID?: string;
-  variant?: "icon" | "full";
+  customClass?: string;
   removeItem: () => Promise<void>;
   addItem: () => Promise<void>;
   loading: boolean;
   inWishlist: boolean;
   isUserLoggedIn: boolean;
+  productClickValue: Product;
 }
 
 function ButtonCommon({
-  variant = "icon",
+  customClass = "",
   productGroupID,
   productID,
   loading,
@@ -23,14 +27,17 @@ function ButtonCommon({
   isUserLoggedIn,
   removeItem,
   addItem,
+  productClickValue,
 }: Props) {
   const fetching = useSignal(false);
 
+  const eventItem = mapProductToAnalyticsItem({
+    product: productClickValue,
+  });
+
   return (
     <Button
-      class={variant === "icon"
-        ? "btn-circle btn-ghost gap-2"
-        : "btn-primary btn-outline gap-2"}
+      class={"text-black " + customClass}
       loading={fetching.value}
       aria-label="Add to wishlist"
       onClick={async (e) => {
@@ -75,13 +82,16 @@ function ButtonCommon({
         }
       }}
     >
-      <Icon
-        id="Heart"
-        size={24}
-        strokeWidth={2}
-        fill={inWishlist ? "black" : "none"}
+      <SendEventOnClick
+        id=""
+        event={{
+          name: "add_to_wishlist",
+          params: {
+            items: [eventItem],
+          },
+        }}
       />
-      {variant === "icon" ? null : inWishlist ? "Remover" : "Favoritar"}
+      Favoritar
     </Button>
   );
 }

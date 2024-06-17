@@ -2,14 +2,16 @@ import { ProductDetailsPage } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import Icon from "../../../components/ui/Icon.tsx";
 import Slider from "../../../components/ui/Slider.tsx";
-import ProductImageZoom from "../../../islands/ProductImageZoom.tsx";
-import SliderJS from "../../../islands/SliderJS.tsx";
+import SliderDotsJS from "../../../islands/SliderDotsJS.tsx";
 import { useId } from "../../../sdk/useId.ts";
+import ZoomImage from "deco-sites/montecarlo/islands/Product/Zoom/ZoomImage.tsx";
+import { useUI } from "../../../sdk/useUI.ts";
+import SliderJS from "../../../islands/SliderJS.tsx";
 
 export interface Props {
   /** @title Integration */
   page: ProductDetailsPage | null;
-
+  arrowMobile?: boolean;
   layout?: {
     width: number;
     height: number;
@@ -24,6 +26,11 @@ export interface Props {
  */
 export default function GallerySlider(props: Props) {
   const id = useId();
+  const { isMobile } = useUI();
+
+  const isLaunch = props.page?.product.isVariantOf?.additionalProperty?.find((
+    r,
+  ) => r.value == "Lançamentos");
 
   if (!props.page) {
     throw new Error("Missing Product Details Page Info");
@@ -34,78 +41,126 @@ export default function GallerySlider(props: Props) {
     layout,
   } = props;
 
-  const { width, height } = layout || { width: 300, height: 370 };
+  const { width, height } = layout || { width: 300, height: 300 };
 
   const aspectRatio = `${width} / ${height}`;
 
   return (
-    <div id={id} class="grid grid-flow-row sm:grid-flow-col">
+    <div
+      id={id}
+      class={`flex lg:grid grid-flow-row sm:grid-flow-col grid-cols-4 grid-rows-3 lg:gap-1 h-[99%] `}
+    >
       {/* Image Slider */}
-      <div class="relative order-1 sm:order-2">
-        <Slider class="carousel carousel-center gap-6 w-screen sm:w-[40vw]">
+      <div class="relative order-1 sm:order-2 col-span-4 row-span-4">
+        <Slider class="carousel carousel-center w-full lg:gap-8 gap-1 p-1 lg:p-0">
           {images.map((img, index) => (
             <Slider.Item
               index={index}
               class="carousel-item w-full"
             >
-              <Image
-                class="w-full"
-                sizes="(max-width: 640px) 100vw, 40vw"
-                style={{ aspectRatio }}
-                src={img.url!}
-                alt={img.alternateName}
-                width={width}
-                height={height}
-                // Preload LCP image for better web vitals
-                preload={index === 0}
-                loading={index === 0 ? "eager" : "lazy"}
-              />
+              <ZoomImage>
+                <Image
+                  class="w-full"
+                  sizes="(max-width: 640px) 100vw, 40vw"
+                  style={{ aspectRatio }}
+                  src={img.url!}
+                  alt={img.alternateName}
+                  width={width}
+                  height={height}
+                  // Preload LCP image for better web vitals
+                  preload={index === 0}
+                  loading={index === 0 ? "eager" : "lazy"}
+                />
+              </ZoomImage>
             </Slider.Item>
           ))}
         </Slider>
 
         <Slider.PrevButton
-          class="no-animation absolute left-2 top-1/2 btn btn-circle btn-outline"
+          class={`"no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
+            props.arrowMobile ? "flex" : "hidden lg:flex"
+          }`}
           disabled
         >
-          <Icon size={24} id="ChevronLeft" strokeWidth={3} />
+          <Icon
+            class="text-black group-disabled:opacity-20"
+            size={40}
+            id="arrowLeft"
+            strokeWidth={1}
+          />
         </Slider.PrevButton>
 
         <Slider.NextButton
-          class="no-animation absolute right-2 top-1/2 btn btn-circle btn-outline"
+          class={`"no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
+            props.arrowMobile ? "flex" : "hidden lg:flex"
+          }`}
           disabled={images.length < 2}
         >
-          <Icon size={24} id="ChevronRight" strokeWidth={3} />
-        </Slider.NextButton>
-
-        <div class="absolute top-2 right-2 bg-base-100 rounded-full">
-          <ProductImageZoom
-            images={images}
-            width={700}
-            height={Math.trunc(700 * height / width)}
+          <Icon
+            class="text-black group-disabled:opacity-20"
+            size={40}
+            id="arrowRight"
+            strokeWidth={1}
           />
-        </div>
+        </Slider.NextButton>
+        <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 absolute left-0 right-0 bottom-0 mx-auto top-auto">
+          {images?.map((_, index) => (
+            <li class="carousel-item">
+              {isMobile.value
+                ? (
+                  <Slider.Dot index={index}>
+                    <div class="py-5">
+                      <div class=" w-8 h-1 group-disabled:bg-primary bg-white" />
+                    </div>
+                  </Slider.Dot>
+                )
+                : (
+                  <Slider.DotLine index={index}>
+                    <div class="py-5">
+                      <div class=" w-8 h-1 group-disabled:bg-primary bg-white" />
+                    </div>
+                  </Slider.DotLine>
+                )}
+            </li>
+          ))}
+        </ul>
+        {isLaunch && (
+          <span
+            class={"absolute top-1 right-1 lg:top-0 lg:right-0 py-1 px-3 text-xs lg:text-sm bg-perola-intermediario"}
+          >
+            Lançamento
+          </span>
+        )}
       </div>
-
       {/* Dots */}
-      <ul class="carousel carousel-center gap-1 px-4 sm:px-0 sm:flex-col order-2 sm:order-1">
-        {images.map((img, index) => (
-          <li class="carousel-item min-w-[63px] sm:min-w-[100px]">
-            <Slider.Dot index={index}>
-              <Image
-                style={{ aspectRatio }}
-                class="group-disabled:border-base-300 border rounded "
-                width={100}
-                height={123}
-                src={img.url!}
-                alt={img.alternateName}
-              />
-            </Slider.Dot>
-          </li>
-        ))}
-      </ul>
-
-      <SliderJS rootId={id} />
+      {!isMobile.value &&
+        (
+          <>
+            <div class="order-2 sm:order-1 row-span-3 col-start-1 col-end-1 w-full relative h-full">
+              <ul
+                class="carousel carousel-center px-4 sm:px-0 sm:flex-col  gap-1 snap-y absolute top-0 left-0 right-0 bottom-0"
+                data-slider-dots
+              >
+                {images.map((img, index) => (
+                  <li class="carousel-item w-full snap-start">
+                    <Slider.Dot index={index}>
+                      <Image
+                        style={{ aspectRatio }}
+                        class="group-disabled:border-black border rounded w-full"
+                        width={100}
+                        height={100}
+                        src={img.url!}
+                        alt={img.alternateName}
+                      />
+                    </Slider.Dot>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <SliderDotsJS rootId={id} />
+          </>
+        )}
+      {isMobile.value && <SliderJS rootId={id} />}
     </div>
   );
 }

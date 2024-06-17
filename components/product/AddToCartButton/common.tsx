@@ -3,14 +3,21 @@ import { useState } from "preact/hooks";
 import Button from "../../../components/ui/Button.tsx";
 import { sendEvent } from "../../../sdk/analytics.tsx";
 import { useUI } from "../../../sdk/useUI.ts";
+import { useId } from "../../../sdk/useId.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../../components/Analytics.tsx";
+import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 
 export interface Props {
   /** @description: sku name */
   eventParams: AddToCartParams;
   onAddItem: () => Promise<void>;
+  price?: number;
 }
 
-const useAddToCart = ({ eventParams, onAddItem }: Props) => {
+const useAddToCart = ({ eventParams, onAddItem, price }: Props) => {
   const [loading, setLoading] = useState(false);
   const { displayCart } = useUI();
 
@@ -39,10 +46,25 @@ const useAddToCart = ({ eventParams, onAddItem }: Props) => {
 
 export default function AddToCartButton(props: Props) {
   const btnProps = useAddToCart(props);
+  const id = useId();
 
   return (
-    <Button {...btnProps} class="btn-primary">
-      Adicionar à Sacola
+    <Button
+      {...btnProps}
+      class="bg-primary text-black font-semibold py-3 w-full hover:opacity-80 duration-300"
+    >
+      <SendEventOnClick
+        id={id}
+        event={{
+          name: "add_to_cart",
+          params: {
+            currency: "BRL",
+            value: props.price,
+            items: props.eventParams.items,
+          },
+        }}
+      />
+      Comprar
     </Button>
   );
 }

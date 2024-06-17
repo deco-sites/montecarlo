@@ -5,10 +5,10 @@ interface Props {
 }
 
 function Breadcrumb({ itemListElement = [] }: Props) {
-  const items = [{ name: "Home", item: "/" }, ...itemListElement];
+  const items = [...itemListElement];
 
   return (
-    <div class="breadcrumbs">
+    <div class="breadcrumbs py-0 text-[#AAA89C] lg:text-sm font-poppins text-sm">
       <ul>
         {items
           .filter(({ name, item }) => name && item)

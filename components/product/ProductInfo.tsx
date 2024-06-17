@@ -1,4 +1,3 @@
-import { SendEventOnView } from "../../components/Analytics.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import AddToCartButtonLinx from "../../islands/AddToCartButton/linx.tsx";
 import AddToCartButtonShopify from "../../islands/AddToCartButton/shopify.tsx";
@@ -11,13 +10,64 @@ import ShippingSimulation from "../../islands/ShippingSimulation.tsx";
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/wake.tsx";
 import { formatPrice } from "../../sdk/format.ts";
+import {
+  formatInstallments,
+  percentageDiscount,
+  returnCollection,
+} from "../../sdk/usePropertyValue.ts";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { ProductDetailsPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductSelector from "./ProductVariantSelector.tsx";
+import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
+import BenefitsList from "deco-sites/montecarlo/components/product/Benefits/Benefits.tsx";
+import type { Props as Benefit } from "deco-sites/montecarlo/components/product/Benefits/Benefits.tsx";
+import type { GroupVariants } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts";
+import { SelectVariants } from "deco-sites/montecarlo/components/product/Similar/VariantGroup.tsx";
+import { Material } from "deco-sites/montecarlo/loaders/Layouts/MaterialProduct.tsx";
+import { Collection } from "deco-sites/montecarlo/loaders/Layouts/BannerCollection.tsx";
+import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
+import ModalBonus from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
+import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 
+import ProductDescription from "./ProductDescription.tsx";
+import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
+import { HTMLWidget } from "apps/admin/widgets.ts";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
+
+interface Bonus {
+  text: string;
+  /**
+   * @description To position the discount add the "${bonus}"
+   */
+  message: HTMLWidget;
+  /**
+   * @description Value to discount in number example 15% = 15
+   */
+  discont: number;
+  /**
+   * @description Maximum value for discount
+   */
+  valueDiscontMax: number;
+}
+
+export interface ExtraInformation {
+  /** @description value of the pix discount, for example if the discount is 7% then you must enter 7 */
+  pixDiscont: number;
+  bonus: Bonus;
+  nameGuia: string;
+  cepLink: { label: string; url: string };
+  benefit: Benefit;
+  groups: GroupVariants[] | null;
+  materialImages?: Material[];
+  lossesImage?: Losses[];
+  collectionBanners?: Collection[];
+}
 interface Props {
   page: ProductDetailsPage | null;
   layout?: {
@@ -28,11 +78,13 @@ interface Props {
      */
     name?: "concat" | "productGroup" | "product";
   };
+  extraInformations: ExtraInformation;
 }
 
-function ProductInfo({ page, layout }: Props) {
+function ProductInfo({ page, layout, extraInformations }: Props) {
   const platform = usePlatform();
   const id = useId();
+  const { groups, collectionBanners } = extraInformations;
 
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
@@ -56,11 +108,21 @@ function ProductInfo({ page, layout }: Props) {
     availability,
   } = useOffer(offers);
   const productGroupID = isVariantOf?.productGroupID ?? "";
+  const model = isVariantOf?.model ?? null;
   const breadcrumb = {
     ...breadcrumbList,
     itemListElement: breadcrumbList?.itemListElement.slice(0, -1),
     numberOfItems: breadcrumbList.numberOfItems - 1,
   };
+  const collections = returnCollection(isVariantOf?.additionalProperty);
+  const stringIstallments = installments
+    ? formatInstallments(installments)
+    : null;
+  const valuePix = percentageDiscount(price, extraInformations.pixDiscont);
+
+  const newName = parseInt(name) ? isVariantOf?.name : name;
+
+  const { isMobile } = useUI();
 
   const eventItem = mapProductToAnalyticsItem({
     product,
@@ -69,146 +131,163 @@ function ProductInfo({ page, layout }: Props) {
     listPrice,
   });
 
+  const complementName =
+    additionalProperty.find((item) => item.name == "complementName") || null;
+
+  const formattedComplementNameForLink = complementName?.complementName &&
+    complementName.complementName
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(" ", "-");
+
   return (
-    <div class="flex flex-col px-4" id={id}>
-      <Breadcrumb itemListElement={breadcrumb.itemListElement} />
-      {/* Code and name */}
-      <div class="mt-4 sm:mt-8">
-        <div>
-          {gtin && <span class="text-sm text-base-300">Cod. {gtin}</span>}
-        </div>
-        <h1>
-          <span class="font-medium text-xl capitalize">
-            {layout?.name === "concat"
-              ? `${isVariantOf?.name} ${name}`
-              : layout?.name === "productGroup"
-              ? isVariantOf?.name
-              : name}
-          </span>
-        </h1>
-      </div>
-      {/* Prices */}
-      <div class="mt-4">
-        <div class="flex flex-row gap-2 items-center">
-          {(listPrice ?? 0) > price && (
-            <span class="line-through text-base-300 text-xs">
-              {formatPrice(listPrice, offers?.priceCurrency)}
+    <>
+      <div class="col-start-4 row-span-2">
+        <div class="flex flex-col gap-1 px-2 lg:px-0" id={id}>
+          <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+          {/* Code and name */}
+          <div class="flex flex-row gap-2 flex-wrap mb-5">
+            {complementName &&
+              (
+                <a
+                  href={`/${formattedComplementNameForLink}`}
+                  class="text-xs underline-offset-2 decoration-primary underline lg:text-sm"
+                >
+                  {complementName.complementName}
+                </a>
+              )}
+          </div>
+          <h1>
+            <span class="font-medium text-base capitalize lg:text-xl">
+              {newName}
             </span>
+          </h1>
+          {model && (
+            <span class="text-xs text-[#AAA89C]">{"Referencia: " + model}</span>
           )}
-          <span class="font-medium text-xl text-secondary">
-            {formatPrice(price, offers?.priceCurrency)}
-          </span>
-        </div>
-        <span class="text-sm text-base-300">{installments}</span>
-      </div>
-      {/* Sku Selector */}
-      <div class="mt-4 sm:mt-6">
-        <ProductSelector product={product} />
-      </div>
-      {/* Add to Cart and Favorites button */}
-      <div class="mt-4 sm:mt-10 flex flex-col gap-2">
-        {availability === "https://schema.org/InStock"
-          ? (
-            <>
-              {platform === "vtex" && (
+          {/* Prices */}
+          <div class="mt-5 flex flex-col gap-3">
+            <div class="flex flex-row gap-1 items-center text-base lg:text-[1.15rem]">
+              <span class=" font-medium">
+                {formatPrice(price, offers?.priceCurrency)}
+              </span>
+              {stringIstallments && (
                 <>
+                  <span class=" text-sm">em</span>
+                  <span class=" font-medium ">{stringIstallments}</span>
+                </>
+              )}
+            </div>
+            <span class="bg-perola-intermediario py-1 px-2 text-sm w-fit">
+              {"ou " + formatPrice(valuePix, offers?.priceCurrency) + " com "}
+              <strong>{extraInformations.pixDiscont + "% OFF no PIX"}</strong>
+            </span>
+            <ModalBonus
+              text={extraInformations.bonus.text}
+              message={extraInformations.bonus.message}
+              price={price}
+              discont={extraInformations.bonus.discont}
+              valueDiscontMax={extraInformations.bonus.valueDiscontMax}
+            />
+          </div>
+          {/* Sku Selector */}
+          <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
+            {groups && (
+              <div class="flex gap-y-2 gap-6 w-full flex-wrap">
+                {groups.map((group) => (
+                  <SelectVariants
+                    variants={group.variants}
+                    type={group.type}
+                    materialImages={extraInformations.materialImages}
+                    losses={extraInformations.lossesImage}
+                  />
+                ))}
+                <ProductSelector product={product} />
+                <span
+                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${
+                    product.isVariantOf?.hasVariant.length == 1 &&
+                    " "
+                  }`}
+                >
+                  {groups.findIndex((r) => r.type == "Pedras")
+                    ? "Guia de pedras"
+                    : isVariantOf?.hasVariant.length === 1
+                    ? "Guia de medidas"
+                    : isVariantOf?.hasVariant.length === 1 &&
+                      groups.findIndex((r) => r.type == "Pedras") &&
+                      "Guia de Medidas e Pedras "}
+                </span>
+              </div>
+            )}
+          </div>
+          {/* Add to Cart and Favorites button */}
+          <div class="mt-7 flex flex-col gap-2 ">
+            {availability === "https://schema.org/InStock"
+              ? (
+                <div class="flex flex-row gap-2 flex-wrap ">
                   <AddToCartButtonVTEX
                     eventParams={{ items: [eventItem] }}
                     productID={productID}
                     seller={seller}
+                    price={price}
                   />
+                  <button class="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300">
+                    Quero ganhar
+                  </button>
                   <WishlistButtonVtex
-                    variant="full"
+                    customClass="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
                     productID={productID}
                     productGroupID={productGroupID}
+                    productClick={product}
                   />
-                </>
-              )}
-              {platform === "wake" && (
-                <>
-                  <AddToCartButtonWake
-                    eventParams={{ items: [eventItem] }}
-                    productID={productID}
-                  />
-                  <WishlistButtonWake
-                    variant="full"
-                    productID={productID}
-                    productGroupID={productGroupID}
-                  />
-                </>
-              )}
-              {platform === "linx" && (
-                <AddToCartButtonLinx
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  productGroupID={productGroupID}
-                />
-              )}
-              {platform === "vnda" && (
-                <AddToCartButtonVNDA
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                  additionalProperty={additionalProperty}
-                />
-              )}
-              {platform === "shopify" && (
-                <AddToCartButtonShopify
-                  eventParams={{ items: [eventItem] }}
-                  productID={productID}
-                />
-              )}
-              {platform === "nuvemshop" && (
-                <AddToCartButtonNuvemshop
-                  productGroupID={productGroupID}
-                  eventParams={{ items: [eventItem] }}
-                  additionalProperty={additionalProperty}
-                />
-              )}
-            </>
-          )
-          : <OutOfStock productID={productID} />}
-      </div>
-      {/* Shipping Simulation */}
-      <div class="mt-8">
-        {platform === "vtex" && (
-          <ShippingSimulation
-            items={[
-              {
-                id: Number(product.sku),
-                quantity: 1,
-                seller: seller,
-              },
-            ]}
-          />
-        )}
-      </div>
-      {/* Description card */}
-      <div class="mt-4 sm:mt-6">
-        <span class="text-sm">
-          {description && (
-            <details>
-              <summary class="cursor-pointer">Descrição</summary>
-              <div
-                class="ml-2 mt-2"
-                dangerouslySetInnerHTML={{ __html: description }}
+                </div>
+              )
+              : <OutOfStock productID={productID} />}
+          </div>
+          {/* Shipping Simulation */}
+          <div class="mt-8">
+            {platform === "vtex" && (
+              <ShippingSimulation
+                items={[
+                  {
+                    id: Number(product.sku),
+                    quantity: 1,
+                    seller: seller,
+                  },
+                ]}
+                cepLink={extraInformations.cepLink}
               />
-            </details>
-          )}
-        </span>
+            )}
+          </div>
+          {isMobile.value &&
+            (
+              <ProductDescription
+                product={product}
+                variants={groups}
+                losses={extraInformations.lossesImage}
+                collectionBanners={collectionBanners}
+                complementName={complementName?.complementName}
+              />
+            )}
+          <BenefitsList
+            title={extraInformations.benefit.title}
+            benefits={extraInformations.benefit.benefits}
+          />
+        </div>
       </div>
-      {/* Analytics Event */}
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item",
-          params: {
-            item_list_id: "product",
-            item_list_name: "Product",
-            items: [eventItem],
-          },
-        }}
-      />
-    </div>
+      {!isMobile.value && (
+        <div class="col-start-1 xl:col-start-2 col-end-4 row-start-1 lg:px-0 w-full max-w-[770px]">
+          <ProductDescription
+            product={product}
+            variants={groups}
+            losses={extraInformations.lossesImage}
+            collectionBanners={collectionBanners}
+            complementName={complementName?.complementName}
+          />
+        </div>
+      )}
+    </>
   );
 }
 

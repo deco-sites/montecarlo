@@ -13,7 +13,7 @@ export default function MenuButton() {
         displayMenu.value = !displayMenu.value;
       }}
     >
-      <Icon id="Bars3" size={20} strokeWidth={0.01} />
+      <Icon id="menu" size={24} strokeWidth={1} />
     </Button>
   );
 }
