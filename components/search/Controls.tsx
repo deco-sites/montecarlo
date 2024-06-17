@@ -82,7 +82,9 @@ function SearchControls(
           <>
             <div class="hidden md:flex flex-col gap-2">
               <div class="flex flex-row flex-wrap justify-between gap-5">
-                <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+                {
+                  breadcrumb?.itemListElement.length > 0 ? <Breadcrumb itemListElement={breadcrumb?.itemListElement} /> : null
+                }
                 {title && title.length > 0
                   ? (
                     <h6 class={"font-poppins text-sm font-semibold"}>
