@@ -194,7 +194,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           {/* Sku Selector */}
           <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
             {groups && (
-              <div class="flex gap-y-2 gap-6 w-full flex-wrap">
+              <div class="flex gap-y-3 gap-6 w-full flex-wrap">
                 {groups.map((group) => (
                   <SelectVariants
                     variants={group.variants}
