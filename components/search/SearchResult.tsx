@@ -117,12 +117,12 @@ function Result({
           {layout?.variant === "aside" && filters.length > 0 &&
             (isFirstPage || !isPartial) && (
             <aside class="hidden md:block w-min min-w-[250px]">
-              <ul class={`flex flex-col gap-6 p-4 md:pl-0`}>
+              <ul class={`flex flex-col gap-6 pt-4 md:pl-0`}>
                 <Filters filters={filters} />
               </ul>
             </aside>
           )}
-          <div class="flex-grow mt-4 relative" id={id}>
+          <div class="flex-grow mt-4 relative pt-4 bg-white" id={id}>
             <ProductGallery
               products={products}
               offset={offset}
