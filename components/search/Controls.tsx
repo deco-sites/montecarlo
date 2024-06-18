@@ -120,7 +120,7 @@ function SearchControls(
                     </button>
                   )
                   : null}
-                  {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+                {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
               </div>
             </div>
 

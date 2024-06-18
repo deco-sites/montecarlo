@@ -75,7 +75,7 @@ function FilterValues({ key, values }: FilterToggle) {
 function Filters({ filters, layout }: Props) {
   const [openFilter, setOpenFilter] = useState<string | null>(null);
 
-  const handleToggle = (id : string) => {
+  const handleToggle = (id: string) => {
     event?.preventDefault();
     setOpenFilter(openFilter === id ? null : id);
   };

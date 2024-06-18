@@ -210,13 +210,9 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     " "
                   }`}
                 >
-                  {groups.findIndex((r) => r.type == "Pedras")
-                    ? "Guia de pedras"
-                    : isVariantOf?.hasVariant.length === 1
-                    ? "Guia de medidas"
-                    : isVariantOf?.hasVariant.length === 1 &&
-                      groups.findIndex((r) => r.type == "Pedras") &&
-                      "Guia de Medidas e Pedras "}
+                  {isVariantOf?.hasVariant &&
+                    isVariantOf?.hasVariant.length > 1 &&
+                    "Guia de medidas"}
                 </span>
               </div>
             )}
