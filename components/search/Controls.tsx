@@ -82,7 +82,9 @@ function SearchControls(
           <>
             <div class="hidden md:flex flex-col gap-2">
               <div class="flex flex-row flex-wrap justify-between gap-5">
-                <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+                {
+                  breadcrumb?.itemListElement.length > 0 ? <Breadcrumb itemListElement={breadcrumb?.itemListElement} /> : null
+                }
                 {title && title.length > 0
                   ? (
                     <h6 class={"font-poppins text-sm font-semibold"}>
@@ -97,14 +99,12 @@ function SearchControls(
 
               <div
                 class={`flex ${
-                  layout === "horizontal" ? "flex-row gap-4" : "flex-col gap-6"
+                  layout === "horizontal" ? `flex-row gap-4 ${!moreFilters.value ? "h-10" : ""}` : "flex-col gap-6"
                 } p-4 md:pl-0`}
               >
                 <ul
                   ref={filtersRef}
-                  className={`flex flex-row gap-4 flex-wrap ${
-                    !moreFilters.value ? "overflow-hidden max-h-[20px]" : ""
-                  }`}
+                  className={`flex flex-row gap-4 flex-wrap`}
                 >
                   <Filters filters={filters} layout={layout} />
                 </ul>

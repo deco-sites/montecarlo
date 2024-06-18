@@ -36,7 +36,7 @@ const DashCard = ({ title, subTitle, cards }: Props) => {
 
   return (
     <div
-      class="mt-12 container px-2 lg:container lg:flex lg:justify-center lg:flex-col"
+      class="py-10 container px-4 md:px-10 lg:container flex justify-center flex-col"
       id={id}
     >
       <div class="flex justify-center gap-2 lg:gap-4 flex-col mb-12">
@@ -44,11 +44,11 @@ const DashCard = ({ title, subTitle, cards }: Props) => {
         <SubTitle text={subTitle} />
       </div>
 
-      <div class="flex flex-wrap gap-2 justify-center 2xl:gap-20 lg:justify-between">
+      <div class="grid grid-cols-3 lg:flex lg:flex-wrap gap-4 justify-center md:gap-5 w-full m-auto max-w-[1000px]">
         {cards.map((card, index) => {
           return (
             <div
-              class={"flex text-black hover:bg-primary flex-col justify-center items-center max-w-[198px] lg:w-[calc(25%-0.5rem)] h-[70px] sm:h-[100px] 2xl:h-[120px] border-2 border-primary cursor-pointer group " +
+              class={"flex text-black hover:bg-primary flex-col justify-center items-center w-full max-w-[198px] h-[70px] sm:h-[100px] 2xl:h-[120px] border-2 border-primary cursor-pointer group" +
                 `${SIZECARD[cards.length as keyof typeof SIZECARD]}`}
               id={id + index}
             >
