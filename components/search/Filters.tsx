@@ -1,3 +1,4 @@
+import { useState } from "preact/hooks";
 import Avatar from "../../components/ui/Avatar.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import type {
@@ -29,7 +30,7 @@ function ValueItem(
   return (
     <a href={url} rel="nofollow" class="flex items-center gap-2">
       <div aria-checked={selected} class="checkbox" />
-      <span class="text-sm">{label}</span>
+      <span class="text-sm max-w-[200px]">{label}</span>
       {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
     </a>
   );
@@ -39,7 +40,7 @@ function FilterValues({ key, values }: FilterToggle) {
   const flexDirection = key === "tamanho" ? "flex-row" : "flex-col";
 
   return (
-    <ul class={`flex flex-wrap gap-4 my-2 ${flexDirection}`}>
+    <ul class={`flex flex-wrap gap-4 my-2 ${flexDirection} w-max`}>
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
 
@@ -72,27 +73,32 @@ function FilterValues({ key, values }: FilterToggle) {
 }
 
 function Filters({ filters, layout }: Props) {
+  const [openFilter, setOpenFilter] =  useState<number | null>(null);
+
+  const handleOpenFilter = (index: number) => {
+    if (openFilter !== index) setOpenFilter(index);
+    else setOpenFilter(null);
+  }
+
   return (
     <>
       {filters
         .filter(isToggle)
-        .map((filter) => {
+        .map((filter, index) => {
           if (filter.key === "codigo-agrupador" || filter.key === "price") {
             return;
           }
 
           return (
             <li
-              class={`flex flex-col gap-4 text-black font-poppins text-sm cursor-pointer ${
+              class={`flex flex-col gap-4 relative text-black font-poppins text-sm cursor-pointer ${
                 layout !== "horizontal" ? "pb-2" : ""
               }`}
             >
-              <details
-                class={`${
-                  layout !== "horizontal" ? "border-b border-black pb-2" : ""
-                }`}
-              >
-                <summary class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap">
+                <span
+                  class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap"
+                  onClick={() => handleOpenFilter(index)}
+                >
                   {filter.label}
                   <Icon
                     class="rotate-90"
@@ -100,17 +106,16 @@ function Filters({ filters, layout }: Props) {
                     id="arrowTop"
                   >
                   </Icon>
-                </summary>
+                </span>
                 <div
                   class={`${
                     layout === "horizontal"
-                      ? "absolute bg-white z-10 px-3 py-2 min-w-[150px]"
+                      ? `absolute ${openFilter !== index ? "hidden" : ""} top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
                       : ""
                   }`}
                 >
                   <FilterValues {...filter} />
                 </div>
-              </details>
             </li>
           );
         })}

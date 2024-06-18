@@ -99,14 +99,12 @@ function SearchControls(
 
               <div
                 class={`flex ${
-                  layout === "horizontal" ? "flex-row gap-4" : "flex-col gap-6"
+                  layout === "horizontal" ? `flex-row gap-4 ${!moreFilters.value ? "h-10" : ""}` : "flex-col gap-6"
                 } p-4 md:pl-0`}
               >
                 <ul
                   ref={filtersRef}
-                  className={`flex flex-row gap-4 flex-wrap ${
-                    !moreFilters.value ? "overflow-hidden max-h-[20px]" : ""
-                  }`}
+                  className={`flex flex-row gap-4 flex-wrap`}
                 >
                   <Filters filters={filters} layout={layout} />
                 </ul>
