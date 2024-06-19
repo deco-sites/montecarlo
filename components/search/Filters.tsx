@@ -73,12 +73,12 @@ function FilterValues({ key, values }: FilterToggle) {
 }
 
 function Filters({ filters, layout }: Props) {
-  const [openFilter, setOpenFilter] =  useState<number | null>(null);
+  const [openFilter, setOpenFilter] = useState<number | null>(null);
 
   const handleOpenFilter = (index: number) => {
     if (openFilter !== index) setOpenFilter(index);
     else setOpenFilter(null);
-  }
+  };
 
   return (
     <>
@@ -95,27 +95,29 @@ function Filters({ filters, layout }: Props) {
                 layout !== "horizontal" ? "pb-2" : ""
               }`}
             >
-                <span
-                  class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap"
-                  onClick={() => handleOpenFilter(index)}
+              <span
+                class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap"
+                onClick={() => handleOpenFilter(index)}
+              >
+                {filter.label}
+                <Icon
+                  class="rotate-90"
+                  size={24}
+                  id="arrowTop"
                 >
-                  {filter.label}
-                  <Icon
-                    class="rotate-90"
-                    size={24}
-                    id="arrowTop"
-                  >
-                  </Icon>
-                </span>
-                <div
-                  class={`${
-                    layout === "horizontal"
-                      ? `absolute ${openFilter !== index ? "hidden" : ""} top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
-                      : ""
-                  }`}
-                >
-                  <FilterValues {...filter} />
-                </div>
+                </Icon>
+              </span>
+              <div
+                class={`${
+                  layout === "horizontal"
+                    ? `absolute ${
+                      openFilter !== index ? "hidden" : ""
+                    } top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
+                    : ""
+                }`}
+              >
+                <FilterValues {...filter} />
+              </div>
             </li>
           );
         })}

@@ -7,7 +7,9 @@ export function useMaterialProducts(
 
   propertyValue.map((item) => {
     if (item.name === "Material") {
-      arrayMaterial.push(item.value || "");
+      if (arrayMaterial.findIndex((array) => array === item.value)) {
+        arrayMaterial.push(item.value || "");
+      }
     }
   });
 
