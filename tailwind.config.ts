@@ -38,6 +38,10 @@ export default {
         "4/5": "80%",
         "1/2": "50%",
       },
+      boxShadow: {
+        "header-menu": "0px 3px 4px rgba(0, 0, 0, 0.1)",
+        "menu": "0px 1px 4px rgba(0, 0, 0, 0.1)",
+      },
     },
   },
 };

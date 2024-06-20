@@ -57,8 +57,9 @@ function AlertContainer(
 ) {
   return (
     <div
-      class={`${active ? "translate-y-0 h-auto" : "-translate-y-16 h-0 duration-0"
-        } transition-all duration-100`}
+      class={`${
+        active ? "translate-y-0 h-auto" : "-translate-y-16 h-0 duration-0"
+      } transition-all duration-100`}
     >
       {children}
     </div>
@@ -103,10 +104,11 @@ function SearchContainer(
 
   return (
     <div
-      class={`${displaySearchDrawer.value || activeS.value
-        ? "translate-y-0 h-auto w-screen absolute left-0 top-full"
-        : "-translate-y-36 h-0 duration-0 -z-10 hidden"
-        } transition-all duration-100`}
+      class={`${
+        displaySearchDrawer.value || activeS.value
+          ? "translate-y-0 h-auto w-screen absolute left-0 top-full"
+          : "-translate-y-36 h-0 duration-0 -z-10 hidden"
+      } transition-all duration-100`}
     >
       {children}
     </div>
@@ -147,10 +149,11 @@ function MenuContainer(
 
   return (
     <div
-      class={`absolute left-0 w-full z-10  ${active.value
-        ? "top-[105px] duration-100 shadow-md shadow-perola+"
-        : "-top-[50px] duration-0 hover:hidden group-hover:hidden"
-        } `}
+      class={`absolute left-0 w-full z-10  ${
+        active.value
+          ? "top-[105px] duration-100 shadow-header-menu"
+          : "-top-[50px] duration-0 hover:hidden group-hover:hidden"
+      } `}
     >
       {children}
     </div>
