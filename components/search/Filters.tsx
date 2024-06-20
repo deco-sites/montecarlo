@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useSignal } from "@preact/signals";
 import Avatar from "../../components/ui/Avatar.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import type {
@@ -81,11 +81,11 @@ function FilterValues({ key, values }: FilterToggle) {
 }
 
 function Filters({ filters, layout }: Props) {
-  const [openFilter, setOpenFilter] = useState<number | null>(null);
+  const openFilter = useSignal<number | null>(null);
 
   const handleOpenFilter = (index: number) => {
-    if (openFilter !== index) setOpenFilter(index);
-    else setOpenFilter(null);
+    if (openFilter.value !== index) openFilter.value = index;
+    else openFilter.value = null;
   };
 
   return (
@@ -122,7 +122,7 @@ function Filters({ filters, layout }: Props) {
                   layout === "horizontal"
                     ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
                     : ""
-                } ${openFilter !== index ? "hidden" : ""}`}
+                } ${openFilter.value !== index ? "hidden" : ""}`}
               >
                 <FilterValues {...filter} />
               </div>
