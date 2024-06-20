@@ -150,7 +150,9 @@ function MenuContainer(
   return (
     <div
       class={`absolute left-0 w-full z-10 ${
-        active.value ? "top-[105px] duration-100" : "-top-[50px] duration-0"
+        active.value
+          ? "top-[105px] duration-100"
+          : "-top-[50px] duration-0 hover:hidden group-hover:hidden"
       } `}
     >
       {children}

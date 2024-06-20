@@ -17,6 +17,9 @@ import Image from "apps/website/components/Image.tsx";
 export interface Props {
   title: string;
   subTitle: string;
+  /**
+   * @description size Image 345x446
+   */
   img: {
     image: ImageWidget;
     alt: string;

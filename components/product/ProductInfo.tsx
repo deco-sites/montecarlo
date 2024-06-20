@@ -134,8 +134,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   const complementName =
     additionalProperty.find((item) => item.name == "complementName") || null;
 
-  const formattedComplementNameForLink = complementName?.complementName &&
-    complementName.complementName
+  const formattedComplementNameForLink = complementName?.value &&
+    complementName.value
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -154,7 +154,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                   href={`/${formattedComplementNameForLink}`}
                   class="text-xs underline-offset-2 decoration-primary underline lg:text-sm"
                 >
-                  {complementName.complementName}
+                  {complementName.value}
                 </a>
               )}
           </div>
@@ -263,7 +263,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                 variants={groups}
                 losses={extraInformations.lossesImage}
                 collectionBanners={collectionBanners}
-                complementName={complementName?.complementName}
+                complementName={complementName?.value}
               />
             )}
           <BenefitsList
@@ -279,7 +279,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             variants={groups}
             losses={extraInformations.lossesImage}
             collectionBanners={collectionBanners}
-            complementName={complementName?.complementName}
+            complementName={complementName?.value}
           />
         </div>
       )}
