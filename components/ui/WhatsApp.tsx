@@ -1,7 +1,17 @@
 import ButtonWhatsapp from "deco-sites/montecarlo/islands/WhatsAppButton/WhatsApp.tsx";
 
-function WhatsApp() {
-  return <ButtonWhatsapp />;
+export interface Props {
+  comercialTimeNumber: string;
+  notComercialTimeNumber: string;
+}
+
+function WhatsApp({ comercialTimeNumber, notComercialTimeNumber }: Props) {
+  return (
+    <ButtonWhatsapp
+      comercialTimeNumber={comercialTimeNumber}
+      notComercialTimeNumber={notComercialTimeNumber}
+    />
+  );
 }
 
 export default WhatsApp;
