@@ -251,6 +251,8 @@ function MiniProductCard({
 
             const img = layout?.materialImages.find((img) => img.name === item);
 
+            console.log("img", img);
+
             if (!img || img === undefined) {
               return null;
             }
