@@ -1,4 +1,4 @@
-import { useState } from "preact/hooks";
+import { useSignal } from "@preact/signals";
 import Avatar from "../../components/ui/Avatar.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import type {
@@ -30,7 +30,7 @@ function ValueItem(
   return (
     <a href={url} rel="nofollow" class="flex items-center gap-2">
       <div aria-checked={selected} class="checkbox" />
-      <span class="text-sm max-w-[200px]">{label}</span>
+      <span class="text-sm md:max-w-[200px]">{label}</span>
       {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
     </a>
   );
@@ -39,8 +39,16 @@ function ValueItem(
 function FilterValues({ key, values }: FilterToggle) {
   const flexDirection = key === "tamanho" ? "flex-row" : "flex-col";
 
+  const cols = values.length <= 10 && "md:grid-cols-1" ||
+    values.length > 10 && values.length <= 20 && "md:grid-cols-2" ||
+    values.length > 20 && "md:grid-cols-3";
+
   return (
-    <ul class={`flex flex-wrap gap-4 my-2 ${flexDirection} w-max`}>
+    <ul
+      class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${
+        cols ? `md:grid ${cols}` : ""
+      }`}
+    >
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
 
@@ -73,11 +81,11 @@ function FilterValues({ key, values }: FilterToggle) {
 }
 
 function Filters({ filters, layout }: Props) {
-  const [openFilter, setOpenFilter] = useState<number | null>(null);
+  const openFilter = useSignal<number | null>(null);
 
   const handleOpenFilter = (index: number) => {
-    if (openFilter !== index) setOpenFilter(index);
-    else setOpenFilter(null);
+    if (openFilter.value !== index) openFilter.value = index;
+    else openFilter.value = null;
   };
 
   return (
@@ -89,9 +97,11 @@ function Filters({ filters, layout }: Props) {
             return;
           }
 
+          if (filter.values.length <= 1) return;
+
           return (
             <li
-              class={`flex flex-col gap-4 relative text-black font-poppins text-sm cursor-pointer ${
+              class={`flex flex-col md:gap-4 relative text-black font-poppins text-sm cursor-pointer border-b-black md:border-0 ${
                 layout !== "horizontal" ? "pb-2" : ""
               }`}
             >
@@ -110,11 +120,9 @@ function Filters({ filters, layout }: Props) {
               <div
                 class={`${
                   layout === "horizontal"
-                    ? `absolute ${
-                      openFilter !== index ? "hidden" : ""
-                    } top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
+                    ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
                     : ""
-                }`}
+                } ${openFilter.value !== index ? "hidden" : ""}`}
               >
                 <FilterValues {...filter} />
               </div>

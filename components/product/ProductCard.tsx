@@ -241,7 +241,7 @@ function MiniProductCard({
             dangerouslySetInnerHTML={{ __html: newName ?? "" }}
           />
         </div>
-        <div class="flex w-full h-auto flex-1 py-1 min-h-4">
+        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1">
           {materials?.map((item) => {
             if (
               !layout?.materialImages || layout?.materialImages === undefined
@@ -258,7 +258,7 @@ function MiniProductCard({
             }
             return (
               <Image
-                class="rounded-full h-min"
+                class="h-min"
                 src={img.image}
                 width={15}
                 height={15}

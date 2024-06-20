@@ -118,7 +118,7 @@ function CardImage(
         : variant == "Variant 2"
         ? (
           <>
-            <div class="relative w-full h-full">
+            <div class="relative w-full">
               <Picture preload={preload}>
                 <Source
                   src={imageMobile}
@@ -138,7 +138,7 @@ function CardImage(
                   loading={"lazy"}
                 />
                 <img
-                  class="w-full h-full"
+                  class="w-full"
                   src={imageDesktop}
                   alt={alt}
                   loading="lazy"
