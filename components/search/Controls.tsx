@@ -69,7 +69,7 @@ function SearchControls(
               </Button>
             </div>
             <div class="flex-grow overflow-auto">
-              <ul class={`flex flex-col gap-8 p-4 md:pl-0`}>
+              <ul class={`flex flex-col gap-4 md:gap-8 p-4 md:pl-0`}>
                 <Filters filters={filters} />
               </ul>
             </div>
@@ -113,12 +113,22 @@ function SearchControls(
                 {showButton.value === true
                   ? (
                     <button
-                      class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-fit"
+                      class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-5 flex gap-1"
                       onClick={() => {
                         moreFilters.value = !moreFilters.value;
                       }}
                     >
                       {!moreFilters.value ? "Mais" : "Menos"} Filtros
+                      <Icon
+                        class={`relative ${
+                          !moreFilters.value
+                            ? "rotate-90"
+                            : "-rotate-90 -top-[3px]"
+                        }`}
+                        size={24}
+                        id="arrowTop"
+                      >
+                      </Icon>
                     </button>
                   )
                   : null}
