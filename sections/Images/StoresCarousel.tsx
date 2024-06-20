@@ -15,9 +15,9 @@ import {
 export interface ImageItem {
   /** @title Store Name */
   label?: string;
-  /** @description desktop otimized image */
+  /** @description desktop otimized image  size 1263x398*/
   desktop: ImageWidget;
-  /** @description mobile otimized image */
+  /** @description mobile otimized image size 360x462*/
   mobile: ImageWidget;
   /** @description Image's alt text */
   alt?: string;
@@ -187,7 +187,7 @@ function BannerItem({
             height={583}
           />
           <img
-            class="object-cover w-full"
+            class="object-cover w-full lg:max-h-[68vh]"
             loading={lcp ? "eager" : "lazy"}
             src={image.desktop}
             alt={image.alt}
@@ -300,9 +300,9 @@ function BannerCarousel(props: Props) {
   return (
     <div
       id={id}
-      class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min"
+      class="grid h-auto grid-cols-[48px_1fr_48px] sm:grid-cols-[60px_1fr_60px] grid-rows-[1fr_48px_1fr_64px] sm:min-h-min lg:max-h-[68vh]"
     >
-      <Slider class="carousel carousel-center w-full col-span-full row-span-full gap-6">
+      <Slider class="carousel carousel-center w-full col-span-full h-full row-span-full gap-6 lg:max-h-[68vh]">
         {isMobile.value && arrayImage
           ? arrayImage?.map((image, index) => (
             <Slider.Item index={index} class="carousel-item w-full ">
