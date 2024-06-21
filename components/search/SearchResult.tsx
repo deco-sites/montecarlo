@@ -1,7 +1,7 @@
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { Layout as CardLayout } from "../../components/product/ProductCard.tsx";
 
-import Filters from "../../components/search/Filters.tsx";
+import Filters from "../../islands/Search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import SearchControls from "../../islands/SearchControls.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -114,19 +114,21 @@ function Result({
         )}
 
         <div class="flex flex-row">
+          {/* {filters.length > 0 && */}
           {layout?.variant === "aside" && filters.length > 0 &&
             (isFirstPage || !isPartial) && (
-            <aside class="hidden md:block w-min min-w-[250px]">
+            <aside class="hidden md:block w-min min-w-[250px] max-w-[300px] pr-4 pb-6">
               <ul class={`flex flex-col gap-6 pt-4 md:pl-0`}>
-                <Filters filters={filters} />
+                <Filters filters={filters} layout={layout.variant} />
               </ul>
             </aside>
           )}
-          <div class="flex-grow mt-4 relative pt-4 bg-white" id={id}>
+          <div class={`flex-grow ${layout?.variant === "aside" ? "" : "mt-4"} relative pt-4 bg-white`} id={id}>
             <ProductGallery
               products={products}
               offset={offset}
               layout={{ card: cardLayout, columns: layout?.columns, format }}
+              // layout={{ card: cardLayout, columns: {mobile: 2, desktop: 3}, format }}
               pageInfo={pageInfo}
               url={url}
             />
