@@ -13,7 +13,7 @@ import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
 import RangeSlider from "../../islands/RangeSlider.tsx";
 
-interface Props {
+export interface Props {
   filters: ProductListingPage["filters"];
   layout?: "aside" | "drawer" | "horizontal";
 }
@@ -36,7 +36,11 @@ function ValueItem(
   );
 }
 
-function FilterValues({ key, values }: FilterToggle) {
+interface FilterToggleProps extends FilterToggle {
+  layout?: string;
+}
+
+function FilterValues({ key, values, layout }: FilterToggleProps) {
   const flexDirection = key === "tamanho" ? "flex-row" : "flex-col";
 
   const cols = values.length <= 10 && "md:grid-cols-1" ||
@@ -46,7 +50,7 @@ function FilterValues({ key, values }: FilterToggle) {
   return (
     <ul
       class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${
-        cols ? `md:grid ${cols}` : ""
+        layout !== "aside" && cols ? `md:grid ${cols}` : ""
       }`}
     >
       {values.map((item) => {
@@ -87,7 +91,6 @@ function Filters({ filters, layout }: Props) {
     if (openFilter.value !== index) openFilter.value = index;
     else openFilter.value = null;
   };
-
   return (
     <>
       {filters
@@ -101,8 +104,8 @@ function Filters({ filters, layout }: Props) {
 
           return (
             <li
-              class={`flex flex-col md:gap-4 relative text-black font-poppins text-sm cursor-pointer border-b-black md:border-0 ${
-                layout !== "horizontal" ? "pb-2" : ""
+              class={`flex flex-col relative text-black font-poppins text-sm cursor-pointer border-b border-b-black ${
+                layout !== "horizontal" ? "pb-2" : "md:border-0"
               }`}
             >
               <span
@@ -124,7 +127,7 @@ function Filters({ filters, layout }: Props) {
                     : ""
                 } ${openFilter.value !== index ? "hidden" : ""}`}
               >
-                <FilterValues {...filter} />
+                <FilterValues {...filter} layout={layout} />
               </div>
             </li>
           );
@@ -135,8 +138,9 @@ function Filters({ filters, layout }: Props) {
         .map((filter) => {
           return (
             <RangeSlider
-              classProps="max-w-[600px]"
-              sliderClass="max-w-[300px] bg-red-500"
+              // classProps="max-w-[600px]"
+              classProps={layout === "aside" ? "flex-wrap" : ""}
+              sliderClass="min-w-[200px]"
               name={filter.key}
               label={filter.label}
               min={filter.values.min}

@@ -9,7 +9,7 @@ import { Signal, useSignal, useSignalEffect } from "@preact/signals";
 
 import type { ProductListingPage } from "apps/commerce/types.ts";
 
-import RangeSlider from "../../islands/RangeSlider.tsx";
+import ClearFilters from "../../islands/Search/ClearFilters.tsx";
 
 export type Props =
   & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions">
@@ -68,10 +68,17 @@ function SearchControls(
                 <Icon id="XMark" size={24} strokeWidth={2} />
               </Button>
             </div>
-            <div class="flex-grow overflow-auto">
+            <div class="flex-grow overflow-auto flex flex-col justify-between pb-5 gap-5">
               <ul class={`flex flex-col gap-4 md:gap-8 p-4 md:pl-0`}>
                 <Filters filters={filters} />
               </ul>
+
+              <div class="flex flex-col gap-2 px-5">
+                <button class="font-poppins uppercase text-white text-sm bg-[#333435] px-2 py-2">
+                  Aplicar
+                </button>
+                <ClearFilters />
+              </div>
             </div>
           </div>
         </>
@@ -81,10 +88,10 @@ function SearchControls(
         ? (
           <>
             <div class="hidden md:flex flex-col gap-2">
-              <div class="flex flex-row flex-wrap justify-between gap-5">
-                {breadcrumb?.itemListElement.length > 0
-                  ? <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
-                  : null}
+              <div class="flex flex-row-reverse flex-wrap justify-between gap-5 self-end w-full">
+                <div class="flex flex-row justify-end font-poppins text-sm min-w-[40vw] gap-10 relative">
+                  <Filters filters={priceArray} layout={layout} />
+                </div>
                 {title && title.length > 0
                   ? (
                     <h6 class={"font-poppins text-sm font-semibold"}>
@@ -92,9 +99,9 @@ function SearchControls(
                     </h6>
                   )
                   : null}
-                <div class="flex flex-row justify-end font-poppins text-sm min-w-[40vw] gap-10 relative">
-                  <Filters filters={priceArray} layout={layout} />
-                </div>
+                {breadcrumb?.itemListElement.length > 0
+                  ? <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+                  : null}
               </div>
 
               <div
