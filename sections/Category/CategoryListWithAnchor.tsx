@@ -12,7 +12,7 @@ export interface Category {
   label: string;
   description?: string;
   href?: string;
-    /**
+  /**
    * @description size image 163x163
    */
   image: ImageWidget;
