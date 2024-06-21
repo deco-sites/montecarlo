@@ -134,8 +134,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   const complementName =
     additionalProperty.find((item) => item.name == "complementName") || null;
 
-  const formattedComplementNameForLink = complementName?.complementName &&
-    complementName.complementName
+  const formattedComplementNameForLink = complementName?.value &&
+    complementName.value
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -154,7 +154,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                   href={`/${formattedComplementNameForLink}`}
                   class="text-xs underline-offset-2 decoration-primary underline lg:text-sm"
                 >
-                  {complementName.complementName}
+                  {complementName.value}
                 </a>
               )}
           </div>
@@ -194,7 +194,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           {/* Sku Selector */}
           <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
             {groups && (
-              <div class="flex gap-y-2 gap-6 w-full flex-wrap">
+              <div class="flex gap-y-3 gap-6 w-full flex-wrap">
                 {groups.map((group) => (
                   <SelectVariants
                     variants={group.variants}
@@ -210,13 +210,9 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     " "
                   }`}
                 >
-                  {groups.findIndex((r) => r.type == "Pedras")
-                    ? "Guia de pedras"
-                    : isVariantOf?.hasVariant.length === 1
-                    ? "Guia de medidas"
-                    : isVariantOf?.hasVariant.length === 1 &&
-                      groups.findIndex((r) => r.type == "Pedras") &&
-                      "Guia de Medidas e Pedras "}
+                  {isVariantOf?.hasVariant &&
+                    isVariantOf?.hasVariant.length > 1 &&
+                    "Guia de medidas"}
                 </span>
               </div>
             )}
@@ -267,7 +263,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                 variants={groups}
                 losses={extraInformations.lossesImage}
                 collectionBanners={collectionBanners}
-                complementName={complementName?.complementName}
+                complementName={complementName?.value}
               />
             )}
           <BenefitsList
@@ -283,7 +279,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             variants={groups}
             losses={extraInformations.lossesImage}
             collectionBanners={collectionBanners}
-            complementName={complementName?.complementName}
+            complementName={complementName?.value}
           />
         </div>
       )}

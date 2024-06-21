@@ -69,7 +69,7 @@ function SearchControls(
               </Button>
             </div>
             <div class="flex-grow overflow-auto">
-              <ul class={`flex flex-col gap-8 p-4 md:pl-0`}>
+              <ul class={`flex flex-col gap-4 md:gap-8 p-4 md:pl-0`}>
                 <Filters filters={filters} />
               </ul>
             </div>
@@ -82,7 +82,9 @@ function SearchControls(
           <>
             <div class="hidden md:flex flex-col gap-2">
               <div class="flex flex-row flex-wrap justify-between gap-5">
-                <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+                {breadcrumb?.itemListElement.length > 0
+                  ? <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+                  : null}
                 {title && title.length > 0
                   ? (
                     <h6 class={"font-poppins text-sm font-semibold"}>
@@ -97,30 +99,40 @@ function SearchControls(
 
               <div
                 class={`flex ${
-                  layout === "horizontal" ? "flex-row gap-4" : "flex-col gap-6"
+                  layout === "horizontal"
+                    ? `flex-row gap-4 ${!moreFilters.value ? "h-10" : ""}`
+                    : "flex-col gap-6"
                 } p-4 md:pl-0`}
               >
                 <ul
                   ref={filtersRef}
-                  className={`flex flex-row gap-4 flex-wrap ${
-                    !moreFilters.value ? "overflow-hidden max-h-[20px]" : ""
-                  }`}
+                  className={`flex flex-row gap-4 flex-wrap`}
                 >
                   <Filters filters={filters} layout={layout} />
                 </ul>
                 {showButton.value === true
                   ? (
                     <button
-                      class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-fit"
+                      class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-5 flex gap-1"
                       onClick={() => {
                         moreFilters.value = !moreFilters.value;
                       }}
                     >
                       {!moreFilters.value ? "Mais" : "Menos"} Filtros
+                      <Icon
+                        class={`relative ${
+                          !moreFilters.value
+                            ? "rotate-90"
+                            : "-rotate-90 -top-[3px]"
+                        }`}
+                        size={24}
+                        id="arrowTop"
+                      >
+                      </Icon>
                     </button>
                   )
                   : null}
-                  {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+                {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
               </div>
             </div>
 
