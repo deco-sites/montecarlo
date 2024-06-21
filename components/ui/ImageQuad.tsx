@@ -8,7 +8,13 @@ import { useUI } from "../../sdk/useUI.ts";
  */
 interface Image {
   title: string;
+  /**
+   * @description sizeImage 320x320
+   */
   mobile: ImageWidget;
+  /**
+   * @description sizeImage 600x600
+   */
   desktop: ImageWidget;
   alt?: string;
   button: string;
