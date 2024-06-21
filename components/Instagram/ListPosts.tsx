@@ -12,6 +12,9 @@ import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
  */
 export interface Card {
   alt: string;
+  /**
+   * @description size Image 168x168
+   */
   image: ImageWidget;
   href: string;
 }
