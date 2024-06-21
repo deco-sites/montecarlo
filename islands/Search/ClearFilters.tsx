@@ -6,16 +6,16 @@ function Island() {
 
     const keysToDelete = [];
     for (const param of searchParams.keys()) {
-        if (param.startsWith("filter.")) {
-            keysToDelete.push(param);
-        }
+      if (param.startsWith("filter.")) {
+        keysToDelete.push(param);
+      }
     }
 
-    keysToDelete.forEach(key => searchParams.delete(key));
+    keysToDelete.forEach((key) => searchParams.delete(key));
 
     return pathName + "?" + searchParams.toString();
   };
-  
+
   return (
     <a
       class="font-poppins uppercase text-black bg-[#f7ead5] px-2 py-2 text-center text-sm"

@@ -4,6 +4,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
  * @titleBy name
  */
 export interface Material {
+  /** @title min size Image 15x15 */
   image: ImageWidget;
   name: string;
 }

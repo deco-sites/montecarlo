@@ -3,6 +3,9 @@ import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
   logo?: {
+    /**
+     * @description size Image 244x45
+     */
     image: ImageWidget;
     description?: string;
   };

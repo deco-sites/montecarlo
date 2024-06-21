@@ -123,7 +123,12 @@ function Result({
               </ul>
             </aside>
           )}
-          <div class={`flex-grow ${layout?.variant === "aside" ? "" : "mt-4"} relative pt-4 bg-white`} id={id}>
+          <div
+            class={`flex-grow ${
+              layout?.variant === "aside" ? "" : "mt-4"
+            } relative pt-4 bg-white`}
+            id={id}
+          >
             <ProductGallery
               products={products}
               offset={offset}

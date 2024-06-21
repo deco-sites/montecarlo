@@ -74,7 +74,9 @@ function SearchControls(
               </ul>
 
               <div class="flex flex-col gap-2 px-5">
-                <button class="font-poppins uppercase text-white text-sm bg-[#333435] px-2 py-2">Aplicar</button>
+                <button class="font-poppins uppercase text-white text-sm bg-[#333435] px-2 py-2">
+                  Aplicar
+                </button>
                 <ClearFilters />
               </div>
             </div>
@@ -97,7 +99,7 @@ function SearchControls(
                     </h6>
                   )
                   : null}
-                  {breadcrumb?.itemListElement.length > 0
+                {breadcrumb?.itemListElement.length > 0
                   ? <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
                   : null}
               </div>

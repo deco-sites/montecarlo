@@ -11,7 +11,13 @@ import Slider from "../../components/ui/Slider.tsx";
 import { clx } from "../../sdk/clx.ts";
 import { useId } from "../../sdk/useId.ts";
 
+/**
+ * @titleBy title
+ */
 export interface Card {
+  /**
+   * @description size Image 216x240
+   */
   image: ImageWidget;
   altText?: string;
   title: string;

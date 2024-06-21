@@ -40,17 +40,17 @@ interface FilterToggleProps extends FilterToggle {
   layout?: string;
 }
 
-function FilterValues({ key, values, layout }: FilterToggleProps, ) {
+function FilterValues({ key, values, layout }: FilterToggleProps) {
   const flexDirection = key === "tamanho" ? "flex-row" : "flex-col";
 
   const cols = values.length <= 10 && "md:grid-cols-1" ||
     values.length > 10 && values.length <= 20 && "md:grid-cols-2" ||
     values.length > 20 && "md:grid-cols-3";
-    
+
   return (
     <ul
       class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${
-        layout !== "aside" && cols? `md:grid ${cols}` : ""
+        layout !== "aside" && cols ? `md:grid ${cols}` : ""
       }`}
     >
       {values.map((item) => {
@@ -127,7 +127,7 @@ function Filters({ filters, layout }: Props) {
                     : ""
                 } ${openFilter.value !== index ? "hidden" : ""}`}
               >
-                <FilterValues {...filter} layout={layout}/>
+                <FilterValues {...filter} layout={layout} />
               </div>
             </li>
           );
