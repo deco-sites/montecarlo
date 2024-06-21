@@ -32,11 +32,13 @@ import * as $Product_Zoom_ZoomImage from "./islands/Product/Zoom/ZoomImage.tsx";
 import * as $RangeSlider from "./islands/RangeSlider.tsx";
 import * as $SearchContent from "./islands/SearchContent.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
+import * as $Search_ClearFilters from "./islands/Search/ClearFilters.tsx";
 import * as $Search_Filters from "./islands/Search/Filters.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $ShowMore from "./islands/ShowMore.tsx";
 import * as $SliderDotsJS from "./islands/SliderDotsJS.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
+import * as $WhatsAppButton_WhatsApp from "./islands/WhatsAppButton/WhatsApp.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
 import { type Manifest } from "$fresh/server.ts";
@@ -77,11 +79,13 @@ const manifest = {
     "./islands/RangeSlider.tsx": $RangeSlider,
     "./islands/SearchContent.tsx": $SearchContent,
     "./islands/SearchControls.tsx": $SearchControls,
+    "./islands/Search/ClearFilters.tsx": $Search_ClearFilters,
     "./islands/Search/Filters.tsx": $Search_Filters,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/ShowMore.tsx": $ShowMore,
     "./islands/SliderDotsJS.tsx": $SliderDotsJS,
     "./islands/SliderJS.tsx": $SliderJS,
+    "./islands/WhatsAppButton/WhatsApp.tsx": $WhatsAppButton_WhatsApp,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
   },

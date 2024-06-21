@@ -159,12 +159,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 40px;
+  gap: 15px 40px;
   width: fit-content;
 }
 
 .range-slider {
-  width: 100vw;
+  width: calc(100% - 10px);
   position: relative;
 
   display: flex;
