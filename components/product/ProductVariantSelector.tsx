@@ -55,7 +55,7 @@ function VariantSelector({ product }: Props) {
               </div>
             </div>
           )
-          : (
+          : name !== "complementName" && (
             <li class="flex flex-col gap-2">
               <span class="text-sm">{name}</span>
               <ul class="flex flex-row gap-3">

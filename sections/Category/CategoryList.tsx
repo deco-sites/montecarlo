@@ -15,6 +15,9 @@ export interface Category {
   label: string;
   description?: string;
   href?: string;
+  /**
+   * @description size image 163x163
+   */
   image: ImageWidget;
   alt?: string;
 }
@@ -105,6 +108,19 @@ function CategoryList(props: Props) {
             class="flex flex-col gap-1 md:gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
             id={id + index}
           >
+            <SendEventOnClick
+              id={id + index}
+              event={{
+                name: "select_promotion",
+                params: {
+                  creative_name: category.label,
+                  creative_slot: id,
+                  promotion_id: id + index,
+                  promotion_name: category.label,
+                  items: [],
+                },
+              }}
+            />
             <Image
               loading={"lazy"}
               fetchPriority="low"
@@ -123,24 +139,10 @@ function CategoryList(props: Props) {
               event={{
                 name: "view_promotion",
                 params: {
-                  view_promotion: category.alt,
-                  creative_name: category.alt,
-                  creative_slot: category.alt,
+                  creative_name: category.label,
+                  creative_slot: id,
                   promotion_id: id + index,
-                  promotion_name: category.alt,
-                  items: [],
-                },
-              }}
-            />
-            <SendEventOnClick
-              id={id + index}
-              event={{
-                name: "select_promotion",
-                params: {
-                  creative_name: category.alt,
-                  creative_slot: id + index,
-                  promotion_id: category.href,
-                  promotion_name: category.alt,
+                  promotion_name: category.label,
                   items: [],
                 },
               }}

@@ -291,7 +291,9 @@ function Cart({
           params: {
             currency: "BRL",
             value: total,
-            items: [],
+            items: items
+              .map((_, index) => itemToAnalyticsItem(index))
+              .filter((x): x is AnalyticsItem => Boolean(x)),
           },
         }}
       />

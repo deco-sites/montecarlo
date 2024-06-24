@@ -25,16 +25,21 @@ import * as $Header_ScrollableContainer from "./islands/Header/ScrollableContain
 import * as $Header_Searchbar from "./islands/Header/Searchbar.tsx";
 import * as $ListLinks from "./islands/ListLinks.tsx";
 import * as $Newsletter from "./islands/Newsletter.tsx";
+import * as $NewsletterForm_ButtonClosePopup from "./islands/NewsletterForm/ButtonClosePopup.tsx";
+import * as $NewsletterForm_NewsletterPopup from "./islands/NewsletterForm/NewsletterPopup.tsx";
 import * as $OutOfStock from "./islands/OutOfStock.tsx";
 import * as $ProductImageZoom from "./islands/ProductImageZoom.tsx";
 import * as $Product_Zoom_ZoomImage from "./islands/Product/Zoom/ZoomImage.tsx";
 import * as $RangeSlider from "./islands/RangeSlider.tsx";
 import * as $SearchContent from "./islands/SearchContent.tsx";
 import * as $SearchControls from "./islands/SearchControls.tsx";
+import * as $Search_ClearFilters from "./islands/Search/ClearFilters.tsx";
+import * as $Search_Filters from "./islands/Search/Filters.tsx";
 import * as $ShippingSimulation from "./islands/ShippingSimulation.tsx";
 import * as $ShowMore from "./islands/ShowMore.tsx";
 import * as $SliderDotsJS from "./islands/SliderDotsJS.tsx";
 import * as $SliderJS from "./islands/SliderJS.tsx";
+import * as $WhatsAppButton_WhatsApp from "./islands/WhatsAppButton/WhatsApp.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
 import * as $miniCart_InputCep from "./islands/miniCart/InputCep.tsx";
@@ -67,16 +72,23 @@ const manifest = {
     "./islands/Header/Searchbar.tsx": $Header_Searchbar,
     "./islands/ListLinks.tsx": $ListLinks,
     "./islands/Newsletter.tsx": $Newsletter,
+    "./islands/NewsletterForm/ButtonClosePopup.tsx":
+      $NewsletterForm_ButtonClosePopup,
+    "./islands/NewsletterForm/NewsletterPopup.tsx":
+      $NewsletterForm_NewsletterPopup,
     "./islands/OutOfStock.tsx": $OutOfStock,
     "./islands/ProductImageZoom.tsx": $ProductImageZoom,
     "./islands/Product/Zoom/ZoomImage.tsx": $Product_Zoom_ZoomImage,
     "./islands/RangeSlider.tsx": $RangeSlider,
     "./islands/SearchContent.tsx": $SearchContent,
     "./islands/SearchControls.tsx": $SearchControls,
+    "./islands/Search/ClearFilters.tsx": $Search_ClearFilters,
+    "./islands/Search/Filters.tsx": $Search_Filters,
     "./islands/ShippingSimulation.tsx": $ShippingSimulation,
     "./islands/ShowMore.tsx": $ShowMore,
     "./islands/SliderDotsJS.tsx": $SliderDotsJS,
     "./islands/SliderJS.tsx": $SliderJS,
+    "./islands/WhatsAppButton/WhatsApp.tsx": $WhatsAppButton_WhatsApp,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
     "./islands/miniCart/InputCep.tsx": $miniCart_InputCep,

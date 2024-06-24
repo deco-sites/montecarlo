@@ -17,7 +17,7 @@ export default function ProductCardInline({ product, itemListName }: Props) {
   const {
     url,
     productID,
-    name,
+    name = "",
     image: images,
     offers,
     isVariantOf,
@@ -26,6 +26,8 @@ export default function ProductCardInline({ product, itemListName }: Props) {
   const { listPrice, price, installments } = useOffer(offers);
   const id = `product-card-${productID}`;
   const [front] = images ?? [];
+
+  const newName = parseInt(name) ? isVariantOf?.name : name;
 
   const eventItem = mapProductToAnalyticsItem({
     product,
@@ -84,7 +86,7 @@ export default function ProductCardInline({ product, itemListName }: Props) {
         }}
       />
       <Image
-        alt={name}
+        alt={newName}
         width={112}
         height={112}
         src={front.url!}
@@ -97,7 +99,7 @@ export default function ProductCardInline({ product, itemListName }: Props) {
         <h3
           class={" text-sm overflow-x-hidden max-h-[37px] line-clamp-2 text-ellipsis"}
         >
-          {name}
+          {newName}
         </h3>
         <div
           class={`line-through text-[#9F9584] text-sm font-light min-h-4`}

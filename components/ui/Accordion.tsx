@@ -11,13 +11,18 @@ interface Props {
 
 export default function Accordion(props: Props) {
   return (
-    <details class="group" open={props.open}>
+    <details class="group list-none marker:hidden" open={props.open}>
       <summary
-        class={`flex cursor-pointer items-center justify-between border-b border-${
+        class={`flex cursor-pointer items-center justify-between border-b capitalize list-none marker:hidden
+           border-${
           props.borderColor ? props.borderColor : "black"
         } py-4 opacity-100  group-open:border-b-[#AAA89C] `}
       >
-        <h3 class={props.titleClass}>{props.title}</h3>
+        <h3
+          dangerouslySetInnerHTML={{ __html: props.title }}
+          class={props.titleClass}
+        >
+        </h3>
         <Icon
           class=" transform transition-transform -rotate-90 group-open:rotate-90 group-open:text-[#AAA89C]"
           size={24}

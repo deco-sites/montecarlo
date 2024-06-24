@@ -62,7 +62,10 @@ export type AvailableIcons =
   | "Delete"
   | "SearchIcon"
   | "columnOne"
-  | "columnTwo";
+  | "columnTwo"
+  | "Close"
+  | "StorePin"
+  | "instagramIcon";
 
 interface Props extends JSX.SVGAttributes<SVGSVGElement> {
   /**

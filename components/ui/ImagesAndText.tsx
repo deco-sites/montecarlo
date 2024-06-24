@@ -9,7 +9,13 @@ import { useId } from "../../sdk/useId.ts";
  * @titleBy title
  */
 interface CardImage {
+  /**
+   * @description size Image 375x184
+   */
   imageMobile: ImageWidget;
+  /**
+   * @description size Image 572x280
+   */
   imageDesktop: ImageWidget;
   preload?: boolean;
   alt: string;
@@ -112,7 +118,7 @@ function CardImage(
         : variant == "Variant 2"
         ? (
           <>
-            <div class="relative w-full h-full">
+            <div class="relative w-full">
               <Picture preload={preload}>
                 <Source
                   src={imageMobile}
@@ -132,7 +138,7 @@ function CardImage(
                   loading={"lazy"}
                 />
                 <img
-                  class="w-full h-full"
+                  class="w-full"
                   src={imageDesktop}
                   alt={alt}
                   loading="lazy"

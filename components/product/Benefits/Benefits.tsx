@@ -1,8 +1,14 @@
 import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 
+/**
+ * @titleBy label
+ */
 interface Benefit {
   label?: string;
+  /**
+   * @description size Image 20x20
+   */
   icon: ImageWidget;
   iconAlt?: string;
   description?: string;

@@ -9,7 +9,7 @@ import { Signal, useSignal, useSignalEffect } from "@preact/signals";
 
 import type { ProductListingPage } from "apps/commerce/types.ts";
 
-import RangeSlider from "../../islands/RangeSlider.tsx";
+import ClearFilters from "../../islands/Search/ClearFilters.tsx";
 
 export type Props =
   & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions">
@@ -68,10 +68,17 @@ function SearchControls(
                 <Icon id="XMark" size={24} strokeWidth={2} />
               </Button>
             </div>
-            <div class="flex-grow overflow-auto">
-              <ul class={`flex flex-col gap-8 p-4 md:pl-0`}>
+            <div class="flex-grow overflow-auto flex flex-col justify-between pb-5 gap-5">
+              <ul class={`flex flex-col gap-4 md:gap-8 p-4 md:pl-0`}>
                 <Filters filters={filters} />
               </ul>
+
+              <div class="flex flex-col gap-2 px-5">
+                <button class="font-poppins uppercase text-white text-sm bg-[#333435] px-2 py-2">
+                  Aplicar
+                </button>
+                <ClearFilters />
+              </div>
             </div>
           </div>
         </>
@@ -81,7 +88,10 @@ function SearchControls(
         ? (
           <>
             <div class="hidden md:flex flex-col gap-2">
-              <div class="flex flex-row flex-wrap justify-between gap-5">
+              <div class="flex flex-row-reverse flex-wrap justify-between gap-5 self-end w-full">
+                <div class="flex flex-row justify-end font-poppins text-sm min-w-[40vw] gap-10 relative">
+                  <Filters filters={priceArray} layout={layout} />
+                </div>
                 {title && title.length > 0
                   ? (
                     <h6 class={"font-poppins text-sm font-semibold"}>
@@ -89,37 +99,47 @@ function SearchControls(
                     </h6>
                   )
                   : null}
-                <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
-                <div class="flex flex-row justify-end font-poppins text-sm min-w-[40vw] gap-10 relative">
-                  <Filters filters={priceArray} layout={layout} />
-                </div>
+                {breadcrumb?.itemListElement.length > 0
+                  ? <Breadcrumb itemListElement={breadcrumb?.itemListElement} />
+                  : null}
               </div>
 
               <div
                 class={`flex ${
-                  layout === "horizontal" ? "flex-row gap-4" : "flex-col gap-6"
+                  layout === "horizontal"
+                    ? `flex-row gap-4 ${!moreFilters.value ? "h-10" : ""}`
+                    : "flex-col gap-6"
                 } p-4 md:pl-0`}
               >
                 <ul
                   ref={filtersRef}
-                  className={`flex flex-row gap-4 flex-wrap ${
-                    !moreFilters.value ? "overflow-hidden max-h-[20px]" : ""
-                  }`}
+                  className={`flex flex-row gap-4 flex-wrap`}
                 >
                   <Filters filters={filters} layout={layout} />
                 </ul>
                 {showButton.value === true
                   ? (
                     <button
-                      class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-fit"
+                      class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-5 flex gap-1"
                       onClick={() => {
                         moreFilters.value = !moreFilters.value;
                       }}
                     >
                       {!moreFilters.value ? "Mais" : "Menos"} Filtros
+                      <Icon
+                        class={`relative ${
+                          !moreFilters.value
+                            ? "rotate-90"
+                            : "-rotate-90 -top-[3px]"
+                        }`}
+                        size={24}
+                        id="arrowTop"
+                      >
+                      </Icon>
                     </button>
                   )
                   : null}
+                {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
               </div>
             </div>
 

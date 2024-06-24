@@ -6,11 +6,17 @@ import {
 } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
 
+/**
+ * @titleBy href
+ */
 export interface Link {
   label: string;
   href: string;
 }
 
+/**
+ * @titleBy title
+ */
 export interface ListLinks {
   title: string;
   listLinks: Link[];
@@ -20,7 +26,13 @@ export interface ListLinks {
   };
 }
 
+/**
+ * @titleBy href
+ */
 export interface Image {
+  /**
+   * @description size Image in aspectRatio 2/1 = 500x250, or aspectRatio 1/1 = 250x250
+   */
   img: {
     src: ImageWidget;
     alt: string;
@@ -28,6 +40,9 @@ export interface Image {
   };
   href: string;
   title: string;
+  /**
+   * @title Content
+   */
   conter: HTMLWidget;
 }
 
@@ -80,9 +95,11 @@ export default function ListLinksOurImage({ listlinks, image, index }: Props) {
         <SendEventOnClick
           id={id + "image"}
           event={{
-            name: "login",
+            name: "select_promotion",
             params: {
-              method: image.href,
+              item_list_name: image.img.alt,
+              item_list_id: id + "image",
+              promotion_name: image.img.alt,
             },
           }}
         />

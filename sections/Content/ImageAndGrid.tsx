@@ -10,7 +10,13 @@ interface CTAProps {
 }
 
 interface ImageProps {
+  /**
+   * @description size Image 176x176
+   */
   source: ImageWidget;
+  /**
+   * @description size Image 176x176
+   */
   hoverImage?: ImageWidget;
   alt?: string;
 }
@@ -30,6 +36,9 @@ interface ConfigProps {
 export interface Props {
   title?: string;
   description?: string;
+  /**
+   * @description size Image 360x360
+   */
   banner: BannerProductDotInfoProps;
   grid: ItemProps[];
   config?: ConfigProps;
@@ -69,14 +78,14 @@ export default function ImageAndGrid(props: Props) {
                 <span
                   class={`absolute ${
                     item.cta ? "group-hover:invisible" : ""
-                  } flex h-full w-full items-center justify-center bg-perola-intermediario bg-opacity-70 text-sm lg:text-[1.75rem] transition font-beausiteGrand`}
+                  } flex h-full w-full items-center justify-center bg-perola-intermediario bg-opacity-70 text-sm lg:text-2xl transition font-beausiteGrand z-10`}
                 >
                   {item.label}
                 </span>
               )}
 
               {item.cta && (
-                <span class="absolute invisible group-hover:visible flex h-full w-full items-center justify-center bg-perola-intermediario bg-opacity-20 transition">
+                <span class="absolute invisible group-hover:visible flex h-full w-full items-center justify-center bg-perola-intermediario bg-opacity-20 transition z-10">
                   <a
                     href={item.cta.href}
                     class="font-poppins text-sm lg:text-base text-black bg-[#FFC72C] bg-opacity-80 py-2 px-4 lg:px-6 hover:opacity-80"

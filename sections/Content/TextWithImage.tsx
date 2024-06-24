@@ -10,6 +10,9 @@ export interface Props {
   title?: HTMLWidget;
   titleMobile?: HTMLWidget;
   description?: HTMLWidget;
+  /**
+   * @description size Image mobile 375x418 and size Image desktop 632x704
+   */
   image?: {
     mobile?: ImageWidget;
     desktop?: ImageWidget;

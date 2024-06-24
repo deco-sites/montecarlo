@@ -21,6 +21,9 @@ export interface Props {
   description?: textProps;
   promotion: string;
   urlBanner: string;
+  /**
+   * @description Mobile: 375x482, Desktop: 1263x585
+   */
   image: {
     mobile?: ImageWidget;
     desktop?: ImageWidget;

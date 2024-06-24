@@ -55,6 +55,9 @@ function ListLinks(props: Props) {
               params: {
                 promotion_id: link.href,
                 promotion_name: link.label,
+                creative_name: link.label,
+                creative_slot: index.toString(),
+                items: [],
               },
             }}
           />
@@ -80,6 +83,10 @@ function ListLinks(props: Props) {
               name: "view_promotion",
               params: {
                 creative_name: link.label,
+                creative_slot: index.toString(),
+                promotion_id: link.href,
+                promotion_name: link.label,
+                items: [],
               },
             }}
           />

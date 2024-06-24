@@ -27,6 +27,7 @@ import type { Props as Benefit } from "deco-sites/montecarlo/components/product/
 import type { GroupVariants } from "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts";
 import { SelectVariants } from "deco-sites/montecarlo/components/product/Similar/VariantGroup.tsx";
 import { Material } from "deco-sites/montecarlo/loaders/Layouts/MaterialProduct.tsx";
+import { Collection } from "deco-sites/montecarlo/loaders/Layouts/BannerCollection.tsx";
 import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
 import ModalBonus from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
@@ -65,6 +66,7 @@ export interface ExtraInformation {
   groups: GroupVariants[] | null;
   materialImages?: Material[];
   lossesImage?: Losses[];
+  collectionBanners?: Collection[];
 }
 interface Props {
   page: ProductDetailsPage | null;
@@ -82,7 +84,7 @@ interface Props {
 function ProductInfo({ page, layout, extraInformations }: Props) {
   const platform = usePlatform();
   const id = useId();
-  const { groups } = extraInformations;
+  const { groups, collectionBanners } = extraInformations;
 
   if (page === null) {
     throw new Error("Missing Product Details Page Info");
@@ -129,6 +131,16 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     listPrice,
   });
 
+  const complementName =
+    additionalProperty.find((item) => item.name == "complementName") || null;
+
+  const formattedComplementNameForLink = complementName?.value &&
+    complementName.value
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(" ", "-");
+
   return (
     <>
       <div class="col-start-4 row-span-2">
@@ -136,12 +148,15 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           <Breadcrumb itemListElement={breadcrumb.itemListElement} />
           {/* Code and name */}
           <div class="flex flex-row gap-2 flex-wrap mb-5">
-            {collections &&
-              collections.map((item) => (
-                <span class="text-xs underline-offset-2 decoration-primary underline lg:text-sm">
-                  {"Coleção " + item.value}
-                </span>
-              ))}
+            {complementName &&
+              (
+                <a
+                  href={`/${formattedComplementNameForLink}`}
+                  class="text-xs underline-offset-2 decoration-primary underline lg:text-sm"
+                >
+                  {complementName.value}
+                </a>
+              )}
           </div>
           <h1>
             <span class="font-medium text-base capitalize lg:text-xl">
@@ -153,14 +168,14 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           )}
           {/* Prices */}
           <div class="mt-5 flex flex-col gap-3">
-            <div class="flex flex-row gap-1 items-center text-base lg:text-xl">
-              <span class=" font-semibold ">
+            <div class="flex flex-row gap-1 items-center text-base lg:text-[1.15rem]">
+              <span class=" font-medium">
                 {formatPrice(price, offers?.priceCurrency)}
               </span>
               {stringIstallments && (
                 <>
                   <span class=" text-sm">em</span>
-                  <span class=" font-semibold ">{stringIstallments}</span>
+                  <span class=" font-medium ">{stringIstallments}</span>
                 </>
               )}
             </div>
@@ -179,7 +194,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           {/* Sku Selector */}
           <div class="mt-4 sm:mt-6 flex flex-row items-end gap-x-6 gap-y-2 flex-wrap">
             {groups && (
-              <div class="flex gap-y-2 gap-6 w-full flex-wrap">
+              <div class="flex gap-y-3 gap-6 w-full flex-wrap">
                 {groups.map((group) => (
                   <SelectVariants
                     variants={group.variants}
@@ -195,13 +210,9 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     " "
                   }`}
                 >
-                  {groups.findIndex((r) => r.type == "Pedras")
-                    ? "Guia de pedras"
-                    : isVariantOf?.hasVariant.length === 1
-                    ? "Guia de medidas"
-                    : isVariantOf?.hasVariant.length === 1 &&
-                      groups.findIndex((r) => r.type == "Pedras") &&
-                      "Guia de Medidas e Pedras "}
+                  {isVariantOf?.hasVariant &&
+                    isVariantOf?.hasVariant.length > 1 &&
+                    "Guia de medidas"}
                 </span>
               </div>
             )}
@@ -246,7 +257,15 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             )}
           </div>
           {isMobile.value &&
-            <ProductDescription product={product} />}
+            (
+              <ProductDescription
+                product={product}
+                variants={groups}
+                losses={extraInformations.lossesImage}
+                collectionBanners={collectionBanners}
+                complementName={complementName?.value}
+              />
+            )}
           <BenefitsList
             title={extraInformations.benefit.title}
             benefits={extraInformations.benefit.benefits}
@@ -255,7 +274,13 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
       </div>
       {!isMobile.value && (
         <div class="col-start-1 xl:col-start-2 col-end-4 row-start-1 lg:px-0 w-full max-w-[770px]">
-          <ProductDescription product={product} />
+          <ProductDescription
+            product={product}
+            variants={groups}
+            losses={extraInformations.lossesImage}
+            collectionBanners={collectionBanners}
+            complementName={complementName?.value}
+          />
         </div>
       )}
     </>

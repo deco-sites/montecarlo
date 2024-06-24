@@ -112,9 +112,9 @@ function NavItem({ item }: { item: MenuNavItem }) {
         />
       </a>
       <div
-        class={`fixed hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 py-16 duration-200  ${
-          GRIDCOLUMN[cont as keyof typeof GRIDCOLUMN]
-        }`}
+        data-menu
+        class={`fixed hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 py-16 duration-200 shadow-menu
+           ${GRIDCOLUMN[cont as keyof typeof GRIDCOLUMN]}`}
         style={{ top: "35px", left: "0px", marginTop: headerHeight }}
       >
         {listlinks != undefined && listlinks?.length > 0 && (

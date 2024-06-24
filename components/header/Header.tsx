@@ -19,6 +19,9 @@ export interface AlertMessage {
 }
 
 export interface Logo {
+  /**
+   * @description size Image 244x45
+   */
   src: ImageWidget;
   alt: string;
   width?: number;
@@ -31,11 +34,17 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
+/**
+ * @titleBy href
+ */
 export interface Link {
   label: string;
   href: string;
 }
 
+/**
+ * @titleBy title
+ */
 export interface ListLinks {
   title: string;
   listLinks: Link[];
@@ -45,7 +54,13 @@ export interface ListLinks {
   };
 }
 
+/**
+ * @titleBy href
+ */
 export interface Image {
+  /**
+   * @description size Image in aspectRatio 2/1 = 500x250, or aspectRatio 1/1 = 250x250
+   */
   img: {
     src: ImageWidget;
     alt: string;
@@ -53,6 +68,9 @@ export interface Image {
   };
   href: string;
   title: string;
+  /**
+   * @title Content
+   */
   conter: HTMLWidget;
 }
 
@@ -144,7 +162,7 @@ function Header({
 
   return (
     <>
-      <header style={{ height: headerHeight }}>
+      <header style={{ height: headerHeight }} class="lg:mb-8">
         <Drawers
           menu={{ items: navItems }}
           searchbar={searchbar}

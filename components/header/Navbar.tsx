@@ -169,7 +169,7 @@ function Navbar(
   } else {
     // Desktop header
     return (
-      <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6 pt-4 pb-3">
+      <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6 pt-4 pb-3 shadow-header-menu lg:min-h-[74px]">
         <ul
           class={`flex gap-6 col-span-1 ${
             logoPosition === "left" ? "justify-center" : "justify-start"

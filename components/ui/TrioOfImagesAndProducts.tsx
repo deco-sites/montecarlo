@@ -23,7 +23,13 @@ interface CardImage {
    * @format area
    */
   description?: string;
+  /**
+   * @description size Image 359×495
+   */
   imageMobile: ImageWidget;
+  /**
+   * @description size Image 	376×518
+   */
   imageDesktop: ImageWidget;
   products: Product[] | null;
   alt?: string;

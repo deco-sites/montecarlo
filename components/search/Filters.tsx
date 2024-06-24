@@ -1,3 +1,4 @@
+import { useSignal } from "@preact/signals";
 import Avatar from "../../components/ui/Avatar.tsx";
 import { formatPrice } from "../../sdk/format.ts";
 import type {
@@ -12,7 +13,7 @@ import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
 import RangeSlider from "../../islands/RangeSlider.tsx";
 
-interface Props {
+export interface Props {
   filters: ProductListingPage["filters"];
   layout?: "aside" | "drawer" | "horizontal";
 }
@@ -29,17 +30,29 @@ function ValueItem(
   return (
     <a href={url} rel="nofollow" class="flex items-center gap-2">
       <div aria-checked={selected} class="checkbox" />
-      <span class="text-sm">{label}</span>
+      <span class="text-sm md:max-w-[200px]">{label}</span>
       {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
     </a>
   );
 }
 
-function FilterValues({ key, values }: FilterToggle) {
+interface FilterToggleProps extends FilterToggle {
+  layout?: string;
+}
+
+function FilterValues({ key, values, layout }: FilterToggleProps) {
   const flexDirection = key === "tamanho" ? "flex-row" : "flex-col";
 
+  const cols = values.length <= 10 && "md:grid-cols-1" ||
+    values.length > 10 && values.length <= 20 && "md:grid-cols-2" ||
+    values.length > 20 && "md:grid-cols-3";
+
   return (
-    <ul class={`flex flex-wrap gap-4 my-2 ${flexDirection}`}>
+    <ul
+      class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${
+        layout !== "aside" && cols ? `md:grid ${cols}` : ""
+      }`}
+    >
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
 
@@ -72,45 +85,50 @@ function FilterValues({ key, values }: FilterToggle) {
 }
 
 function Filters({ filters, layout }: Props) {
+  const openFilter = useSignal<number | null>(null);
+
+  const handleOpenFilter = (index: number) => {
+    if (openFilter.value !== index) openFilter.value = index;
+    else openFilter.value = null;
+  };
   return (
     <>
       {filters
         .filter(isToggle)
-        .map((filter) => {
+        .map((filter, index) => {
           if (filter.key === "codigo-agrupador" || filter.key === "price") {
             return;
           }
 
+          if (filter.values.length <= 1) return;
+
           return (
             <li
-              class={`flex flex-col gap-4 text-black font-poppins text-sm cursor-pointer ${
-                layout !== "horizontal" ? "pb-2" : ""
+              class={`flex flex-col relative text-black font-poppins text-sm cursor-pointer border-b border-b-black ${
+                layout !== "horizontal" ? "pb-2" : "md:border-0"
               }`}
             >
-              <details
-                class={`${
-                  layout !== "horizontal" ? "border-b border-black pb-2" : ""
-                }`}
+              <span
+                class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap"
+                onClick={() => handleOpenFilter(index)}
               >
-                <summary class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap">
-                  {filter.label}
-                  <Icon
-                    class="rotate-90"
-                    size={24}
-                    id="arrowTop"
-                  >
-                  </Icon>
-                </summary>
-                <div
-                  class={`${
-                    layout === "horizontal"
-                      ? "absolute bg-white z-10 px-3 py-2 min-w-[150px]"
-                      : ""
-                  }`}
+                {filter.label}
+                <Icon
+                  class="rotate-90"
+                  size={24}
+                  id="arrowTop"
                 >
-                  <FilterValues {...filter} />
-                </div>
-              </details>
+                </Icon>
+              </span>
+              <div
+                class={`${
+                  layout === "horizontal"
+                    ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
+                    : ""
+                } ${openFilter.value !== index ? "hidden" : ""}`}
+              >
+                <FilterValues {...filter} layout={layout} />
+              </div>
             </li>
           );
         })}
@@ -120,8 +138,9 @@ function Filters({ filters, layout }: Props) {
         .map((filter) => {
           return (
             <RangeSlider
-              classProps="max-w-[600px]"
-              sliderClass="max-w-[300px] bg-red-500"
+              // classProps="max-w-[600px]"
+              classProps={layout === "aside" ? "flex-wrap" : ""}
+              sliderClass="min-w-[200px]"
               name={filter.key}
               label={filter.label}
               min={filter.values.min}

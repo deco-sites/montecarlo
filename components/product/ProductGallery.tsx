@@ -55,7 +55,7 @@ function ProductGallery(
 
   return (
     <div
-      class={`grid ${mobile} gap-4 items-center ${desktop}`}
+      class={`grid ${mobile} gap-2 items-center ${desktop}`}
     >
       {layout?.format == "Show More" && (
         <Head>

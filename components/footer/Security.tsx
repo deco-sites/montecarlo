@@ -5,6 +5,9 @@ import Image from "apps/website/components/Image.tsx";
  * @titleBy alt
  */
 export interface Security {
+  /**
+   * @description recommended img size 68x68
+   */
   src: ImageWidget;
   alt: string;
 }

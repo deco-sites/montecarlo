@@ -5,6 +5,9 @@ import Image from "apps/website/components/Image.tsx";
  * @titleBy alt
  */
 export interface Stack {
+  /**
+   * @description recommended img size 71x25
+   */
   src: ImageWidget;
   alt: string;
 }

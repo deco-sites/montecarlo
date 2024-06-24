@@ -12,6 +12,9 @@ import { useId } from "../../sdk/useId.ts";
 
 interface Benefit {
   label?: string;
+  /**
+   * @description recommended image size 32x16
+   */
   icon: ImageWidget;
   iconAlt?: string;
   description?: string;
@@ -76,10 +79,10 @@ export default function Benefits({
       id={id}
       class="bg-perola-intermediario flex flex-col mx-auto py-12 gap-7 lg:gap-14"
     >
-      <div class="flex flex-col gap-3 container px-5">
+      <div class="flex flex-col gap-3 container px-14">
         {title?.mobile && (
           <h2
-            class="text-sm font-poppins block lg:hidden"
+            class="text-xl font-poppins block lg:hidden"
             dangerouslySetInnerHTML={{ __html: title.mobile }}
           />
         )}
@@ -90,7 +93,7 @@ export default function Benefits({
           />
         )}
       </div>
-      <div class="hidden md:flex container flex-row flex-wrap gap-10 justify-evenly items-start max-w-[1080px]">
+      <div class="hidden md:flex container flex-row flex-wrap gap-10 justify-evenly items-start max-w-[1080px] px-5">
         {listOfBenefits}
       </div>
       <div class="block md:hidden">
@@ -102,6 +105,10 @@ export default function Benefits({
           name: "view_promotion",
           params: {
             creative_name: title.mobile ? title.mobile : title.desktop,
+            creative_slot: id,
+            promotion_id: id,
+            promotion_name: title.mobile ? title.mobile : title.desktop,
+            items: [],
           },
         }}
       />

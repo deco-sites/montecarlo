@@ -80,7 +80,7 @@ function MiniProductCard({
   const {
     url,
     productID,
-    name,
+    name = "",
     image: images,
     offers,
     isVariantOf,
@@ -100,6 +100,8 @@ function MiniProductCard({
   const l = layout;
   const align = "center";
   const relativeUrl = relative(url);
+
+  const newName = parseInt(name) ? isVariantOf?.name : name;
 
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
@@ -230,10 +232,10 @@ function MiniProductCard({
             class={`truncate font-normal ${
               PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
             }`}
-            dangerouslySetInnerHTML={{ __html: name ?? "" }}
+            dangerouslySetInnerHTML={{ __html: newName ?? "" }}
           />
         </div>
-        <div class="flex w-full h-auto flex-1 py-1 min-h-4">
+        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1">
           {materials?.map((item) => {
             if (
               !layout?.materialImages || layout?.materialImages === undefined
@@ -248,7 +250,7 @@ function MiniProductCard({
             }
             return (
               <Image
-                class="rounded-full h-min"
+                class="h-min"
                 src={img.image}
                 width={15}
                 height={15}
