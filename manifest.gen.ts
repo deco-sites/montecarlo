@@ -2,7 +2,9 @@
 // This file SHOULD be checked into source version control.
 // This file is automatically updated during development when running `dev.ts`.
 
-import * as $$$$$$$$$0 from "./actions/newsletter/sendForm.ts";
+import * as $$$$$$$$$0 from "./actions/miniCart/getlistCEP.ts";
+import * as $$$$$$$$$1 from "./actions/miniCart/removeCEP.ts";
+import * as $$$$$$$$$2 from "./actions/newsletter/sendForm.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
 import * as $$$8 from "./loaders/availableIcons.ts";
@@ -200,7 +202,9 @@ const manifest = {
     "deco-sites/montecarlo/sections/Video/FullVideo.tsx": $$$$$$78,
   },
   "actions": {
-    "deco-sites/montecarlo/actions/newsletter/sendForm.ts": $$$$$$$$$0,
+    "deco-sites/montecarlo/actions/miniCart/getlistCEP.ts": $$$$$$$$$0,
+    "deco-sites/montecarlo/actions/miniCart/removeCEP.ts": $$$$$$$$$1,
+    "deco-sites/montecarlo/actions/newsletter/sendForm.ts": $$$$$$$$$2,
   },
   "apps": {
     "deco-sites/montecarlo/apps/decohub.ts": $$$$$$$$$$$0,

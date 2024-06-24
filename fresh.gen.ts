@@ -13,6 +13,7 @@ import * as $BannerProductDotInfo from "./islands/BannerProductDotInfo.tsx";
 import * as $FormStore_Form from "./islands/FormStore/Form.tsx";
 import * as $Header_ButtonCopy from "./islands/Header/ButtonCopy.tsx";
 import * as $Header_Buttons from "./islands/Header/Buttons.tsx";
+import * as $Header_Cart_itemsCartVtex from "./islands/Header/Cart/itemsCartVtex.tsx";
 import * as $Header_Cart_linx from "./islands/Header/Cart/linx.tsx";
 import * as $Header_Cart_nuvemshop from "./islands/Header/Cart/nuvemshop.tsx";
 import * as $Header_Cart_shopify from "./islands/Header/Cart/shopify.tsx";
@@ -41,6 +42,7 @@ import * as $SliderJS from "./islands/SliderJS.tsx";
 import * as $WhatsAppButton_WhatsApp from "./islands/WhatsAppButton/WhatsApp.tsx";
 import * as $WishlistButton_vtex from "./islands/WishlistButton/vtex.tsx";
 import * as $WishlistButton_wake from "./islands/WishlistButton/wake.tsx";
+import * as $miniCart_InputCep from "./islands/miniCart/InputCep.tsx";
 import { type Manifest } from "$fresh/server.ts";
 
 const manifest = {
@@ -58,6 +60,7 @@ const manifest = {
     "./islands/FormStore/Form.tsx": $FormStore_Form,
     "./islands/Header/ButtonCopy.tsx": $Header_ButtonCopy,
     "./islands/Header/Buttons.tsx": $Header_Buttons,
+    "./islands/Header/Cart/itemsCartVtex.tsx": $Header_Cart_itemsCartVtex,
     "./islands/Header/Cart/linx.tsx": $Header_Cart_linx,
     "./islands/Header/Cart/nuvemshop.tsx": $Header_Cart_nuvemshop,
     "./islands/Header/Cart/shopify.tsx": $Header_Cart_shopify,
@@ -88,6 +91,7 @@ const manifest = {
     "./islands/WhatsAppButton/WhatsApp.tsx": $WhatsAppButton_WhatsApp,
     "./islands/WishlistButton/vtex.tsx": $WishlistButton_vtex,
     "./islands/WishlistButton/wake.tsx": $WishlistButton_wake,
+    "./islands/miniCart/InputCep.tsx": $miniCart_InputCep,
   },
   baseUrl: import.meta.url,
 } satisfies Manifest;
