@@ -10,6 +10,7 @@ import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 import { useUI } from "../../sdk/useUI.ts";
 import { Section } from "deco/blocks/section.ts";
+import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
 
 export interface AlertMessage {
   title?: HTMLWidget;
@@ -108,6 +109,10 @@ export interface Props {
 
   logoPosition?: "left" | "center";
 
+  cart: {
+    bonus?: PropsBonus;
+  };
+
   buttons?: Buttons;
 }
 
@@ -131,6 +136,7 @@ function Header({
   device,
   ourStores,
   help,
+  cart,
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const items = navItems ?? [];
@@ -161,6 +167,7 @@ function Header({
           menu={{ items: navItems }}
           searchbar={searchbar}
           platform={platform}
+          bonus={cart.bonus}
         >
           <style
             dangerouslySetInnerHTML={{ __html: style["show-alert-header"] }}

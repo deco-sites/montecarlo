@@ -59,6 +59,7 @@ export type AvailableIcons =
   | "menu"
   | "Location"
   | "arrowTop"
+  | "Delete"
   | "SearchIcon"
   | "columnOne"
   | "columnTwo"
