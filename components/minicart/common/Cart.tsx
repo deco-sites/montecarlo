@@ -55,7 +55,7 @@ function Cart({
   freeShippingTarget,
   checkoutHref,
   bonus,
-  variant = "variant1",
+  variant = "variant2",
   itemToAnalyticsItem,
   onUpdateQuantity,
   onAddCoupon,
