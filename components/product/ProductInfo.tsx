@@ -133,8 +133,6 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
 
   const complementName = product.alternateName;
 
-  console.log("alternateName", complementName);
-
   const formattedComplementNameForLink = complementName &&
     complementName
       .toLowerCase()
