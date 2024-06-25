@@ -131,9 +131,9 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     listPrice,
   });
 
-  const complementName = product.alternateName
+  const complementName = product.alternateName;
 
-  console.log("alternateName", complementName)
+  console.log("alternateName", complementName);
 
   const formattedComplementNameForLink = complementName &&
     complementName
@@ -155,7 +155,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                   href={`/${formattedComplementNameForLink}`}
                   class="text-xs underline-offset-2 decoration-primary underline lg:text-sm"
                 >
-                  {complementName.value}
+                  {complementName}
                 </a>
               )}
           </div>
@@ -263,7 +263,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                 variants={groups}
                 losses={extraInformations.lossesImage}
                 collectionBanners={collectionBanners}
-                complementName={complementName?.value}
+                complementName={complementName}
               />
             )}
           <BenefitsList
@@ -279,7 +279,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             variants={groups}
             losses={extraInformations.lossesImage}
             collectionBanners={collectionBanners}
-            complementName={complementName?.value}
+            complementName={complementName}
           />
         </div>
       )}
