@@ -131,11 +131,12 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     listPrice,
   });
 
-  const complementName =
-    additionalProperty.find((item) => item.name == "complementName") || null;
+  const complementName = product.alternateName
 
-  const formattedComplementNameForLink = complementName?.value &&
-    complementName.value
+  console.log("alternateName", complementName)
+
+  const formattedComplementNameForLink = complementName &&
+    complementName
       .toLowerCase()
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
@@ -205,10 +206,9 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                 ))}
                 <ProductSelector product={product} />
                 <span
-                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${
-                    product.isVariantOf?.hasVariant.length == 1 &&
+                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${product.isVariantOf?.hasVariant.length == 1 &&
                     " "
-                  }`}
+                    }`}
                 >
                   {isVariantOf?.hasVariant &&
                     isVariantOf?.hasVariant.length > 1 &&
