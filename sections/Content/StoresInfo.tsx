@@ -68,8 +68,8 @@ export default function StoresInfo(props: Props) {
       {info
         ? (
           <div class="flex flex-col gap-2 md:row-span-3">
-            {info.map((state, index) => (
-              <State key={index} title={state.label}>
+            {info.map((state, stateIndex) => (
+              <State key={stateIndex} title={state.label}>
                 <div class="flex flex-col gap-2 mt-2 mb-3">
                   {state.cities?.map((city, index) => (
                     <City
@@ -82,7 +82,7 @@ export default function StoresInfo(props: Props) {
                           <div
                             key={index}
                             class="flex flex-col gap-5 mx-5"
-                            id={id + index}
+                            id={id + stateIndex}
                           >
                             <h5 class="font-poppins font-semibold text-sm">
                               {store.label}
@@ -127,14 +127,16 @@ export default function StoresInfo(props: Props) {
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   class="font-poppins text-sm w-fit border-b border-[#FFC72C]"
-                                  id={id + index + "link"}
+                                  id={id + stateIndex + stateIndex + "link"}
                                 >
+                                  {console.log("index: ", store.mapLink)}
                                   <SendEventOnClick
-                                    id={id + index}
+                                    id={id + stateIndex + stateIndex + "link"}
                                     event={{
                                       name: "select_item",
                                       params: {
-                                        item_list_id: id + index + "link",
+                                        item_list_id: id + stateIndex +
+                                          stateIndex + "link",
                                         item_list_name: store.mapLink,
                                         items: [],
                                       },
@@ -145,11 +147,11 @@ export default function StoresInfo(props: Props) {
                               )
                               : null}
                             <SendEventOnView
-                              id={id + index}
+                              id={id + stateIndex}
                               event={{
                                 name: "view_item_list",
                                 params: {
-                                  item_list_id: id + index,
+                                  item_list_id: id + stateIndex,
                                   item_list_name: store.label,
                                   items: [],
                                 },

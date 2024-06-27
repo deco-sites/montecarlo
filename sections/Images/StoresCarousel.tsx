@@ -140,14 +140,14 @@ function BannerItem({
         href={image.href}
         target="_blank"
         rel="noopener noreferrer"
-        id={id + "desktop"}
+        id={id + "desktopClick"}
       >
         <SendEventOnClick
-          id={id + "desktop"}
+          id={id + "desktopClick"}
           event={{
             name: "select_item",
             params: {
-              item_list_id: id + "desktop",
+              item_list_id: id + "desktopClick",
               item_list_name: image.label,
               items: [],
             },
