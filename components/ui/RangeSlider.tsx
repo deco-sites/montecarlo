@@ -158,14 +158,14 @@ function RangeSlider(props: Props) {
     <>
       <span class="font-poppins text-sm">{label}</span>
       <div
-        class={`relative ${classProps}`}
+        class={`relative ${classProps ? classProps : ""}`}
         ref={rangeSliderRef}
         data-range-slider
         min={min}
         max={max}
         name={name}
       >
-        <div class={`range-slider ${sliderClass}`}>
+        <div class={`range-slider ${sliderClass ? sliderClass : ""}`}>
           <div class="range-bar">
             <div ref={rangeFillRef} class="range-fill"></div>
           </div>
@@ -173,7 +173,7 @@ function RangeSlider(props: Props) {
           <button ref={rightKnobRef} class="knob right"></button>
         </div>
 
-        <div class="flex gap-2 w-[200px] font-poppins text-sm text-[#AAA89C]">
+        <div class="flex justify-center gap-2 w-[200px] font-poppins text-sm text-[#AAA89C]">
           <span class="range-min-interval">
             {formatPrice(leftValue ? leftValue : 1)}
           </span>{" "}

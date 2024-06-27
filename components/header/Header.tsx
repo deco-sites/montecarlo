@@ -10,6 +10,7 @@ import Navbar from "./Navbar.tsx";
 import { headerHeight } from "./constants.ts";
 import { useUI } from "../../sdk/useUI.ts";
 import { Section } from "deco/blocks/section.ts";
+import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
 
 export interface AlertMessage {
   title?: HTMLWidget;
@@ -18,6 +19,9 @@ export interface AlertMessage {
 }
 
 export interface Logo {
+  /**
+   * @description size Image 244x45
+   */
   src: ImageWidget;
   alt: string;
   width?: number;
@@ -30,11 +34,17 @@ export interface Buttons {
   hideCartButton?: boolean;
 }
 
+/**
+ * @titleBy href
+ */
 export interface Link {
   label: string;
   href: string;
 }
 
+/**
+ * @titleBy title
+ */
 export interface ListLinks {
   title: string;
   listLinks: Link[];
@@ -44,7 +54,13 @@ export interface ListLinks {
   };
 }
 
+/**
+ * @titleBy href
+ */
 export interface Image {
+  /**
+   * @description size Image in aspectRatio 2/1 = 500x250, or aspectRatio 1/1 = 250x250
+   */
   img: {
     src: ImageWidget;
     alt: string;
@@ -52,6 +68,9 @@ export interface Image {
   };
   href: string;
   title: string;
+  /**
+   * @title Content
+   */
   conter: HTMLWidget;
 }
 
@@ -90,6 +109,10 @@ export interface Props {
 
   logoPosition?: "left" | "center";
 
+  cart: {
+    bonus?: PropsBonus;
+  };
+
   buttons?: Buttons;
 }
 
@@ -113,6 +136,7 @@ function Header({
   device,
   ourStores,
   help,
+  cart,
 }: SectionProps<typeof loader>) {
   const platform = usePlatform();
   const items = navItems ?? [];
@@ -143,6 +167,7 @@ function Header({
           menu={{ items: navItems }}
           searchbar={searchbar}
           platform={platform}
+          bonus={cart.bonus}
         >
           <style
             dangerouslySetInnerHTML={{ __html: style["show-alert-header"] }}

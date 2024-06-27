@@ -20,7 +20,7 @@ export default function ModalBonus(
   const formatValue = formatPrice(bonusValue) || " ";
 
   return (
-    <div class="relative w-fit">
+    <div class="relative w-fit pb-2">
       <label class="peer relative flex flex-row items-center justify-between cursor-pointer select-none">
         <input type="checkbox" name="todo[1]" class="peer" />
         <span class="decoration-primary left-0 z-10 -ml-3 mb-2 text-sm underline underline-offset-2 before:absolute before:left-0 before:-z-10 before:h-6 before:w-8 before:bg-white lg:text-sm">

@@ -1,6 +1,7 @@
 // import { platform } from "../../apps/storefront.ts";
 import { lazy } from "preact/compat";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
+import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
 
 const CartVTEX = lazy(() => import("./vtex/Cart.tsx"));
 const CartVNDA = lazy(() => import("./vnda/Cart.tsx"));
@@ -11,11 +12,12 @@ const CartNuvemshop = lazy(() => import("./nuvemshop/Cart.tsx"));
 
 export interface Props {
   platform: ReturnType<typeof usePlatform>;
+  bonus?: PropsBonus;
 }
 
-function Cart({ platform }: Props) {
+function Cart({ platform, bonus }: Props) {
   if (platform === "vtex") {
-    return <CartVTEX />;
+    return <CartVTEX bonus={bonus} />;
   }
 
   if (platform === "vnda") {

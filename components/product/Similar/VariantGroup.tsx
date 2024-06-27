@@ -43,14 +43,14 @@ export function SelectVariants(
                 href={item.link.replace("https://montecarlo.myvtex.com", "")}
                 class={`${
                   item.active &&
-                  "border border-primary rounded-full p-1 cursor-pointer"
+                  "border border-primary rounded-sm p-1 cursor-pointer"
                 } `}
               >
                 <Image
-                  class="rounded-full h-min"
+                  class="rounded-sm h-min"
                   src={img.image}
-                  width={28}
-                  height={28}
+                  width={20}
+                  height={20}
                   alt={img.name}
                 />
               </a>
@@ -81,14 +81,14 @@ export function SelectVariants(
                 href={item.link.replace("https://montecarlo.myvtex.com", "")}
                 class={`${
                   item.active &&
-                  "border border-primary rounded-full p-1 cursor-pointer"
+                  "border border-primary rounded-sm p-1 cursor-pointer"
                 } `}
               >
                 <Image
-                  class="rounded-full h-min"
+                  class="rounded-sm h-min"
                   src={img.image}
-                  width={28}
-                  height={28}
+                  width={20}
+                  height={20}
                   alt={img.name}
                 />
               </a>

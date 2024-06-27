@@ -3,6 +3,9 @@ import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 import Image from "apps/website/components/Image.tsx";
 
 export interface Props {
+  /**
+   * @description Desktop:size Image: Variant1: (705x655), Variant2 and Variant4:(353x280), Variant3:(353x655) / Mobile:size Image: Variant1: (360x300), Variant2 and Variant4:(360x267), Variant3:(360x625)
+   */
   primaryImage: {
     srcDesktop: ImageWidget;
     srcMobile: ImageWidget;
@@ -11,6 +14,9 @@ export interface Props {
     preload: boolean;
     showMobile?: boolean;
   };
+  /**
+   * @description Desktop:size Image: Variant1: (705x655), Variant2 and Variant4:(353x280), Variant3:(353x655) / Mobile:size Image: Variant1: (360x300), Variant2 and Variant4:(360x267), Variant3:(360x625)
+   */
   secondImage: {
     srcDesktop: ImageWidget;
     srcMobile: ImageWidget;
