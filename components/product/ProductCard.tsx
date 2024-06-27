@@ -258,7 +258,7 @@ function MiniProductCard({
             }
             return (
               <Image
-                class="h-min"
+                class="h-min rounded-sm"
                 src={img.image}
                 width={15}
                 height={15}

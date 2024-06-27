@@ -195,7 +195,7 @@ function ShelfProductCard({
             dangerouslySetInnerHTML={{ __html: newName ?? "" }}
           />
         </div>
-        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1">
+        <div class="flex w-full h-auto flex-1 py-1 min-h-4 gap-1 rounded-sm">
           {materials?.map((item) => {
             if (
               !layout?.materialImages || layout?.materialImages === undefined
@@ -210,7 +210,7 @@ function ShelfProductCard({
             }
             return (
               <Image
-                class="h-min"
+                class="h-min rounded-sm"
                 src={img.image}
                 width={15}
                 height={15}
