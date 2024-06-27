@@ -1,11 +1,6 @@
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
 import type { HTMLWidget } from "apps/admin/widgets.ts";
-
-import {
-  SendEventOnClick,
-  SendEventOnView,
-} from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
 
 interface Form {
@@ -267,19 +262,6 @@ function Newsletter({
           </div>
         </form>
       </div>
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_promotion",
-          params: {
-            creative_name: title,
-            creative_slot: id,
-            promotion_id: id,
-            promotion_name: title,
-            items: [],
-          },
-        }}
-      />
     </div>
   );
 }
