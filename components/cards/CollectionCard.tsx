@@ -240,6 +240,9 @@ const DEFAULT_PROPS = {
   cta: "ver mais coleções",
 };
 
+/**
+ * @titleBy title
+ */
 interface Card {
   title: string;
   background: {
@@ -341,33 +344,35 @@ export default function GridCollectionCard(props: Props) {
 
 function Card({ background, title, link, hover, preload }: Card) {
   return (
-    <div className={"min-h-[168px] relative group"}>
-      <a href={link} title={"Ir para a coleção " + title}>
-        <div>
-          <Picture className={"z-0"}>
-            <img
-              class={"w-full"}
-              src={background.image}
-              alt={background.altText}
-              loading={preload ? "eager" : "lazy"}
-            />
-          </Picture>
-          <h2
-            className={"pb-[6px] text-center font-medium text-sm lg:textarea-md lg:text-base absolute left-0 right-0 bottom-0 px-4 group-hover:hidden"}
+    <div>
+      <div className={"min-h-[168px] relative group"}>
+        <a href={link} title={"Ir para a coleção " + title}>
+          <div>
+            <Picture className={"z-0"}>
+              <img
+                class={"w-full"}
+                src={background.image}
+                alt={background.altText}
+                loading={preload ? "eager" : "lazy"}
+              />
+            </Picture>
+          </div>
+          <div
+            className={"bg-[rgb(255,199,44)]/0 w-full h-full top-0 absolute group-hover:bg-[rgb(255,199,44)]/85"}
           >
-            {title}
-          </h2>
-        </div>
-        <div
-          className={"opacity-0 bg-[#FFC72C] w-full h-full top-0 absolute group-hover:opacity-85"}
-        >
-          <h4
-            className={"px-3 font-bold text-sm leading-[18px] text-white h-full flex items-center justify-center text-center"}
-          >
-            {hover.text}
-          </h4>
-        </div>
-      </a>
+            <h4
+              className={"hidden group-hover:flex px-3 font-normal text-sm leading-[18px] text-black h-full items-center justify-center text-center"}
+            >
+              {hover.text}
+            </h4>
+          </div>
+        </a>
+      </div>
+      <h2
+        className={"pb-[6px] text-center font-medium text-sm lg:textarea-md lg:text-base px-4"}
+      >
+        {title}
+      </h2>
     </div>
   );
 }
