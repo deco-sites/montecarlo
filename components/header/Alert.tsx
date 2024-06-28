@@ -24,7 +24,7 @@ export interface Props {
 function Buttons() {
   return (
     <>
-      <div class="flex items-center justify-center z-10 col-start-1 row-start-1">
+      <div class="flex items-center justify-center z-10 col-start-1 row-start-1 absolute md:left-1/4">
         <Slider.PrevButton class=" bg-transparent border-none hover:bg-transparent text-primary">
           <Icon
             class="text-black"
@@ -34,7 +34,7 @@ function Buttons() {
           />
         </Slider.PrevButton>
       </div>
-      <div class="flex items-center justify-center z-10 col-start-3 row-start-1">
+      <div class="flex items-center justify-center z-10 col-start-3 row-start-1 absolute md:left-3/4">
         <Slider.NextButton class=" bg-transparent border-none hover:bg-transparent text-primary">
           <Icon
             class="text-black"
@@ -93,7 +93,7 @@ function Alert({ alerts = [], interval = 5 }: Props) {
   return (
     <div
       id={id}
-      class="w-full justify-center items-center py-1 grid grid-cols-[24px_auto_24px] show-alert bg-primary"
+      class="relative w-full justify-center items-center py-1 px-0 md:px-5 grid md:flex grid-cols-[24px_auto_24px] show-alert bg-primary"
     >
       <style
         dangerouslySetInnerHTML={{
@@ -101,10 +101,10 @@ function Alert({ alerts = [], interval = 5 }: Props) {
         }}
       >
       </style>
-      <Slider class="carousel carousel-center  gap-6 col-start-2">
+      <Slider class="carousel carousel-center gap-6 col-start-2">
         {alerts.map((alert, index) => (
           <Slider.Item index={index} class="carousel-item">
-            <div class="flex flex-row gap-4 justify-center items-center uppercase text-xs">
+            <div class="flex flex-row gap-4 justify-center items-center uppercase text-xs w-screen">
               {alert.title && (
                 <span
                   class="text-secondary-content flex justify-center items-center"
@@ -112,17 +112,25 @@ function Alert({ alerts = [], interval = 5 }: Props) {
                 >
                 </span>
               )}
-              <span class="text-secondary-content flex justify-center items-center">
-                {alert.labelButton}
-              </span>
-              <ButtonCopy label={alert.cupom}>
-                <div class="text-secondary-content flex justify-center items-center gap-2 cursor-pointer">
-                  <span class="uppercase border border-dashed border-black px-1 font-bold">
-                    {alert.cupom}
+              {alert.labelButton
+                ? (
+                  <span class="text-secondary-content flex justify-center items-center">
+                    {alert.labelButton}
                   </span>
-                  <Icon id="FileCopy" size={18} />
-                </div>
-              </ButtonCopy>
+                )
+                : null}
+              {alert.labelButton
+                ? (
+                  <ButtonCopy label={alert.cupom}>
+                    <div class="text-secondary-content flex justify-center items-center gap-2 cursor-pointer">
+                      <span class="uppercase border border-dashed border-black px-1 font-bold">
+                        {alert.cupom}
+                      </span>
+                      <Icon id="FileCopy" size={18} />
+                    </div>
+                  </ButtonCopy>
+                )
+                : null}
             </div>
           </Slider.Item>
         ))}
@@ -130,7 +138,11 @@ function Alert({ alerts = [], interval = 5 }: Props) {
 
       <Buttons />
 
-      <SliderJS rootId={id} interval={interval && interval * 1e3} />
+      <SliderJS
+        rootId={id}
+        interval={interval && interval * 1e3}
+        infinite={true}
+      />
     </div>
   );
 }

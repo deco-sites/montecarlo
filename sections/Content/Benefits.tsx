@@ -52,8 +52,8 @@ export default function Benefits({
     return (
       <div class="flex flex-col h-full max-w-[127px] mx-auto">
         <div class="
-            relative flex justify-center items-center mb-4 min-h-[100px]
-            before:absolute before:w-[70px] before:h-[70px] before:border-2 before:border-black before:rotate-45
+            relative flex justify-center items-center mb-4 min-h-[96px]
+            before:absolute before:w-[68px] before:h-[68px] before:border before:border-black before:rotate-45
           ">
           <img
             height={20}
