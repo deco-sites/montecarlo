@@ -359,10 +359,10 @@ function Card({ background, title, link, hover, preload }: Card) {
           </h2>
         </div>
         <div
-          className={"opacity-0 bg-[#FFC72C] w-full h-full top-0 absolute group-hover:opacity-85"}
+          className={"bg-[rgb(255,199,44)]/0 w-full h-full top-0 absolute group-hover:bg-[rgb(255,199,44)]/85"}
         >
           <h4
-            className={"px-3 font-bold text-sm leading-[18px] text-white h-full flex items-center justify-center text-center"}
+            className={"hidden group-hover:flex px-3 font-bold text-sm leading-[18px] text-white h-full items-center justify-center text-center"}
           >
             {hover.text}
           </h4>
