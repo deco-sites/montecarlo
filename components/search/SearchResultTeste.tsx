@@ -54,6 +54,8 @@ function Teste(props: SectionProps<typeof loader>) {
     props: { title: "testett" },
   });
 
+  console.log("props teste", props.page);
+
   return (
     <div id="testeR">
       <h1>
