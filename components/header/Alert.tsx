@@ -112,15 +112,15 @@ function Alert({ alerts = [], interval = 5 }: Props) {
                 >
                 </span>
               )}
-              {
-                alert.labelButton ? (
+              {alert.labelButton
+                ? (
                   <span class="text-secondary-content flex justify-center items-center">
                     {alert.labelButton}
                   </span>
-                ) : null
-              }
-              {
-                alert.labelButton ? (
+                )
+                : null}
+              {alert.labelButton
+                ? (
                   <ButtonCopy label={alert.cupom}>
                     <div class="text-secondary-content flex justify-center items-center gap-2 cursor-pointer">
                       <span class="uppercase border border-dashed border-black px-1 font-bold">
@@ -129,8 +129,8 @@ function Alert({ alerts = [], interval = 5 }: Props) {
                       <Icon id="FileCopy" size={18} />
                     </div>
                   </ButtonCopy>
-                ) : null
-              }
+                )
+                : null}
             </div>
           </Slider.Item>
         ))}
@@ -138,7 +138,11 @@ function Alert({ alerts = [], interval = 5 }: Props) {
 
       <Buttons />
 
-      <SliderJS rootId={id} interval={interval && interval * 1e3} infinite={true} />
+      <SliderJS
+        rootId={id}
+        interval={interval && interval * 1e3}
+        infinite={true}
+      />
     </div>
   );
 }

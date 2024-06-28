@@ -1,4 +1,4 @@
-import {useUI} from "../../sdk/useUI.ts";
+import { useUI } from "../../sdk/useUI.ts";
 
 export interface Props {
   /**

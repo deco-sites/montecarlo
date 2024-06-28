@@ -1,1 +1,1 @@
-export {default} from "../../components/ui/Spacing.tsx";
+export { default } from "../../components/ui/Spacing.tsx";

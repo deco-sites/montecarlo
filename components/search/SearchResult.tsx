@@ -1,9 +1,9 @@
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { Layout as CardLayout } from "../../components/product/ProductCard.tsx";
 
-import Filters from "../../islands/Search/Filters.tsx";
+import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import SearchControls from "../../islands/SearchControls.tsx";
+import SearchControls from "../../components/search/Controls.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
@@ -101,6 +101,7 @@ function Result({
         class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${
           isFirstPage ? "py-10" : "pt-0"
         } ${pageInfo?.nextPage ? "pb-0" : ""}`}
+        id="resultTeste"
       >
         {(isFirstPage || !isPartial) && (
           <SearchControls
