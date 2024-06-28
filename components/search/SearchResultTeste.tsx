@@ -41,7 +41,7 @@ function Result(props: Props) {
 
   return (
     <div id="">
-      {JSON.stringify(props)}
+      {page.products}
     </div>
   );
 }
@@ -50,6 +50,7 @@ function Teste(props: SectionProps<typeof loader>) {
   const { title, url } = props;
 
   const buttonSearchOutOfStock = useSection({
+    href: "s?q=relogios&sort=price%3Adesc&filter.cor=cinza",
     props: { showResult: true },
   });
 

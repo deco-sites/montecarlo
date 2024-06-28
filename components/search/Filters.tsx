@@ -12,6 +12,25 @@ import { parseRange } from "apps/commerce/utils/filters.ts";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
 import RangeSlider from "../../islands/RangeSlider.tsx";
+import { useSection } from "deco/hooks/useSection.ts";
+
+const useUrlRebased = (overrides: string | undefined, base: string) => {
+  let url: string | undefined = undefined;
+
+  if (overrides) {
+    const temp = new URL(overrides, base);
+    const final = new URL(base);
+
+    final.pathname = temp.pathname;
+    for (const [key, value] of temp.searchParams.entries()) {
+      final.searchParams.set(key, value);
+    }
+
+    url = final.href;
+  }
+
+  return url;
+};
 
 export interface Props {
   filters: ProductListingPage["filters"];
@@ -28,7 +47,16 @@ function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
 ) {
   return (
-    <a href={url} rel="nofollow" class="flex items-center gap-2">
+    <a
+      hx-swap="outerHTML"
+      hx-get={useSection({
+        href: "http://localhost:8000/teste",
+      })}
+      hx-target="closest section"
+      id="resultTeste"
+      rel="nofollow"
+      class="flex items-center gap-2"
+    >
       <div aria-checked={selected} class="checkbox" />
       <span class="text-sm md:max-w-[200px]">{label}</span>
       {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
@@ -125,7 +153,7 @@ function Filters({ filters, layout }: Props) {
                   layout === "horizontal"
                     ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
                     : ""
-                } ${openFilter.value !== index ? "hidden" : ""}`}
+                } ${openFilter.value !== index ? "flex" : ""}`}
               >
                 <FilterValues {...filter} layout={layout} />
               </div>
