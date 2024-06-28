@@ -8,6 +8,7 @@ export interface Props {
   page: ProductListingPage | null;
   startingPage?: 0 | 1;
   partial?: "hideMore" | "hideLess";
+  showResult?: boolean;
 }
 
 const useUrlRebased = (overrides: string | undefined, base: string) => {
@@ -39,8 +40,8 @@ function Result(props: Props) {
   const page = props.page!;
 
   return (
-    <div id="testeR">
-      {props}
+    <div id="">
+      {JSON.stringify(props)}
     </div>
   );
 }
@@ -49,12 +50,8 @@ function Teste(props: SectionProps<typeof loader>) {
   const { title, url } = props;
 
   const buttonSearchOutOfStock = useSection({
-    href:
-      "http://localhost:8000/Joias/Masculino?map=c%2CspecificationFilter_162",
-    props: { title: "testett" },
+    props: { showResult: true },
   });
-
-  console.log("props teste", props.page);
 
   return (
     <div id="testeR">
@@ -63,14 +60,14 @@ function Teste(props: SectionProps<typeof loader>) {
       </h1>
       <button
         class="bg-primary p-2"
-        hx-swap="outerHTML show:parent:top"
+        hx-swap="outerHTML"
         hx-get={buttonSearchOutOfStock}
-        hx-target="#testeR"
+        hx-target="closest section"
         id="btnStock"
       >
         Button HTMX
       </button>
-      <Result {...props} />
+      {props.showResult && <Result {...props} />}
     </div>
   );
 }
@@ -82,11 +79,7 @@ function SearchResult(
     return <NotFound />;
   }
 
-  return (
-    <>
-      <Teste {...props} page={page} />
-    </>
-  );
+  return <Teste {...props} page={page} />;
 }
 
 export const loader = (props: Props, req: Request) => {
