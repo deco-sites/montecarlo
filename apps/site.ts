@@ -72,12 +72,21 @@ export default function Site(
     );
   }
 
+  console.log(state);
+
   return {
-    state: { ...state, firstByteThresholdMS: true },
+    state: {
+      ...state,
+      flavor: { framework: "htmx" },
+      firstByteThresholdMS: true,
+    },
     manifest,
     dependencies: [
       commerce({
         ...state,
+
+        flavor: { framework: "htmx" },
+        firstByteThresholdMS: true,
         global: theme ? [...(state.global ?? []), theme] : state.global,
       }),
     ],

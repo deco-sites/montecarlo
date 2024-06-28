@@ -9,6 +9,7 @@ import { useOffer } from "../../sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
+import { Section } from "deco/mod.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -35,6 +36,8 @@ export interface Props {
 
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
+
+  sections: Section[];
 }
 
 function NotFound() {

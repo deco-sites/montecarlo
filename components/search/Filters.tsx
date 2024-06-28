@@ -46,11 +46,14 @@ const isRange = (filter: Filter): filter is FilterRange =>
 function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
 ) {
+  const href = new URL(url, "http://localhost:8000").href;
+
   return (
-    <a
+    <button
       hx-swap="outerHTML"
       hx-get={useSection({
-        href: "http://localhost:8000/teste",
+        href,
+        props: {},
       })}
       hx-target="closest section"
       id="resultTeste"
@@ -60,7 +63,7 @@ function ValueItem(
       <div aria-checked={selected} class="checkbox" />
       <span class="text-sm md:max-w-[200px]">{label}</span>
       {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
-    </a>
+    </button>
   );
 }
 

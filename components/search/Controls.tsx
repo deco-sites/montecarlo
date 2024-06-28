@@ -69,7 +69,9 @@ function SearchControls(
               </Button>
             </div>
             <div class="flex-grow overflow-auto flex flex-col justify-between pb-5 gap-5">
-              <ul class={`flex flex-col gap-4 md:gap-8 p-4 md:pl-0`}>
+              <ul
+                class={`flex flex-col gap-4 md:gap-8 p-4 md:pl-0`}
+              >
                 <Filters filters={filters} />
               </ul>
 
