@@ -1,1 +1,1 @@
-export {default} from "../../components/cards/CollectionCard.tsx";
+export { default } from "../../components/cards/CollectionCard.tsx";
