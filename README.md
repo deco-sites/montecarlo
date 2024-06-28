@@ -1,4 +1,4 @@
-# Storefront starter by deco.cx
+# Storefront starter by deco.cx 
 
 A fully featured starter to help you customize and deploy an ecommerce website.
 in minutes.
