@@ -1,5 +1,6 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { useId } from "../../sdk/useId.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface StyleProps {
   textAlign?: "left" | "center" | "right";
@@ -27,6 +28,7 @@ export interface Props {
   image: {
     mobile: ImageWidget;
     desktop: ImageWidget;
+    altText?: string;
   };
   placement: "left" | "right";
   style: StyleProps;
@@ -52,38 +54,58 @@ export default function HeroTextWithImage(props: Props) {
       {placement == "left"
         ? (
           <div class={`h-full order-1 sm:order-none`}>
-            <img
-              class="w-full object-cover block sm:hidden"
-              src={image.mobile}
-              alt={title}
-              decoding="async"
-              loading="eager"
-            />
-            <img
-              class="w-full h-full object-cover max-h-[420px] hidden sm:block"
-              src={image.desktop}
-              alt={title}
-              decoding="async"
-              loading="eager"
-            />
+            <Picture preload={true}>
+              <Source
+                media="(max-width: 1023px)"
+                src={image.mobile || ""}
+                width={360}
+                height={208}
+                class="w-full object-cover"
+              />
+              <Source
+                media="(min-width: 1024px)"
+                src={image.desktop || ""}
+                width={1434}
+                height={572}
+                class="w-full object-cover"
+              />
+              <img
+                class="w-full h-full object-cover lg:max-h-[420px]"
+                preload={"true"}
+                loading={"eager"}
+                src={image.desktop || ""}
+                alt={image.altText}
+                title={title}
+              />
+            </Picture>
           </div>
         )
         : (
           <div class={`h-full order-1 sm:order-1`}>
-            <img
-              class="w-full object-cover block sm:hidden"
-              src={image.mobile}
-              alt={title}
-              decoding="async"
-              loading="eager"
-            />
-            <img
-              class="w-full h-full object-cover max-h-[420px] hidden sm:block"
-              src={image.desktop}
-              alt={title}
-              decoding="async"
-              loading="eager"
-            />
+            <Picture preload={true}>
+              <Source
+                media="(max-width: 1023px)"
+                src={image.mobile || ""}
+                width={360}
+                height={208}
+                class="w-full object-cover"
+              />
+              <Source
+                media="(min-width: 1024px)"
+                src={image.desktop || ""}
+                width={1434}
+                height={572}
+                class="w-full object-cover"
+              />
+              <img
+                class="w-full h-full object-cover max-h-[420px]"
+                preload={"true"}
+                loading={"eager"}
+                src={image.desktop || ""}
+                alt={image.altText}
+                title={title}
+              />
+            </Picture>
           </div>
         )}
 

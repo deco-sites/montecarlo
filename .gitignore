@@ -77,3 +77,9 @@ deno.lock
 # deco files
 .decofile.json
 .metadata/**/*
+
+
+# Deco files
+
+_docker_deps.ts
+.metadata/changeset.json

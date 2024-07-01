@@ -1,7 +1,7 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
-import type { HTMLWidget } from "apps/admin/widgets.ts";
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface StyleProps {
   textAlign?: "left" | "center" | "right";
@@ -29,6 +29,7 @@ export interface Props {
   image: {
     mobile: ImageWidget;
     desktop: ImageWidget;
+    alt?: string;
   };
   placement: "left" | "right";
   style: StyleProps;
@@ -57,20 +58,30 @@ export default function HeroTextWithImage(props: Props) {
       style={{ backgroundColor: style.backgroundColor, color: style.fontColor }}
     >
       <div class={`h-full ${PLACEMENT[placement]}`}>
-        <img
-          class="w-full object-cover block md:hidden"
-          src={image.mobile}
-          alt={title}
-          decoding="async"
-          loading="eager"
-        />
-        <img
-          class="w-full h-full object-cover max-h-[704px] hidden md:block"
-          src={image.desktop}
-          alt={title}
-          decoding="async"
-          loading="eager"
-        />
+        <Picture preload={true}>
+          <Source
+            media="(max-width: 1023px)"
+            src={image.mobile || ""}
+            width={375}
+            height={293}
+            class="w-full object-cover"
+          />
+          <Source
+            media="(min-width: 1024px)"
+            src={image.desktop || ""}
+            width={756}
+            height={590}
+            class="w-full object-cover"
+          />
+          <img
+            class="w-full h-full object-cover"
+            src={image.desktop || ""}
+            preload={"true"}
+            decoding={"sync"}
+            alt={image.alt}
+            loading={"eager"}
+          />
+        </Picture>
       </div>
 
       <div class="w-full h-full flex-1 flex flex-col px-10 md:items-center justify-end lg:justify-center order-0">
