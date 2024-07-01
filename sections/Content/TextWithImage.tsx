@@ -1,3 +1,4 @@
+import { Picture, Source } from "apps/website/components/Picture.tsx";
 import {
   SendEventOnClick,
   SendEventOnView,
@@ -70,20 +71,30 @@ export default function TextWithImage({
       style={{ backgroundColor: style.backgroundColor, color: style.fontColor }}
     >
       <div class={`h-full ${PLACEMENT[placement]}`} id={id}>
-        <img
-          class="w-full object-cover block md:hidden"
-          src={image.mobile}
-          alt={title}
-          decoding="async"
-          loading="lazy"
-        />
-        <img
-          class="w-full h-full object-cover max-h-[704px] hidden md:block"
-          src={image.desktop}
-          alt={title}
-          decoding="async"
-          loading="lazy"
-        />
+        <Picture>
+          <Source
+            media="(max-width: 1023px)"
+            src={image.mobile || ""}
+            width={375}
+            height={418}
+            class="w-full object-cover"
+          />
+          <Source
+            media="(min-width: 1024px)"
+            src={image.desktop || ""}
+            width={632}
+            height={704}
+            class="w-full object-cover"
+          />
+          <img
+            class="w-full lg:h-full object-cover lg:max-h-[704px]"
+            preload={"true"}
+            loading={"eager"}
+            src={image.desktop || ""}
+            alt={title}
+            title={title}
+          />
+        </Picture>
         <SendEventOnView
           id={id}
           event={{
