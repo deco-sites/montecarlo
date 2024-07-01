@@ -22,6 +22,7 @@ export interface Props {
    * @format html
    */
   subTitle?: string;
+  columnsMobile?: 1 | 2 | 3;
   cards: Card[];
 }
 
@@ -31,7 +32,7 @@ const SIZECARD = {
   6: "w-[calc(33%-0.5rem)]",
 };
 
-const DashCard = ({ title, subTitle, cards }: Props) => {
+const DashCard = ({ title, subTitle, cards, columnsMobile }: Props) => {
   const id = useId();
 
   return (
@@ -44,11 +45,11 @@ const DashCard = ({ title, subTitle, cards }: Props) => {
         <SubTitle text={subTitle} />
       </div>
 
-      <div class="grid grid-cols-3 lg:flex lg:flex-wrap gap-4 justify-center md:gap-5 w-full m-auto max-w-[1000px]">
+      <div class={`grid grid-cols-${columnsMobile ? columnsMobile : 2} lg:flex lg:flex-wrap gap-4 justify-center md:gap-5 w-full m-auto max-w-[1000px]`}>
         {cards.map((card, index) => {
           return (
             <div
-              class={"flex text-black hover:bg-primary flex-col justify-center items-center w-full max-w-[198px] h-[70px] sm:h-[100px] 2xl:h-[120px] border-2 border-primary cursor-pointer group" +
+              class={"flex text-black hover:bg-primary flex-col justify-center items-center w-full md:max-w-[198px] h-[70px] sm:h-[100px] 2xl:h-[120px] border-2 border-primary cursor-pointer group" +
                 `${SIZECARD[cards.length as keyof typeof SIZECARD]}`}
               id={id + index}
             >
