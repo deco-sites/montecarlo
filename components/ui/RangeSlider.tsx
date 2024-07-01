@@ -1,5 +1,9 @@
+import { useSection } from "deco/hooks/useSection.ts";
 import { formatPrice } from "../../sdk/format.ts";
 import { useEffect, useRef, useState } from "preact/hooks";
+import { useSignal, useSignalEffect } from "@preact/signals";
+import { useScript } from "deco/hooks/useScript.ts";
+import htmx from "apps/decohub/apps/htmx.ts";
 
 export interface Props {
   classProps?: string;
@@ -8,57 +12,57 @@ export interface Props {
   label?: string;
   min: number;
   max: number;
+  url: string;
 }
 
 function RangeSlider(props: Props) {
-  const { classProps, min, max, sliderClass, label, name } = props;
 
-  const rangeSliderRef = useRef<HTMLDivElement>(null);
-  const leftKnobRef = useRef<HTMLButtonElement>(null);
-  const rightKnobRef = useRef<HTMLButtonElement>(null);
-  const rangeFillRef = useRef<HTMLDivElement>(null);
+  const { label, min, max, sliderClass, classProps, name, url } = props;
 
-  const queryParams = new URLSearchParams(window.location.search);
-  const filter = queryParams.get(`filter.${name}`);
-  const [initialMin, initialMax] = filter
-    ? filter.split(":").map(Number)
-    : [min, max];
+  const searchParams = new URLSearchParams(window.location.search);
+  const priceFilter = searchParams.get("filter.price");
 
-  const [leftValue, setLeftValue] = useState(initialMin);
-  const [rightValue, setRightValue] = useState(initialMax);
+  const [initialMin, initialMax] = priceFilter ? priceFilter.split(":").map(Number) : [min, max];
 
-  const leftValueRef = useRef(leftValue);
-  const rightValueRef = useRef(rightValue);
+  const onLoad = () => {
+    const rangeSlider = document.querySelector('#range-slider');
+    const leftKnob = rangeSlider!.querySelector('.knob.left');
+    const rightKnob = rangeSlider!.querySelector('.knob.right');
+    const rangeFill = rangeSlider!.querySelector('.range-fill');
+    const rangeMinInterval = rangeSlider!.querySelector('.range-min-interval');
+    const rangeMaxInterval = rangeSlider!.querySelector('.range-max-interval');
+    const rangeBar = rangeSlider!.querySelector(".range-bar")
 
-  useEffect(() => {
-    leftValueRef.current = leftValue;
-  }, [leftValue]);
+    const min = parseInt(rangeSlider!.getAttribute('min')!);
+    const max = parseInt(rangeSlider!.getAttribute('max')!);
 
-  useEffect(() => {
-    rightValueRef.current = rightValue;
-  }, [rightValue]);
+    const searchParams = new URLSearchParams(window.location.search);
+    const priceFilter = searchParams.get("filter.price");
 
-  useEffect(() => {
-    const rangeSlider = rangeSliderRef.current!;
-    const rangeBar = rangeSlider.querySelector(".range-bar") as HTMLDivElement;
-    const leftKnob = leftKnobRef.current!;
-    const rightKnob = rightKnobRef.current!;
-    const rangeFill = rangeFillRef.current!;
+    const [initialMin, initialMax] = priceFilter ? priceFilter.split(":").map(Number) : [min, max];
 
-    const rangeBarRect = rangeBar.getBoundingClientRect();
-    const valuePerPixel = (max - min) / rangeBarRect.width;
-
-    const initialLeftPosition = (initialMin - min) / valuePerPixel;
-    const initialRightPosition = (initialMax - min) / valuePerPixel;
-
-    leftKnob.style.left = initialLeftPosition + "px";
-    rightKnob.style.left = initialRightPosition - leftKnob.offsetWidth + "px";
-    rangeFill.style.width = rightKnob.offsetLeft - leftKnob.offsetLeft +
-      leftKnob.offsetWidth + "px";
-    rangeFill.style.left = leftKnob.offsetLeft + "px";
+    let leftValue = initialMin;
+    let rightValue = initialMax;
 
     let isDraggingLeft = false;
     let isDraggingRight = false;
+
+    const rangeBarRect = rangeBar!.getBoundingClientRect();
+    const valuePerPixel = (max - min) / rangeBarRect.width;
+
+    const initialLeftPosition = (leftValue - min) / valuePerPixel;
+    const initialRightPosition = (rightValue - min) / valuePerPixel;
+
+    console.log("position", initialLeftPosition, leftValue, min, valuePerPixel)
+    
+    leftKnob!.style.left = initialLeftPosition + 'px';
+    rightKnob!.style.left = initialRightPosition - leftKnob!.offsetWidth + 'px';
+    rangeFill!.style.width = rightKnob!.offsetLeft - leftKnob!.offsetLeft + leftKnob!.offsetWidth + 'px';
+    rangeFill!.style.left = leftKnob!.offsetLeft + 'px';
+    
+
+    rangeMinInterval!.textContent = `R$ ${leftValue},00`;
+    rangeMaxInterval!.textContent = `R$ ${rightValue},00`;
 
     const startDragLeft = () => (isDraggingLeft = true);
     const startDragRight = () => (isDraggingRight = true);
@@ -68,121 +72,89 @@ function RangeSlider(props: Props) {
       isDraggingRight = false;
 
       const queryParams = new URLSearchParams(window.location.search);
-      queryParams.set(
-        `filter.${name}`,
-        `${leftValueRef.current}:${rightValueRef.current}`,
-      );
+      queryParams.set(`filter.price`, `${leftValue}:${rightValue}`);
 
-      window.location.href =
-        `${window.location.origin}${window.location.pathname}?${queryParams}`;
+      const url = `${window.location.pathname}?${queryParams}`;
+      rangeSlider.setAttribute('hx-get', url);
+      rangeSlider.setAttribute('hx-push-url', 'true');
+      htmx.trigger(rangeSlider, 'trigger-range-change');
     };
 
-    const handleDragSlider = (event: MouseEvent | Touch) => {
+    const handleDragSlider = (event: MouseEvent | TouchEvent) => {
       if (isDraggingLeft || isDraggingRight) {
-        const rangeBarRect = rangeBar.getBoundingClientRect();
-        let newX = event.clientX - rangeBarRect.left;
+        const rangeBarRect = rangeSlider.querySelector('.range-bar')!.getBoundingClientRect();
+        const valuePerPixel = (max - min) / rangeBarRect.width;
+        let newX = (event instanceof MouseEvent ? event.clientX : event.touches[0].clientX) - rangeBarRect.left;
 
         newX = Math.max(0, Math.min(rangeBarRect.width, newX));
 
         if (isDraggingLeft) {
-          leftKnob.style.left = newX + "px";
-          if (newX - leftKnob.offsetWidth > rightKnob.offsetLeft) {
-            rightKnob.style.left = newX - leftKnob.offsetWidth + "px";
-          }
+          leftKnob!.style.left = newX + 'px';
+          leftValue = Math.round(newX * valuePerPixel) + min;
         }
 
         if (isDraggingRight) {
-          rightKnob.style.left = newX - leftKnob.offsetWidth + "px";
-          if (newX < leftKnob.offsetLeft) {
-            leftKnob.style.left = newX + "px";
-          }
+          rightKnob!.style.left = newX - leftKnob!.offsetWidth + 'px';
+          rightValue = Math.round((newX + rightKnob!.offsetWidth) * valuePerPixel) + min;
         }
 
-        rangeFill.style.width = rightKnob.offsetLeft - leftKnob.offsetLeft +
-          leftKnob.offsetWidth + "px";
-        rangeFill.style.left = leftKnob.offsetLeft + "px";
+        rangeFill!.style.width = rightKnob!.offsetLeft - leftKnob!.offsetLeft + leftKnob!.offsetWidth + 'px';
+        rangeFill!.style.left = leftKnob!.offsetLeft + 'px';
 
-        const minValue = parseInt(rangeSlider.getAttribute("min")!);
-        const maxValue = parseInt(rangeSlider.getAttribute("max")!);
-        const valuePerPixel = (maxValue - minValue) / rangeBarRect.width;
-
-        const leftValue = Math.round(leftKnob.offsetLeft * valuePerPixel) +
-          minValue;
-        const rightValue = Math.round(
-          (rightKnob.offsetLeft + rightKnob.offsetWidth) * valuePerPixel,
-        ) + minValue;
-
-        setLeftValue(leftValue);
-        setRightValue(rightValue);
+        rangeMinInterval!.textContent = `R$ ${leftValue},00`;
+        rangeMaxInterval!.textContent = `R$ ${rightValue},00`;
       }
     };
 
-    leftKnob.addEventListener("mousedown", startDragLeft);
-    rightKnob.addEventListener("mousedown", startDragRight);
-    rangeSlider.addEventListener(
-      "mousemove",
-      handleDragSlider as EventListener,
-    );
-    rangeSlider.addEventListener("mouseup", stopDragging);
+    leftKnob!.addEventListener('mousedown', startDragLeft);
+    rightKnob!.addEventListener('mousedown', startDragRight);
+    rangeSlider!.addEventListener('mousemove', handleDragSlider);
+    rangeSlider!.addEventListener('mouseup', stopDragging);
 
-    leftKnob.addEventListener("touchstart", (event) => {
-      startDragLeft();
-    });
-    rightKnob.addEventListener("touchstart", (event) => {
-      startDragRight();
-    });
-    rangeSlider.addEventListener("touchmove", (event) => {
-      handleDragSlider(event.touches[0]);
-    });
-    rangeSlider.addEventListener("touchend", stopDragging);
+    leftKnob!.addEventListener('touchstart', startDragLeft);
+    rightKnob!.addEventListener('touchstart', startDragRight);
+    rangeSlider!.addEventListener('touchmove', (event) => handleDragSlider(event.touches[0]));
+    rangeSlider!.addEventListener('touchend', stopDragging);
 
-    return () => {
-      leftKnob.removeEventListener("mousedown", startDragLeft);
-      rightKnob.removeEventListener("mousedown", startDragRight);
-      rangeSlider.removeEventListener(
-        "mousemove",
-        handleDragSlider as EventListener,
-      );
-      rangeSlider.removeEventListener("mouseup", stopDragging);
-
-      leftKnob.removeEventListener("touchstart", startDragLeft);
-      rightKnob.removeEventListener("touchstart", startDragRight);
-      rangeSlider.removeEventListener("touchmove", (event) => {
-        handleDragSlider(event.touches[0]);
-      });
-      rangeSlider.removeEventListener("touchend", stopDragging);
-    };
-  }, [min, max, initialMin, initialMax, name]);
+    htmx.on('trigger-range-change', function (event) {
+      event.preventDefault()
+      const url = event.target.getAttribute('hx-get');
+      history.pushState({}, "", url);
+      htmx.ajax('GET', url);
+    });
+  };
 
   return (
     <>
       <span class="font-poppins text-sm">{label}</span>
       <div
         class={`relative ${classProps ? classProps : ""}`}
-        ref={rangeSliderRef}
         data-range-slider
-        min={min}
-        max={max}
+        min={initialMin}
+        max={initialMax}
         name={name}
+        id="range-slider"
+        hx-swap="outerHTML"
+        hx-target="closest section"
+        hx-indicator="#spinner"
+        data-url=""
       >
         <div class={`range-slider ${sliderClass ? sliderClass : ""}`}>
           <div class="range-bar">
-            <div ref={rangeFillRef} class="range-fill"></div>
+            <div class="range-fill"></div>
           </div>
-          <button ref={leftKnobRef} class="knob left"></button>
-          <button ref={rightKnobRef} class="knob right"></button>
+          <button class="knob left"></button>
+          <button class="knob right"></button>
         </div>
 
-        <div class="flex justify-center gap-2 w-[200px] font-poppins text-sm text-[#AAA89C]">
-          <span class="range-min-interval">
-            {formatPrice(leftValue ? leftValue : 1)}
-          </span>{" "}
-          -{" "}
-          <span class="range-max-interval">
-            {formatPrice(rightValue ? rightValue : 1)}
-          </span>
+        <div class="range-values flex justify-center gap-2 w-[200px] font-poppins text-sm text-[#AAA89C]" data-min data-max>
+          <span class="range-min-interval">{formatPrice(min)} </span> - <span class="range-max-interval">{formatPrice(max)}</span>
         </div>
       </div>
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(onLoad) }}
+      />
     </>
   );
 }

@@ -11,8 +11,8 @@ import type {
 import { parseRange } from "apps/commerce/utils/filters.ts";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
-import RangeSlider from "../../islands/RangeSlider.tsx";
 import { useSection } from "deco/hooks/useSection.ts";
+import RangeSlider from "../../components/ui/RangeSlider.tsx";
 
 const useUrlRebased = (overrides: string | undefined, base: string) => {
   let url: string | undefined = undefined;
@@ -46,7 +46,7 @@ const isRange = (filter: Filter): filter is FilterRange =>
 function ValueItem(
   { url, selected, label, quantity }: FilterToggleValue,
 ) {
-  const href = new URL(url, "http://localhost:8000").href;
+  const href = new URL(url, "http://localhost:8000/s").href;
 
   return (
     <button
@@ -59,6 +59,9 @@ function ValueItem(
       id="resultTeste"
       rel="nofollow"
       class="flex items-center gap-2"
+      hx-trigger="click delay:1s"
+      hx-indicator="#spinner"
+      hx-push-url={href}
     >
       <div aria-checked={selected} class="checkbox" />
       <span class="text-sm md:max-w-[200px]">{label}</span>
@@ -80,9 +83,8 @@ function FilterValues({ key, values, layout }: FilterToggleProps) {
 
   return (
     <ul
-      class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${
-        layout !== "aside" && cols ? `md:grid ${cols}` : ""
-      }`}
+      class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${layout !== "aside" && cols ? `md:grid ${cols}` : ""
+        }`}
     >
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
@@ -115,13 +117,18 @@ function FilterValues({ key, values, layout }: FilterToggleProps) {
   );
 }
 
-function Filters({ filters, layout }: Props) {
+function Filters({ filters, layout, url }: Props & { url: string }) {
   const openFilter = useSignal<number | null>(null);
 
   const handleOpenFilter = (index: number) => {
     if (openFilter.value !== index) openFilter.value = index;
     else openFilter.value = null;
+
+
   };
+
+  const href = new URL(url).href
+
   return (
     <>
       {filters
@@ -135,9 +142,8 @@ function Filters({ filters, layout }: Props) {
 
           return (
             <li
-              class={`flex flex-col relative text-black font-poppins text-sm cursor-pointer border-b border-b-black ${
-                layout !== "horizontal" ? "pb-2" : "md:border-0"
-              }`}
+              class={`flex flex-col relative text-black font-poppins text-sm cursor-pointer border-b group border-b-black ${layout !== "horizontal" ? "pb-2" : "md:border-0"
+                }`}
             >
               <span
                 class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap"
@@ -152,11 +158,10 @@ function Filters({ filters, layout }: Props) {
                 </Icon>
               </span>
               <div
-                class={`${
-                  layout === "horizontal"
-                    ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
-                    : ""
-                } ${openFilter.value !== index ? "flex" : ""}`}
+                class={`${layout === "horizontal"
+                  ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
+                  : ""
+                  } ${openFilter.value !== index ? "" : ""} hidden group-hover:flex `}
               >
                 <FilterValues {...filter} layout={layout} />
               </div>
@@ -176,6 +181,7 @@ function Filters({ filters, layout }: Props) {
               label={filter.label}
               min={filter.values.min}
               max={filter.values.max}
+              url={url}
             />
           );
         })}
