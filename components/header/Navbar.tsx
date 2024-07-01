@@ -237,6 +237,7 @@ function Navbar(
                 width={logo.width || 100}
                 height={logo.height || 13}
                 class="w-full h-auto max-w-60"
+                loading={"eager"}
               />
               <SendEventOnClick
                 id={id + "logo"}

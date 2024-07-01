@@ -88,8 +88,7 @@ export default function TextWithImage({
           />
           <img
             class="w-full lg:h-full object-cover lg:max-h-[704px]"
-            preload={"true"}
-            loading={"eager"}
+            loading={"lazy"}
             src={image.desktop || ""}
             alt={title}
             title={title}
