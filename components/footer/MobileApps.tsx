@@ -1,3 +1,5 @@
+import Image from "apps/website/components/Image.tsx";
+
 export default function MobileApps(
   { content }: { content: { apple?: string; android?: string } },
 ) {
@@ -11,10 +13,10 @@ export default function MobileApps(
               target="_blank"
               aria-label={`Download on the App Store at link ${content?.apple}`}
             >
-              <img
+              <Image
                 loading="lazy"
-                width="135"
-                height="40"
+                width={135}
+                height={40}
                 src="/image/app-apple.png"
                 alt="Download on the App Store"
               />
@@ -26,10 +28,10 @@ export default function MobileApps(
               target="_blank"
               aria-label={`Get it on Google Play at link ${content?.android}`}
             >
-              <img
+              <Image
                 loading="lazy"
-                width="135"
-                height="40"
+                width={135}
+                height={40}
                 src="/image/app-android.png"
                 alt="Get it on Google Play"
               />

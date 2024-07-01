@@ -254,6 +254,7 @@ function Collection(props: CollectionProps) {
             class="w-full h-full object-cover"
             src={props.image?.desktop || ""}
             alt={props.image?.alt}
+            loading={"lazy"}
           />
         </Picture>
       </div>
