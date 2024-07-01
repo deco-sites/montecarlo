@@ -267,7 +267,7 @@ function Newsletter({
           </div>
         </form>
       </div>
-      <SendEventOnView
+      {/* <SendEventOnView
         id={id}
         event={{
           name: "view_promotion",
@@ -279,7 +279,7 @@ function Newsletter({
             items: [],
           },
         }}
-      />
+      /> */}
     </div>
   );
 }

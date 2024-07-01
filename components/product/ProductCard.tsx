@@ -188,7 +188,7 @@ function MiniProductCard({
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
-          <SendEventOnClick
+          {/* <SendEventOnClick
             id={id}
             event={{
               name: "add_to_cart",
@@ -198,7 +198,7 @@ function MiniProductCard({
                 items: [eventItem],
               },
             }}
-          />
+          /> */}
           <Image
             src={front.url!}
             alt={front.alternateName}

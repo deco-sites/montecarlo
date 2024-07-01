@@ -99,7 +99,7 @@ export default function Benefits({
       <div class="block md:hidden">
         <Carousel {...slider} children={listOfBenefits} />
       </div>
-      <SendEventOnView
+      {/* <SendEventOnView
         id={id}
         event={{
           name: "view_promotion",
@@ -111,7 +111,7 @@ export default function Benefits({
             items: [],
           },
         }}
-      />
+      /> */}
     </div>
   );
 }
