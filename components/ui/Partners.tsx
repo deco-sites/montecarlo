@@ -1,8 +1,10 @@
 import { useMemo } from "preact/hooks";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-
-export interface Image {
+import Image from "apps/website/components/Image.tsx";
+export interface ImageInterface {
   image: ImageWidget;
+  width?: number;
+  height?: number;
   altText: string;
 }
 
@@ -13,7 +15,7 @@ export interface Props {
 }
 
 export interface ColumnImages {
-  colImages: Image[];
+  colImages: ImageInterface[];
 }
 
 const IMAGES = [
@@ -56,11 +58,14 @@ function Partners(props: Props) {
                 } items-center gap-24`}
                 style={`animation-delay: ${300 * index}ms`}
               >
-                {colImages.map((item: Image) => (
-                  <img
+                {colImages.map((item: ImageInterface) => (
+                  <Image
                     key={index}
+                    width={item.width || 150}
+                    height={item.height || 150}
                     src={item.image}
                     alt={item.altText || ""}
+                    loading={"lazy"}
                   />
                 ))}
               </div>

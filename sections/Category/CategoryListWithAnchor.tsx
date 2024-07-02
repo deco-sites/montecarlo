@@ -1,6 +1,3 @@
-import Header from "../../components/ui/SectionHeader.tsx";
-import Slider from "../../components/ui/Slider.tsx";
-import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
@@ -115,7 +112,7 @@ function CategoryListWithAnchor(props: Props) {
             <Image
               loading={"lazy"}
               fetchPriority="low"
-              decoding="sync"
+              decoding="async"
               sizes="(max-width: 640px) 100vw, 20vw"
               src={category.image}
               width={163}

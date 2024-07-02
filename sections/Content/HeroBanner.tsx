@@ -46,7 +46,7 @@ export default function HeroBanner({
     <div class="relative flex items-end lg:max-h-[90vh] lg:min-h-[600px]">
       <div class="bg-red w-full h-full" id={promotion + "div"}>
         <a href={urlBanner} id={promotion}>
-          <Picture>
+          <Picture preload={true}>
             <Source
               media="(max-width: 768px)"
               src={image.mobile || ""}
@@ -65,6 +65,8 @@ export default function HeroBanner({
               class="w-full h-full object-cover"
               src={image.desktop || ""}
               alt={image.alt}
+              loading={"eager"}
+              preload={"true"}
             />
           </Picture>
         </a>

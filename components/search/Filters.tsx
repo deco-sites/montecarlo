@@ -44,13 +44,17 @@ const isRange = (filter: Filter): filter is FilterRange =>
   filter["@type"] === "FilterRange";
 
 function ValueItem(
-  { url, selected, label, quantity }: FilterToggleValue,
+  { url, selected, label, quantity, urlPage }: FilterToggleValue & { urlPage: string }
 ) {
-  const href = new URL(url, "http://localhost:8000/s").href;
+  const hrefPage = new URL(urlPage).href
+
+  const href = new URL(url, hrefPage + "/s").href;
+
+  console.log("joias", href, url)
 
   return (
     <button
-      hx-swap="outerHTML"
+      hx-swap="outerHTML show:parent:top"
       hx-get={useSection({
         href,
         props: {},
@@ -74,7 +78,7 @@ interface FilterToggleProps extends FilterToggle {
   layout?: string;
 }
 
-function FilterValues({ key, values, layout }: FilterToggleProps) {
+function FilterValues({ key, values, layout, urlPage }: FilterToggleProps & { urlPage: string }) {
   const flexDirection = key === "tamanho" ? "flex-row" : "flex-col";
 
   const cols = values.length <= 10 && "md:grid-cols-1" ||
@@ -83,9 +87,8 @@ function FilterValues({ key, values, layout }: FilterToggleProps) {
 
   return (
     <ul
-      class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${
-        layout !== "aside" && cols ? `md:grid ${cols}` : ""
-      }`}
+      class={`flex flex-wrap gap-y-4 gap-x-8 my-2 ${flexDirection} w-max ${layout !== "aside" && cols ? `md:grid ${cols}` : ""
+        }`}
     >
       {values.map((item) => {
         const { url, selected, value, quantity } = item;
@@ -107,12 +110,12 @@ function FilterValues({ key, values, layout }: FilterToggleProps) {
           return range && (
             <ValueItem
               {...item}
-              label={`${formatPrice(range.from)} - ${formatPrice(range.to)}`}
+              label={`${formatPrice(range.from)} - ${formatPrice(range.to)}`} urlPage={urlPage}
             />
           );
         }
 
-        return <ValueItem {...item} />;
+        return <ValueItem {...item} urlPage={urlPage} />;
       })}
     </ul>
   );
@@ -126,7 +129,6 @@ function Filters({ filters, layout, url }: Props & { url: string }) {
     else openFilter.value = null;
   };
 
-  const href = new URL(url).href;
 
   return (
     <>
@@ -141,9 +143,8 @@ function Filters({ filters, layout, url }: Props & { url: string }) {
 
           return (
             <li
-              class={`flex flex-col relative text-black font-poppins text-sm cursor-pointer border-b group border-b-black ${
-                layout !== "horizontal" ? "pb-2" : "md:border-0"
-              }`}
+              class={`flex flex-col relative text-black font-poppins text-sm cursor-pointer border-b group border-b-black ${layout !== "horizontal" ? "pb-2" : "md:border-0"
+                }`}
             >
               <span
                 class="flex justify-between items-center font-poppins text-sm gap-2 whitespace-nowrap"
@@ -158,15 +159,13 @@ function Filters({ filters, layout, url }: Props & { url: string }) {
                 </Icon>
               </span>
               <div
-                class={`${
-                  layout === "horizontal"
-                    ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
-                    : ""
-                } ${
-                  openFilter.value !== index ? "" : ""
-                } hidden group-hover:flex `}
+                class={`${layout === "horizontal"
+                  ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
+                  : ""
+                  } ${openFilter.value !== index ? "" : ""
+                  } hidden group-hover:flex `}
               >
-                <FilterValues {...filter} layout={layout} />
+                <FilterValues {...filter} layout={layout} urlPage={url} />
               </div>
             </li>
           );
