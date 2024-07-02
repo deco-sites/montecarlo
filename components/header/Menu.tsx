@@ -73,11 +73,7 @@ function Menu({ items }: Props) {
               : (
                 <a
                   href={item.href}
-                  class={`flex border-b-[1px] items-center justify-between px-4 py-4 m-auto w-full font-normal text-[14px] leading-[17.5px] ${
-                    index === items.length - 1
-                      ? "text-primary bg-secondary"
-                      : "text-primary-content"
-                  }`}
+                  class={`flex items-center justify-between py-3 m-auto w-full bg-white font-normal text-base text-black`}
                 >
                   {item.label}
                 </a>
