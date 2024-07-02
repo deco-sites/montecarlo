@@ -26,6 +26,30 @@ function RangeSlider(props: Props) {
     : [min, max];
 
   const onLoad = () => {
+    const formatters = new Map<string, Intl.NumberFormat>();
+
+    const formatter = (currency: string, locale: string) => {
+      const key = `${currency}::${locale}`;
+
+      if (!formatters.has(key)) {
+        formatters.set(
+          key,
+          new Intl.NumberFormat(locale, {
+            style: "currency",
+            currency,
+          }),
+        );
+      }
+
+      return formatters.get(key)!;
+    };
+
+    const formatPrice = (
+      price: number | undefined,
+      currency = "BRL",
+      locale = "pt-BR",
+    ) => price ? formatter(currency, locale).format(price) : null;
+
     const rangeSlider = document.querySelector("#range-slider");
     const leftKnob = rangeSlider!.querySelector(".knob.left");
     const rightKnob = rangeSlider!.querySelector(".knob.right");
@@ -62,8 +86,8 @@ function RangeSlider(props: Props) {
       leftKnob!.offsetWidth + "px";
     rangeFill!.style.left = leftKnob!.offsetLeft + "px";
 
-    rangeMinInterval!.textContent = `R$ ${leftValue},00`;
-    rangeMaxInterval!.textContent = `R$ ${rightValue},00`;
+    rangeMinInterval!.textContent = formatPrice(leftValue);
+    rangeMaxInterval!.textContent = formatPrice(rightValue);
 
     const startDragLeft = () => (isDraggingLeft = true);
     const startDragRight = () => (isDraggingRight = true);
@@ -107,8 +131,9 @@ function RangeSlider(props: Props) {
           leftKnob!.offsetWidth + "px";
         rangeFill!.style.left = leftKnob!.offsetLeft + "px";
 
-        rangeMinInterval!.textContent = `R$ ${leftValue},00`;
-        rangeMaxInterval!.textContent = `R$ ${rightValue},00`;
+        rangeMinInterval!.textContent = formatPrice(leftValue);
+        rangeMaxInterval!.textContent = formatPrice(rightValue);
+
       }
     };
 
@@ -161,8 +186,9 @@ function RangeSlider(props: Props) {
           data-min
           data-max
         >
-          <span class="range-min-interval">{formatPrice(min)}</span> -{" "}
-          <span class="range-max-interval">{formatPrice(max)}</span>
+          <span class="range-min-interval">{formatPrice(initialMin, "BRL")}</span> -{" "}
+          {console.log("format", formatPrice(initialMax))}
+          <span class="range-max-interval">{formatPrice(initialMax, "BRL")}</span>
         </div>
       </div>
       <script
