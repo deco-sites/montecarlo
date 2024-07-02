@@ -202,12 +202,13 @@ export default function TrioOfImagesAndProducts(
             return (
               <Slider.Item
                 index={index}
+                id={index.toString()}
                 class="carousel-item w-full lg:w-[calc(33.3333%-0.5rem)]"
               >
                 <Card
                   image={image}
                   index={index.toString()}
-                  id={id}
+                  id={index.toString()}
                   titleSection={title ? title : ""}
                 />
               </Slider.Item>
