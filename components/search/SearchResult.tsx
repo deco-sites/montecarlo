@@ -117,6 +117,7 @@ function Result({
             layout={layout?.variant}
             title={title}
             url={url.href}
+            columns={layout?.columns?.mobile || 2}
           />
         )}
 

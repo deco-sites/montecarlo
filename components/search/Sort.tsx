@@ -46,7 +46,7 @@ function Sort({ sortOptions, url }: Props & { url: string }) {
       <select
         id="sort"
         name="sort"
-        hx-swap="outerHTML"
+        hx-swap="outerHTML show:parent:top"
         hx-target="closest section"
         hx-indicator="#spinner"
         hx-trigger="change"

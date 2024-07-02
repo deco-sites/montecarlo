@@ -19,10 +19,20 @@ export type Props =
     displayFilter?: boolean;
     layout?: "aside" | "drawer" | "horizontal";
     title?: string;
+    columns?: 1 | 2;
   };
 
 function SearchControls(
-  { filters, breadcrumb, displayFilter, sortOptions, layout, title, url }:
+  {
+    filters,
+    breadcrumb,
+    displayFilter,
+    sortOptions,
+    layout,
+    title,
+    url,
+    columns = 2,
+  }:
     & Props
     & { url: string },
 ) {
@@ -192,21 +202,37 @@ function SearchControls(
               <div class={"flex col-span-2 justify-end w-full gap-2 my-2"}>
                 <button
                   class={`p-1 border ${
-                    columnsMobile.value === 1
-                      ? "border-[##AAA89C]"
-                      : "border-transparent"
+                    columns === 1 ? "border-[##AAA89C]" : "border-transparent"
                   }`}
-                  onClick={() => columnsMobile.value = 1}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-get={useSection({
+                    props: {
+                      layout: { columns: { mobile: 1 }, variant: "horizontal" },
+                    },
+                  })}
+                  hx-target="closest section"
+                  id="resultTeste"
+                  rel="nofollow"
+                  hx-trigger="click"
+                  hx-indicator="#spinner"
                 >
                   <Icon id="columnOne" width={32} height={16} />
                 </button>
                 <button
                   class={`p-1 border ${
-                    columnsMobile.value === 2
-                      ? "border-[##AAA89C]"
-                      : "border-transparent"
+                    columns === 2 ? "border-[##AAA89C]" : "border-transparent"
                   }`}
-                  onClick={() => columnsMobile.value = 2}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-get={useSection({
+                    props: {
+                      layout: { columns: { mobile: 2 }, variant: "horizontal" },
+                    },
+                  })}
+                  hx-target="closest section"
+                  id="resultTeste"
+                  rel="nofollow"
+                  hx-trigger="click"
+                  hx-indicator="#spinner"
                 >
                   <Icon id="columnTwo" width={35} height={16} />
                 </button>
