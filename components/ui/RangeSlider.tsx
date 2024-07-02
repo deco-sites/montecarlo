@@ -56,8 +56,6 @@ function RangeSlider(props: Props) {
     const initialLeftPosition = (leftValue - min) / valuePerPixel;
     const initialRightPosition = (rightValue - min) / valuePerPixel;
 
-    console.log("position", initialLeftPosition, leftValue, min, valuePerPixel);
-
     leftKnob!.style.left = initialLeftPosition + "px";
     rightKnob!.style.left = initialRightPosition - leftKnob!.offsetWidth + "px";
     rangeFill!.style.width = rightKnob!.offsetLeft - leftKnob!.offsetLeft +
