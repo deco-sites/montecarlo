@@ -10,6 +10,8 @@ import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { Section } from "deco/mod.ts";
+import { use } from "https://esm.sh/marked@9.1.1";
+import { useSection } from "deco/hooks/useSection.ts";
 
 export type Format = "Show More" | "Pagination";
 

@@ -33,7 +33,7 @@ const portugueseMappings = {
   "orders:desc": "Mais vendidos",
   "name:desc": "Nome - de Z a A",
   "name:asc": "Nome - de A a Z",
-  "release:desc": "Lançamentos",
+  "release:desc": "Mais recentes",
   "discount:desc": "Maior desconto",
 };
 

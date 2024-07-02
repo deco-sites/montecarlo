@@ -97,7 +97,7 @@ function ProductGallery(
                   })}
                   hx-swap="beforeend"
                   hx-target="closest section"
-                  hx-push-url={partialUrl.href}
+                  hx-push-url={"false"}
                 >
                   Carregar mais Produtos
                 </button>
