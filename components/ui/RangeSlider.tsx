@@ -133,7 +133,6 @@ function RangeSlider(props: Props) {
 
         rangeMinInterval!.textContent = formatPrice(leftValue);
         rangeMaxInterval!.textContent = formatPrice(rightValue);
-
       }
     };
 
@@ -186,9 +185,13 @@ function RangeSlider(props: Props) {
           data-min
           data-max
         >
-          <span class="range-min-interval">{formatPrice(initialMin, "BRL")}</span> -{" "}
-          {console.log("format", formatPrice(initialMax))}
-          <span class="range-max-interval">{formatPrice(initialMax, "BRL")}</span>
+          <span class="range-min-interval">
+            {formatPrice(initialMin, "BRL")}
+          </span>{" "}
+          - {console.log("format", formatPrice(initialMax))}
+          <span class="range-max-interval">
+            {formatPrice(initialMax, "BRL")}
+          </span>
         </div>
       </div>
       <script
