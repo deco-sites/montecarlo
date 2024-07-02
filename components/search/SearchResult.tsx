@@ -133,9 +133,7 @@ function Result({
             </aside>
           )}
           <div
-            class={`flex-grow ${
-              isPartial ? "" : layout?.variant === "aside" ? "" : "mt-4 pt-4 "
-            } relative  bg-white`}
+            class={`flex-grow  relative  bg-white`}
             id={id}
           >
             <ProductGallery

@@ -91,7 +91,7 @@ function SearchControls(
       {layout === "horizontal"
         ? (
           <>
-            <div class="hidden md:flex flex-col gap-2">
+            <div class="hidden md:flex flex-col gap-2 md:mb-4 md:pb-4">
               <div class="flex flex-row-reverse flex-wrap justify-between gap-5 self-end w-full">
                 <div class="flex flex-row justify-end font-poppins text-sm min-w-[40vw] gap-10 relative">
                   <Filters filters={priceArray} layout={layout} url={url} />
@@ -143,7 +143,9 @@ function SearchControls(
                     </button>
                   )
                   : null}
-                {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+                {sortOptions.length > 0 && (
+                  <Sort sortOptions={sortOptions} url={url} />
+                )}
               </div>
             </div>
 
@@ -198,7 +200,9 @@ function SearchControls(
                   Filtrar
                 </Button>
                 <div class={"flex justify-center flex-1 bg-[#F5F3E7]"}>
-                  {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+                  {sortOptions.length > 0 && (
+                    <Sort sortOptions={sortOptions} url={url} />
+                  )}
                 </div>
               </div>
             </div>
@@ -231,7 +235,9 @@ function SearchControls(
                 Filtrar
               </Button>
               <div class={"flex justify-center"}>
-                {sortOptions.length > 0 && <Sort sortOptions={sortOptions} />}
+                {sortOptions.length > 0 && (
+                  <Sort sortOptions={sortOptions} url={url} />
+                )}
               </div>
             </div>
           </div>

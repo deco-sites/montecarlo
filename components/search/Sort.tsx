@@ -1,6 +1,6 @@
 import { useMemo } from "preact/hooks";
 import { ProductListingPage } from "apps/commerce/types.ts";
-import type { JSX } from "preact";
+import { useScript } from "deco/hooks/useScript.ts";
 
 const SORT_QUERY_PARAM = "sort";
 const PAGE_QUERY_PARAM = "page";
@@ -13,15 +13,14 @@ const useSort = () =>
     return urlSearchParams.get(SORT_QUERY_PARAM) ?? "";
   }, []);
 
-// TODO: Replace with "search utils"
-const applySort = (e: JSX.TargetedEvent<HTMLSelectElement, Event>) => {
-  const urlSearchParams = new URLSearchParams(
-    globalThis.window.location.search,
-  );
+const applySort = (url: string, value: string) => {
+  const urlObj = new URL(url); // Cria um objeto URL para manipular facilmente os componentes da URL
+  const urlSearchParams = urlObj.searchParams; // Obtém os parâmetros de busca da URL
 
-  urlSearchParams.delete(PAGE_QUERY_PARAM);
-  urlSearchParams.set(SORT_QUERY_PARAM, e.currentTarget.value);
-  globalThis.window.location.search = urlSearchParams.toString();
+  urlSearchParams.delete(PAGE_QUERY_PARAM); // Remove o parâmetro de página
+  urlSearchParams.set(SORT_QUERY_PARAM, value); // Define o parâmetro de ordenação com o valor passado
+
+  return urlObj.href; // Retorna a URL completa com os novos parâmetros
 };
 
 export type Props = Pick<ProductListingPage, "sortOptions">;
@@ -34,11 +33,11 @@ const portugueseMappings = {
   "orders:desc": "Mais vendidos",
   "name:desc": "Nome - de Z a A",
   "name:asc": "Nome - de A a Z",
-  // "release:desc": "Relevância - Decrescente",
+  "release:desc": "Lançamentos",
   "discount:desc": "Maior desconto",
 };
 
-function Sort({ sortOptions }: Props) {
+function Sort({ sortOptions, url }: Props & { url: string }) {
   const sort = useSort();
 
   return (
@@ -47,7 +46,24 @@ function Sort({ sortOptions }: Props) {
       <select
         id="sort"
         name="sort"
-        onInput={applySort}
+        hx-swap="outerHTML"
+        hx-target="closest section"
+        hx-indicator="#spinner"
+        hx-trigger="change"
+        hx-on:change={useScript(() => {
+          const sort: HTMLSelectElement = document.querySelector("#sort");
+
+          const urlObj = new URL(window.location.href);
+
+          const urlSearchParams = urlObj.searchParams; // Obtém os parâmetros de busca da URL
+
+          urlSearchParams.delete("page"); // Remove o parâmetro de página
+          urlSearchParams.set("sort", sort.value); // Define o parâmetro de ordenação com o valor passado
+
+          const newUrl = urlObj.href;
+          history.pushState({}, "", newUrl);
+          htmx.ajax("GET", newUrl);
+        })}
         class="w-min h-[36px] px-1 rounded m-2 md:m-0 text-base-content cursor-pointer outline-none bg-transparent text-center md:underline md:text-sm md:h-fit"
       >
         {sortOptions.map(({ value, label }) => ({
