@@ -97,6 +97,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     name = "",
     gtin,
     isVariantOf,
+    category,
     additionalProperty = [],
   } = product;
   const description = product.description || isVariantOf?.description;
@@ -209,9 +210,11 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     " "
                   }`}
                 >
-                  {isVariantOf?.hasVariant &&
-                    isVariantOf?.hasVariant.length > 1 &&
-                    "Guia de medidas"}
+                  {
+                    category?.toLowerCase().includes("anéis") || category?.toLowerCase().includes("alianças") ? (
+                      isVariantOf?.hasVariant && isVariantOf?.hasVariant.length > 1 && "Guia de medidas"
+                    ) : null
+                  }
                 </span>
               </div>
             )}
