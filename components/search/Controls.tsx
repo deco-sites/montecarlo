@@ -2,7 +2,6 @@ import Button from "../../components/ui/Button.tsx";
 import Icon from "../../components/ui/Icon.tsx";
 import Filters from "../../components/search/Filters.tsx";
 import Sort from "../../components/search/Sort.tsx";
-import Drawer from "../../components/ui/Drawer.tsx";
 import Breadcrumb from "../../components/ui/Breadcrumb.tsx";
 import { useRef } from "preact/hooks";
 import { Signal, useSignal, useSignalEffect } from "@preact/signals";
@@ -10,6 +9,9 @@ import { Signal, useSignal, useSignalEffect } from "@preact/signals";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 
 import ClearFilters from "../../islands/Search/ClearFilters.tsx";
+import Drawer from "deco-sites/montecarlo/components/ui/Drawer.tsx";
+import { useScript } from "deco/hooks/useScript.ts";
+import { useSection } from "deco/hooks/useSection.ts";
 
 export type Props =
   & Pick<ProductListingPage, "filters" | "breadcrumb" | "sortOptions">
@@ -51,11 +53,19 @@ function SearchControls(
     }
   });
 
+  console.log("url", url);
+
+  const newUrl = new URL(url);
+
+  const clearURL = newUrl.origin + newUrl.pathname.replace("/s", "");
+  console.log("new", clearURL);
+
   return (
     <Drawer
       loading="lazy"
       open={open.value}
       onClose={() => open.value = false}
+      id="filter"
       aside={
         <>
           <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
@@ -63,12 +73,14 @@ function SearchControls(
               <h1 class="px-4 py-3">
                 <span class="font-medium text-2xl">Filtrar</span>
               </h1>
-              <Button
+              <button
                 class="btn btn-ghost bg-transparent hover:bg-transparent border-none ring-transparent"
-                onClick={() => open.value = false}
+                hx-on:click={useScript(() => {
+                  document.querySelector("#filter")!.click();
+                })}
               >
                 <Icon id="XMark" size={24} strokeWidth={2} />
-              </Button>
+              </button>
             </div>
             <div class="flex-grow overflow-auto flex flex-col justify-between pb-5 gap-5">
               <ul
@@ -81,7 +93,19 @@ function SearchControls(
                 <button class="font-poppins uppercase text-white text-sm bg-[#333435] px-2 py-2">
                   Aplicar
                 </button>
-                <ClearFilters />
+                <a
+                  class="font-poppins uppercase text-black bg-[#f7ead5] px-2 py-2 text-center text-sm"
+                  hx-get={useSection({ href: clearURL })}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-target="closest section"
+                  id="resultTeste"
+                  rel="nofollow"
+                  hx-trigger="click"
+                  hx-indicator="#spinner"
+                  hx-push-url={clearURL}
+                >
+                  Limpar Filtro
+                </a>
               </div>
             </div>
           </div>
@@ -188,17 +212,17 @@ function SearchControls(
                 </button>
               </div>
 
-              <div class="flex flex-row gap-2 col-span-2">
-                <Button
+              <div class="flex flex-row gap-2 col-span-2 mb-4">
+                <button
                   class={`bg-[#F5F3E7] ${
                     displayFilter ? "btn-ghost" : "btn-ghost md:hidden"
                   } flex-1`}
-                  onClick={() => {
-                    open.value = true;
-                  }}
+                  hx-on:click={useScript(() => {
+                    document.querySelector("#filter")!.click();
+                  })}
                 >
                   Filtrar
-                </Button>
+                </button>
                 <div class={"flex justify-center flex-1 bg-[#F5F3E7]"}>
                   {sortOptions.length > 0 && (
                     <Sort sortOptions={sortOptions} url={url} />

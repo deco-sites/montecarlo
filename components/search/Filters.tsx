@@ -63,7 +63,7 @@ function ValueItem(
       id="resultTeste"
       rel="nofollow"
       class="flex items-center gap-2"
-      hx-trigger="click delay:1s"
+      hx-trigger="click"
       hx-indicator="#spinner"
       hx-push-url={href}
     >
