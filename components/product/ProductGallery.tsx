@@ -8,6 +8,8 @@ import { Format } from "../../components/search/SearchResult.tsx";
 import Spinner from "../../components/ui/Spinner.tsx";
 import ShowMore from "../../islands/ShowMore.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
+import { useSection } from "deco/hooks/useSection.ts";
+import { propsLoader } from "deco/blocks/propsLoader.ts";
 
 export interface Columns {
   mobile?: 1 | 2;
@@ -90,10 +92,12 @@ function ProductGallery(
                 <button
                   id={`show-more-button-${pageInfo.currentPage}`}
                   class="btn cursor-pointer hidden w-0 h-0 absolute font-poppins text-sm bg-[#FFC72C] font-normal rounded-none hover:bg-[#FFC72C]"
-                  {...usePartialSection({
+                  hx-get={useSection({
                     href: partialUrl.href,
-                    mode: "append",
                   })}
+                  hx-swap="beforeend"
+                  hx-target="closest section"
+                  hx-push-url={partialUrl.href}
                 >
                   Carregar mais Produtos
                 </button>

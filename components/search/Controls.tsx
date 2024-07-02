@@ -20,7 +20,9 @@ export type Props =
   };
 
 function SearchControls(
-  { filters, breadcrumb, displayFilter, sortOptions, layout, title, url }: Props & { url: string }
+  { filters, breadcrumb, displayFilter, sortOptions, layout, title, url }:
+    & Props
+    & { url: string },
 ) {
   const open = useSignal(false);
 
@@ -107,10 +109,11 @@ function SearchControls(
               </div>
 
               <div
-                class={`flex ${layout === "horizontal"
-                  ? `flex-row gap-4 ${!moreFilters.value ? "h-10" : ""}`
-                  : "flex-col gap-6"
-                  } p-4 md:pl-0`}
+                class={`flex ${
+                  layout === "horizontal"
+                    ? `flex-row gap-4 ${!moreFilters.value ? "h-10" : ""}`
+                    : "flex-col gap-6"
+                } p-4 md:pl-0`}
               >
                 <ul
                   ref={filtersRef}
@@ -128,10 +131,11 @@ function SearchControls(
                     >
                       {!moreFilters.value ? "Mais" : "Menos"} Filtros
                       <Icon
-                        class={`relative ${!moreFilters.value
-                          ? "rotate-90"
-                          : "-rotate-90 -top-[3px]"
-                          }`}
+                        class={`relative ${
+                          !moreFilters.value
+                            ? "rotate-90"
+                            : "-rotate-90 -top-[3px]"
+                        }`}
                         size={24}
                         id="arrowTop"
                       >
@@ -144,8 +148,9 @@ function SearchControls(
             </div>
 
             <div
-              class={`grid grid-cols-2 md:flex md:flex-row flex-wrap items-center justify-between sm:gap-4 w-full ${!displayFilter ? "" : ""
-                } md:hidden`}
+              class={`grid grid-cols-2 md:flex md:flex-row flex-wrap items-center justify-between sm:gap-4 w-full ${
+                !displayFilter ? "" : ""
+              } md:hidden`}
             >
               <div class="flex flex-col gap-2 sm:p-0 mb-2 col-span-2">
                 {title && title.length > 0
@@ -160,19 +165,21 @@ function SearchControls(
 
               <div class={"flex col-span-2 justify-end w-full gap-2 my-2"}>
                 <button
-                  class={`p-1 border ${columnsMobile.value === 1
-                    ? "border-[##AAA89C]"
-                    : "border-transparent"
-                    }`}
+                  class={`p-1 border ${
+                    columnsMobile.value === 1
+                      ? "border-[##AAA89C]"
+                      : "border-transparent"
+                  }`}
                   onClick={() => columnsMobile.value = 1}
                 >
                   <Icon id="columnOne" width={32} height={16} />
                 </button>
                 <button
-                  class={`p-1 border ${columnsMobile.value === 2
-                    ? "border-[##AAA89C]"
-                    : "border-transparent"
-                    }`}
+                  class={`p-1 border ${
+                    columnsMobile.value === 2
+                      ? "border-[##AAA89C]"
+                      : "border-transparent"
+                  }`}
                   onClick={() => columnsMobile.value = 2}
                 >
                   <Icon id="columnTwo" width={35} height={16} />
@@ -181,8 +188,9 @@ function SearchControls(
 
               <div class="flex flex-row gap-2 col-span-2">
                 <Button
-                  class={`bg-[#F5F3E7] ${displayFilter ? "btn-ghost" : "btn-ghost md:hidden"
-                    } flex-1`}
+                  class={`bg-[#F5F3E7] ${
+                    displayFilter ? "btn-ghost" : "btn-ghost md:hidden"
+                  } flex-1`}
                   onClick={() => {
                     open.value = true;
                   }}
@@ -199,8 +207,9 @@ function SearchControls(
         : (
           <div class="flex flex-col justify-between sm:p-0 sm:gap-2 sm:flex-col">
             <div
-              class={`grid grid-cols-2 md:flex md:flex-row flex-wrap items-center justify-between sm:gap-4 w-full ${!displayFilter ? "" : ""
-                }`}
+              class={`grid grid-cols-2 md:flex md:flex-row flex-wrap items-center justify-between sm:gap-4 w-full ${
+                !displayFilter ? "" : ""
+              }`}
             >
               <div class="flex flex-col gap-2 sm:p-0 mb-2 col-span-2">
                 {title && title.length > 0
