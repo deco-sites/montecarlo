@@ -97,6 +97,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     name = "",
     gtin,
     isVariantOf,
+    category,
     additionalProperty = [],
   } = product;
   const description = product.description || isVariantOf?.description;
@@ -209,9 +210,11 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     " "
                   }`}
                 >
-                  {isVariantOf?.hasVariant &&
-                    isVariantOf?.hasVariant.length > 1 &&
-                    "Guia de medidas"}
+                  {
+                    category?.toLowerCase().includes("anéis") || category?.toLowerCase().includes("alianças") ? (
+                      isVariantOf?.hasVariant && isVariantOf?.hasVariant.length > 1 && "Guia de medidas"
+                    ) : null
+                  }
                 </span>
               </div>
             )}
@@ -227,11 +230,11 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     seller={seller}
                     price={price}
                   />
-                  <button class="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300">
+                  <button class="hidden w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300">
                     Quero ganhar
                   </button>
                   <WishlistButtonVtex
-                    customClass="w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
+                    customClass="hidden w-[calc(50%-0.25rem)] bg-perola-intermediario py-3 hover:opacity-80 duration-300"
                     productID={productID}
                     productGroupID={productGroupID}
                     productClick={product}
