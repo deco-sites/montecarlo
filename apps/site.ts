@@ -72,8 +72,6 @@ export default function Site(
     );
   }
 
-  console.log(state);
-
   return {
     state: { ...state, firstByteThresholdMS: true },
     manifest,
