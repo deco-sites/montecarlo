@@ -37,7 +37,6 @@ import Discount from "./Flags/Discount.tsx";
 
 import type { Custom } from "./Flags/Custom.tsx";
 
-
 import ProductDescription from "./ProductDescription.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 import { HTMLWidget } from "apps/admin/widgets.ts";
@@ -157,8 +156,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   const discountFlagValues = {
     ...extraInformations?.discountFlag,
     oldPrice: listPrice,
-    newPrice: price
-  }
+    newPrice: price,
+  };
 
   const complementName = product.alternateName;
 
@@ -173,7 +172,10 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     <>
       <div class="col-start-4 row-span-2">
         <div class="flex flex-col gap-1 px-2 lg:px-0" id={id}>
-          <Breadcrumb itemListElement={breadcrumb.itemListElement} />
+          <Breadcrumb
+            itemListElement={breadcrumb.itemListElement}
+            class="hidden lg:flex"
+          />
           {/* Code and name */}
           <div class="flex flex-row gap-4 flex-wrap mb-5 relative items-center">
             {complementName &&
@@ -185,7 +187,14 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                   {complementName}
                 </a>
               )}
-              <Flags isProductPage={true} productAdditionalProperty={product.isVariantOf?.additionalProperty ? product.isVariantOf?.additionalProperty : undefined} releaseFlag={extraInformations?.releaseFlag} discountFlag={discountFlagValues} />
+            <Flags
+              isProductPage={true}
+              productAdditionalProperty={product.isVariantOf?.additionalProperty
+                ? product.isVariantOf?.additionalProperty
+                : undefined}
+              releaseFlag={extraInformations?.releaseFlag}
+              discountFlag={discountFlagValues}
+            />
           </div>
           <h1>
             <span class="font-medium text-base capitalize lg:text-xl">
@@ -197,7 +206,15 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           )}
           {/* Prices */}
           <div class="mt-5 flex flex-col gap-3 relative">
-            <Discount isProductPage={true} oldPrice={discountFlagValues?.oldPrice} newPrice={discountFlagValues?.newPrice} initialText={discountFlagValues?.initialText} finalText={discountFlagValues?.finalText} backgroundColor={discountFlagValues?.backgroundColor} fontColor={discountFlagValues?.fontColor} />
+            <Discount
+              isProductPage={true}
+              oldPrice={discountFlagValues?.oldPrice}
+              newPrice={discountFlagValues?.newPrice}
+              initialText={discountFlagValues?.initialText}
+              finalText={discountFlagValues?.finalText}
+              backgroundColor={discountFlagValues?.backgroundColor}
+              fontColor={discountFlagValues?.fontColor}
+            />
             <div class="flex flex-row gap-1 items-center text-base lg:text-[1.15rem]">
               <span class=" font-medium">
                 {formatPrice(price, offers?.priceCurrency)}

@@ -165,7 +165,7 @@ function Filters({ filters, layout, url }: Props & { url: string }) {
               <div
                 class={`${
                   layout === "horizontal"
-                    ? `absolute top-5 bg-white z-10 px-3 py-2 min-w-[150px]`
+                    ? `absolute top-5 bg-white z-20 px-3 py-2 min-w-[150px]`
                     : ""
                 } ${
                   openFilter.value !== index ? "" : ""
