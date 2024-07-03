@@ -180,7 +180,6 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                 </a>
               )}
               <Flags isProductPage={true} productAdditionalProperty={product.isVariantOf?.additionalProperty ? product.isVariantOf?.additionalProperty : undefined} releaseFlag={extraInformations?.releaseFlag} discountFlag={discountFlagValues} />
-              {/*aqui */}
           </div>
           <h1>
             <span class="font-medium text-base capitalize lg:text-xl">
