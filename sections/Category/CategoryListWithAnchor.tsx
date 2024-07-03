@@ -1,9 +1,9 @@
 import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
 import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
+import { useSection } from "deco/hooks/useSection.ts";
 
 export interface Category {
   label: string;
@@ -102,9 +102,11 @@ function CategoryListWithAnchor(props: Props) {
         {list.map((category) => (
           <button
             class="flex flex-col gap-2 max-w-[228px] w-[calc(50%-0.5rem)] lg:w-[calc(16.66%-0.5rem)] group"
-            {...usePartialSection({
+            hx-get={useSection({
               props: { idSelectedToShowProducts: category.label },
             })}
+            hx-swap="outerHTML"
+            hx-target="closest section"
           >
             <Image
               loading={"lazy"}

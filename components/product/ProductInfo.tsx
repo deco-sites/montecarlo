@@ -210,11 +210,13 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     " "
                   }`}
                 >
-                  {
-                    category?.toLowerCase().includes("anéis") || category?.toLowerCase().includes("alianças") ? (
-                      isVariantOf?.hasVariant && isVariantOf?.hasVariant.length > 1 && "Guia de medidas"
-                    ) : null
-                  }
+                  {category?.toLowerCase().includes("anéis") ||
+                      category?.toLowerCase().includes("alianças")
+                    ? (
+                      isVariantOf?.hasVariant &&
+                      isVariantOf?.hasVariant.length > 1 && "Guia de medidas"
+                    )
+                    : null}
                 </span>
               </div>
             )}

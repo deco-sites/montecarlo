@@ -1,14 +1,17 @@
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { Layout as CardLayout } from "../../components/product/ProductCard.tsx";
 
-import Filters from "../../islands/Search/Filters.tsx";
+import Filters from "../../components/search/Filters.tsx";
 import Icon from "../../components/ui/Icon.tsx";
-import SearchControls from "../../islands/SearchControls.tsx";
+import SearchControls from "../../components/search/Controls.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { useOffer } from "../../sdk/useOffer.ts";
 import type { ProductListingPage } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
+import { Section } from "deco/mod.ts";
+import { use } from "https://esm.sh/marked@9.1.1";
+import { useSection } from "deco/hooks/useSection.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -35,6 +38,8 @@ export interface Props {
 
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
+
+  sections?: Section[];
 }
 
 function NotFound() {
@@ -96,7 +101,10 @@ function Result({
   });
 
   return (
-    <>
+    <div
+      id="resultTeste"
+      class="relative w-full h-full"
+    >
       <div
         class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${
           isFirstPage ? "py-10" : "pt-0"
@@ -110,6 +118,8 @@ function Result({
             // displayFilter={layout?.variant === "drawer"}
             layout={layout?.variant}
             title={title}
+            url={url.href}
+            columns={layout?.columns?.mobile || 2}
           />
         )}
 
@@ -119,14 +129,16 @@ function Result({
             (isFirstPage || !isPartial) && (
             <aside class="hidden md:block w-min min-w-[250px] max-w-[300px] pr-4 pb-6">
               <ul class={`flex flex-col gap-6 pt-4 md:pl-0`}>
-                <Filters filters={filters} layout={layout.variant} />
+                <Filters
+                  filters={filters}
+                  layout={layout.variant}
+                  url={url.href}
+                />
               </ul>
             </aside>
           )}
           <div
-            class={`flex-grow ${
-              layout?.variant === "aside" ? "" : "mt-4"
-            } relative pt-4 bg-white`}
+            class={`flex-grow  relative  bg-white`}
             id={id}
           >
             <ProductGallery
@@ -165,6 +177,16 @@ function Result({
             </div>
           </div>
         )}
+        <div
+          id="spinner"
+          class="htmx-indicator w-full min-h-screen flex justify-center items-center absolute top-0 bottom-0 left-0 right-0 bg-[#0000003d]"
+        >
+          <span
+            id="loading-searchResult"
+            class="loading loading-spinner loading-lg"
+          >
+          </span>
+        </div>
       </div>
       <SendEventOnView
         id={id}
@@ -185,7 +207,7 @@ function Result({
           },
         }}
       />
-    </>
+    </div>
   );
 }
 

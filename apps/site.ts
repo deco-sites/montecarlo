@@ -73,7 +73,7 @@ export default function Site(
   }
 
   return {
-    state,
+    state: { ...state, firstByteThresholdMS: true },
     manifest,
     dependencies: [
       commerce({
