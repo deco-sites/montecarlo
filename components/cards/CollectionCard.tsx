@@ -322,7 +322,7 @@ export default function GridCollectionCard(props: Props) {
         <button
           className={"mx-auto mt-12 md:mt-10 bg-[#FFC72C] h-10 px-8 md:px-12 text-xl md:text-lg font-normal text-black flex items-center justify-center"}
           hx-get={useSection({
-            props: { lengthToShowDesktop: props.lengthToShowDesktop * 2 },
+            props: { mobileCountController: props.lengthToShowMobile * 2 },
           })}
           hx-swap="outerHTML"
           hx-target="closest section"
