@@ -61,7 +61,7 @@ const style = {
           grid-template-columns: 18% 53% 18%;        
         }
         to{
-          height:55px;
+          height:59px;
           grid-template-columns: 22% 46% 22%;
         }
   }
@@ -110,7 +110,7 @@ function Navbar(
   // Mobile header
   if (device === "mobile") {
     return (
-      <div class="lg:hidden grid grid-cols-[68px_auto_68px] justify-between items-center border-b border-base-200 w-full px-4 pb-6 gap-2 header-mobile h-full ">
+      <div class="lg:hidden grid grid-cols-[68px_auto_68px] justify-between items-center border-b border-base-200 w-full px-4 pb-6 gap-2 header-mobile h-full shadow-header-menu ">
         <style dangerouslySetInnerHTML={{ __html: style["header-mobile"] }}>
         </style>
         {/* DL click em button.tsx */}
@@ -169,7 +169,7 @@ function Navbar(
   } else {
     // Desktop header
     return (
-      <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6 pt-4 pb-3 shadow-header-menu lg:min-h-[74px]">
+      <div class="hidden sm:grid sm:grid-cols-3 items-center border-b border-base-200 w-full px-6 pt-4 pb-3 shadow-header-menu lg:min-h-[80px]">
         <ul
           class={`flex gap-6 col-span-1 ${
             logoPosition === "left" ? "justify-center" : "justify-start"

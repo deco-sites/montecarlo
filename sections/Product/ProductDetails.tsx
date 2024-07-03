@@ -38,11 +38,11 @@ export default function ProductDetails({ page, extraInformations }: Props) {
   return (
     <div
       id={id}
-      class="w-full py-8 flex flex-col lg:grid grid-cols-[15%_auto_auto_346px] justify-items-end grid-rows-1 mx-auto gap-4 lg:gap-8 max-w-[1512px] lg:px-14 lg:border-t-perola-intermediario lg:border-t"
+      class="w-full pt-3 pb-8 flex flex-col lg:grid grid-cols-[15%_auto_auto_346px] justify-items-end grid-rows-1 mx-auto gap-4 lg:gap-8 max-w-[1512px] lg:px-14 lg:pt-8 lg:border-t-perola-intermediario lg:border-t"
     >
       <Breadcrumb
         itemListElement={breadcrumb.itemListElement}
-        class="flex lg:hidden"
+        class="flex lg:hidden px-2"
       />
 
       <div class="flex flex-col gap-6 lg:flex-row lg:justify-center col-span-3 row-end-1">
