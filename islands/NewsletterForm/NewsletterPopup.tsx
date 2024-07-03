@@ -156,7 +156,7 @@ const NewsletterPopupForm = ({
                   setNewsletterConfirm(false);
                 }}
                 type="button"
-                class="min-w-24 flex m-auto bg-[#F5F3E7] text-black py-2 px-3 text-sm text-center"
+                class="min-w-24 flex m-auto bg-[#F5F3E7] text-black py-2 px-3 text-sm text-center justify-center items-center"
               >
                 Cadastrar
               </button>
@@ -174,30 +174,40 @@ const NewsletterPopupForm = ({
                       <br />
                       E-mail cadastrado com sucesso.
                     </p>
-                    <p class="text-base text-black text-center m-auto my-2">
-                      {primaryMessageSucess
-                        ? primaryMessageSucess
-                        : "Use o cupom"}
-                      {" "}
-                    </p>
-                    <p class="text-3xl text-black text-center m-auto my-2 borde border-dashed border-2 border-black p-2">
-                      <strong className="text-black">
-                        {cupom ? cupom : "BEMVINDO20"}
-                        {" "}
-                      </strong>
-                    </p>
-                    <p class="text-lg text-black text-center m-auto my-2">
-                      {secordMessageSucess
-                        ? secordMessageSucess
-                        : "e garanta 20% OFF"}
-                      {" "}
-                    </p>
-                    <p class="text-xs text-black text-center m-auto my-2">
-                      {thirdMessageSucess
-                        ? thirdMessageSucess
-                        : "Cupom não válido para lançamentos, alianças, Joias Natan e relógios de marcas terceiras. Não cumulativo com outras promoções."}
-                      {" "}
-                    </p>
+                    {
+                      primaryMessageSucess ? (
+                        <p class="text-base text-black text-center m-auto my-2">
+                          {primaryMessageSucess}
+                        </p>
+                      ) : null
+                    }
+                    {
+                      cupom ? (
+                        <p
+                          onClick={() => {
+                            navigator.clipboard.writeText(cupom || "");
+                          }} 
+                          class="text-3xl text-black text-center m-auto my-2 borde border-dashed border-2 border-black p-2 cursor-pointer">
+                          <strong className="text-black">
+                            {cupom}
+                          </strong>
+                        </p>
+                      ) : null
+                    }
+                    {
+                      secordMessageSucess ? (
+                        <p class="text-lg text-black text-center m-auto my-2">
+                          {secordMessageSucess}
+                        </p>
+                      ) : null
+                    }
+                    {
+                      thirdMessageSucess ? (
+                        <p class="text-xs text-black text-center m-auto my-2">
+                          {thirdMessageSucess}
+                        </p>
+                      ) : null
+                    }
                     <a
                       class="flex justify-center text-sm text-black text-center m-auto my-2"
                       href="https://montecarlojoias.zendesk.com/hc/pt-br/articles/360041259091-Conhe%C3%A7a-as-regras-Cupons-e-Promo%C3%A7%C3%B5es-"
