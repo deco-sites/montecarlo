@@ -236,7 +236,7 @@ function Cart({
                     {formatPrice(total / maxInstallments, currency, locale)}
                   </span>
                 )}
-                <SendEventOnView
+                {/* <SendEventOnView
                   id={id}
                   event={{
                     name: "view_cart",
@@ -248,7 +248,7 @@ function Cart({
                         .filter((x): x is AnalyticsItem => Boolean(x)),
                     },
                   }}
-                />
+                /> */}
               </div>
             ) : (
               <div class=" pt-2 flex flex-col justify-end items-end px-2 text-black  relative z-20 bg-white lg:px-8">
@@ -297,7 +297,7 @@ function Cart({
                 </Button>
               </a>
             </div>
-            <SendEventOnView
+            {/* <SendEventOnView
               id={id}
               event={{
                 name: "view_cart",
@@ -309,7 +309,7 @@ function Cart({
                     .filter((x): x is AnalyticsItem => Boolean(x)),
                 },
               }}
-            />
+            /> */}
           </footer>
         </>
       )}
