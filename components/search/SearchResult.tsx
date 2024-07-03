@@ -101,12 +101,13 @@ function Result({
   });
 
   return (
-    <>
+    <div
+      id="resultTeste"
+      class="relative w-full h-full"
+    >
       <div
-        class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 relative ${
-          isFirstPage ? "py-10" : "pt-0"
-        } ${pageInfo?.nextPage ? "pb-0" : ""}`}
-        id="resultTeste"
+        class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${isFirstPage ? "py-10" : "pt-0"
+          } ${pageInfo?.nextPage ? "pb-0" : ""}`}
       >
         {(isFirstPage || !isPartial) && (
           <SearchControls
@@ -125,16 +126,16 @@ function Result({
           {/* {filters.length > 0 && */}
           {layout?.variant === "aside" && filters.length > 0 &&
             (isFirstPage || !isPartial) && (
-            <aside class="hidden md:block w-min min-w-[250px] max-w-[300px] pr-4 pb-6">
-              <ul class={`flex flex-col gap-6 pt-4 md:pl-0`}>
-                <Filters
-                  filters={filters}
-                  layout={layout.variant}
-                  url={url.href}
-                />
-              </ul>
-            </aside>
-          )}
+              <aside class="hidden md:block w-min min-w-[250px] max-w-[300px] pr-4 pb-6">
+                <ul class={`flex flex-col gap-6 pt-4 md:pl-0`}>
+                  <Filters
+                    filters={filters}
+                    layout={layout.variant}
+                    url={url.href}
+                  />
+                </ul>
+              </aside>
+            )}
           <div
             class={`flex-grow  relative  bg-white`}
             id={id}
@@ -177,7 +178,7 @@ function Result({
         )}
         <div
           id="spinner"
-          class="htmx-indicator w-full min-h-screen flex justify-center items-center absolute top-0 bottom-0 left-0 right-0 bg-[#00000066]"
+          class="htmx-indicator w-full min-h-screen flex justify-center items-center absolute top-0 bottom-0 left-0 right-0 bg-[#0000003d]"
         >
           <span
             id="loading-searchResult"
@@ -205,7 +206,7 @@ function Result({
           },
         }}
       />
-    </>
+    </div>
   );
 }
 

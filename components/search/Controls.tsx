@@ -22,19 +22,24 @@ export type Props =
     columns?: 1 | 2;
   };
 
-function filter() {
-  const container: HTMLDivElement | null = document.querySelector("#h-filter");
-  const filterLabel: HTMLDivElement | null = document.querySelector(
-    "#filter-label",
-  );
-
-  if (container!.offsetHeight <= 50) {
-    filterLabel!.style.display = "none";
-  } else {
-    filterLabel!.style.display = "flex";
-  }
+  function filter() {
+    const container: HTMLDivElement | null = document.querySelector("#h-filter");
+    const filterLabel: HTMLDivElement | null = document.querySelector("#filter-label");
+    console.log("load");
+  
+    if (container && filterLabel) {
+      console.log("height", container.scrollHeight);
+  
+      if (container.scrollHeight <= 50) {
+        filterLabel.style.display = "none";
+      } else {
+        filterLabel.style.display = "flex";
+      }
+    } else {
+      console.error("Elementos não encontrados");
+    }
 }
-
+  
 function SearchControls(
   {
     filters,
@@ -56,8 +61,6 @@ function SearchControls(
   );
   const priceArray = priceFilter ? [priceFilter] : [];
 
-  console.log("filter", filters.length);
-
   filters = filters.filter((item) => item.key !== "price");
 
   const moreFilters = useSignal(false);
@@ -76,13 +79,9 @@ function SearchControls(
     }
   });
 
-  console.log("url", url);
-
   const newUrl = new URL(url);
 
   const clearURL = newUrl.origin + newUrl.pathname.replace("/s", "");
-  console.log("new", clearURL);
-
   return (
     <Drawer
       loading="lazy"
@@ -113,7 +112,7 @@ function SearchControls(
               </ul>
 
               <div class="flex flex-col gap-2 px-5">
-                <button class="font-poppins uppercase text-white text-sm bg-[#333435] px-2 py-2">
+                <button class="font-poppins uppercase text-white text-sm bg-[#333435] px-2 py-2 hidden">
                   Aplicar
                 </button>
                 <a
@@ -318,12 +317,12 @@ function SearchControls(
                 )}
               </div>
             </div>
-            <script
-              type="module"
-              dangerouslySetInnerHTML={{ __html: useScript(filter) }}
-            />
           </div>
         )}
+        <script
+          type="module"
+          dangerouslySetInnerHTML={{ __html: useScript(filter) }}
+        />
     </Drawer>
   );
 }
