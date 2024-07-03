@@ -17,6 +17,9 @@ import { relative } from "../../sdk/url.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
 
+import Flags from "./Flags/Flags.tsx";
+import type { Release } from "./Flags/Release.tsx";
+
 interface Name {
   /**
    * @title Product Name fontSize
@@ -43,6 +46,15 @@ export interface Layout {
   name?: Name;
   price?: Price;
   materialImages?: Material[];
+  releaseFlag: Release;
+  discountFlag: {
+    initialText?: string;
+    finalText?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  }
 }
 
 interface Props {
@@ -137,12 +149,19 @@ function ShelfProductCard({
     listPrice,
   });
 
+  const discountFlagValues = {
+    ...layout?.discountFlag,
+    oldPrice: listPrice,
+    newPrice: price
+  }
+
   return (
     <div
       id={id}
-      class={`card-compact group w-full h-full gap-2 text-center rounded-none my-4`}
+      class={`card-compact group w-full h-full gap-2 text-center rounded-none relative my-4`}
       data-deco="view-product"
     >
+      <Flags productAdditionalProperty={product.isVariantOf?.additionalProperty} releaseFlag={layout?.releaseFlag} discountFlag={discountFlagValues} />
       <figure
         class="relative overflow-hidden mb-2"
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}

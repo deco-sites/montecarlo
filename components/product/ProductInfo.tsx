@@ -32,6 +32,13 @@ import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
 import ModalBonus from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/product/Modal/Bonus.tsx";
 
+import Flags from "./Flags/Flags.tsx";
+import Discount from "./Flags/Discount.tsx";
+
+import type { Release } from "./Flags/Release.tsx";
+import type { Custom } from "./Flags/Custom.tsx";
+
+
 import ProductDescription from "./ProductDescription.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 import { HTMLWidget } from "apps/admin/widgets.ts";
@@ -67,6 +74,16 @@ export interface ExtraInformation {
   materialImages?: Material[];
   lossesImage?: Losses[];
   collectionBanners?: Collection[];
+  releaseFlag: Release;
+  discountFlag: {
+    initialText?: string;
+    finalText?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  }
+  customFlag: Custom;
 }
 interface Props {
   page: ProductDetailsPage | null;
@@ -131,6 +148,12 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
     listPrice,
   });
 
+  const discountFlagValues = {
+    ...extraInformations?.discountFlag,
+    oldPrice: listPrice,
+    newPrice: price
+  }
+
   const complementName = product.alternateName;
 
   const formattedComplementNameForLink = complementName &&
@@ -146,7 +169,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
         <div class="flex flex-col gap-1 px-2 lg:px-0" id={id}>
           <Breadcrumb itemListElement={breadcrumb.itemListElement} />
           {/* Code and name */}
-          <div class="flex flex-row gap-2 flex-wrap mb-5">
+          <div class="flex flex-row gap-4 flex-wrap mb-5 relative items-center">
             {complementName &&
               (
                 <a
@@ -156,6 +179,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                   {complementName}
                 </a>
               )}
+              <Flags isProductPage={true} productAdditionalProperty={product.isVariantOf?.additionalProperty ? product.isVariantOf?.additionalProperty : undefined} releaseFlag={extraInformations?.releaseFlag} discountFlag={discountFlagValues} />
+              {/*aqui */}
           </div>
           <h1>
             <span class="font-medium text-base capitalize lg:text-xl">
@@ -166,7 +191,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
             <span class="text-xs text-[#AAA89C]">{"Referencia: " + model}</span>
           )}
           {/* Prices */}
-          <div class="mt-5 flex flex-col gap-3">
+          <div class="mt-5 flex flex-col gap-3 relative">
+            <Discount isProductPage={true} oldPrice={discountFlagValues?.oldPrice} newPrice={discountFlagValues?.newPrice} initialText={discountFlagValues?.initialText} finalText={discountFlagValues?.finalText} backgroundColor={discountFlagValues?.backgroundColor} fontColor={discountFlagValues?.fontColor} />
             <div class="flex flex-row gap-1 items-center text-base lg:text-[1.15rem]">
               <span class=" font-medium">
                 {formatPrice(price, offers?.priceCurrency)}
