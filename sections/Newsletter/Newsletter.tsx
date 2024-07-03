@@ -25,9 +25,27 @@ interface Layout {
   };
 }
 
+interface SuccessMessage {
+  /*
+   * @description Enable this option only for testing purpose. Don't forget to disable before publish
+   */
+  testSuccessMessage?: boolean;
+  // testErrorMessage?: boolean;
+  coupon?: {
+    label?: string;
+    code?: string;
+    description?: string;
+  }
+  links?: {
+    label: string;
+    href: string;
+  }[];
+}
+
 export interface Props {
   title?: string;
   description?: string;
+  successMessage?: SuccessMessage;
   form?: Form;
   layout?: Layout;
 }
@@ -64,6 +82,7 @@ export default function NewsletterSection({
       textColor: "#000",
     },
   },
+  successMessage,
 }: Props) {
   return (
     <Newsletter
@@ -71,6 +90,7 @@ export default function NewsletterSection({
       description={description}
       form={form}
       layout={layout}
+      successMessage={successMessage}
     />
   );
 }
