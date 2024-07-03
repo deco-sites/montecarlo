@@ -1,4 +1,3 @@
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { useUI } from "../../sdk/useUI.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
@@ -322,9 +321,11 @@ export default function GridCollectionCard(props: Props) {
       {mobileCountController && (
         <button
           className={"mx-auto mt-12 md:mt-10 bg-[#FFC72C] h-10 px-8 md:px-12 text-xl md:text-lg font-normal text-black flex items-center justify-center"}
-          {...usePartialSection({
-            props: { lengthToShowMobile: props.lengthToShowMobile * 2 },
+          hx-get={useSection({
+            props: { lengthToShowDesktop: props.lengthToShowDesktop * 2 },
           })}
+          hx-swap="outerHTML"
+          hx-target="closest section"
         >
           {cta}
         </button>

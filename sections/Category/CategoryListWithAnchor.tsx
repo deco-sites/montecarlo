@@ -1,7 +1,6 @@
 import { useId } from "../../sdk/useId.ts";
 import Image from "apps/website/components/Image.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
 import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 import { useSection } from "deco/hooks/useSection.ts";

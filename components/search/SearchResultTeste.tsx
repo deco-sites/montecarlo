@@ -1,7 +1,6 @@
 import { useSection } from "deco/hooks/useSection.ts";
 import { ProductListingPage } from "apps/commerce/types.ts";
 import { SectionProps } from "deco/mod.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 
 export interface Props {
   title?: string;

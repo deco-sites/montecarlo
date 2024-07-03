@@ -1,7 +1,7 @@
 import { ImageWidget, VideoWidget } from "apps/admin/widgets.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import Image from "apps/website/components/Image.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
+import { useSection } from "deco/hooks/useSection.ts";
 
 export interface Props {
   title: string;
@@ -76,7 +76,11 @@ export default function FullVideo(props: Props) {
         <div class="absolute top-0 bottom-0 left-0 right-0 flex items-center gap-2 ml-[calc(50%-0.75rem)] lg:ml-[calc(50%-2rem)] lg:gap-12 sm:gap-8 ">
           <button
             class="flex h-6 w-6 items-center justify-center rounded-full bg-primary lg:w-16 lg:h-16 cursor-pointer sm:w-10 sm:h-10"
-            {...usePartialSection({ props: { autoPlay: true } })}
+            hx-get={useSection({
+              props: { autoPlay: true }
+            })}
+            hx-swap="outerHTML"
+            hx-target="closest section"
             type={"button"}
           >
             <div class="h-2 w-2 rotate-45 bg-black before:absolute before:-left-[4px] before:top-[2px] 
