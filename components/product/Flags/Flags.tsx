@@ -43,12 +43,7 @@ function Flags({ productAdditionalProperty, releaseFlag, discountFlag, isProduct
 
     return (
         <>
-            {/*isReleaseProduct ? <ReleaseFlag text={releaseFlag?.text} backgroundColor={releaseFlag?.backgroundColor} fontColor={releaseFlag?.fontColor} /> : ''*/}
-            {/*propertiesFormatted ? <CustomFlag isProductPage={isProductPage} text={propertiesFormatted.textoFlag} textColor={propertiesFormatted.corTexto} backgroundColor={propertiesFormatted.corFundo}  /> : ''*/}
             <div className={`${isProductPage ? 'relative top-0 left-0' : 'absolute z-10 top-5 left-3'}`}>
-                {/*<ReleaseFlag isProductPage={isProductPage} text={releaseFlag?.text} backgroundColor={releaseFlag?.backgroundColor} fontColor={releaseFlag?.fontColor} />*/}
-                {/*<CustomFlag isProductPage={isProductPage} text={propertiesFormatted?.textoFlag} textColor={propertiesFormatted?.corTexto} backgroundColor={propertiesFormatted?.corFundo}  />*/}
-
                 {isReleaseProduct ? <ReleaseFlag isProductPage={isProductPage} text={releaseFlag?.text} backgroundColor={releaseFlag?.backgroundColor} fontColor={releaseFlag?.fontColor} /> : ''}
                 {propertiesFormatted ? <CustomFlag isProductPage={isProductPage} text={propertiesFormatted.textoFlag} textColor={propertiesFormatted.corTexto} backgroundColor={propertiesFormatted.corFundo}  /> : ''}
             </div>

@@ -35,7 +35,6 @@ import type { Props as ModalBonusProps } from "deco-sites/montecarlo/components/
 import Flags from "./Flags/Flags.tsx";
 import Discount from "./Flags/Discount.tsx";
 
-import type { Release } from "./Flags/Release.tsx";
 import type { Custom } from "./Flags/Custom.tsx";
 
 
@@ -74,15 +73,21 @@ export interface ExtraInformation {
   materialImages?: Material[];
   lossesImage?: Losses[];
   collectionBanners?: Collection[];
-  releaseFlag: Release;
-  discountFlag: {
+  releaseFlag?: {
+    text?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
+  discountFlag?: {
     initialText?: string;
     finalText?: string;
     /** @format color-input */
     backgroundColor?: string;
     /** @format color-input */
     fontColor?: string;
-  }
+  };
   customFlag: Custom;
 }
 interface Props {
