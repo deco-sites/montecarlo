@@ -135,7 +135,7 @@ export default function StoresInfo(props: Props) {
                                       name: "select_item",
                                       params: {
                                         item_list_id: id + "desktopClick",
-                                        item_list_name: image.label,
+                                        item_list_name: store.label,
                                         items: [],
                                       },
                                     }}
