@@ -35,7 +35,7 @@ interface SuccessMessage {
     label?: string;
     code?: string;
     description?: string;
-  }
+  };
   links?: {
     label: string;
     href: string;

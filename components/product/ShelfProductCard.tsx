@@ -59,7 +59,7 @@ export interface Layout {
     backgroundColor?: string;
     /** @format color-input */
     fontColor?: string;
-  }
+  };
 }
 
 interface Props {
@@ -157,8 +157,8 @@ function ShelfProductCard({
   const discountFlagValues = {
     ...layout?.discountFlag,
     oldPrice: listPrice,
-    newPrice: price
-  }
+    newPrice: price,
+  };
 
   return (
     <div
@@ -166,7 +166,11 @@ function ShelfProductCard({
       class={`card-compact group w-full h-full gap-2 text-center rounded-none relative my-4`}
       data-deco="view-product"
     >
-      <Flags productAdditionalProperty={product.isVariantOf?.additionalProperty} releaseFlag={layout?.releaseFlag} discountFlag={discountFlagValues} />
+      <Flags
+        productAdditionalProperty={product.isVariantOf?.additionalProperty}
+        releaseFlag={layout?.releaseFlag}
+        discountFlag={discountFlagValues}
+      />
       <figure
         class="relative overflow-hidden mb-2"
         style={{ aspectRatio: `${WIDTH} / ${HEIGHT}` }}
