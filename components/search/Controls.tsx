@@ -22,6 +22,19 @@ export type Props =
     columns?: 1 | 2;
   };
 
+function filter() {
+  const container: HTMLDivElement | null = document.querySelector("#h-filter");
+  const filterLabel: HTMLDivElement | null = document.querySelector(
+    "#filter-label",
+  );
+
+  if (container!.offsetHeight <= 50) {
+    filterLabel!.style.display = "none";
+  } else {
+    filterLabel!.style.display = "flex";
+  }
+}
+
 function SearchControls(
   {
     filters,
@@ -38,12 +51,12 @@ function SearchControls(
 ) {
   const open = useSignal(false);
 
-  const columnsMobile = useSignal(2);
-
   const priceFilter = filters.find((item) =>
     item.key === "price" && item["@type"] === "FilterRange"
   );
   const priceArray = priceFilter ? [priceFilter] : [];
+
+  console.log("filter", filters.length);
 
   filters = filters.filter((item) => item.key !== "price");
 
@@ -143,40 +156,55 @@ function SearchControls(
               </div>
 
               <div
-                class={`flex ${
+                id="container-filter"
+                data-show="close"
+                class={`flex relative after:content-[''] after:h-8 after:w-full after:absolute after:top-full after:left-0 after:right-0 after:bg-white ${
                   layout === "horizontal"
                     ? `flex-row gap-4 ${!moreFilters.value ? "h-10" : ""}`
                     : "flex-col gap-6"
                 } p-4 md:pl-0`}
               >
                 <ul
-                  ref={filtersRef}
+                  id={"h-filter"}
                   className={`flex flex-row gap-4 flex-wrap`}
                 >
                   <Filters filters={filters} layout={layout} url={url} />
                 </ul>
-                {showButton.value === true
-                  ? (
-                    <button
-                      class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-5 flex gap-1"
-                      onClick={() => {
-                        moreFilters.value = !moreFilters.value;
-                      }}
-                    >
-                      {!moreFilters.value ? "Mais" : "Menos"} Filtros
-                      <Icon
-                        class={`relative ${
-                          !moreFilters.value
-                            ? "rotate-90"
-                            : "-rotate-90 -top-[3px]"
-                        }`}
-                        size={24}
-                        id="arrowTop"
-                      >
-                      </Icon>
-                    </button>
-                  )
-                  : null}
+                <button
+                  id={"filter-label"}
+                  class="font-poppins text-sm text-black border-b border-[#FFC72C] whitespace-nowrap h-5 flex gap-1"
+                  hx-on:click={useScript(() => {
+                    const filter: HTMLDivElement | null = document
+                      .querySelector("#container-filter");
+                    const filterLabel: HTMLDivElement | null = document
+                      .querySelector("#filter-label > span");
+                    const filterIcon: HTMLDivElement | null = document
+                      .querySelector("#filter-label > svg");
+                    if (filter?.getAttribute("data-show") == "open") {
+                      filter!.style.height = "";
+                      filterLabel!.innerText = "Mostrar Mais";
+                      filterIcon!.style.transform = "rotate(90deg)";
+                      filter?.setAttribute("data-show", "close");
+                      filterIcon!.style.top = "0px";
+                    } else {
+                      filter!.style.height = "auto";
+                      filter?.setAttribute("data-show", "open");
+                      filterLabel!.innerText = "Mostrar Menos";
+                      filterIcon!.style.transform = "rotate(-90deg)";
+                      filterIcon!.style.top = "-3px";
+                    }
+                  })}
+                >
+                  <span>
+                    {!moreFilters.value ? "Mais" : "Menos"} Filtros
+                  </span>
+                  <Icon
+                    class={`relative rotate-90 duration-300`}
+                    size={24}
+                    id="arrowTop"
+                  >
+                  </Icon>
+                </button>
                 {sortOptions.length > 0 && (
                   <Sort sortOptions={sortOptions} url={url} />
                 )}
@@ -290,6 +318,10 @@ function SearchControls(
                 )}
               </div>
             </div>
+            <script
+              type="module"
+              dangerouslySetInnerHTML={{ __html: useScript(filter) }}
+            />
           </div>
         )}
     </Drawer>
