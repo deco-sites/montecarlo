@@ -130,12 +130,12 @@ export default function StoresInfo(props: Props) {
                                   id={id + index + "link"}
                                 >
                                   <SendEventOnClick
-                                    id={id + index}
+                                    id={id + "desktopClick"}
                                     event={{
                                       name: "select_item",
                                       params: {
-                                        item_list_id: id + index + "link",
-                                        item_list_name: store.mapLink,
+                                        item_list_id: id + "desktopClick",
+                                        item_list_name: image.label,
                                         items: [],
                                       },
                                     }}

@@ -219,3 +219,23 @@ details>summary::-webkit-details-marker
   {
   display: none;
 }
+
+.htmx-indicator {
+  opacity: 0;
+  transition: opacity 500ms ease-out;
+  z-index: -1;
+  -webkit-transition: opacity 500ms ease-out;
+  -moz-transition: opacity 500ms ease-out;
+  -ms-transition: opacity 500ms ease-out;
+  -o-transition: opacity 500ms ease-out;
+}
+
+.htmx-request .htmx-indicator {
+  opacity: 1;
+  z-index: 50;
+}
+
+.htmx-request.htmx-indicator {
+  opacity: 1;
+  z-index: 50;
+}

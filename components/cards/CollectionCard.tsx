@@ -1,10 +1,10 @@
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 import { useUI } from "../../sdk/useUI.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 
 import { Picture } from "apps/website/components/Picture.tsx";
 import Title from "../product/Shelf/Title.tsx";
 import SubTitle from "../product/Shelf/SubTitle.tsx";
+import { useSection } from "deco/hooks/useSection.ts";
 
 const DEFAULT_PROPS = {
   title: "Coleções de Joias em Ouro 18k e Prata 925",
@@ -321,9 +321,11 @@ export default function GridCollectionCard(props: Props) {
       {mobileCountController && (
         <button
           className={"mx-auto mt-12 md:mt-10 bg-[#FFC72C] h-10 px-8 md:px-12 text-xl md:text-lg font-normal text-black flex items-center justify-center"}
-          {...usePartialSection({
-            props: { lengthToShowMobile: props.lengthToShowMobile * 2 },
+          hx-get={useSection({
+            props: { lengthToShowDesktop: props.lengthToShowDesktop * 2 },
           })}
+          hx-swap="outerHTML"
+          hx-target="closest section"
         >
           {cta}
         </button>
@@ -331,9 +333,11 @@ export default function GridCollectionCard(props: Props) {
       {desktopCountController && (
         <button
           className={"mx-auto mt-12 md:mt-10 bg-[#FFC72C] h-10 px-8 md:px-12 text-xl md:text-lg font-normal text-black flex items-center justify-center"}
-          {...usePartialSection({
+          hx-get={useSection({
             props: { lengthToShowDesktop: props.lengthToShowDesktop * 2 },
           })}
+          hx-swap="outerHTML"
+          hx-target="closest section"
         >
           {cta}
         </button>
