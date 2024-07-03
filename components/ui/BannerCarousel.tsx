@@ -124,7 +124,7 @@ function BannerItemMobile({
         id={id}
         href={action?.href ?? "#"}
         aria-label={action?.label}
-        class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
+        class="absolute overflow-y-hidden w-full h-full"
       >
         {action && <Action {...action} />}
       </a>
@@ -188,7 +188,7 @@ function BannerItem({
             id={id}
             href={primaryImage.action?.href ?? "#"}
             aria-label={primaryImage.action?.label}
-            class="absolute overflow-y-hidden w-full h-full bg-gradient-to-t from-[#01010157] to-transparent"
+            class="absolute overflow-y-hidden w-full h-full"
           >
             {primaryImage.action && <Action {...primaryImage.action} />}
           </a>
