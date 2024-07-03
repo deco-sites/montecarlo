@@ -5,7 +5,6 @@ import {
 } from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
 
-
 import Flags from "./Flags/Flags.tsx";
 
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
@@ -22,7 +21,6 @@ import { relative } from "../../sdk/url.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
 import type { Release } from "./Flags/Release.tsx";
-
 
 interface Name {
   /**
@@ -66,7 +64,7 @@ export interface Layout {
     backgroundColor?: string;
     /** @format color-input */
     fontColor?: string;
-  }
+  };
 }
 
 interface Props {
@@ -164,8 +162,8 @@ function MiniProductCard({
   const discountFlagValues = {
     ...layout?.discountFlag,
     oldPrice: listPrice,
-    newPrice: price
-  }
+    newPrice: price,
+  };
 
   return (
     <div
@@ -173,7 +171,11 @@ function MiniProductCard({
       class={`card card-compact group w-full px-1 gap-2 text-center h-min relative mx-auto md:max-w-full`}
       data-deco="view-product"
     >
-      <Flags productAdditionalProperty={product.isVariantOf?.additionalProperty} releaseFlag={layout?.releaseFlag} discountFlag={discountFlagValues} />
+      <Flags
+        productAdditionalProperty={product.isVariantOf?.additionalProperty}
+        releaseFlag={layout?.releaseFlag}
+        discountFlag={discountFlagValues}
+      />
       <SendEventOnView
         id={id}
         event={{

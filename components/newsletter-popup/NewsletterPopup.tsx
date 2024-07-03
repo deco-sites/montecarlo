@@ -39,7 +39,18 @@ interface PropsNewsletterPopup {
   thirdMessageSucess?: string;
 }
 
-function NewsletterPopup({ title, image, alt, phone, primaryMessageSucess, cupom, secordMessageSucess, thirdMessageSucess }: PropsNewsletterPopup) {
+function NewsletterPopup(
+  {
+    title,
+    image,
+    alt,
+    phone,
+    primaryMessageSucess,
+    cupom,
+    secordMessageSucess,
+    thirdMessageSucess,
+  }: PropsNewsletterPopup,
+) {
   const { isMobile } = useUI();
 
   return (
@@ -65,9 +76,9 @@ function NewsletterPopup({ title, image, alt, phone, primaryMessageSucess, cupom
                     backgroundPosition: "center",
                   }}
                 />
-                <NewsletterPopupForm 
+                <NewsletterPopupForm
                   title={title}
-                  phone={phone} 
+                  phone={phone}
                   primaryMessageSucess={primaryMessageSucess}
                   cupom={cupom}
                   secordMessageSucess={secordMessageSucess}
@@ -98,7 +109,7 @@ function NewsletterPopup({ title, image, alt, phone, primaryMessageSucess, cupom
                 />
                 <NewsletterPopupForm
                   title={title}
-                  phone={phone} 
+                  phone={phone}
                   primaryMessageSucess={primaryMessageSucess}
                   cupom={cupom}
                   secordMessageSucess={secordMessageSucess}

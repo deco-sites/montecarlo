@@ -68,16 +68,18 @@ function AlertContainer(
 function SearchContainer(
   { children, active }: { children: ComponentChildren; active: boolean },
 ) {
-  const activeS = useSignal(true);
   const lastScrollTop = useSignal(0);
   const delta = 5;
-  const { displaySearchDrawer } = useUI();
+  const { displaySearchDrawer, activeS } = useUI();
 
   useSignalEffect(() => {
+    const iconSearch = globalThis.document.querySelector(
+      '[data="search-icon"]',
+    );
+    const iconSearchClose = globalThis.document.querySelector(
+      '[data="search-icon-close"]',
+    );
     const handleScroll = () => {
-      const iconSearch = globalThis.document.querySelector(
-        '[data="search-icon"]',
-      );
       const nowScrollTop = globalThis.scrollY ||
         document.documentElement.scrollTop;
 
@@ -86,20 +88,64 @@ function SearchContainer(
           activeS.value = false;
           displaySearchDrawer.value = false;
           iconSearch?.removeAttribute("disabled");
+          iconSearchClose?.setAttribute("disabled", "");
         } else {
           activeS.value = true;
-          displaySearchDrawer.value = false;
-          iconSearch?.setAttribute("disabled", "");
+          displaySearchDrawer.value = true;
+          iconSearch?.setAttribute("disabled", "true");
+          iconSearchClose?.removeAttribute("disabled");
         }
         lastScrollTop.value = nowScrollTop;
       }
     };
 
-    globalThis.addEventListener("scroll", handleScroll);
+    const handleScrollPDP = () => {
+      const nowScrollTop = globalThis.scrollY ||
+        document.documentElement.scrollTop;
 
-    return () => {
-      globalThis.removeEventListener("scroll", handleScroll);
+      if (Math.abs(lastScrollTop.value - nowScrollTop) >= delta) {
+        if (nowScrollTop > lastScrollTop.value) {
+          activeS.value = false;
+          displaySearchDrawer.value = false;
+          iconSearch?.removeAttribute("disabled");
+          iconSearchClose?.setAttribute("disabled", "");
+        } else {
+          activeS.value = false;
+          displaySearchDrawer.value = false;
+          iconSearch?.removeAttribute("disabled");
+          iconSearchClose?.setAttribute("disabled", "");
+        }
+        lastScrollTop.value = nowScrollTop;
+      }
     };
+
+    if (window.location.href.includes("/p")) {
+      const iconSearch = globalThis.document.querySelector(
+        '[data="search-icon"]',
+      );
+      const iconSearchClose = globalThis.document.querySelector(
+        '[data="search-icon-close"]',
+      );
+      if (!activeS.value) {
+        iconSearch?.removeAttribute("disabled");
+        iconSearchClose?.setAttribute("disabled", "true");
+        globalThis.addEventListener("scroll", handleScrollPDP);
+        return () => {
+          globalThis.removeEventListener("scroll", handleScrollPDP);
+        };
+      }
+      globalThis.addEventListener("scroll", handleScrollPDP);
+      displaySearchDrawer.value = true;
+      activeS.value = false;
+
+      iconSearchClose?.removeAttribute("disabled");
+      iconSearch?.setAttribute("disabled", "true");
+    } else {
+      globalThis.addEventListener("scroll", handleScroll);
+      return () => {
+        globalThis.removeEventListener("scroll", handleScroll);
+      };
+    }
   });
 
   return (
