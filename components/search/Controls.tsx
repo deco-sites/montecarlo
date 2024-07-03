@@ -22,24 +22,26 @@ export type Props =
     columns?: 1 | 2;
   };
 
-  function filter() {
-    const container: HTMLDivElement | null = document.querySelector("#h-filter");
-    const filterLabel: HTMLDivElement | null = document.querySelector("#filter-label");
-    console.log("load");
-  
-    if (container && filterLabel) {
-      console.log("height", container.scrollHeight);
-  
-      if (container.scrollHeight <= 50) {
-        filterLabel.style.display = "none";
-      } else {
-        filterLabel.style.display = "flex";
-      }
+function filter() {
+  const container: HTMLDivElement | null = document.querySelector("#h-filter");
+  const filterLabel: HTMLDivElement | null = document.querySelector(
+    "#filter-label",
+  );
+  console.log("load");
+
+  if (container && filterLabel) {
+    console.log("height", container.scrollHeight);
+
+    if (container.scrollHeight <= 50) {
+      filterLabel.style.display = "none";
     } else {
-      console.error("Elementos não encontrados");
+      filterLabel.style.display = "flex";
     }
+  } else {
+    console.error("Elementos não encontrados");
+  }
 }
-  
+
 function SearchControls(
   {
     filters,
@@ -319,10 +321,10 @@ function SearchControls(
             </div>
           </div>
         )}
-        <script
-          type="module"
-          dangerouslySetInnerHTML={{ __html: useScript(filter) }}
-        />
+      <script
+        type="module"
+        dangerouslySetInnerHTML={{ __html: useScript(filter) }}
+      />
     </Drawer>
   );
 }

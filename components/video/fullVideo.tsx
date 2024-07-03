@@ -77,7 +77,7 @@ export default function FullVideo(props: Props) {
           <button
             class="flex h-6 w-6 items-center justify-center rounded-full bg-primary lg:w-16 lg:h-16 cursor-pointer sm:w-10 sm:h-10"
             hx-get={useSection({
-              props: { autoPlay: true }
+              props: { autoPlay: true },
             })}
             hx-swap="outerHTML"
             hx-target="closest section"

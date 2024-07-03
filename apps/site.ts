@@ -75,18 +75,11 @@ export default function Site(
   console.log(state);
 
   return {
-    state: {
-      ...state,
-      flavor: { framework: "htmx" },
-      firstByteThresholdMS: true,
-    },
+    state: { ...state, firstByteThresholdMS: true },
     manifest,
     dependencies: [
       commerce({
         ...state,
-
-        flavor: { framework: "htmx" },
-        firstByteThresholdMS: true,
         global: theme ? [...(state.global ?? []), theme] : state.global,
       }),
     ],

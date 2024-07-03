@@ -188,7 +188,7 @@ function RangeSlider(props: Props) {
           <span class="range-min-interval">
             {formatPrice(initialMin, "BRL")}
           </span>{" "}
-          - 
+          -
           <span class="range-max-interval">
             {formatPrice(initialMax, "BRL")}
           </span>
