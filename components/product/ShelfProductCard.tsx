@@ -18,7 +18,6 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
 
 import Flags from "./Flags/Flags.tsx";
-import type { Release } from "./Flags/Release.tsx";
 
 interface Name {
   /**
@@ -46,8 +45,14 @@ export interface Layout {
   name?: Name;
   price?: Price;
   materialImages?: Material[];
-  releaseFlag: Release;
-  discountFlag: {
+  releaseFlag?: {
+    text?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
+  discountFlag?: {
     initialText?: string;
     finalText?: string;
     /** @format color-input */

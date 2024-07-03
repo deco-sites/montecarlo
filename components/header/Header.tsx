@@ -77,6 +77,10 @@ export interface Image {
 export interface MenuNavItem {
   label: string;
   href?: string;
+  /** @format color-input */
+  background?: string;
+  /** @format color-input */
+  color?: string;
   listlinks?: ListLinks[];
   image?: Image[];
 }
