@@ -11,6 +11,10 @@ interface PropsNewsletterPopup {
    */
   title?: string;
   /*
+  * @description Descrição do popup
+  */
+    description?: string;
+  /*
    * @description ativar campo de telefone
    */
   phone?: boolean;
@@ -34,6 +38,7 @@ interface PropsNewsletterPopup {
 
 const NewsletterPopupForm = ({
   title,
+  description,
   phone,
   primaryMessageSucess,
   cupom,
@@ -214,16 +219,18 @@ const NewsletterPopupForm = ({
       {newsletterConfirm && !userExists
         ? (
           <>
-            <h1 class="text-3xl font-bold text-center text-black mb-4 px-8">
-              {title ? title : "10% OFF DE PRESENTE"}
-              {" "}
-            </h1>
-            <p class="text-black mb-4 text-center text-sm">
-              Muito bom te ver por aqui!
-              <br />
-              Cadastre-se pra brilhar na sua primeira compra e acompanhar nossas
-              novidades.
-            </p>
+            {
+              title ? (
+                <h1 class="text-3xl font-bold text-center text-black mb-4 px-8">
+                  {title}
+                </h1>
+              ) : null
+            }
+            {
+              description ? (
+                <p class="text-black mb-4 text-center text-sm" dangerouslySetInnerHTML={{__html: description}} />
+              ) : null
+            }
             <form
               class="space-y-4"
               onSubmit={handleSubmit}
