@@ -39,7 +39,18 @@ interface PropsNewsletterPopup {
   thirdMessageSucess?: string;
 }
 
-function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
+function NewsletterPopup(
+  {
+    title,
+    image,
+    alt,
+    phone,
+    primaryMessageSucess,
+    cupom,
+    secordMessageSucess,
+    thirdMessageSucess,
+  }: PropsNewsletterPopup,
+) {
   const { isMobile } = useUI();
 
   return (
@@ -53,19 +64,26 @@ function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
               style="background: hsla(0, 0%, 0%, 0.5);z-index: 9999;"
             >
               <div
-                class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
+                class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-fit"
                 style={{ maxWidth: "760px" }}
               >
                 {/* Left side with image */}
                 <div
-                  class="w-full min-w-[340px]"
+                  class="w-full min-w-[340px] hidden md:block"
                   style={{
                     backgroundImage: image ? `url(${image})` : "",
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }}
                 />
-                <NewsletterPopupForm phone={phone} />
+                <NewsletterPopupForm
+                  title={title}
+                  phone={phone}
+                  primaryMessageSucess={primaryMessageSucess}
+                  cupom={cupom}
+                  secordMessageSucess={secordMessageSucess}
+                  thirdMessageSucess={thirdMessageSucess}
+                />
               </div>
             </div>
           </ClosedPopup>
@@ -89,7 +107,14 @@ function NewsletterPopup({ title, image, alt, phone }: PropsNewsletterPopup) {
                     backgroundPosition: "center",
                   }}
                 />
-                <NewsletterPopupForm phone={phone} />
+                <NewsletterPopupForm
+                  title={title}
+                  phone={phone}
+                  primaryMessageSucess={primaryMessageSucess}
+                  cupom={cupom}
+                  secordMessageSucess={secordMessageSucess}
+                  thirdMessageSucess={thirdMessageSucess}
+                />
               </div>
             </div>
           </ClosedPopup>

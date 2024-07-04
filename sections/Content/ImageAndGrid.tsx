@@ -106,12 +106,14 @@ export default function ImageAndGrid(props: Props) {
                           }`}
                           src={item.image.source}
                           alt={item.image.alt}
+                          loading={"lazy"}
                         />
                         {item.image.hoverImage && (
                           <img
                             class="h-full w-full object-cover hidden group-hover:block opacity-95 absolute top-0 left-0 right-0 bottom-0 "
                             src={item.image.hoverImage}
                             alt={item.image.alt}
+                            loading={"lazy"}
                           />
                         )}
                       </a>
@@ -124,12 +126,14 @@ export default function ImageAndGrid(props: Props) {
                           }`}
                           src={item.image.source}
                           alt={item.image.alt}
+                          loading={"lazy"}
                         />
                         {item.image.hoverImage && (
                           <img
                             class="h-full w-full object-cover hidden group-hover:block opacity-95 absolute top-0 left-0 right-0 bottom-0 "
                             src={item.image.hoverImage}
                             alt={item.image.alt}
+                            loading={"lazy"}
                           />
                         )}
                       </>

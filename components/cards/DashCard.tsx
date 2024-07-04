@@ -50,7 +50,13 @@ const DashCard = ({ title, subTitle, cards, layout }: Props) => {
         <SubTitle text={subTitle} />
       </div>
 
-      <div class={`grid grid-cols-${layout?.columnsMobile ? layout.columnsMobile : 2} grid-cols-${layout?.columnsTablet ? layout.columnsTablet : 2} lg:flex lg:flex-wrap gap-4 justify-center md:gap-5 w-full m-auto max-w-[1000px]`}>
+      <div
+        class={`grid grid-cols-${
+          layout?.columnsMobile ? layout.columnsMobile : 2
+        } grid-cols-${
+          layout?.columnsTablet ? layout.columnsTablet : 2
+        } lg:flex lg:flex-wrap gap-4 justify-center md:gap-5 w-full m-auto max-w-[1000px]`}
+      >
         {cards.map((card, index) => {
           return (
             <div

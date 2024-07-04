@@ -81,13 +81,23 @@ export default function Select(
         ))}
       </select>
 
-      <button
+      {
+        /*<button
         type="button"
         class="mt-6  bg-[#F5F3E7] px-[10px] py-[14px] text-xs"
         onClick={Storange}
       >
         {button}
       </button>
+      */
+      }
+
+      <a
+        href={"/nossas-lojas"}
+        class="mt-6 bg-[#F5F3E7] px-[10px] py-[14px] text-xs"
+      >
+        {button}
+      </a>
     </>
   );
 }

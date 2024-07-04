@@ -34,6 +34,7 @@ const displayMenuProductsChild = signal(false);
 const productsChild = signal<Navmenu | undefined>(undefined);
 const productsChild2 = signal<ListLinks | null>(null);
 const showPopup = signal<boolean>(true);
+const activeS = signal<boolean>(true);
 
 const state = {
   displayCart,
@@ -46,6 +47,7 @@ const state = {
   productsChild,
   productsChild2,
   showPopup,
+  activeS,
 };
 
 // Keyboard event listeners

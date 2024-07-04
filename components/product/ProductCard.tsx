@@ -4,6 +4,9 @@ import {
   SendEventOnView,
 } from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
+
+import Flags from "./Flags/Flags.tsx";
+
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
 import { formatPrice } from "../../sdk/format.ts";
@@ -14,6 +17,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "../../sdk/url.ts";
+
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
 
@@ -51,6 +55,21 @@ export interface Layout {
   name?: Name;
   price?: Price;
   materialImages?: Material[];
+  releaseFlag?: {
+    text?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
+  discountFlag?: {
+    initialText?: string;
+    finalText?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
 }
 
 interface Props {
@@ -113,6 +132,7 @@ function MiniProductCard({
 
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
+
     return (
       <li>
         <a href={relativeLink}>
@@ -145,22 +165,18 @@ function MiniProductCard({
     listPrice,
   });
 
+  const discountFlagValues = {
+    ...layout?.discountFlag,
+    oldPrice: listPrice,
+    newPrice: price,
+  };
+
   return (
     <div
       id={id}
-      class={`card card-compact group w-full px-1 gap-2 text-center h-min  mx-auto md:max-w-full`}
+      class={`card card-compact group w-full px-1 gap-2 text-center h-min relative mx-auto md:max-w-full`}
       data-deco="view-product"
     >
-      {/* <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item_list",
-          params: {
-            item_list_name: itemListName,
-            items: [eventItem],
-          },
-        }}
-      /> */}
       <SendEventOnClick
         id={id}
         event={{
@@ -250,8 +266,6 @@ function MiniProductCard({
             }
 
             const img = layout?.materialImages.find((img) => img.name === item);
-
-            console.log("img", img);
 
             if (!img || img === undefined) {
               return null;

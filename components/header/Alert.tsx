@@ -72,7 +72,7 @@ const style = {
       }
       to{
         transform: translateY(85px);
-        background: #ffffff40;
+        background: #ffffffbf;
         }
     }
 
@@ -93,7 +93,7 @@ function Alert({ alerts = [], interval = 5 }: Props) {
   return (
     <div
       id={id}
-      class="relative w-full justify-center items-center py-1 px-0 md:px-5 grid md:flex grid-cols-[24px_auto_24px] show-alert bg-primary"
+      class="relative w-full justify-center items-center py-1 px-0 md:px-5 grid md:flex grid-cols-[24px_auto_24px] show-alert bg-[#ffc821]"
     >
       <style
         dangerouslySetInnerHTML={{

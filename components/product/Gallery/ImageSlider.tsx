@@ -51,8 +51,8 @@ export default function GallerySlider(props: Props) {
       class={`flex lg:grid grid-flow-row sm:grid-flow-col grid-cols-4 grid-rows-3 lg:gap-1 h-[99%] `}
     >
       {/* Image Slider */}
-      <div class="relative order-1 sm:order-2 col-span-4 row-span-4">
-        <Slider class="carousel carousel-center w-full lg:gap-8 gap-1 p-1 lg:p-0">
+      <div class="relative order-1 sm:order-2 col-span-4 row-span-4 w-full h-full">
+        <Slider class="carousel carousel-center w-full h-full lg:gap-8 gap-1 p-1 lg:p-0">
           {images.map((img, index) => (
             <Slider.Item
               index={index}
@@ -60,7 +60,7 @@ export default function GallerySlider(props: Props) {
             >
               <ZoomImage>
                 <Image
-                  class="w-full"
+                  class="w-full h-[calc(100vw*(300/300))] lg:max-h-[765px] lg:h-[calc(49.3vw*(500/500))]"
                   sizes="(max-width: 640px) 100vw, 40vw"
                   style={{ aspectRatio }}
                   src={img.url!}

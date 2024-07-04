@@ -92,7 +92,7 @@ export default function ProductCardInline({ product, itemListName }: Props) {
         src={front.url!}
         preload={false}
         loading={"lazy"}
-        decoding={"sync"}
+        decoding={"async"}
       >
       </Image>
       <div class="flex w-full flex-col justify-between px-2 py-2">

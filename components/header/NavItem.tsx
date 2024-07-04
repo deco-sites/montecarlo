@@ -38,6 +38,10 @@ export interface Image {
 export interface MenuNavItem {
   label: string;
   href?: string;
+  /** @format color-input */
+  background?: string;
+  /** @format color-input */
+  color?: string;
   /**
    * @maximum 5
    */
@@ -94,7 +98,15 @@ function NavItem({ item }: { item: MenuNavItem }) {
   return (
     <li class="group flex items-center gap-3">
       <a href={href} class="my-auto" id={id}>
-        <span class="group-hover:font-semibold cursor-pointer text-sm font-thin text-black px-5 py-3">
+        <span
+          class={`group-hover:font-semibold cursor-pointer text-sm font-thin text-black ${
+            item.background ? "inline-flex px-3 py-1" : "px-5 py-3"
+          }`}
+          style={{
+            backgroundColor: item.background ? item.background : "transparent",
+            color: item.color ? item.color : "#000",
+          }}
+        >
           {label}
         </span>
         <SendEventOnClick
@@ -111,9 +123,9 @@ function NavItem({ item }: { item: MenuNavItem }) {
           }}
         />
       </a>
-      
-      {
-        listlinks !== undefined && listlinks?.length > 0 ? (
+
+      {listlinks !== undefined && listlinks?.length > 0
+        ? (
           <div
             data-menu
             class={`fixed hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 py-16 duration-200 shadow-menu
@@ -143,8 +155,8 @@ function NavItem({ item }: { item: MenuNavItem }) {
               </div>
             )}
           </div>
-        ) : null
-      }
+        )
+        : null}
     </li>
   );
 }

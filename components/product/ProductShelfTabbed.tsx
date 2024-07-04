@@ -1,3 +1,4 @@
+import { useSection } from "deco/hooks/useSection.ts";
 import {
   SendEventOnClick,
   SendEventOnView,
@@ -14,7 +15,6 @@ import { useOffer } from "../../sdk/useOffer.ts";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-import { usePartialSection } from "deco/hooks/usePartialSection.ts";
 
 /** @titleBy title */
 interface Tab {
@@ -67,7 +67,11 @@ function TabbedProductShelf({
           {tabs.map((tab, index) => (
             <button
               class={`tab tab-lg ${index === ti ? "tab-active" : ""}`}
-              {...usePartialSection({ props: { tabIndex: index } })}
+              hx-get={useSection({
+                props: { tabIndex: index },
+              })}
+              hx-swap="outerHTML"
+              hx-target="closest section"
             >
               {tab.title}
             </button>

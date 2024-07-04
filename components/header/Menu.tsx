@@ -34,6 +34,10 @@ export interface Image {
 export interface MenuNavItem {
   label: string;
   href?: string;
+  /** @format color-input */
+  background?: string;
+  /** @format color-input */
+  color?: string;
   listlinks?: ListLinks[];
   image?: Image[];
 }
@@ -73,11 +77,17 @@ function Menu({ items }: Props) {
               : (
                 <a
                   href={item.href}
-                  class={`flex border-b-[1px] items-center justify-between px-4 py-4 m-auto w-full font-normal text-[14px] leading-[17.5px] ${
-                    index === items.length - 1
-                      ? "text-primary bg-secondary"
-                      : "text-primary-content"
-                  }`}
+                  class={`flex items-center justify-between ${
+                    item.background
+                      ? "py-2 px-3 inline-flex w-fit"
+                      : "py-3 w-full"
+                  } m-auto font-normal text-base`}
+                  style={{
+                    backgroundColor: item.background
+                      ? item.background
+                      : "transparent",
+                    color: item.color ? item.color : "#000",
+                  }}
                 >
                   {item.label}
                 </a>
