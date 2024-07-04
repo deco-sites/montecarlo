@@ -53,12 +53,12 @@ function NewsletterPopup({ title, image, alt, phone, primaryMessageSucess, cupom
               style="background: hsla(0, 0%, 0%, 0.5);z-index: 9999;"
             >
               <div
-                class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
+                class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-fit"
                 style={{ maxWidth: "760px" }}
               >
                 {/* Left side with image */}
                 <div
-                  class="w-full min-w-[340px]"
+                  class="w-full min-w-[340px] hidden md:block"
                   style={{
                     backgroundImage: image ? `url(${image})` : "",
                     backgroundSize: "cover",
