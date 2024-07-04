@@ -84,7 +84,7 @@ export default function ImageAndGrid(props: Props) {
                 </span>
               )}
 
-              {item.cta && (
+              {item.cta?.href && (
                 <span class="absolute invisible group-hover:visible flex h-full w-full items-center justify-center bg-perola-intermediario bg-opacity-20 transition z-10">
                   <a
                     href={item.cta.href}
