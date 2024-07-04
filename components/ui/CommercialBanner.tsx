@@ -169,23 +169,27 @@ function CommercialBanner(
       {isMobileDevice
         ? (
           <Image
-            className="w-full lg:w-[50vw] object-cover"
+            className="w-full lg:w-[50vw] object-cover h-[calc(100vw*(416/720))]"
             width={600}
             src={imageMobile}
             alt={altText}
-            style={"height: auto;"}
             loading={preloadImage ? "eager" : "lazy"}
+            preload={preloadImage}
+            fetchPriority={preloadImage ? "high" : "low"}
+            decoding={preloadImage ? "sync" : "async"}
           />
         )
         : (
           <Image
-            className="w-full lg:w-[50%] object-cover"
+            className="w-full lg:w-[50%] object-cover lg:h-[calc(50vw*(572/1547))]"
             src={imageDesktop}
             alt={altText}
-            style={`height: ${heightImageDesktopController}px;`}
             height={heightImageDesktopController}
             width={1200}
             loading={preloadImage ? "eager" : "lazy"}
+            preload={preloadImage}
+            fetchPriority={preloadImage ? "high" : "low"}
+            decoding={preloadImage ? "sync" : "async"}
           />
         )}
       <SendEventOnView
