@@ -2,6 +2,7 @@ import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import { Material } from "deco-sites/montecarlo/loaders/Layouts/MaterialProduct.tsx";
 import { Losses } from "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx";
+import { useSection } from "deco/hooks/useSection.ts";
 
 interface Variants {
   link: string;
@@ -19,8 +20,11 @@ interface GroupVariants {
 }
 
 export function SelectVariants(
-  { type, variants, materialImages, losses }: GroupVariants,
+  { type, variants, materialImages, losses, url }: GroupVariants & { url: string }
 ) {
+
+  const newUrl = new URL(url).origin;
+
   if (type == "Material") {
     return (
       <div class="flex flex-col gap-1 min-w-32 order-1">
@@ -38,13 +42,17 @@ export function SelectVariants(
             if (!img || img === undefined) {
               return null;
             }
+            const href = item.link.replace("https://montecarlo.myvtex.com", newUrl)
             return (
-              <a
-                href={item.link.replace("https://montecarlo.myvtex.com", "")}
-                class={`${
-                  item.active &&
+              <button
+                hx-target="closest section"
+                hx-get={useSection({ href })}
+                hx-swap="outerHTML show:parent:top"
+                hx-indicator="#spinner-pdp"
+                hx-push-url={href}
+                class={`${item.active &&
                   "border border-primary rounded-sm p-1 cursor-pointer"
-                } `}
+                  } `}
               >
                 <Image
                   class="rounded-sm h-min"
@@ -53,7 +61,7 @@ export function SelectVariants(
                   height={20}
                   alt={img.name}
                 />
-              </a>
+              </button>
             );
           })}
         </div>
@@ -76,13 +84,17 @@ export function SelectVariants(
             if (!img || img === undefined) {
               return null;
             }
+            const href = item.link.replace("https://montecarlo.myvtex.com", newUrl)
             return (
               <a
-                href={item.link.replace("https://montecarlo.myvtex.com", "")}
-                class={`${
-                  item.active &&
+                hx-target="closest section"
+                hx-get={useSection({ href })}
+                hx-swap="outerHTML show:parent:top"
+                hx-indicator="#spinner-pdp"
+                hx-push-url={href}
+                class={`${item.active &&
                   "border border-primary rounded-sm p-1 cursor-pointer"
-                } `}
+                  } `}
               >
                 <Image
                   class="rounded-sm h-min"
@@ -114,12 +126,14 @@ export function SelectVariants(
           </label>
           <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white">
             {variants.length > 1 && variants.map((variant) => {
+              const href = variant.link.replace("https://montecarlo.myvtex.com", newUrl)
               return (
                 <a
-                  href={variant.link.replace(
-                    "https://montecarlo.myvtex.com",
-                    "",
-                  )}
+                  hx-target="closest section"
+                  hx-get={useSection({ href })}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-indicator="#spinner-pdp"
+                  hx-push-url={href}
                   selected={variant.active}
                   class="hover:bg-primary px-2 py-1"
                 >
@@ -149,12 +163,14 @@ export function SelectVariants(
             </label>
             <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white">
               {variants.length > 1 && variants.map((variant) => {
+                const href = variant.link.replace("https://montecarlo.myvtex.com", newUrl)
                 return (
                   <a
-                    href={variant.link.replace(
-                      "https://montecarlo.myvtex.com",
-                      "",
-                    )}
+                    hx-target="closest section"
+                    hx-get={useSection({ href })}
+                    hx-swap="outerHTML show:parent:top"
+                    hx-indicator="#spinner-pdp"
+                    hx-push-url={href}
                     selected={variant.active}
                     class="hover:bg-primary px-2 py-1"
                   >
@@ -175,12 +191,16 @@ export function SelectVariants(
         <span class="text-xs uppercase">{type}</span>
         <div class="flex w-full h-auto flex-1 min-h-4 gap-1 items-center flex-wrap">
           {variants?.map((item) => {
+            const href = item.link.replace("https://montecarlo.myvtex.com", newUrl)
             return (
               <a
-                href={item.link.replace("https://montecarlo.myvtex.com", "")}
-                class={` " p-1 w-7 h-7 rounded-full flex justify-center items-center "  ${
-                  item.active && "border border-primary rounded-full "
-                } `}
+                hx-target="closest section"
+                hx-get={useSection({ href })}
+                hx-swap="outerHTML show:parent:top"
+                hx-indicator="#spinner-pdp"
+                hx-push-url={href}
+                class={` " p-1 w-7 h-7 rounded-full flex justify-center items-center "  ${item.active && "border border-primary rounded-full "
+                  } `}
               >
                 {item.message}
               </a>
@@ -195,12 +215,16 @@ export function SelectVariants(
         <span class="text-xs uppercase">Disponível em:</span>
         <div class="flex w-full h-auto flex-1 min-h-4 gap-1 items-center flex-wrap">
           {variants?.map((item) => {
+            const href = item.link.replace("https://montecarlo.myvtex.com", newUrl)
             return (
               <a
-                href={item.link.replace("https://montecarlo.myvtex.com", "")}
-                class={` " p-1 w-16 h-16 flex justify-center items-center "  ${
-                  item.active && "border border-primary rounded-lg "
-                } `}
+                hx-target="closest section"
+                hx-get={useSection({ href })}
+                hx-swap="outerHTML show:parent:top"
+                hx-indicator="#spinner-pdp"
+                hx-push-url={href}
+                class={` " p-1 w-16 h-16 flex justify-center items-center "  ${item.active && "border border-primary rounded-lg "
+                  } `}
               >
                 <Image
                   class="w-full h-full object-cover rounded-lg"

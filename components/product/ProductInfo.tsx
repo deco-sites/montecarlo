@@ -168,6 +168,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
       .replace(/[\u0300-\u036f]/g, "")
       .replace(" ", "-");
 
+  const urlProduct = product.url
+
   return (
     <>
       <div class="col-start-4 row-span-2">
@@ -248,17 +250,17 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     type={group.type}
                     materialImages={extraInformations.materialImages}
                     losses={extraInformations.lossesImage}
+                    url={urlProduct || ""}
                   />
                 ))}
                 <ProductSelector product={product} />
                 <span
-                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${
-                    product.isVariantOf?.hasVariant.length == 1 &&
+                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${product.isVariantOf?.hasVariant.length == 1 &&
                     " "
-                  }`}
+                    }`}
                 >
                   {category?.toLowerCase().includes("anéis") ||
-                      category?.toLowerCase().includes("alianças")
+                    category?.toLowerCase().includes("alianças")
                     ? (
                       isVariantOf?.hasVariant &&
                       isVariantOf?.hasVariant.length > 1 && "Guia de medidas"

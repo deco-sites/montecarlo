@@ -63,11 +63,11 @@ export default function ZoomImage({ children }: Props) {
     <div
       ref={zoom}
       onClick={() => activeZoom.value = !activeZoom.value}
-      class={`w-full origin-[0px_0px] ${
+      class={`w-full h-full origin-[0px_0px] ${
         activeZoom.value ? "cursor-zoom-out" : "cursor-zoom-in"
       }`}
     >
-      <div ref={imgZoom}>
+      <div class="w-full h-full" ref={imgZoom}>
         {children}
       </div>
     </div>
