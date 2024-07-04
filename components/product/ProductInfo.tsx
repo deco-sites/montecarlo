@@ -168,6 +168,8 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
       .replace(/[\u0300-\u036f]/g, "")
       .replace(" ", "-");
 
+  const urlProduct = product.url;
+
   return (
     <>
       <div class="col-start-4 row-span-2">
@@ -248,6 +250,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                     type={group.type}
                     materialImages={extraInformations.materialImages}
                     losses={extraInformations.lossesImage}
+                    url={urlProduct || ""}
                   />
                 ))}
                 <ProductSelector product={product} />
