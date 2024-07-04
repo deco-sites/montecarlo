@@ -1,5 +1,5 @@
 {
-  "imports": {
+  "imports": { 
     "deco-sites/montecarlo/": "./",
     "deco/": "https://denopkg.com/deco-cx/deco@1.75.1/",
     "apps/": "https://cdn.jsdelivr.net/gh/deco-cx/apps@0.47.7/",
