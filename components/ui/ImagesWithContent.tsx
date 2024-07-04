@@ -91,6 +91,7 @@ export default function ImagesWithContent(props: Props) {
                   alt={primaryImage.alt}
                   preload={primaryImage.preload}
                   fetchPriority={primaryImage.preload ? "high" : "low"}
+                  loading={primaryImage.preload ? "eager" : "lazy"}
                   width={756}
                   height={636}
                   class={`w-full h-full ${GRIDLAYOUT[primaryImage.variant]}`}
@@ -103,6 +104,7 @@ export default function ImagesWithContent(props: Props) {
                 alt={secondImage.alt}
                 preload={secondImage.preload}
                 fetchPriority={secondImage.preload ? "high" : "low"}
+                loading={secondImage.preload ? "eager" : "lazy"}
                 width={350}
                 height={275}
                 class="w-full h-auto"
