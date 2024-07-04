@@ -20,7 +20,6 @@ import { relative } from "../../sdk/url.ts";
 
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
-import type { Release } from "./Flags/Release.tsx";
 
 interface Name {
   /**
@@ -56,7 +55,13 @@ export interface Layout {
   name?: Name;
   price?: Price;
   materialImages?: Material[];
-  releaseFlag: Release;
+  releaseFlag?: {
+    text?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
   discountFlag?: {
     initialText?: string;
     finalText?: string;
@@ -127,6 +132,7 @@ function MiniProductCard({
 
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
+
     return (
       <li>
         <a href={relativeLink}>
