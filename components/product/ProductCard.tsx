@@ -4,6 +4,9 @@ import {
   SendEventOnView,
 } from "../../components/Analytics.tsx";
 import Avatar from "../../components/ui/Avatar.tsx";
+
+import Flags from "./Flags/Flags.tsx";
+
 import WishlistButtonVtex from "../../islands/WishlistButton/vtex.tsx";
 import WishlistButtonWake from "../../islands/WishlistButton/vtex.tsx";
 import { formatPrice } from "../../sdk/format.ts";
@@ -14,6 +17,7 @@ import type { Product } from "apps/commerce/types.ts";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Image from "apps/website/components/Image.tsx";
 import { relative } from "../../sdk/url.ts";
+
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
 
@@ -51,6 +55,21 @@ export interface Layout {
   name?: Name;
   price?: Price;
   materialImages?: Material[];
+  releaseFlag?: {
+    text?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
+  discountFlag?: {
+    initialText?: string;
+    finalText?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
 }
 
 interface Props {
@@ -113,6 +132,7 @@ function MiniProductCard({
 
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
+
     return (
       <li>
         <a href={relativeLink}>
@@ -120,8 +140,8 @@ function MiniProductCard({
             variant={relativeLink === relativeUrl
               ? "active"
               : relativeLink
-              ? "default"
-              : "disabled"}
+                ? "default"
+                : "disabled"}
             content={value}
           />
         </a>
@@ -145,12 +165,23 @@ function MiniProductCard({
     listPrice,
   });
 
+  const discountFlagValues = {
+    ...layout?.discountFlag,
+    oldPrice: listPrice,
+    newPrice: price,
+  };
+
   return (
     <div
       id={id}
-      class={`card card-compact group w-full px-1 gap-2 text-center h-min  mx-auto md:max-w-full`}
+      class={`card card-compact group w-full px-1 gap-2 text-center h-min relative mx-auto md:max-w-full`}
       data-deco="view-product"
     >
+      <Flags
+        productAdditionalProperty={product.isVariantOf?.additionalProperty}
+        releaseFlag={layout?.releaseFlag}
+        discountFlag={discountFlagValues}
+      />
       <SendEventOnView
         id={id}
         event={{
@@ -204,18 +235,17 @@ function MiniProductCard({
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
-              l?.onMouseOver?.image == "Zoom image"
+            class={`bg-base-100 col-span-full row-span-full rounded w-full ${l?.onMouseOver?.image == "Zoom image"
                 ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                 : ""
-            }`}
+              }`}
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
             decoding="async"
           />
           {(!l?.onMouseOver?.image ||
-              l?.onMouseOver?.image == "Change image")
+            l?.onMouseOver?.image == "Change image")
             ? (
               <Image
                 src={back?.url ?? front.url!}
@@ -235,9 +265,8 @@ function MiniProductCard({
       <div class="flex-auto flex flex-col justify-between text-start">
         <div class="flex flex-col gap-0">
           <h2
-            class={`truncate font-normal ${
-              PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
-            }`}
+            class={`truncate font-normal ${PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
+              }`}
             dangerouslySetInnerHTML={{ __html: newName ?? "" }}
           />
         </div>
@@ -279,9 +308,8 @@ function MiniProductCard({
               )}
             </div>
             <div
-              class={`text-blak font-bold ${
-                PROPS_FONT_SIZE[layout?.price?.fontSize || "Small"]
-              }`}
+              class={`text-blak font-bold ${PROPS_FONT_SIZE[layout?.price?.fontSize || "Small"]
+                }`}
             >
               {formatPrice(price, offers?.priceCurrency)}
             </div>

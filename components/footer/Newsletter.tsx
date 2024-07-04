@@ -40,7 +40,7 @@ interface SuccessMessage {
     label?: string;
     code?: string;
     description?: string;
-  }
+  };
   links?: {
     label: string;
     href: string;
@@ -188,8 +188,7 @@ function Newsletter({
 
             if (vtexNewsletter.status === 404 && leadsMktCloud.status === 404) {
               registeredError.value = true;
-            } 
-            else {
+            } else {
               registeredError.value = false;
             }
           }
@@ -246,130 +245,165 @@ function Newsletter({
       style={{ backgroundColor: layout.bgColor, color: layout.textColor }}
     >
       <div class="flex flex-col items-center container gap-5 lg:gap-7 max-w-[700px]">
-        {
-          registered.value === true ? null : (
-            <>
-              <div class="flex flex-col gap-1 px-4 font-poppins text-center max-w-[660px]">
-                <h3 class="text-xl lg:text-2xl font-semibold">{title}</h3>
-                <p class="text-sm font-medium">{description}</p>
-              </div>
-              <form
-                onSubmit={handleSubmit}
-                class="flex flex-col gap-5 items-center font-poppins w-full"
-              >
-                <div class="flex flex-col lg:flex-row items-start gap-2.5 lg:gap-2 w-full">
-                  {form.fields.map((field) => (
-                    <label for={field.name} class="flex flex-col gap-1 flex-1 w-full">
-                      <input
-                        class={`flex-1 p-3 text-xs placeholder-black font-medium peer focus:outline-none ${(field.name === "email" && emailFounded.value === true) ? "border border-red-500" : ""}`}
-                        name={field.name}
-                        type={field.type}
-                        placeholder={field.placeholder}
-                        required={field.required}
-                        pattern={field.pattern}
-                      />
-                      <span class={`hidden text-xs text-red-500 ${(field.name === "email" && emailFounded.value === true) ? "!block" : "peer-[&:not(:placeholder-shown):not(:focus):invalid]:block"}`}>
-                        {
-                          field.name === "email" && emailFounded.value === true ? 
-                            "E-mail já cadastrado." 
-                            : field.helpText
-                        }
-                      </span>
-                    </label>
-                  ))}
-                </div>
-      
-                <div class="flex flex-col lg:flex-row gap-5 lg:gap-2.5 w-full">
-                  {form.termsAndConditions &&
-                    (
-                      <div class="flex flex-1 lg:items-center gap-3">
-                        {termsAndConditionsCheckBox}
-                        <label
-                          for="termsAndConditions"
-                          class="flex-1 text-xs"
-                          dangerouslySetInnerHTML={{
-                            __html: form.termsAndConditions
-                              ? form.termsAndConditions
-                              : "",
-                          }}
-                        />
-                      </div>
-                    )}
-      
-                  <div class="flex flex-1 self-center">
+        {registered.value === true ? null : (
+          <>
+            <div class="flex flex-col gap-1 px-4 font-poppins text-center max-w-[660px]">
+              <h3 class="text-xl lg:text-2xl font-semibold">{title}</h3>
+              <p class="text-sm font-medium">{description}</p>
+            </div>
+            <form
+              onSubmit={handleSubmit}
+              class="flex flex-col gap-5 items-center font-poppins w-full"
+            >
+              <div class="flex flex-col lg:flex-row items-start gap-2.5 lg:gap-2 w-full">
+                {form.fields.map((field) => (
+                  <label
+                    for={field.name}
+                    class="flex flex-col gap-1 flex-1 w-full"
+                  >
                     <input
-                      class="w-fit text-sm p-3.5 cursor-pointer disabled:loading hover:opacity-80"
-                      style={{
-                        backgroundColor: layout?.submitButton?.bgColor,
-                        color: layout?.submitButton?.textColor,
-                      }}
-                      type="submit"
-                      value={form.submitButtonText}
-                      disabled={loading}
+                      class={`flex-1 p-3 text-xs placeholder-black font-medium peer focus:outline-none ${
+                        (field.name === "email" && emailFounded.value === true)
+                          ? "border border-red-500"
+                          : ""
+                      }`}
+                      name={field.name}
+                      type={field.type}
+                      placeholder={field.placeholder}
+                      required={field.required}
+                      pattern={field.pattern}
                     />
-                  </div>
+                    <span
+                      class={`hidden text-xs text-red-500 ${
+                        (field.name === "email" && emailFounded.value === true)
+                          ? "!block"
+                          : "peer-[&:not(:placeholder-shown):not(:focus):invalid]:block"
+                      }`}
+                    >
+                      {field.name === "email" && emailFounded.value === true
+                        ? "E-mail já cadastrado."
+                        : field.helpText}
+                    </span>
+                  </label>
+                ))}
+              </div>
+
+              <div class="flex flex-col lg:flex-row gap-5 lg:gap-2.5 w-full">
+                {form.termsAndConditions &&
+                  (
+                    <div class="flex flex-1 lg:items-center gap-3">
+                      {termsAndConditionsCheckBox}
+                      <label
+                        for="termsAndConditions"
+                        class="flex-1 text-xs"
+                        dangerouslySetInnerHTML={{
+                          __html: form.termsAndConditions
+                            ? form.termsAndConditions
+                            : "",
+                        }}
+                      />
+                    </div>
+                  )}
+
+                <div class="flex flex-1 self-center">
+                  <input
+                    class="w-fit text-sm p-3.5 cursor-pointer disabled:loading hover:opacity-80"
+                    style={{
+                      backgroundColor: layout?.submitButton?.bgColor,
+                      color: layout?.submitButton?.textColor,
+                    }}
+                    type="submit"
+                    value={form.submitButtonText}
+                    disabled={loading}
+                  />
                 </div>
-              </form>
-            </>
-          )
-        }
+              </div>
+            </form>
+          </>
+        )}
 
         <div class={`${registered.value === true ? "" : "hidden"}`}>
           <div class="flex w-fit flex-col justify-center items-center gap-4">
-
-            {
-              registeredError.value === true ? (
+            {registeredError.value === true
+              ? (
                 <div class="flex flex-col gap-2 justify-center items-center">
-                  <span class="text-red-500">Houve um erro ao cadastrar o email.</span>
-                  <span class="text-red-500">Verifique se você já é cadastrado.</span>
-                  <button 
+                  <span class="text-red-500">
+                    Houve um erro ao cadastrar o email.
+                  </span>
+                  <span class="text-red-500">
+                    Verifique se você já é cadastrado.
+                  </span>
+                  <button
                     class="underline"
                     onClick={() => {
                       registeredError.value = false;
                       registered.value = false;
                     }}
-                  >Tente novamente</button>
+                  >
+                    Tente novamente
+                  </button>
                 </div>
-              ) : (
+              )
+              : (
                 <>
                   <span>Obrigado!</span>
-              
+
                   <div class="flex gap-2">
-                    <div><svg width="30" height="29" viewBox="0 0 39 38" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19.5 0C9.012 0 0.5 8.512 0.5 19C0.5 29.488 9.012 38 19.5 38C29.988 38 38.5 29.488 38.5 19C38.5 8.512 29.988 0 19.5 0ZM15.7 28.5L6.2 19L8.879 16.321L15.7 23.123L30.121 8.702L32.8 11.4L15.7 28.5Z" fill="#CAAF8A"></path></svg></div>
+                    <div>
+                      <svg
+                        width="30"
+                        height="29"
+                        viewBox="0 0 39 38"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M19.5 0C9.012 0 0.5 8.512 0.5 19C0.5 29.488 9.012 38 19.5 38C29.988 38 38.5 29.488 38.5 19C38.5 8.512 29.988 0 19.5 0ZM15.7 28.5L6.2 19L8.879 16.321L15.7 23.123L30.121 8.702L32.8 11.4L15.7 28.5Z"
+                          fill="#CAAF8A"
+                        >
+                        </path>
+                      </svg>
+                    </div>
                     <span>E-mail cadastrado com sucesso</span>
                   </div>
-                  {
-                    successMessage?.coupon?.label ? (
+                  {successMessage?.coupon?.label
+                    ? (
                       <div class="flex flex-col gap-2 justify-center items-center">
                         <span>Use o cupom</span>
                         <button
                           class="bg-[#333435] hover:bg-black rounded-md py-2 px-6 text-[#F6F8F9] uppercase font-semibold flex gap-2 justify-center items-center"
                           onClick={() => {
-                            navigator.clipboard.writeText(successMessage?.coupon?.code || "");
-                          }}  
+                            navigator.clipboard.writeText(
+                              successMessage?.coupon?.code || "",
+                            );
+                          }}
                         >
                           {successMessage?.coupon?.label}
                           <Icon id="FileCopy" size={18} />
                         </button>
-                        {
-                          successMessage?.coupon?.description ? (
-                            <span>{successMessage?.coupon?.description}</span>
-                          ) : null
-                        }
+                        {successMessage?.coupon?.description
+                          ? <span>{successMessage?.coupon?.description}</span>
+                          : null}
                       </div>
-                    ) : null
-                  }
+                    )
+                    : null}
 
-                  {
-                    successMessage?.links && successMessage?.links?.length > 0 ? 
-                      successMessage.links.map((link, index) => {
-                        return <a key={index} target="_blank" class="underline" href={link.href}>{link.label}</a>
-                      })
-                    : null
-                  }
+                  {successMessage?.links && successMessage?.links?.length > 0
+                    ? successMessage.links.map((link, index) => {
+                      return (
+                        <a
+                          key={index}
+                          target="_blank"
+                          class="underline"
+                          href={link.href}
+                        >
+                          {link.label}
+                        </a>
+                      );
+                    })
+                    : null}
                 </>
-              )
-            }
+              )}
           </div>
         </div>
       </div>

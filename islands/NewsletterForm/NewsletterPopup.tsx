@@ -306,40 +306,41 @@ const NewsletterPopupForm = ({
                       <br />
                       E-mail cadastrado com sucesso.
                     </p>
-                    {
-                      primaryMessageSucess ? (
+                    {primaryMessageSucess
+                      ? (
                         <p class="text-base text-black text-center m-auto my-2">
                           {primaryMessageSucess}
                         </p>
-                      ) : null
-                    }
-                    {
-                      cupom ? (
+                      )
+                      : null}
+                    {cupom
+                      ? (
                         <p
                           onClick={() => {
                             navigator.clipboard.writeText(cupom || "");
-                          }} 
-                          class="text-3xl text-black text-center m-auto my-2 borde border-dashed border-2 border-black p-2 cursor-pointer">
+                          }}
+                          class="text-3xl text-black text-center m-auto my-2 borde border-dashed border-2 border-black p-2 cursor-pointer"
+                        >
                           <strong className="text-black">
                             {cupom}
                           </strong>
                         </p>
-                      ) : null
-                    }
-                    {
-                      secordMessageSucess ? (
+                      )
+                      : null}
+                    {secordMessageSucess
+                      ? (
                         <p class="text-lg text-black text-center m-auto my-2">
                           {secordMessageSucess}
                         </p>
-                      ) : null
-                    }
-                    {
-                      thirdMessageSucess ? (
+                      )
+                      : null}
+                    {thirdMessageSucess
+                      ? (
                         <p class="text-xs text-black text-center m-auto my-2">
                           {thirdMessageSucess}
                         </p>
-                      ) : null
-                    }
+                      )
+                      : null}
                     <a
                       class="flex justify-center text-sm text-black text-center m-auto my-2"
                       href="https://montecarlojoias.zendesk.com/hc/pt-br/articles/360041259091-Conhe%C3%A7a-as-regras-Cupons-e-Promo%C3%A7%C3%B5es-"

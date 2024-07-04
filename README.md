@@ -125,7 +125,7 @@ account
 > increase the traffic on your site and lead to higher costs
 
 > If your don't know the font-family, font-style and font-weight, ask your
-> designer for these values.
+> designer for these values
 
 ### Adding your logo
 

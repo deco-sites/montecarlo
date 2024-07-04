@@ -64,7 +64,12 @@ function Banner(props: SectionProps<ReturnType<typeof loader>>) {
           height={200}
           media="(min-width: 767px)"
         />
-        <img class="w-full" src={image.desktop} alt={image.alt ?? title} />
+        <img
+          class="w-full"
+          src={image.desktop}
+          alt={image.alt ?? title}
+          loading={"lazy"}
+        />
       </Picture>
 
       <div class="container flex flex-col items-center justify-center sm:items-start col-start-1 col-span-1 row-start-1 row-span-1 w-full">

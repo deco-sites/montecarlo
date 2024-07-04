@@ -58,6 +58,7 @@ function VerticalCard({ card, index }: { card: Card; index: number }) {
           class="w-full h-[340px] object-cover 2xl:h-[400px]"
           src={card.image}
           alt={card.altText}
+          loading={"lazy"}
         />
         <div class="text-center mt-4">
           <h3 class="text-xl font-medium">{card.title}</h3>

@@ -10,6 +10,7 @@ interface Props {
   loading?: "eager" | "lazy";
   children: ComponentChildren;
   aside: ComponentChildren;
+  id: string;
 }
 
 function Drawer(props: Props) {
@@ -20,9 +21,9 @@ function Drawer(props: Props) {
     onClose,
     class: _class = "",
     loading = "lazy",
+    id,
   } = props;
   const lazy = useSignal(loading === "lazy" && !open);
-  const id = useId();
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) =>
@@ -56,7 +57,7 @@ function Drawer(props: Props) {
 
       <aside class="drawer-side h-full overflow-hidden z-[100]">
         <label for={id} class="drawer-overlay" />
-        {!lazy.value && aside}
+        {aside}
       </aside>
     </div>
   );
