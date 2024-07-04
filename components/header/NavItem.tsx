@@ -98,9 +98,14 @@ function NavItem({ item }: { item: MenuNavItem }) {
   return (
     <li class="group flex items-center gap-3">
       <a href={href} class="my-auto" id={id}>
-        <span 
-          class={`group-hover:font-semibold cursor-pointer text-sm font-thin text-black ${item.background ? "inline-flex px-3 py-1" : "px-5 py-3"}`}
-          style={{ backgroundColor: item.background ? item.background : "transparent", color: item.color ? item.color : "#000" }}
+        <span
+          class={`group-hover:font-semibold cursor-pointer text-sm font-thin text-black ${
+            item.background ? "inline-flex px-3 py-1" : "px-5 py-3"
+          }`}
+          style={{
+            backgroundColor: item.background ? item.background : "transparent",
+            color: item.color ? item.color : "#000",
+          }}
         >
           {label}
         </span>

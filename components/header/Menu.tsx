@@ -77,10 +77,19 @@ function Menu({ items }: Props) {
               : (
                 <a
                   href={item.href}
-                  class={`flex items-center justify-between ${item.background ? "py-2 px-3 inline-flex w-fit": "py-3 w-full"} m-auto font-normal text-base`}
-                  style={{ backgroundColor: item.background ? item.background : "transparent", color: item.color ? item.color : "#000" }}
+                  class={`flex items-center justify-between ${
+                    item.background
+                      ? "py-2 px-3 inline-flex w-fit"
+                      : "py-3 w-full"
+                  } m-auto font-normal text-base`}
+                  style={{
+                    backgroundColor: item.background
+                      ? item.background
+                      : "transparent",
+                    color: item.color ? item.color : "#000",
+                  }}
                 >
-                    {item.label}
+                  {item.label}
                 </a>
               )}
           </li>

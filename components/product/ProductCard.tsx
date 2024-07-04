@@ -140,8 +140,8 @@ function MiniProductCard({
             variant={relativeLink === relativeUrl
               ? "active"
               : relativeLink
-                ? "default"
-                : "disabled"}
+              ? "default"
+              : "disabled"}
             content={value}
           />
         </a>
@@ -235,17 +235,18 @@ function MiniProductCard({
             alt={front.alternateName}
             width={WIDTH}
             height={HEIGHT}
-            class={`bg-base-100 col-span-full row-span-full rounded w-full ${l?.onMouseOver?.image == "Zoom image"
+            class={`bg-base-100 col-span-full row-span-full rounded w-full ${
+              l?.onMouseOver?.image == "Zoom image"
                 ? "duration-100 transition-scale scale-100 lg:group-hover:scale-125"
                 : ""
-              }`}
+            }`}
             sizes="(max-width: 640px) 50vw, 20vw"
             preload={preload}
             loading={preload ? "eager" : "lazy"}
             decoding="async"
           />
           {(!l?.onMouseOver?.image ||
-            l?.onMouseOver?.image == "Change image")
+              l?.onMouseOver?.image == "Change image")
             ? (
               <Image
                 src={back?.url ?? front.url!}
@@ -265,8 +266,9 @@ function MiniProductCard({
       <div class="flex-auto flex flex-col justify-between text-start">
         <div class="flex flex-col gap-0">
           <h2
-            class={`truncate font-normal ${PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
-              }`}
+            class={`truncate font-normal ${
+              PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
+            }`}
             dangerouslySetInnerHTML={{ __html: newName ?? "" }}
           />
         </div>
@@ -279,8 +281,6 @@ function MiniProductCard({
             }
 
             const img = layout?.materialImages.find((img) => img.name === item);
-
-            console.log("img", img);
 
             if (!img || img === undefined) {
               return null;
@@ -308,8 +308,9 @@ function MiniProductCard({
               )}
             </div>
             <div
-              class={`text-blak font-bold ${PROPS_FONT_SIZE[layout?.price?.fontSize || "Small"]
-                }`}
+              class={`text-blak font-bold ${
+                PROPS_FONT_SIZE[layout?.price?.fontSize || "Small"]
+              }`}
             >
               {formatPrice(price, offers?.priceCurrency)}
             </div>

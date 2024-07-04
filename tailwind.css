@@ -222,12 +222,13 @@ details>summary::-webkit-details-marker
 
 .htmx-indicator {
   opacity: 0;
-  transition: opacity 500ms ease-out;
+  transition: opacity 300ms ease-out;
+  transition: z-index 400ms ease-out;
   z-index: -1;
-  -webkit-transition: opacity 500ms ease-out;
-  -moz-transition: opacity 500ms ease-out;
-  -ms-transition: opacity 500ms ease-out;
-  -o-transition: opacity 500ms ease-out;
+  -webkit-transition: z-index 400ms ease-out;
+  -moz-transition: z-index 400ms ease-out;
+  -ms-transition: z-index 400ms ease-out;
+  -o-transition: z-index 400ms ease-out;
 }
 
 .htmx-request .htmx-indicator {
