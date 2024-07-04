@@ -151,7 +151,7 @@ function MiniProductCard({
       class={`card card-compact group w-full px-1 gap-2 text-center h-min  mx-auto md:max-w-full`}
       data-deco="view-product"
     >
-      <SendEventOnView
+      {/* <SendEventOnView
         id={id}
         event={{
           name: "view_item_list",
@@ -160,7 +160,7 @@ function MiniProductCard({
             items: [eventItem],
           },
         }}
-      />
+      /> */}
       <SendEventOnClick
         id={id}
         event={{
@@ -292,7 +292,7 @@ function MiniProductCard({
         </div>
         {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
-      <SendEventOnView
+      {/* <SendEventOnView
         id={id}
         event={{
           name: "view_item",
@@ -302,7 +302,7 @@ function MiniProductCard({
             items: [eventItem],
           },
         }}
-      />
+      /> */}
     </div>
   );
 }
