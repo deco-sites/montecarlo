@@ -70,8 +70,6 @@ function ButtonWhatsapp(
     }
   }, [isProduct]);
 
-  console.log('not mobileee value', !isMobile.value);
-
   if (active) {
     return (
       <>
