@@ -3,7 +3,7 @@ import Image from "apps/website/components/Image.tsx";
 import NewsletterPopupForm from "../../islands/NewsletterForm/NewsletterPopup.tsx";
 import ClosedPopup from "../../islands/NewsletterForm/ButtonClosePopup.tsx";
 import { useUI } from "../../sdk/useUI.ts";
-import type { HTMLWidget } from "apps/admins/widgets.ts";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 interface PropsNewsletterPopup {
   /*
