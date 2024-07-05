@@ -96,6 +96,8 @@ function ButtonWhatsapp(
         </div>
       </>
     );
+  } else {
+    return <></>;
   }
 }
 
