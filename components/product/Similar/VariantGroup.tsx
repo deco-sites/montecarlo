@@ -133,7 +133,7 @@ export function SelectVariants(
               </div>
             )}
           </label>
-          <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white">
+          <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white z-10">
             {variants.length > 1 && variants.map((variant) => {
               const href = variant.link.replace(
                 "https://montecarlo.myvtex.com",
@@ -173,7 +173,7 @@ export function SelectVariants(
                 </div>
               )}
             </label>
-            <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white">
+            <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white z-10">
               {variants.length > 1 && variants.map((variant) => {
                 const href = variant.link.replace(
                   "https://montecarlo.myvtex.com",
