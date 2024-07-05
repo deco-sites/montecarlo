@@ -20,7 +20,6 @@ import { relative } from "../../sdk/url.ts";
 
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { Material } from "../../loaders/Layouts/MaterialProduct.tsx";
-import type { Release } from "./Flags/Release.tsx";
 
 interface Name {
   /**
@@ -56,7 +55,13 @@ export interface Layout {
   name?: Name;
   price?: Price;
   materialImages?: Material[];
-  releaseFlag: Release;
+  releaseFlag?: {
+    text?: string;
+    /** @format color-input */
+    backgroundColor?: string;
+    /** @format color-input */
+    fontColor?: string;
+  };
   discountFlag?: {
     initialText?: string;
     finalText?: string;
@@ -127,6 +132,7 @@ function MiniProductCard({
 
   const skuSelector = variants.map(([value, link]) => {
     const relativeLink = relative(link);
+
     return (
       <li>
         <a href={relativeLink}>
@@ -145,7 +151,7 @@ function MiniProductCard({
 
   const cta = (
     <a
-      href={url && relative(url)}
+      href={url && relative(url)?.split('?')[0]}
       aria-label="view product"
       class="w-min py-[10px] px-[14px] hidden lg:group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
     >
@@ -209,7 +215,7 @@ function MiniProductCard({
       >
         {/* Product Images */}
         <a
-          href={url && relative(url)}
+          href={url && relative(url)?.split('?')[0]}
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >

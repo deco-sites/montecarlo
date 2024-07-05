@@ -3,12 +3,17 @@ import Image from "apps/website/components/Image.tsx";
 import NewsletterPopupForm from "../../islands/NewsletterForm/NewsletterPopup.tsx";
 import ClosedPopup from "../../islands/NewsletterForm/ButtonClosePopup.tsx";
 import { useUI } from "../../sdk/useUI.ts";
+import type { HTMLWidget } from "apps/admins/widgets.ts";
 
 interface PropsNewsletterPopup {
   /*
    * @description Titulo do popup
    */
   title?: string;
+  /*
+  * @description Descrição do popup
+  */
+  description?: HTMLWidget;
   /*
    * @description imagem do popup
    */
@@ -42,6 +47,7 @@ interface PropsNewsletterPopup {
 function NewsletterPopup(
   {
     title,
+    description,
     image,
     alt,
     phone,
@@ -64,12 +70,12 @@ function NewsletterPopup(
               style="background: hsla(0, 0%, 0%, 0.5);z-index: 9999;"
             >
               <div
-                class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-full"
+                class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-fit"
                 style={{ maxWidth: "760px" }}
               >
                 {/* Left side with image */}
                 <div
-                  class="w-full min-w-[340px]"
+                  class="w-full min-w-[340px] hidden md:block"
                   style={{
                     backgroundImage: image ? `url(${image})` : "",
                     backgroundSize: "cover",
@@ -78,6 +84,7 @@ function NewsletterPopup(
                 />
                 <NewsletterPopupForm
                   title={title}
+                  description={description}
                   phone={phone}
                   primaryMessageSucess={primaryMessageSucess}
                   cupom={cupom}
@@ -109,6 +116,7 @@ function NewsletterPopup(
                 />
                 <NewsletterPopupForm
                   title={title}
+                  description={description}
                   phone={phone}
                   primaryMessageSucess={primaryMessageSucess}
                   cupom={cupom}

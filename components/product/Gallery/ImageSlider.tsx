@@ -60,7 +60,7 @@ export default function GallerySlider(props: Props) {
             >
               <ZoomImage>
                 <Image
-                  class="w-full"
+                  class="w-full h-[calc(100vw*(300/300))] lg:max-h-[765px] lg:h-[calc(49.3vw*(500/500))]"
                   sizes="(max-width: 640px) 100vw, 40vw"
                   style={{ aspectRatio }}
                   src={img.url!}
