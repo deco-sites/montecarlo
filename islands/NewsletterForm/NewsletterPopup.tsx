@@ -11,9 +11,9 @@ interface PropsNewsletterPopup {
    */
   title?: string;
   /*
-  * @description Descrição do popup
-  */
-    description?: string;
+   * @description Descrição do popup
+   */
+  description?: string;
   /*
    * @description ativar campo de telefone
    */
@@ -69,7 +69,10 @@ const NewsletterPopupForm = ({
 
   const sandForm = async () => {
     console.log("click");
-    if (refName.current?.value !== "" && refEmail.current?.value !=="" && refCheckbox.current?.value !== "") {
+    if (
+      refName.current?.value !== "" && refEmail.current?.value !== "" &&
+      refCheckbox.current?.value !== ""
+    ) {
       console.log("validado");
       try {
         const ras = await invoke[
@@ -115,13 +118,11 @@ const NewsletterPopupForm = ({
         formData[field] = input?.value;
       }
 
-      
       formData["termsAndConditions"] = (e.currentTarget.elements.namedItem(
           "termsAndConditions",
         ) as RadioNodeList)?.value === "true"
         ? true
         : false;
-      
 
       const currentDate = new Date();
       const year = currentDate.getFullYear();
@@ -189,16 +190,15 @@ const NewsletterPopupForm = ({
             // registered.value = true;
             if (vtexNewsletter.status === 404 && leadsMktCloud.status === 404) {
               registeredError.value = true;
-            } 
-            else {
+            } else {
               setUserExists(true);
               registered.value = true;
               registeredError.value = false;
             }
           }
         } else if (emailAlreadyExists.data) {
-            // emailFounded.value = true;
-            registeredError.value = true;
+          // emailFounded.value = true;
+          registeredError.value = true;
         }
       }
     } finally {
@@ -219,18 +219,21 @@ const NewsletterPopupForm = ({
       {newsletterConfirm && !userExists
         ? (
           <>
-            {
-              title ? (
+            {title
+              ? (
                 <h1 class="text-3xl font-bold text-center text-black mb-4 px-8">
                   {title}
                 </h1>
-              ) : null
-            }
-            {
-              description ? (
-                <p class="text-black mb-4 text-center text-sm" dangerouslySetInnerHTML={{__html: description}} />
-              ) : null
-            }
+              )
+              : null}
+            {description
+              ? (
+                <p
+                  class="text-black mb-4 text-sm"
+                  dangerouslySetInnerHTML={{ __html: description }}
+                />
+              )
+              : null}
             <form
               class="space-y-4"
               onSubmit={handleSubmit}
@@ -264,13 +267,13 @@ const NewsletterPopupForm = ({
                   // ref={refPhone}
                 />
               )}
-              {
-                registeredError.value === true ? (
+              {registeredError.value === true
+                ? (
                   <span class={`text-red-500 text-sm mt-2 leading-none`}>
                     Email já cadastrado
                   </span>
-                ) : null
-              }
+                )
+                : null}
               <div class="flex items-center">
                 <input
                   type="checkbox"
