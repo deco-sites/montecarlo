@@ -4,8 +4,6 @@ import Button from "deco-sites/montecarlo/components/ui/Button.tsx";
 function MenuProducts() {
   const { productsChild, displayMenuProducts } = useUI();
 
-  console.log("menus", productsChild.value, displayMenuProducts.value);
-
   return (
     <div>
       <ul
