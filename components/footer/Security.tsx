@@ -1,5 +1,4 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy alt
@@ -27,8 +26,7 @@ export default function Securitys(
               return (
                 <li>
                   {item.src && (
-                    <Image
-                      width={68}
+                    <img
                       height={68}
                       loading="lazy"
                       src={item.src}
