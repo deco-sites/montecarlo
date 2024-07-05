@@ -90,15 +90,19 @@ function Result({
     });
   });
 
-  filters.push({
-    "@type": "FilterRange",
-    key: "price",
-    label: "Faixa de Preço",
-    values: {
-      min: minPrice,
-      max: maxPrice,
-    },
-  });
+  products.length > 1 ?  (
+    filters.push({
+      "@type": "FilterRange",
+      key: "price",
+      label: "Faixa de Preço",
+      values: {
+        min: minPrice,
+        max: maxPrice,
+      },
+    })
+  )
+  : null
+  
 
   return (
     <div
@@ -112,7 +116,7 @@ function Result({
       >
         {(isFirstPage || !isPartial) && (
           <SearchControls
-            sortOptions={sortOptions}
+            sortOptions={products?.length > 1 ? sortOptions : []}
             filters={filters}
             breadcrumb={breadcrumb}
             // displayFilter={layout?.variant === "drawer"}
