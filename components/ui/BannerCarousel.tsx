@@ -346,7 +346,6 @@ function BannerCarousel(props: Props) {
             </Slider.Item>
           ))
           : images?.map((image, index) => {
-            console.log(image);
             return (
               <Slider.Item index={index} class="carousel-item w-full ">
                 <BannerItem

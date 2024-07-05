@@ -40,8 +40,6 @@ function Drawer(props: Props) {
     lazy.value = false;
   }, []);
 
-  console.log("lazy ", id, !lazy.value)
-
   return (
     <div class={`drawer ${_class}`}>
       <input
