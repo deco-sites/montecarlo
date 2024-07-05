@@ -86,8 +86,8 @@ function SearchControls(
   const clearURL = newUrl.origin + newUrl.pathname.replace("/s", "");
   return (
     <Drawer
-      loading="lazy"
-      open={open.value}
+      loading="eager"
+      open={false}
       onClose={() => open.value = false}
       id="filter"
       aside={
