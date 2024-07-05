@@ -38,7 +38,7 @@ export default function Securitys(
               );
             })}
 
-            {/* ReclameAqui's Seal */ }
+            {/* ReclameAqui's Seal */}
             <script defer 
               dangerouslySetInnerHTML={{__html: `
                 const script = document.createElement("script");
@@ -56,7 +56,7 @@ export default function Securitys(
                   <div id="reputation-ra"></div>
               </li>
 
-              {/* Confi's Seal */ }
+              {/* Confi's Seal */}
               <script defer 
               dangerouslySetInnerHTML={{__html: `
                 const scriptconfi = document.createElement("script");
