@@ -3,6 +3,7 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 /**
  * @titleBy alt
  */
+
 export interface Security {
   /**
    * @description recommended img size 68x68
