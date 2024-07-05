@@ -13,7 +13,8 @@ import { Section } from "deco/blocks/section.ts";
 import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
 
 export interface AlertMessage {
-  title?: HTMLWidget;
+  /** @format rich-text */
+  title?: string;
   labelButton?: string;
   cupom?: string;
 }
