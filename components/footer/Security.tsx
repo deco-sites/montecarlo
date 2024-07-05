@@ -37,6 +37,46 @@ export default function Securitys(
                 </li>
               );
             })}
+
+            {/* ReclameAqui's Seal */}
+            <script defer 
+              dangerouslySetInnerHTML={{__html: `
+                const script = document.createElement("script");
+                script.type = "text/javascript";
+                script.id = "ra-embed-reputation";
+                script.src = "https://s3.amazonaws.com/raichu-beta/selos/bundle.js";
+                script.async = true;
+                script.setAttribute("data-id", "MTA0MzE6bW9udGUtY2FybG8tam9pYXM=");
+                script.setAttribute("data-target", "reputation-ra");
+                script.setAttribute("data-model", "2");
+                document.body.appendChild(script);
+              `}}/>
+
+              <li>
+                  <div id="reputation-ra"></div>
+              </li>
+
+              {/* Confi's Seal */}
+              <script defer 
+              dangerouslySetInnerHTML={{__html: `
+                const scriptconfi = document.createElement("script");
+                scriptconfi.type = "text/javascript";
+                scriptconfi.id = "getData";
+                scriptconfi.src = "https://cdn.confi.com.vc/scripts/getData.js?sellerId=107550";
+                scriptconfi.async = true;
+                scriptconfi.setAttribute("data-target", "reputation-confi");
+                document.body.appendChild(scriptconfi);
+              `}}/>
+
+              <li>
+                <div id="reputation-confi" class="h-[68px] w-[68px]">
+                  <a
+                    id="seloEconfy"
+                    href="https://confi.com.vc/lojas-confiaveis/detalhes?id=107550"
+                    target="_blank"
+                  ></a>
+                </div>
+              </li>
           </ul>
         </div>
       )}
