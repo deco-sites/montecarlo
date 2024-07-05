@@ -7,7 +7,7 @@ function MenuProducts() {
   return (
     <div>
       <ul
-        class={"flex flex-wrap mt-4 m-auto pl-10 pr-2 gap-10 w-full"}
+        class={"flex flex-wrap mt-4 mb-6 m-auto pl-10 pr-2 gap-10 w-full"}
       >
         <span class="text-base font-semibold text-black">
           {productsChild.value?.title}

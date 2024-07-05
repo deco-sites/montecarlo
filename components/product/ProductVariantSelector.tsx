@@ -43,7 +43,7 @@ function VariantSelector({ product }: Props) {
                 </label>
                 {(isVariantOf && isVariantOf.hasVariant.length > 1)
                   ? (
-                    <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white">
+                    <div class="absolute top-full hidden flex-col divide-y-2 peer-has-[:checked]:flex w-full overflow-y-scroll max-h-52 bg-white z-10">
                       {Object.entries(possibilities[name]).map(
                         ([value, link]) => {
                           return (
