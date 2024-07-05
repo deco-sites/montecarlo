@@ -11,8 +11,8 @@ interface PropsNewsletterPopup {
    */
   title?: string;
   /*
-  * @description Descrição do popup
-  */
+   * @description Descrição do popup
+   */
   description?: HTMLWidget;
   /*
    * @description imagem do popup
