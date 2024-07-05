@@ -1,5 +1,4 @@
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import Image from "apps/website/components/Image.tsx";
 
 /**
  * @titleBy alt
@@ -11,6 +10,7 @@ export interface Stack {
   src: ImageWidget;
   alt: string;
 }
+
 
 export default function Stacks(
   { content }: { content?: { title?: string; items?: Stack[] } },
@@ -27,8 +27,7 @@ export default function Stacks(
               return (
                 <li>
                   {item.src && (
-                    <Image
-                      width={71}
+                    <img
                       height={26}
                       loading="lazy"
                       src={item.src}
