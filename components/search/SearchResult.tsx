@@ -90,19 +90,19 @@ function Result({
     });
   });
 
-  products.length > 1 ?  (
-    filters.push({
-      "@type": "FilterRange",
-      key: "price",
-      label: "Faixa de Preço",
-      values: {
-        min: minPrice,
-        max: maxPrice,
-      },
-    })
-  )
-  : null
-  
+  products.length > 1
+    ? (
+      filters.push({
+        "@type": "FilterRange",
+        key: "price",
+        label: "Faixa de Preço",
+        values: {
+          min: minPrice,
+          max: maxPrice,
+        },
+      })
+    )
+    : null;
 
   return (
     <div

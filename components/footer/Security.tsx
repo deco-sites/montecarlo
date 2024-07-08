@@ -38,9 +38,11 @@ export default function Securitys(
               );
             })}
 
-            { /* ReclameAqui's Seal */ }
-            <script defer 
-              dangerouslySetInnerHTML={{__html: `
+            {/* ReclameAqui's Seal */}
+            <script
+              defer
+              dangerouslySetInnerHTML={{
+                __html: `
                 const script = document.createElement("script");
                 script.type = "text/javascript";
                 script.id = "ra-embed-reputation";
@@ -50,15 +52,19 @@ export default function Securitys(
                 script.setAttribute("data-target", "reputation-ra");
                 script.setAttribute("data-model", "2");
                 document.body.appendChild(script);
-              `}}/>
+              `,
+              }}
+            />
 
-              <li>
-                  <div id="reputation-ra"></div>
-              </li>
+            <li>
+              <div id="reputation-ra"></div>
+            </li>
 
-              { /* Confi's Seal */ }
-              <script defer 
-              dangerouslySetInnerHTML={{__html: `
+            {/* Confi's Seal */}
+            <script
+              defer
+              dangerouslySetInnerHTML={{
+                __html: `
                 const scriptconfi = document.createElement("script");
                 scriptconfi.type = "text/javascript";
                 scriptconfi.id = "getData";
@@ -66,17 +72,20 @@ export default function Securitys(
                 scriptconfi.async = true;
                 scriptconfi.setAttribute("data-target", "reputation-confi");
                 document.body.appendChild(scriptconfi);
-              `}}/>
+              `,
+              }}
+            />
 
-              <li>
-                <div id="reputation-confi" class="h-[68px] w-[68px]">
-                  <a
-                    id="seloEconfy"
-                    href="https://confi.com.vc/lojas-confiaveis/detalhes?id=107550"
-                    target="_blank"
-                  ></a>
-                </div>
-              </li>
+            <li>
+              <div id="reputation-confi" class="h-[68px] w-[68px]">
+                <a
+                  id="seloEconfy"
+                  href="https://confi.com.vc/lojas-confiaveis/detalhes?id=107550"
+                  target="_blank"
+                >
+                </a>
+              </div>
+            </li>
           </ul>
         </div>
       )}

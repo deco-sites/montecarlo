@@ -54,7 +54,6 @@ function CardImage(
     index,
   }: CardImage,
 ) {
-
   return (
     <div
       class="w-full lg:w-2/4 flex flex-col "
@@ -115,64 +114,64 @@ function CardImage(
           </>
         )
         : variant == "Variant 2"
-          ? (
-            <>
-              <div class="relative w-full">
-                <Picture preload={preload}>
-                  <Source
-                    src={imageMobile}
-                    width={350}
-                    height={350}
-                    media="(max-width: 1023px)"
-                    fetchPriority="low"
-                    loading={"lazy"}
-                  />
-                  <Source
-                    src={imageDesktop}
-                    width={700}
-                    height={342}
-                    media="(min-width: 1024px)"
-                    fetchPriority="low"
-                    decoding="async"
-                    loading={"lazy"}
-                  />
-                  <img
-                    class="w-full"
-                    src={imageDesktop}
-                    alt={alt}
-                    loading="lazy"
-                  />
-                </Picture>
-                <div class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b to-[#00000087] via-transparent from-transparent flex justify-center items-end">
-                  {title && (
-                    <h2 class=" text-center text-4xl lg:text-5xl mb-7 font-beausiteGrand text-primary">
-                      {title}
-                    </h2>
-                  )}
-                </div>
-              </div>
-              <div class="flex flex-col w-full items-center gap-6 lg:pt-7 lg:pb-4 py-6 lg:px-16 px-10">
-                {content && (
-                  <span
-                    dangerouslySetInnerHTML={{ __html: content }}
-                    class=" text-center text-sm xl:text-base font-medium"
-                  >
-                  </span>
+        ? (
+          <>
+            <div class="relative w-full">
+              <Picture preload={preload}>
+                <Source
+                  src={imageMobile}
+                  width={350}
+                  height={350}
+                  media="(max-width: 1023px)"
+                  fetchPriority="low"
+                  loading={"lazy"}
+                />
+                <Source
+                  src={imageDesktop}
+                  width={700}
+                  height={342}
+                  media="(min-width: 1024px)"
+                  fetchPriority="low"
+                  decoding="async"
+                  loading={"lazy"}
+                />
+                <img
+                  class="w-full"
+                  src={imageDesktop}
+                  alt={alt}
+                  loading="lazy"
+                />
+              </Picture>
+              <div class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b to-[#00000087] via-transparent from-transparent flex justify-center items-end">
+                {title && (
+                  <h2 class=" text-center text-4xl lg:text-5xl mb-7 font-beausiteGrand text-primary">
+                    {title}
+                  </h2>
                 )}
               </div>
-              {button?.label && (
-                <ButtonLink
-                  href={button?.href || ""}
-                  classCustom={"text-black text-sm mx-auto"}
-                  label={button?.label}
-                />
+            </div>
+            <div class="flex flex-col w-full items-center gap-6 lg:pt-7 lg:pb-4 py-6 lg:px-16 px-10">
+              {content && (
+                <span
+                  dangerouslySetInnerHTML={{ __html: content }}
+                  class=" text-center text-sm xl:text-base font-medium"
+                >
+                </span>
               )}
-            </>
-          )
-          : (
-            <>
-            </>
-          )}
+            </div>
+            {button?.label && (
+              <ButtonLink
+                href={button?.href || ""}
+                classCustom={"text-black text-sm mx-auto"}
+                label={button?.label}
+              />
+            )}
+          </>
+        )
+        : (
+          <>
+          </>
+        )}
       <SendEventOnView
         id={id}
         event={{
