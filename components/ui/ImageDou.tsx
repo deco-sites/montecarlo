@@ -3,6 +3,8 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import ButtonLink from "./ButtonLink.tsx";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
+import Title from "deco-sites/montecarlo/components/ui/Title.tsx";
+import SubTitle from "deco-sites/montecarlo/components/ui/SubTitle.tsx";
 
 /**
  * @titleBy title
@@ -29,6 +31,8 @@ interface Image {
 }
 
 export interface Props {
+  title?: string;
+  subTitle?: string;
   primaryImage: Image;
   secondImage: Image;
 }
@@ -114,11 +118,22 @@ export function SectionImage(
   );
 }
 
-export default function ImageDuo({ primaryImage, secondImage }: Props) {
+export default function ImageDuo({ title, subTitle, primaryImage, secondImage }: Props) {
   return (
-    <div class="flex flex-col gap-5 py-8 lg:flex-row lg:gap-0">
-      <SectionImage props={primaryImage} />
-      <SectionImage props={secondImage} />
+    <div class="flex flex-col gap-8 lg:gap-10 py-8">
+      {
+        title || subTitle ? (
+          <div class="flex flex-col gap-1 px-5">
+            { title ? <Title text={title} /> : null}
+            { subTitle ? <SubTitle text={subTitle} /> : null } 
+          </div>
+        ) : null
+      }
+
+      <div class="flex flex-col gap-5 lg:flex-row lg:gap-0">
+        <SectionImage props={primaryImage} />
+        <SectionImage props={secondImage} />
+      </div>
     </div>
   );
 }
