@@ -36,7 +36,7 @@ export default function ProductCardInline({ product, itemListName }: Props) {
   });
 
   return (
-    <a href={url?.split('?')[0]} class="flex w-full flex-row opacity-1 gap-2">
+    <a href={url?.split("?")[0]} class="flex w-full flex-row opacity-1 gap-2">
       <SendEventOnView
         id={id}
         event={{

@@ -140,7 +140,7 @@ function ShelfProductCard({
 
   const cta = (
     <a
-      href={url && relative(url)?.split('?')[0]}
+      href={url && relative(url)?.split("?")[0]}
       aria-label="view product"
       class="w-min py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 text-black mt-3 font-poppins text-sm bg-[#FFC72C]"
     >
@@ -177,7 +177,7 @@ function ShelfProductCard({
       >
         {/* Product Images */}
         <a
-          href={url && relative(url)?.split('?')[0]}
+          href={url && relative(url)?.split("?")[0]}
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >

@@ -48,59 +48,14 @@ function Buttons() {
   );
 }
 
-const style = {
-  "show-alert": `@keyframes show-alert{
-        from{
-          transform: translateY(0px);
-        }
-        to{
-          transform: translateY(-32px);
-        }
-  }
-  
-  .show-alert{
-    animation: show-alert linear;
-    animation-timeline: scroll();
-    animation-range: 0% 1%;
-    animation-fill-mode: both;
-  }
-  `,
-
-  "show-alert-mobile": `@keyframes show-alert-mobile{
-      from{
-        transform: translateY(0px);
-      }
-      to{
-        transform: translateY(85px);
-        background: #ffffffbf;
-        }
-    }
-
-  .show-alert{
-    animation: show-alert-mobile linear;
-    animation-timeline: scroll();
-    animation-range: 0% 1%;
-    animation-fill-mode: both;
-    }
-  `,
-};
-
 function Alert({ alerts = [], interval = 5 }: Props) {
   const id = useId();
-
-  const { isMobile } = useUI();
 
   return (
     <div
       id={id}
-      class="relative w-full justify-center items-center py-1 px-0 md:px-5 grid md:flex grid-cols-[24px_auto_24px] show-alert bg-[#ffc821]"
+      class="relative w-full justify-center items-center py-1 px-0 md:px-5 grid md:flex grid-cols-[24px_auto_24px]"
     >
-      <style
-        dangerouslySetInnerHTML={{
-          __html: style[isMobile.value ? "show-alert-mobile" : "show-alert"],
-        }}
-      >
-      </style>
       <Slider class="carousel carousel-center gap-6 col-start-2">
         {alerts.map((alert, index) => (
           <Slider.Item index={index} class="carousel-item">
