@@ -1,27 +1,8 @@
-import { useMemo } from "preact/hooks";
 import { ProductListingPage } from "apps/commerce/types.ts";
 import { useScript } from "deco/hooks/useScript.ts";
 
 const SORT_QUERY_PARAM = "sort";
 const PAGE_QUERY_PARAM = "page";
-
-const useSort = () =>
-  useMemo(() => {
-    const urlSearchParams = new URLSearchParams(
-      globalThis.window.location?.search,
-    );
-    return urlSearchParams.get(SORT_QUERY_PARAM) ?? "";
-  }, []);
-
-const applySort = (url: string, value: string) => {
-  const urlObj = new URL(url); // Cria um objeto URL para manipular facilmente os componentes da URL
-  const urlSearchParams = urlObj.searchParams; // Obtém os parâmetros de busca da URL
-
-  urlSearchParams.delete(PAGE_QUERY_PARAM); // Remove o parâmetro de página
-  urlSearchParams.set(SORT_QUERY_PARAM, value); // Define o parâmetro de ordenação com o valor passado
-
-  return urlObj.href; // Retorna a URL completa com os novos parâmetros
-};
 
 export type Props = Pick<ProductListingPage, "sortOptions">;
 
@@ -38,7 +19,7 @@ const portugueseMappings = {
 };
 
 function Sort({ sortOptions, url }: Props & { url: string }) {
-  const sort = useSort();
+  const sortUrl = new URL(url).searchParams;
 
   return (
     <>
@@ -71,7 +52,11 @@ function Sort({ sortOptions, url }: Props & { url: string }) {
           label: portugueseMappings[label as keyof typeof portugueseMappings] ??
             label,
         })).filter(({ label }) => label).map(({ value, label }) => (
-          <option key={value} value={value} selected={value === sort}>
+          <option
+            key={value}
+            value={value}
+            selected={value === sortUrl.get("sort")}
+          >
             <span class="text-sm">{label}</span>
           </option>
         ))}
