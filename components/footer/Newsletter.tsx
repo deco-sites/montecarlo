@@ -323,7 +323,7 @@ function Newsletter({
         )}
 
         <div class={`${registered.value === true ? "" : "hidden"}`}>
-          <div class="flex w-fit flex-col justify-center items-center gap-4">
+          <div class="flex w-fit flex-col justify-center items-center gap-4 font-poppins">
             {registeredError.value === true
               ? (
                 <div class="flex flex-col gap-2 justify-center items-center">
@@ -371,7 +371,7 @@ function Newsletter({
                       <div class="flex flex-col gap-2 justify-center items-center">
                         <span>Use o cupom</span>
                         <button
-                          class="bg-[#333435] hover:bg-black rounded-md py-2 px-6 text-[#F6F8F9] uppercase font-semibold flex gap-2 justify-center items-center"
+                          class="bg-[#333435] hover:bg-black py-2 px-6 text-[#F6F8F9] uppercase font-semibold flex gap-2 justify-center items-center"
                           onClick={() => {
                             navigator.clipboard.writeText(
                               successMessage?.coupon?.code || "",
@@ -394,7 +394,7 @@ function Newsletter({
                         <a
                           key={index}
                           target="_blank"
-                          class="underline"
+                          class="underline text-sm"
                           href={link.href}
                         >
                           {link.label}
