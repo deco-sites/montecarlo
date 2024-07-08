@@ -279,7 +279,7 @@ function SearchControls(
                   Filtrar
                 </button>
                 {sortOptions.length > 0 && (
-                  <div class={"flex justify-center flex-1 bg-[#F5F3E7]"}>    
+                  <div class={"flex justify-center flex-1 bg-[#F5F3E7]"}>
                     <Sort sortOptions={sortOptions} url={url} />
                   </div>
                 )}

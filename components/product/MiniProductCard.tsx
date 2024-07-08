@@ -123,7 +123,7 @@ function MiniProductCard({
 
   const cta = (
     <a
-      href={url && relative(url)?.split('?')[0]}
+      href={url && relative(url)?.split("?")[0]}
       aria-label="view product"
       class="w-min py-[10px] px-[14px] hidden lg:group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
     >
@@ -178,7 +178,7 @@ function MiniProductCard({
       >
         {/* Product Images */}
         <a
-          href={url && relative(url)?.split('?')[0]}
+          href={url && relative(url)?.split("?")[0]}
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
