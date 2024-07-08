@@ -21,6 +21,12 @@ const portugueseMappings = {
 function Sort({ sortOptions, url }: Props & { url: string }) {
   const sortUrl = new URL(url).searchParams;
 
+  const currentSort = sortUrl.get("sort") == null
+    ? "release:desc"
+    : sortUrl.get("sort") == ""
+    ? "relevance:desc"
+    : sortUrl.get("sort");
+
   return (
     <>
       <label for="sort" class="sr-only">Ordenar por</label>
@@ -55,7 +61,7 @@ function Sort({ sortOptions, url }: Props & { url: string }) {
           <option
             key={value}
             value={value}
-            selected={value === sortUrl.get("sort")}
+            selected={value === currentSort}
           >
             <span class="text-sm">{label}</span>
           </option>
