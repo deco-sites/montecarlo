@@ -196,14 +196,14 @@ export default function ImagesAndText({ title, subTitle, cardsImage }: Props) {
   const id = useId();
   return (
     <div class="flex flex-col gap-8 lg:gap-10 py-8">
-      {
-        title || subTitle ? (
+      {title || subTitle
+        ? (
           <div class="flex flex-col gap-1 px-5">
-            { title ? <Title text={title} /> : null}
-            { subTitle ? <SubTitle text={subTitle} /> : null }
+            {title ? <Title text={title} /> : null}
+            {subTitle ? <SubTitle text={subTitle} /> : null}
           </div>
-        ) : null
-      }
+        )
+        : null}
 
       <div class="flex flex-col lg:flex-row w-full h-full lg:gap-2 gap-16 max-w-[1512px] lg:px-14 mx-auto">
         {cardsImage.map((card, index) => (
@@ -215,7 +215,7 @@ export default function ImagesAndText({ title, subTitle, cardsImage }: Props) {
             content={card.content}
             button={card.button}
             variant={card.variant}
-            backgrond={card.backgrond} 
+            backgrond={card.backgrond}
             id={id}
             index={index.toString()}
           />
