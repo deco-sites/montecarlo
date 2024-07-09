@@ -174,6 +174,7 @@ function ShelfCollection({
             name: "view_item_list",
             params: {
               item_list_name: title,
+              item_list_id: id, 
               items: products.map((product, index) =>
                 mapProductToAnalyticsItem({
                   index,

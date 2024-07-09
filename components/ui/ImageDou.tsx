@@ -1,7 +1,10 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import ButtonLink from "./ButtonLink.tsx";
-import { SendEventOnView } from "../../components/Analytics.tsx";
+import {
+  SendEventOnView,
+  SendEventOnClick,
+} from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Title from "deco-sites/montecarlo/components/ui/Title.tsx";
 import SubTitle from "deco-sites/montecarlo/components/ui/SubTitle.tsx";
@@ -37,14 +40,17 @@ export interface Props {
   secondImage: Image;
 }
 
-export function SectionImage(
-  { props, customClass, wrapperCustomClass, infoSectionCustomClass }: {
-    props: Image;
-    customClass?: string;
-    wrapperCustomClass?: string;
-    infoSectionCustomClass?: string;
-  },
-) {
+export function SectionImage({
+  props,
+  customClass,
+  wrapperCustomClass,
+  infoSectionCustomClass,
+}: {
+  props: Image;
+  customClass?: string;
+  wrapperCustomClass?: string;
+  infoSectionCustomClass?: string;
+}) {
   const { mobile, desktop, alt, content, contentTitle, button, title, href } =
     props;
 
@@ -91,13 +97,27 @@ export function SectionImage(
           <span
             class="hidden group-hover:flex text-lg lg:text-xl max-w-[400px] text-center text-black duration-300"
             dangerouslySetInnerHTML={{ __html: content }}
-          >
-          </span>
+          ></span>
         )}
         <ButtonLink
           href={href || ""}
-          classCustom={"text-black text-sm text-black group-hover:bg-[#F5F3E7] duration-300 absolute bottom-11"}
+          classCustom={
+            "text-black text-sm text-black group-hover:bg-[#F5F3E7] duration-300 absolute bottom-11"
+          }
           label={button}
+        />
+        <SendEventOnClick
+          id={id}
+          event={{
+            name: "select_promotion",
+            params: {
+              creative_name: title,
+              creative_slot: "ImageDuo",
+              promotion_id: href,
+              promotion_name: title,
+              items: []
+            },
+          }}
         />
       </div>
       <SendEventOnView
