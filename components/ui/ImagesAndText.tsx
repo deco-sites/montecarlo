@@ -112,6 +112,11 @@ function CardImage(
                   href={button?.href || ""}
                   classCustom={"text-black text-sm"}
                   label={button?.label}
+                  creative_name={title}
+                  creative_slot={index}
+                  promotion_id={button?.label}
+                  promotion_name={alt}
+                  id={id}
                 />
               )}
             </div>
@@ -168,6 +173,11 @@ function CardImage(
                 href={button?.href || ""}
                 classCustom={"text-black text-sm mx-auto"}
                 label={button?.label}
+                creative_name={title}
+                creative_slot={index}
+                promotion_id={button?.label}
+                promotion_name={alt}
+                id={id}
               />
             )}
           </>
@@ -216,7 +226,7 @@ export default function ImagesAndText({ title, subTitle, cardsImage }: Props) {
             button={card.button}
             variant={card.variant}
             backgrond={card.backgrond}
-            id={id}
+            id={index.toString()}
             index={index.toString()}
           />
         ))}

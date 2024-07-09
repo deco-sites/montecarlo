@@ -177,21 +177,6 @@ function MiniProductCard({
       class={`card card-compact group w-full px-1 gap-2 text-center h-min relative mx-auto md:max-w-full`}
       data-deco="view-product"
     >
-      <Flags
-        productAdditionalProperty={product.isVariantOf?.additionalProperty}
-        releaseFlag={layout?.releaseFlag}
-        discountFlag={discountFlagValues}
-      />
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item_list",
-          params: {
-            item_list_name: itemListName,
-            items: [eventItem],
-          },
-        }}
-      />
       <SendEventOnClick
         id={id}
         event={{
@@ -219,7 +204,7 @@ function MiniProductCard({
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
-          <SendEventOnClick
+          {/* <SendEventOnClick
             id={id}
             event={{
               name: "add_to_cart",
@@ -229,7 +214,7 @@ function MiniProductCard({
                 items: [eventItem],
               },
             }}
-          />
+          /> */}
           <Image
             src={front.url!}
             alt={front.alternateName}
@@ -321,7 +306,7 @@ function MiniProductCard({
         </div>
         {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
-      <SendEventOnView
+      {/* <SendEventOnView
         id={id}
         event={{
           name: "view_item",
@@ -331,7 +316,7 @@ function MiniProductCard({
             items: [eventItem],
           },
         }}
-      />
+      /> */}
     </div>
   );
 }
