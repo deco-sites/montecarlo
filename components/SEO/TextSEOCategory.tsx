@@ -39,11 +39,11 @@ export default function TextSEOCategory(props: Props) {
         </span>
       </label>
       {title && (
-        <h2
+        <h1
           class="text-xl order-1 text-start w-full"
           dangerouslySetInnerHTML={{ __html: title }}
         >
-        </h2>
+        </h1>
       )}
       {content && (
         <span

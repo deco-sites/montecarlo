@@ -228,7 +228,7 @@ function MiniProductCard({
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col justify-between text-start">
         <div class="flex flex-col gap-0">
-          <h2
+          <h3
             class={`truncate font-normal ${
               PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
             }`}

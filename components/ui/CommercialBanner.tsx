@@ -121,7 +121,7 @@ function CommercialBanner(
             variant === "variant-2" ? "flex flex-col w-fit px-10 lg:px-16" : ""
           }`}
         >
-          <h5
+          <h2
             dangerouslySetInnerHTML={{ __html: title }}
             className={`
               ${
@@ -132,8 +132,8 @@ function CommercialBanner(
               mb-4 leading-8 md:leading-[60px] md:text-[40px]
             `}
           >
-          </h5>
-          <h5
+          </h2>
+          <h3
             dangerouslySetInnerHTML={{ __html: subTitle }}
             className={`
               ${
@@ -144,7 +144,7 @@ function CommercialBanner(
               leading-6 md:leading-7
             `}
           >
-          </h5>
+          </h3>
           <div class="flex gap-4 flex-wrap mt-5">
             {CTA && CTA.length > 0 && (
               CTA.map((button, index) =>
