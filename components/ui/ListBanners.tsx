@@ -14,7 +14,7 @@ import Image from "apps/website/components/Image.tsx";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import SliderJS from "deco-sites/montecarlo/islands/SliderJS.tsx";
 
-/**@titleBy title */
+/**@titleBy linkToRedirect */
 export interface Card {
   /**@description Image size 246px x 246px  */
   image: ImageWidget;
@@ -22,6 +22,9 @@ export interface Card {
   title?: string;
   linkToRedirect: string;
   preload?: boolean;
+  /**@description default image 246px x 246px in 1:1 and 102px x 102px in 1:2, this value can be changed in the fields below */
+  width?: number;
+  height?: number;
 }
 
 export interface Props {
@@ -95,7 +98,7 @@ const WIDTH = {
 
 const HEIGHT = {
   "1:1": 246,
-  "1:2": 37,
+  "1:2": 102,
 };
 
 function CardImage(
@@ -137,8 +140,8 @@ function CardImage(
           } `}
           src={card.image}
           alt={card.altText}
-          width={WIDTH[aspectRatio]}
-          height={HEIGHT[aspectRatio]}
+          width={card.width || WIDTH[aspectRatio]}
+          height={card.height || HEIGHT[aspectRatio]}
           loading={card.preload ? "eager" : "lazy"}
           fetchPriority={card.preload ? "high" : "low"}
         />
