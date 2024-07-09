@@ -53,9 +53,9 @@ export default function StoresInfo(props: Props) {
           <div class="flex flex-col gap-3 px-10">
             {title
               ? (
-                <h2 class="font-poppins text-2xl md:text-[40px] md:leading-[44px]">
+                <p class="font-poppins text-2xl md:text-[40px] md:leading-[44px]">
                   {title}
-                </h2>
+                </p>
               )
               : null}
             {description
@@ -194,9 +194,9 @@ function State(props: InfoProps) {
       <summary
         class={`flex cursor-pointer items-center justify-between bg-[#F5F3E7] py-2 px-3`}
       >
-        <h4 class={`group-open/State:font-semibold font-poppins text-sm ml-2`}>
+        <h2 class={`group-open/State:font-semibold font-poppins text-sm ml-2`}>
           {title}
-        </h4>
+        </h2>
         <Icon
           class={`transform transition-transform rotate-45 group-open/State:rotate-90`}
           size={15}
