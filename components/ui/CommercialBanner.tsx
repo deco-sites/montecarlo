@@ -181,7 +181,7 @@ function CommercialBanner(
         )
         : (
           <Image
-            className="w-full lg:w-[50%] object-cover lg:h-[calc(50vw*(572/1547))]"
+            className="w-full lg:w-[50%] object-cover lg:h-full"
             src={imageDesktop}
             alt={altText}
             height={heightImageDesktopController}
