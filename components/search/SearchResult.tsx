@@ -123,6 +123,12 @@ function Result({
           isFirstPage ? "py-10" : "pt-0"
         } ${pageInfo?.nextPage ? "pb-0" : ""}`}
       >
+        {
+          pageInfo?.records ? (
+            <span>{pageInfo?.records > 1 ? `${pageInfo?.records} Produtos` : `${pageInfo?.records} Produto`}</span>
+          ) : <span>0 Produto</span>
+        }
+
         {(isFirstPage || !isPartial) && (
           <SearchControls
             sortOptions={products?.length > 1 ? sortOptions : []}
