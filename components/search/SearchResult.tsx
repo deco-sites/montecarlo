@@ -32,6 +32,13 @@ export interface Layout {
 
 export interface Props {
   title?: string;
+  /** Defines static values for Range Price Filter */
+  rangePrice?: {
+    /** @default 1 */ 
+    minPrice?: number,
+    /** @default 500000 */ 
+    maxPrice?: number,
+  },
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
@@ -57,6 +64,7 @@ function Result({
   startingPage = 0,
   url: _url,
   title,
+  rangePrice
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   url: string;
@@ -75,12 +83,13 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
-  let minPrice = 1;
-  let maxPrice = 500000;
+  let minPrice = rangePrice?.minPrice || 1;
+  let maxPrice = rangePrice?.maxPrice || 500000;
 
-  products.forEach((product) => {
+  !rangePrice?.minPrice && !rangePrice?.maxPrice && products.forEach((product) => {
     product?.offers?.offers.forEach((offer) => {
       const price = offer.price;
+
       if (price < minPrice) {
         minPrice = price;
       }
