@@ -118,17 +118,19 @@ export function SectionImage(
   );
 }
 
-export default function ImageDuo({ title, subTitle, primaryImage, secondImage }: Props) {
+export default function ImageDuo(
+  { title, subTitle, primaryImage, secondImage }: Props,
+) {
   return (
     <div class="flex flex-col gap-8 lg:gap-10 py-8">
-      {
-        title || subTitle ? (
+      {title || subTitle
+        ? (
           <div class="flex flex-col gap-1 px-5">
-            { title ? <Title text={title} /> : null}
-            { subTitle ? <SubTitle text={subTitle} /> : null } 
+            {title ? <Title text={title} /> : null}
+            {subTitle ? <SubTitle text={subTitle} /> : null}
           </div>
-        ) : null
-      }
+        )
+        : null}
 
       <div class="flex flex-col gap-5 lg:flex-row lg:gap-0">
         <SectionImage props={primaryImage} />
