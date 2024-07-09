@@ -87,7 +87,7 @@ export default function ProductDescription(
         <Accordion
           open
           title="Descrição"
-          titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+          titleClass="font-poppins text-[#000000] group-open:text-[#AAA89C]"
         >
           <h3 class="font-poppins text-lg lg:text-xl text-black mb-2">
             {newName}
@@ -105,7 +105,7 @@ export default function ProductDescription(
         {Object.keys(technicalInfo).length > 0 && (
           <Accordion
             title="Informações Técnicas"
-            titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+            titleClass="font-poppins text-[#000000] group-open:text-[#AAA89C]"
           >
             <ul
               class="list-disc ml-6 font-poppins text-sm text-black flex flex-col gap-2 lg:mt-5"
@@ -117,7 +117,7 @@ export default function ProductDescription(
         {banner && (
           <Accordion
             title={banner.Banner?.titleAccordion || banner.Banner.title}
-            titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+            titleClass="font-poppins text-[#000000] group-open:text-[#AAA89C]"
           >
             <Collection
               title={banner.Banner.title}
@@ -145,7 +145,7 @@ export default function ProductDescription(
           (
             <Accordion
               title="Pedras"
-              titleClass="font-inter text-[#000000] group-open:text-[#AAA89C]"
+              titleClass="font-poppins text-[#000000] group-open:text-[#AAA89C]"
             >
               <div class="flex flex-col gap-5">
                 {Arraylosses?.variants.map((item) => {

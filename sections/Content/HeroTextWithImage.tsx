@@ -4,6 +4,8 @@ import { useId } from "../../sdk/useId.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 
 interface StyleProps {
+  /** @default BeausiteGrand */
+  titleFont?: "poppins" | "beausiteGrand";
   textAlign?: "left" | "center" | "right";
   /** @format color-input */
   backgroundColor?: string;
@@ -87,7 +89,7 @@ export default function HeroTextWithImage(props: Props) {
       <div class="w-full h-full flex-1 flex flex-col px-10 md:items-center justify-end lg:justify-center order-0">
         <div class="flex flex-col p-5 py-14 gap-4">
           <h1
-            class={`text-4xl md:text-5xl lg:text-[3.438rem] block text-left lg:leading-12 font-beausiteGrand text-${style.textAlign} max-w-[250px] md:max-w-[350px] lg:max-w-[380px]`}
+            class={`text-4xl md:text-5xl lg:text-[3.438rem] block text-left lg:leading-12 font-${style.titleFont ? style.titleFont : "beausiteGrand"} text-${style.textAlign} max-w-[250px] md:max-w-[350px] lg:max-w-[380px]`}
           >
             {title}
           </h1>
