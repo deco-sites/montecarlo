@@ -1,2 +1,26 @@
 User-agent: *
-Allow: *
+
+Disallow: /*PS=*
+Disallow: /*O=OrderBy*
+Disallow: /*?&utmi*
+Disallow: /*?utm*
+Disallow: /*?uam*
+Disallow: /*?fq*
+Disallow: /*?j=*
+Disallow: /teste*
+Disallow: /*&o=*
+Disallow: /*&O=*
+Disallow: /*?O=*
+Disallow: /*?o=*
+Disallow: /*?map*
+Disallow: /*&map*
+Disallow: /checkout/
+Disallow: /checkout
+Disallow: /login/
+Disallow: /login
+
+# Permitir somente page=
+Allow: /*?page=*
+
+Sitemap: https://www.montecarlo.com.br/sitemap.xml
+

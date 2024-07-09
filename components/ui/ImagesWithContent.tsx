@@ -123,12 +123,12 @@ export default function ImagesWithContent(props: Props) {
             )}
         </div>
         <div class="pt-16 xl:pt-28 pl-14 xl:pl-24 pr-6 pb-16 xl:pb-28 text-black lg:w-2/4 ">
-          <h2 class="font-beausiteGrand text-4xl mb-8 xl:text-[3.3rem] xl:leading-12 xl:mb-9 xl:max-w-[500px] ">
+          <p class="font-beausiteGrand text-4xl mb-8 xl:text-[3.3rem] xl:leading-12 xl:mb-9 xl:max-w-[500px] ">
             {title}
-          </h2>
-          <h4 class="text-xl font-medium mb-6 xl:text-2xl xl:mb-5 xl:max-w-[500px] ">
+          </p>
+          <h2 class="text-xl font-medium mb-6 xl:text-2xl xl:mb-5 xl:max-w-[500px] ">
             {subTitle}
-          </h4>
+          </h2>
           <span
             class="text-xl xl:text-lg xl:max-w-[500px] block "
             dangerouslySetInnerHTML={{ __html: content }}

@@ -18,11 +18,11 @@ export default function Accordion(props: Props) {
           props.borderColor ? props.borderColor : "black"
         } py-4 opacity-100  group-open:border-b-[#AAA89C] `}
       >
-        <h3
+        <h2
           dangerouslySetInnerHTML={{ __html: props.title }}
           class={props.titleClass}
         >
-        </h3>
+        </h2>
         <Icon
           class=" transform transition-transform -rotate-90 group-open:rotate-90 group-open:text-[#AAA89C]"
           size={24}

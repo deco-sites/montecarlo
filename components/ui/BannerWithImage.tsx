@@ -112,11 +112,11 @@ export default function BannerWithImage(props: Props) {
           </img>
         </Picture>
         <div class="md:w-2/4 flex flex-col justify-center items-center px-12 md:px-16 md:py-12 lg:px-20 py-11 gap-3 xl:px-36 xl:gap-5 ">
-          <span
+          <h2
             class="text-2xl md:text-3xl xl:text-5xl xl:leading-tight :"
             dangerouslySetInnerHTML={{ __html: title }}
           >
-          </span>
+          </h2>
           {content && (
             <span
               class="text-base md:text-lg xl:text-2xl xl:leading-10"
