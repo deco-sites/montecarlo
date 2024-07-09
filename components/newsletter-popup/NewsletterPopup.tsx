@@ -3,12 +3,17 @@ import Image from "apps/website/components/Image.tsx";
 import NewsletterPopupForm from "../../islands/NewsletterForm/NewsletterPopup.tsx";
 import ClosedPopup from "../../islands/NewsletterForm/ButtonClosePopup.tsx";
 import { useUI } from "../../sdk/useUI.ts";
+import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 interface PropsNewsletterPopup {
   /*
    * @description Titulo do popup
    */
   title?: string;
+  /*
+   * @description Descrição do popup
+   */
+  description?: HTMLWidget;
   /*
    * @description imagem do popup
    */
@@ -42,6 +47,7 @@ interface PropsNewsletterPopup {
 function NewsletterPopup(
   {
     title,
+    description,
     image,
     alt,
     phone,
@@ -78,6 +84,7 @@ function NewsletterPopup(
                 />
                 <NewsletterPopupForm
                   title={title}
+                  description={description}
                   phone={phone}
                   primaryMessageSucess={primaryMessageSucess}
                   cupom={cupom}
@@ -109,6 +116,7 @@ function NewsletterPopup(
                 />
                 <NewsletterPopupForm
                   title={title}
+                  description={description}
                   phone={phone}
                   primaryMessageSucess={primaryMessageSucess}
                   cupom={cupom}

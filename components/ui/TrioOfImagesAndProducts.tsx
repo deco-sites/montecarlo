@@ -144,7 +144,7 @@ function Card(
         {button && (
           <ButtonLink
             href={href || ""}
-            classCustom={"text-black text-sm absolute bottom-9 hidden lg:flex"}
+            classCustom={"text-black text-sm absolute bottom-9 lg:flex"}
             label={button}
             creative_name={title}
             creative_slot={index}

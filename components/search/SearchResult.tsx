@@ -90,15 +90,19 @@ function Result({
     });
   });
 
-  filters.push({
-    "@type": "FilterRange",
-    key: "price",
-    label: "Faixa de Preço",
-    values: {
-      min: minPrice,
-      max: maxPrice,
-    },
-  });
+  products.length > 1
+    ? (
+      filters.push({
+        "@type": "FilterRange",
+        key: "price",
+        label: "Faixa de Preço",
+        values: {
+          min: minPrice,
+          max: maxPrice,
+        },
+      })
+    )
+    : null;
 
   return (
     <div
@@ -112,7 +116,7 @@ function Result({
       >
         {(isFirstPage || !isPartial) && (
           <SearchControls
-            sortOptions={sortOptions}
+            sortOptions={products?.length > 1 ? sortOptions : []}
             filters={filters}
             breadcrumb={breadcrumb}
             // displayFilter={layout?.variant === "drawer"}
@@ -149,6 +153,23 @@ function Result({
               pageInfo={pageInfo}
               url={url}
             />
+
+            { 
+              products.length == 0 && (
+                <div class="sm:flex items-start  gap-8 justify-between max-w-[770px] mx-auto">
+                  <div class="sm:max-w-[330px]">
+                    <p class="text-[#333435] text-4xl font-light mt-6 sm:mt-0 mb-3">{'Desculpe!'}</p>
+                    <p class="text-base sm:text-lg text-[#8c8d8e] font-normal mb-1">{'Não encontramos o que você está buscando.'}</p>
+
+                    <a class="w-full sm:max-w-[302px] h-14 bg-[#333435] hover:bg-[#686969] text-white flex items-center justify-center text-base font-bold cursor-pointer mt-4 mb-6" href="/">{'Voltar'}</a>
+                  </div>
+
+                  <div class="sm:max-w-[330px]">
+                    <p class="text-base sm:text-lg text-[#8c8d8e] font-normal mb-1 leading-8 sm:leading-9">{'Verifique os termos digitados'}<br></br>{'Tente utilizar uma única palavra'}<br></br>{'Utilize termos genéricos na busca'}<br></br>{'Procure utilizar sinônimos ao termo desejado.'}</p>
+                  </div>
+                </div>
+              )
+            }
           </div>
         </div>
 

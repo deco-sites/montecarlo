@@ -1,7 +1,7 @@
-import { useId } from "../../sdk/useId.ts";
 import { useSignal } from "@preact/signals";
 import { ComponentChildren } from "preact";
 import { useEffect } from "preact/hooks";
+import { useId } from "deco-sites/montecarlo/sdk/useId.ts";
 
 interface Props {
   onClose?: () => void;
@@ -10,7 +10,7 @@ interface Props {
   loading?: "eager" | "lazy";
   children: ComponentChildren;
   aside: ComponentChildren;
-  id: string;
+  id?: string;
 }
 
 function Drawer(props: Props) {
@@ -21,9 +21,9 @@ function Drawer(props: Props) {
     onClose,
     class: _class = "",
     loading = "lazy",
-    id,
+    id = useId(),
   } = props;
-  const lazy = useSignal(loading === "lazy" && !open);
+  const lazy = useSignal(loading === "lazy" && !open); // false
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) =>
@@ -57,7 +57,7 @@ function Drawer(props: Props) {
 
       <aside class="drawer-side h-full overflow-hidden z-[100]">
         <label for={id} class="drawer-overlay" />
-        {aside}
+        {!lazy.value && aside}
       </aside>
     </div>
   );

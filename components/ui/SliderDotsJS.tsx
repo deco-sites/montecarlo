@@ -124,8 +124,6 @@ const setup = ({ rootId, scroll, interval, infinite }: Props) => {
       return;
     }
 
-    console.log("teste");
-
     if (action) {
       sliderDots.scrollBy(0, item.offsetTop);
     } else {

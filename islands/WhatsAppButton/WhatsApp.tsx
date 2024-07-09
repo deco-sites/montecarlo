@@ -70,56 +70,35 @@ function ButtonWhatsapp(
     }
   }, [isProduct]);
 
-  return (
-    <>
-      {active && !isMobile.value
-        ? (
-          <div
-            onMouseOver={() => setMouse(true)}
-            onMouseLeave={() => setMouse(false)}
-            class="flex flex-col justify-center items-center gap-2 right-8 z-30"
+  if (active) {
+    return (
+      <>
+        <div
+          onMouseOver={() => setMouse(true)}
+          onMouseLeave={() => setMouse(false)}
+          class="flex flex-col justify-center items-center gap-2 right-8 z-30"
+        >
+          <a
+            href={`https://wa.me/55${whatsapp}`}
+            class="fixed flex bottom-6 right-6 z-40 bg-[#45D268] text-white w-14 md:w-40 h-14 md:12 flex-row items-center justify-center md:p-3 px-3 md:px-4 py-3 md:py-0 rounded-full no-underline cursor-pointer transition gap-0 md:gap-1 ease-in"
+            aria-label="Chat on WhatsApp"
           >
-            <a
-              href={`https://wa.me/55${whatsapp}`}
-              class="fixed flex bottom-6 right-6 z-40 bg-[#45D268] text-white w-40 h-12 flex-row items-center justify-center p-3 md:py-0 md:px-4 rounded-full no-underline cursor-pointer transition gap-1 ease-in"
+            <button
+              class="bg-transparent text-white p-0 rounded-full ml-[-5%]"
               aria-label="Chat on WhatsApp"
             >
-              <button
-                class="bg-transparent text-white p-0 rounded-full ml-[-5%]"
-                aria-label="Chat on WhatsApp"
-              >
-                <Icon id="WhatsApp" size={28} stroke="0.01" />
-              </button>
-              <p class="hidden md:flex bg-[#45D268] text-white text-center text-xs capitalize w-20 h-9 items-center justify-center">
-                compre pelo whatsApp
-              </p>
-            </a>
-          </div>
-        )
-        : (
-          active && isMobile.value && (
-            <div
-              onMouseOver={() => setMouse(true)}
-              onMouseLeave={() => setMouse(false)}
-              class="flex flex-col justify-center items-center gap-2 right-8 z-30"
-            >
-              <a
-                href={`https://wa.me/55${whatsapp}`}
-                class="fixed flex bottom-6 right-6 z-40 bg-[#45D268] text-white w-14 h-14 px-3 py-3 rounded-full no-underline cursor-pointer transition gap-0 ease-in"
-                aria-label="Chat on WhatsApp"
-              >
-                <button
-                  class="bg-transparent text-white p-0 rounded-full ml-[-5%]"
-                  aria-label="Chat on WhatsApp"
-                >
-                  <Icon id="WhatsApp" size={28} stroke="0.01" />
-                </button>
-              </a>
-            </div>
-          )
-        )}
-    </>
-  );
+              <Icon id="WhatsApp" size={28} stroke="0.01" />
+            </button>
+            <p class="hidden md:flex bg-[#45D268] text-white text-center text-xs capitalize w-20 h-9 items-center justify-center">
+              compre pelo whatsApp
+            </p>
+          </a>
+        </div>
+      </>
+    );
+  } else {
+    return <></>;
+  }
 }
 
 export default ButtonWhatsapp;

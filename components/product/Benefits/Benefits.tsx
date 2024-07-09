@@ -24,7 +24,7 @@ function Benefit({ props }: { props: Benefit }) {
     <div class="flex flex-row h-full w-full gap-3 ">
       <div class="
             relative flex justify-center items-center h-16 w-16 p-5
-            before:absolute before:w-12 before:h-12 before:border-2 before:border-black before:rotate-45
+            before:absolute before:w-12 before:h-12 before:border before:border-black before:rotate-45
           ">
         <Image
           height={20}

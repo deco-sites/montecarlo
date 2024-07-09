@@ -324,9 +324,11 @@ function BannerCarousel(props: Props) {
           })}
       </Slider>
 
-      {props.arrows && <Buttons />}
+      {props.arrows && images?.length > 1 && <Buttons />}
 
-      {props.dots && <Dots images={arrayImage || images} interval={interval} />}
+      {props.dots && images?.length > 1 && (
+        <Dots images={arrayImage || images} interval={interval} />
+      )}
 
       <SliderJS rootId={id} interval={interval && interval * 1e3} infinite />
     </div>

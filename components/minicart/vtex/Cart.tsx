@@ -16,8 +16,6 @@ function Cart({ bonus }: Props) {
   const currency = cart.value?.storePreferencesData.currencyCode ?? "BRL";
   const coupon = cart.value?.marketingData?.coupon ?? undefined;
 
-  console.log("orderFormId", cart.value?.orderFormId);
-
   return (
     <BaseCart
       items={items.map((item) => ({

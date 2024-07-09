@@ -4,6 +4,8 @@ import ButtonLink from "./ButtonLink.tsx";
 import { Colors } from "deco-sites/montecarlo/constants.tsx";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
+import Title from "deco-sites/montecarlo/components/ui/Title.tsx";
+import SubTitle from "deco-sites/montecarlo/components/ui/SubTitle.tsx";
 
 /**
  * @titleBy title
@@ -36,6 +38,8 @@ interface CardImage {
 }
 
 export interface Props {
+  title?: string;
+  subTitle?: string;
   cardsImage: CardImage[];
 }
 
@@ -54,8 +58,6 @@ function CardImage(
     index,
   }: CardImage,
 ) {
-  console.log("button", button);
-
   return (
     <div
       class="w-full lg:w-2/4 flex flex-col "
@@ -200,25 +202,35 @@ function CardImage(
   );
 }
 
-export default function ImagesAndText({ cardsImage }: Props) {
+export default function ImagesAndText({ title, subTitle, cardsImage }: Props) {
   const id = useId();
   return (
-    <div class="flex flex-col lg:flex-row w-full h-full py-8 lg:gap-2 gap-16 max-w-[1512px] lg:px-14 mx-auto">
-      {cardsImage.map((card, index) => (
-        <CardImage
-          imageMobile={card.imageMobile}
-          imageDesktop={card.imageDesktop}
-          alt={card.alt}
-          title={card.title}
-          content={card.content}
-          button={card.button}
-          variant={card.variant}
-          backgrond={card.backgrond}
-          preload={card.preload}
-          id={index.toString()}
-          index={index.toString()}
-        />
-      ))}
+    <div class="flex flex-col gap-8 lg:gap-10 py-8">
+      {title || subTitle
+        ? (
+          <div class="flex flex-col gap-1 px-5">
+            {title ? <Title text={title} /> : null}
+            {subTitle ? <SubTitle text={subTitle} /> : null}
+          </div>
+        )
+        : null}
+
+      <div class="flex flex-col lg:flex-row w-full h-full lg:gap-2 gap-16 max-w-[1512px] lg:px-14 mx-auto">
+        {cardsImage.map((card, index) => (
+          <CardImage
+            imageMobile={card.imageMobile}
+            imageDesktop={card.imageDesktop}
+            alt={card.alt}
+            title={card.title}
+            content={card.content}
+            button={card.button}
+            variant={card.variant}
+            backgrond={card.backgrond}
+            id={index.toString()}
+            index={index.toString()}
+          />
+        ))}
+      </div>
     </div>
   );
 }

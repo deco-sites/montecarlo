@@ -35,7 +35,9 @@ export default function ScrollableContainer(
   return (
     <>
       {type === "Alert" && (
-        <AlertContainer active={activeAlert.value}>{children}</AlertContainer>
+        <AlertContainer active={activeAlert.value}>
+          {children}
+        </AlertContainer>
       )}
       {type === "Menu" && (
         <MenuContainer activeAlert={activeAlert.value}>
@@ -58,8 +60,10 @@ function AlertContainer(
   return (
     <div
       class={`${
-        active ? "translate-y-0 h-auto" : "-translate-y-16 h-0 duration-0"
-      } transition-all duration-100`}
+        !active
+          ? " translate-y-[59px] bg-[#ffffffbf] lg:-translate-y-16 lg:h-0 duration-0 absolute"
+          : "translate-y-0 bg-[#ffc821]"
+      }`}
     >
       {children}
     </div>
@@ -198,7 +202,7 @@ function MenuContainer(
     <div
       class={`absolute left-0 w-full z-10  ${
         active.value
-          ? "top-[105px] duration-100 shadow-header-menu"
+          ? "top-full duration-100 shadow-header-menu"
           : "-top-[50px] duration-0 hover:hidden group-hover:hidden"
       } `}
     >

@@ -11,9 +11,11 @@ import { headerHeight } from "./constants.ts";
 import { useUI } from "../../sdk/useUI.ts";
 import { Section } from "deco/blocks/section.ts";
 import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
+import ScrollableContainer from "deco-sites/montecarlo/islands/Header/ScrollableContainer.tsx";
 
 export interface AlertMessage {
-  title?: HTMLWidget;
+  /** @format rich-text */
+  title?: string;
   labelButton?: string;
   cupom?: string;
 }
@@ -145,25 +147,6 @@ function Header({
   const platform = usePlatform();
   const items = navItems ?? [];
 
-  const style = {
-    "show-alert-header": `@keyframes show-alert-header{
-          from{
-            transform: translateY(0px);
-          }
-          to{
-            transform: translateY(-32px);
-          }
-    }
-    
-    .show-alert-header{
-      animation: show-alert-header linear;
-      animation-timeline: scroll();
-      animation-range: 0% 1%;
-      animation-fill-mode: both;
-    }
-    `,
-  };
-
   return (
     <>
       <header style={{ height: headerHeight }} class="lg:mb-8">
@@ -173,12 +156,13 @@ function Header({
           platform={platform}
           bonus={cart.bonus}
         >
-          <style
-            dangerouslySetInnerHTML={{ __html: style["show-alert-header"] }}
-          >
-          </style>
-          <div class="bg-base-100 fixed w-full z-50 show-alert-header">
-            {alerts && alerts.length > 0 && <Alert alerts={alerts} />}
+          <div class="bg-base-100 fixed w-full z-50 ">
+            {alerts && alerts.length > 0 &&
+              (
+                <ScrollableContainer type="Alert">
+                  <Alert alerts={alerts} />
+                </ScrollableContainer>
+              )}
             <Navbar
               device={device}
               items={items}
