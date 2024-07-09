@@ -99,7 +99,12 @@ function Result({
     });
   });
 
-  products.length > 1
+  const isSearchPage = url.href.indexOf('/s?q=') != -1;
+  const isSearchPageAndProductsNotFound = isSearchPage && products.length == 0;
+  const isNotSearchPageAndProductsNotFound = !isSearchPage && products.length == 0;
+
+
+  products.length > 1 || (!isSearchPage && products.length == 0)
     ? (
       filters.push({
         "@type": "FilterRange",
@@ -170,7 +175,7 @@ function Result({
             />
 
             { 
-              products.length == 0 && (
+              isSearchPageAndProductsNotFound && (
                 <div class="sm:flex items-start  gap-8 justify-between max-w-[770px] mx-auto">
                   <div class="sm:max-w-[330px]">
                     <p class="text-[#333435] text-4xl font-light mt-6 sm:mt-0 mb-3">{'Desculpe!'}</p>
@@ -185,6 +190,18 @@ function Result({
                 </div>
               )
             }
+
+            {
+              isNotSearchPageAndProductsNotFound && (
+                <div class="sm:flex items-start  gap-8 justify-between max-w-[770px] mx-auto">
+                  <div class="sm:max-w-[330px] sm:mx-auto pt-8">
+                    <p class="text-[#333435] text-4xl font-light mt-6 sm:mt-0 mb-3">{'Desculpe!'}</p>
+                    <p class="text-base sm:text-lg text-[#8c8d8e] font-normal mb-6">{'Não encontramos nenhum produto com base nos filtros selecionados.'}</p>
+                  </div>
+                </div>
+              )
+            }
+
           </div>
         </div>
 
