@@ -100,9 +100,10 @@ interface Props {
     name?: "concat" | "productGroup" | "product";
   };
   extraInformations: ExtraInformation;
+  isMobile: boolean
 }
 
-function ProductInfo({ page, layout, extraInformations }: Props) {
+function ProductInfo({ page, layout, extraInformations, isMobile }: Props) {
   const platform = usePlatform();
   const id = useId();
   const { groups, collectionBanners } = extraInformations;
@@ -143,8 +144,6 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
   const valuePix = percentageDiscount(price, extraInformations.pixDiscont);
 
   const newName = parseInt(name) ? isVariantOf?.name : name;
-
-  const { isMobile } = useUI();
 
   const eventItem = mapProductToAnalyticsItem({
     product,
@@ -255,13 +254,12 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
                 ))}
                 <ProductSelector product={product} />
                 <span
-                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${
-                    product.isVariantOf?.hasVariant.length == 1 &&
+                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${product.isVariantOf?.hasVariant.length == 1 &&
                     " "
-                  }`}
+                    }`}
                 >
                   {category?.toLowerCase().includes("anéis") ||
-                      category?.toLowerCase().includes("alianças")
+                    category?.toLowerCase().includes("alianças")
                     ? (
                       isVariantOf?.hasVariant &&
                       isVariantOf?.hasVariant.length > 1 && "Guia de medidas"
@@ -310,7 +308,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
               />
             )}
           </div>
-          {isMobile.value &&
+          {isMobile &&
             (
               <ProductDescription
                 product={product}
@@ -326,7 +324,7 @@ function ProductInfo({ page, layout, extraInformations }: Props) {
           />
         </div>
       </div>
-      {!isMobile.value && (
+      {!isMobile && (
         <div class="col-start-1 xl:col-start-2 col-end-4 row-start-1 lg:px-0 w-full max-w-[770px]">
           <ProductDescription
             product={product}

@@ -16,6 +16,7 @@ export interface Props {
     width: number;
     height: number;
   };
+  isMobile: boolean
 }
 
 /**
@@ -26,7 +27,7 @@ export interface Props {
  */
 export default function GallerySlider(props: Props) {
   const id = useId();
-  const { isMobile } = useUI();
+  const isMobile = props.isMobile;
 
   const isLaunch = props.page?.product.isVariantOf?.additionalProperty?.find((
     r,
@@ -78,9 +79,8 @@ export default function GallerySlider(props: Props) {
         </Slider>
 
         <Slider.PrevButton
-          class={`"no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
-            props.arrowMobile ? "flex" : "hidden lg:flex"
-          }`}
+          class={`"no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${props.arrowMobile ? "flex" : "hidden lg:flex"
+            }`}
           disabled
         >
           <Icon
@@ -92,9 +92,8 @@ export default function GallerySlider(props: Props) {
         </Slider.PrevButton>
 
         <Slider.NextButton
-          class={`"no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
-            props.arrowMobile ? "flex" : "hidden lg:flex"
-          }`}
+          class={`"no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${props.arrowMobile ? "flex" : "hidden lg:flex"
+            }`}
           disabled={images.length < 2}
         >
           <Icon
@@ -107,7 +106,7 @@ export default function GallerySlider(props: Props) {
         <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 absolute left-0 right-0 bottom-0 mx-auto top-auto">
           {images?.map((_, index) => (
             <li class="carousel-item">
-              {isMobile.value
+              {isMobile
                 ? (
                   <Slider.Dot index={index}>
                     <div class="py-5">
@@ -134,7 +133,7 @@ export default function GallerySlider(props: Props) {
         )}
       </div>
       {/* Dots */}
-      {!isMobile.value &&
+      {!isMobile &&
         (
           <>
             <div class="order-2 sm:order-1 row-span-3 col-start-1 col-end-1 w-full relative h-full">
@@ -164,7 +163,7 @@ export default function GallerySlider(props: Props) {
             <SliderDotsJS rootId={id} />
           </>
         )}
-      {isMobile.value && <SliderJS rootId={id} />}
+      {isMobile && <SliderJS rootId={id} />}
     </div>
   );
 }

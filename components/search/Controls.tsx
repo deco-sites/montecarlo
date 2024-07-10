@@ -94,9 +94,9 @@ function SearchControls(
         <>
           <div class="bg-base-100 flex flex-col h-full divide-y overflow-y-hidden">
             <div class="flex justify-between items-center w-[80vw] max-w-[500px] pr-2">
-              <h1 class="px-4 py-3">
+              <p class="px-4 py-3">
                 <span class="font-medium text-2xl">Filtrar</span>
-              </h1>
+              </p>
               <button
                 class="btn btn-ghost bg-transparent hover:bg-transparent border-none ring-transparent"
                 hx-on:click={useScript(() => {
