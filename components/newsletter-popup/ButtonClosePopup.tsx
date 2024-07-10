@@ -25,13 +25,16 @@ export default function ClosedPopup({ children }: Props) {
         showPopup.value = true;
       } else {
         globalThis.window.removeEventListener("mousemove", activePopup)
+        globalThis.window.removeEventListener("touchmove", activePopup)
       }
     }
 
     if (show == null || show == "") {
       globalThis.window.addEventListener("mousemove", activePopup)
+      globalThis.window.addEventListener("touchmove", activePopup)
     } else {
       globalThis.window.removeEventListener("mousemove", activePopup)
+      globalThis.window.removeEventListener("touchmove", activePopup)
     }
   });
 
