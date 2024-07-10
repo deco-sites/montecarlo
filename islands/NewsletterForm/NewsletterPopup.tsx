@@ -206,13 +206,16 @@ const NewsletterPopupForm = ({
     }
   };
 
+  const ClosedPopup = () => {
+    sessionStorage.setItem("showpopup", "false");
+    showPopup.value = false;
+  }
+
   return (
     <div class="max-w-[380px] md:w-full bg-[#FFC72C] flex flex-col items-center self-center px-4 py-12 md:p-16 relative">
       <button
         class="absolute top-1 right-2 text-[#F8F7F3] font-bold"
-        onClick={() => {
-          showPopup.value = false;
-        }}
+        onClick={ClosedPopup}
       >
         ✕
       </button>
