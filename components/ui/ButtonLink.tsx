@@ -23,12 +23,12 @@ export default function ButtonLink({
   creative_slot,
   promotion_id,
   promotion_name,
-  id
+  id,
 }: Props) {
-  const generatedId = useId(); 
-  const finalId = id || generatedId; 
+  const generatedId = useId();
+  const finalId = id || generatedId;
 
-  console.log("Button ID:", finalId); 
+  console.log("Button ID:", finalId);
 
   return (
     <a

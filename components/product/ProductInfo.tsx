@@ -100,7 +100,7 @@ interface Props {
     name?: "concat" | "productGroup" | "product";
   };
   extraInformations: ExtraInformation;
-  isMobile: boolean
+  isMobile: boolean;
 }
 
 function ProductInfo({ page, layout, extraInformations, isMobile }: Props) {
@@ -254,12 +254,13 @@ function ProductInfo({ page, layout, extraInformations, isMobile }: Props) {
                 ))}
                 <ProductSelector product={product} />
                 <span
-                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${product.isVariantOf?.hasVariant.length == 1 &&
+                  class={`text-sm underline-offset-2 decoration-primary underline lg:text-sm mb-2 cursor-pointer order-6 items-end flex ${
+                    product.isVariantOf?.hasVariant.length == 1 &&
                     " "
-                    }`}
+                  }`}
                 >
                   {category?.toLowerCase().includes("anéis") ||
-                    category?.toLowerCase().includes("alianças")
+                      category?.toLowerCase().includes("alianças")
                     ? (
                       isVariantOf?.hasVariant &&
                       isVariantOf?.hasVariant.length > 1 && "Guia de medidas"

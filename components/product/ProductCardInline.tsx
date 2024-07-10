@@ -58,7 +58,8 @@ export default function ProductCardInline({ product, itemListName }: Props) {
           },
         }}
       />
-      {/* <SendEventOnClick
+      {
+        /* <SendEventOnClick
         id={id}
         event={{
           name: "add_to_cart",
@@ -68,7 +69,8 @@ export default function ProductCardInline({ product, itemListName }: Props) {
             items: [eventItem],
           },
         }}
-      /> */}
+      /> */
+      }
       <SendEventOnClick
         id={id}
         event={{

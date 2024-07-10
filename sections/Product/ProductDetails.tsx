@@ -36,12 +36,11 @@ export default function ProductDetails({ page, extraInformations }: Props) {
     product,
   });
 
-  const device = useDevice()
-  const isMobileSection = device != "desktop"
+  const device = useDevice();
+  const isMobileSection = device != "desktop";
 
   return (
-    <div class=" w-full h-full relative"
-    >
+    <div class=" w-full h-full relative">
       <div
         id={id}
         class="w-full pt-3 pb-8 flex flex-col lg:grid grid-cols-[15%_auto_auto_346px] justify-items-end grid-rows-1 mx-auto gap-4 lg:gap-8 max-w-[1512px] lg:px-14 lg:pt-8 lg:border-t-perola-intermediario lg:border-t"
