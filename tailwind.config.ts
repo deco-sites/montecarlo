@@ -30,7 +30,7 @@ export default {
         "perola+": "#9F9584",
         "perola-claro": "#F8F7F3",
         "text-conte": "#F8F7F3",
-        "base-content": "#000"
+        "base-content": "#000",
       },
       lineHeight: {
         "12": "3.75rem",

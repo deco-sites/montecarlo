@@ -146,7 +146,8 @@ export default defineApp(async (_req, ctx) => {
           }}
         >
         </style>
-        {/* <script
+        {
+          /* <script
           defer
           dangerouslySetInnerHTML={{
             __html: `
@@ -172,7 +173,8 @@ export default defineApp(async (_req, ctx) => {
               document.head.appendChild(s);
             }`,
           }}
-        /> */}
+        /> */
+        }
       </Head>
 
       {/* Rest of Preact tree */}

@@ -42,7 +42,8 @@ function CartButton({ loading, currency, total, items }: Props) {
         onClick={onClick}
       >
         <Icon id="ShippingCustom" width={18} height={22} strokeWidth={2} />
-        {/* <SendEventOnClick
+        {
+          /* <SendEventOnClick
           id=""
           event={{
             name: "view_cart",
@@ -52,7 +53,8 @@ function CartButton({ loading, currency, total, items }: Props) {
               items: items,
             },
           }}
-        /> */}
+        /> */
+        }
       </Button>
     </div>
   );

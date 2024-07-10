@@ -204,7 +204,8 @@ function MiniProductCard({
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
-          {/* <SendEventOnClick
+          {
+            /* <SendEventOnClick
             id={id}
             event={{
               name: "add_to_cart",
@@ -214,7 +215,8 @@ function MiniProductCard({
                 items: [eventItem],
               },
             }}
-          /> */}
+          /> */
+          }
           <Image
             src={front.url!}
             alt={front.alternateName}
@@ -306,7 +308,8 @@ function MiniProductCard({
         </div>
         {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
-      {/* <SendEventOnView
+      {
+        /* <SendEventOnView
         id={id}
         event={{
           name: "view_item",
@@ -316,7 +319,8 @@ function MiniProductCard({
             items: [eventItem],
           },
         }}
-      /> */}
+      /> */
+      }
     </div>
   );
 }
