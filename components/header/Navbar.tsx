@@ -268,11 +268,10 @@ function Navbar(
             )}
           {!buttons?.hideAccountButton && (
             <a
-              class="flex items-center text-xs font-thin pointer-events-none"
-              href="#"
+              class="flex items-center text-xs font-thin"
+              href="/account"
               aria-label="Account"
               id={id + "account"}
-              disabled
             >
               <div class="flex btn btn-circle btn-sm btn-ghost gap-1 justify-center items-center">
                 <Icon id="userAccont" size={21} strokeWidth={0.4} />
