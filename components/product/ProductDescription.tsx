@@ -71,7 +71,7 @@ export default function ProductDescription(
     }
   });
 
-  const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g).join("");
+  const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g)?.join("");
 
   const Arraylosses: GroupVariants | undefined =
     variants && variants.find((group) => group.type === "Pedras") || undefined;
