@@ -10,7 +10,6 @@ import CartButtonNuvemshop from "../../islands/Header/Cart/nuvemshop.tsx";
 import Searchbar from "../search/Searchbar.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
-import Image from "apps/website/components/Image.tsx";
 import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
@@ -21,6 +20,7 @@ import {
   SendEventOnView,
 } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
+import Image from "apps/website/components/Image.tsx";
 
 export interface Link {
   label: string;
@@ -131,7 +131,7 @@ function Navbar(
               alt={logo.alt}
               width={logo.width || 174}
               height={logo.height || 32}
-              class="w-full"
+              class="w-auto h-full object-cover max-h-11"
             />
             <SendEventOnClick
               id={id}
@@ -240,7 +240,7 @@ function Navbar(
                 alt={logo.alt}
                 width={logo.width || 100}
                 height={logo.height || 13}
-                class="w-full h-auto max-w-60"
+                class="h-full w-auto max-h-12 object-cover"
                 loading={"eager"}
               />
               <SendEventOnClick

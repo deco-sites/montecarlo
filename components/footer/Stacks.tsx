@@ -11,7 +11,6 @@ export interface Stack {
   alt: string;
 }
 
-
 export default function Stacks(
   { content }: { content?: { title?: string; items?: Stack[] } },
 ) {

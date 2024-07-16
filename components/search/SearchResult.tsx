@@ -33,14 +33,8 @@ export interface Layout {
 
 export interface Props {
   title?: string;
-  /** Defines static values for Range Price Filter */
-  rangePrice?: {
-    /** @default 1 */ 
-    minPrice?: number,
-    /** @default 500000 */ 
-    maxPrice?: number,
-  },
-  RangePriceProps?: RangePriceProps,
+ /** Defines static values for Range Price Filter */
+  RangePriceProps?: RangePriceProps;
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
@@ -66,7 +60,6 @@ function Result({
   startingPage = 0,
   url: _url,
   title,
-  rangePrice,
   RangePriceProps,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
@@ -86,34 +79,40 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
-  let minPrice = RangePriceProps?.rangePriceData?.minPrice || rangePrice?.minPrice || 1;
-  let maxPrice = RangePriceProps?.rangePriceData?.maxPrice || rangePrice?.maxPrice || 500000;
+  let minPrice = RangePriceProps?.rangePriceData?.minPrice || 1;
+  let maxPrice = RangePriceProps?.rangePriceData?.maxPrice || 500000;
 
-  RangePriceProps?.rangePriceData?.maxPrice === undefined && rangePrice?.minPrice === undefined && !rangePrice?.maxPrice && products.forEach((product) => {
+  RangePriceProps?.rangePriceData?.maxPrice === undefined && RangePriceProps?.rangePriceData?.minPrice === undefined && products.forEach((product) => {
     product?.offers?.offers.forEach((offer) => {
       const price = offer.price;
 
-      if (price < minPrice) {
-        minPrice = price;
-      }
-      if (price > maxPrice) {
-        maxPrice = price;
-      }
+        if (price < minPrice) {
+          minPrice = price;
+        }
+        if (price > maxPrice) {
+          maxPrice = price;
+        }
+      });
     });
-  });
 
-  products.length > 1 ?  (
-    filters.push({
-      "@type": "FilterRange",
-      key: "price",
-      label: "Faixa de Preço",
-      values: {
-        min: minPrice,
-        max: maxPrice,
-      },
-    })
-  )
-  : null
+  const isSearchPage = url.href.indexOf("/s?q=") != -1;
+  const isSearchPageAndProductsNotFound = isSearchPage && products.length == 0;
+  const isNotSearchPageAndProductsNotFound = !isSearchPage &&
+    products.length == 0;
+
+  products.length > 1 || (!isSearchPage && products.length == 0)
+    ? (
+      filters.push({
+        "@type": "FilterRange",
+        key: "price",
+        label: "Faixa de Preço",
+        values: {
+          min: minPrice,
+          max: maxPrice,
+        },
+      })
+    )
+    : null;
 
   return (
     <div
@@ -125,11 +124,15 @@ function Result({
           isFirstPage ? "py-10" : "pt-0"
         } ${pageInfo?.nextPage ? "pb-0" : ""}`}
       >
-        {
-          pageInfo?.records ? (
-            <div class="py-4">{pageInfo?.records > 1 ? `${pageInfo?.records} Produtos` : `${pageInfo?.records} Produto`}</div>
-          ) : <div class="py-4">0 Produto</div>
-        }
+        {pageInfo?.records
+          ? (
+            <span>
+              {pageInfo?.records > 1
+                ? `${pageInfo?.records} Produtos`
+                : `${pageInfo?.records} Produto`}
+            </span>
+          )
+          : <span>0 Produto</span>}
 
         {(isFirstPage || !isPartial) && (
           <SearchControls
@@ -170,6 +173,51 @@ function Result({
               pageInfo={pageInfo}
               url={url}
             />
+
+            {isSearchPageAndProductsNotFound && (
+              <div class="sm:flex items-start  gap-8 justify-between max-w-[770px] mx-auto">
+                <div class="sm:max-w-[330px]">
+                  <p class="text-[#333435] text-4xl font-light mt-6 sm:mt-0 mb-3">
+                    {"Desculpe!"}
+                  </p>
+                  <p class="text-base sm:text-lg text-[#8c8d8e] font-normal mb-1">
+                    {"Não encontramos o que você está buscando."}
+                  </p>
+
+                  <a
+                    class="w-full sm:max-w-[302px] h-14 bg-[#333435] hover:bg-[#686969] text-white flex items-center justify-center text-base font-bold cursor-pointer mt-4 mb-6"
+                    href="/"
+                  >
+                    {"Voltar"}
+                  </a>
+                </div>
+
+                <div class="sm:max-w-[330px]">
+                  <p class="text-base sm:text-lg text-[#8c8d8e] font-normal mb-1 leading-8 sm:leading-9">
+                    {"Verifique os termos digitados"}
+                    <br></br>
+                    {"Tente utilizar uma única palavra"}
+                    <br></br>
+                    {"Utilize termos genéricos na busca"}
+                    <br></br>
+                    {"Procure utilizar sinônimos ao termo desejado."}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {isNotSearchPageAndProductsNotFound && (
+              <div class="sm:flex items-start  gap-8 justify-between max-w-[770px] mx-auto">
+                <div class="sm:max-w-[330px] sm:mx-auto pt-8">
+                  <p class="text-[#333435] text-4xl font-light mt-6 sm:mt-0 mb-3">
+                    {"Desculpe!"}
+                  </p>
+                  <p class="text-base sm:text-lg text-[#8c8d8e] font-normal mb-6">
+                    {"Não encontramos nenhum produto com base nos filtros selecionados."}
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
         </div>
 

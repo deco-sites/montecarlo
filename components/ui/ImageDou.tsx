@@ -1,7 +1,10 @@
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import type { ImageWidget } from "apps/admin/widgets.ts";
 import ButtonLink from "./ButtonLink.tsx";
-import { SendEventOnView } from "../../components/Analytics.tsx";
+import {
+  SendEventOnClick,
+  SendEventOnView,
+} from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
 import Title from "deco-sites/montecarlo/components/ui/Title.tsx";
 import SubTitle from "deco-sites/montecarlo/components/ui/SubTitle.tsx";
@@ -37,14 +40,17 @@ export interface Props {
   secondImage: Image;
 }
 
-export function SectionImage(
-  { props, customClass, wrapperCustomClass, infoSectionCustomClass }: {
-    props: Image;
-    customClass?: string;
-    wrapperCustomClass?: string;
-    infoSectionCustomClass?: string;
-  },
-) {
+export function SectionImage({
+  props,
+  customClass,
+  wrapperCustomClass,
+  infoSectionCustomClass,
+}: {
+  props: Image;
+  customClass?: string;
+  wrapperCustomClass?: string;
+  infoSectionCustomClass?: string;
+}) {
   const { mobile, desktop, alt, content, contentTitle, button, title, href } =
     props;
 
@@ -99,6 +105,19 @@ export function SectionImage(
           classCustom={"text-black text-sm text-black group-hover:bg-[#F5F3E7] duration-300 absolute bottom-11"}
           label={button}
         />
+        <SendEventOnClick
+          id={id}
+          event={{
+            name: "select_promotion",
+            params: {
+              creative_name: title,
+              creative_slot: "ImageDuo",
+              promotion_id: href,
+              promotion_name: title,
+              items: [],
+            },
+          }}
+        />
       </div>
       <SendEventOnView
         id={id}
@@ -118,17 +137,19 @@ export function SectionImage(
   );
 }
 
-export default function ImageDuo({ title, subTitle, primaryImage, secondImage }: Props) {
+export default function ImageDuo(
+  { title, subTitle, primaryImage, secondImage }: Props,
+) {
   return (
     <div class="flex flex-col gap-8 lg:gap-10 py-8">
-      {
-        title || subTitle ? (
+      {title || subTitle
+        ? (
           <div class="flex flex-col gap-1 px-5">
-            { title ? <Title text={title} /> : null}
-            { subTitle ? <SubTitle text={subTitle} /> : null } 
+            {title ? <Title text={title} /> : null}
+            {subTitle ? <SubTitle text={subTitle} /> : null}
           </div>
-        ) : null
-      }
+        )
+        : null}
 
       <div class="flex flex-col gap-5 lg:flex-row lg:gap-0">
         <SectionImage props={primaryImage} />

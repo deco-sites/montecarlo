@@ -212,6 +212,19 @@ function Cart({
                         </div>
                       </div>
                     </label>
+                    <SendEventOnView
+                      id={id}
+                      event={{
+                        name: "view_cart",
+                        params: {
+                          currency: "BRL",
+                          value: total,
+                          items: items
+                            .map((_, index) => itemToAnalyticsItem(index))
+                            .filter((x): x is AnalyticsItem => Boolean(x)),
+                        },
+                      }}
+                    />
                   </div>
                 )
                 : null}
@@ -232,6 +245,21 @@ function Cart({
                         {formatPrice(total / maxInstallments, currency, locale)}
                       </span>
                     )}
+                    {
+                      /* <SendEventOnView
+                  id={id}
+                  event={{
+                    name: "view_cart",
+                    params: {
+                      currency: "BRL",
+                      value: total,
+                      items: items
+                        .map((_, index) => itemToAnalyticsItem(index))
+                        .filter((x): x is AnalyticsItem => Boolean(x)),
+                    },
+                  }}
+                /> */
+                    }
                   </div>
                 )
                 : (
@@ -281,22 +309,24 @@ function Cart({
                   </Button>
                 </a>
               </div>
+              {
+                /* <SendEventOnView
+              id={id}
+              event={{
+                name: "view_cart",
+                params: {
+                  currency: "BRL",
+                  value: total,
+                  items: items
+                    .map((_, index) => itemToAnalyticsItem(index))
+                    .filter((x): x is AnalyticsItem => Boolean(x)),
+                },
+              }}
+            /> */
+              }
             </footer>
           </>
         )}
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_cart",
-          params: {
-            currency: "BRL",
-            value: total,
-            items: items
-              .map((_, index) => itemToAnalyticsItem(index))
-              .filter((x): x is AnalyticsItem => Boolean(x)),
-          },
-        }}
-      />
     </div>
   );
 }

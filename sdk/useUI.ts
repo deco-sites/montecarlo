@@ -33,7 +33,7 @@ const displayMenuProducts = signal(false);
 const displayMenuProductsChild = signal(false);
 const productsChild = signal<Navmenu | undefined>(undefined);
 const productsChild2 = signal<ListLinks | null>(null);
-const showPopup = signal<boolean>(true);
+const showPopup = signal<boolean>(false);
 const activeS = signal<boolean>(true);
 
 const state = {

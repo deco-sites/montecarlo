@@ -105,6 +105,13 @@ function ShelfCollection({
     4: "w-1/4",
     5: "w-1/5",
   };
+
+  let numberOfSlidesDesktopFormatted = layout?.numberOfSliders?.desktop;
+
+  if (numberOfSlidesDesktopFormatted == undefined) {
+    numberOfSlidesDesktopFormatted = 3;
+  }
+
   return (
     <div class="w-full py-8 flex flex-col gap-5 lg:gap-10 lg:py-10 items-center">
       <div class="flex flex-col w-full gap-1">
@@ -147,12 +154,24 @@ function ShelfCollection({
 
         {layout?.showArrows && (
           <>
-            <div class="relative z-10 col-start-1 row-start-3 hidden lg:block">
+            <div
+              class={`relative z-10 col-start-1 row-start-3 hidden lg:block ${
+                products.length <= numberOfSlidesDesktopFormatted
+                  ? "opacity-0"
+                  : ""
+              }`}
+            >
               <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
                 <Icon size={40} id="arrowLeft" strokeWidth={3} />
               </Slider.PrevButton>
             </div>
-            <div class="relative z-10 col-start-3 row-start-3 hidden lg:block">
+            <div
+              class={`relative z-10 col-start-3 row-start-3 hidden lg:block ${
+                products.length <= numberOfSlidesDesktopFormatted
+                  ? "opacity-0"
+                  : ""
+              }`}
+            >
               <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
                 <Icon size={40} id="arrowRight" strokeWidth={3} />
               </Slider.NextButton>
@@ -167,6 +186,7 @@ function ShelfCollection({
             name: "view_item_list",
             params: {
               item_list_name: title,
+              item_list_id: id,
               items: products.map((product, index) =>
                 mapProductToAnalyticsItem({
                   index,

@@ -151,7 +151,7 @@ function MiniProductCard({
 
   const cta = (
     <a
-      href={url && relative(url)?.split('?')[0]}
+      href={url && relative(url)?.split("?")[0]}
       aria-label="view product"
       class="w-min py-[10px] px-[14px] hidden lg:group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
     >
@@ -177,21 +177,6 @@ function MiniProductCard({
       class={`card card-compact group w-full px-1 gap-2 text-center h-min relative mx-auto md:max-w-full`}
       data-deco="view-product"
     >
-      <Flags
-        productAdditionalProperty={product.isVariantOf?.additionalProperty}
-        releaseFlag={layout?.releaseFlag}
-        discountFlag={discountFlagValues}
-      />
-      <SendEventOnView
-        id={id}
-        event={{
-          name: "view_item_list",
-          params: {
-            item_list_name: itemListName,
-            items: [eventItem],
-          },
-        }}
-      />
       <SendEventOnClick
         id={id}
         event={{
@@ -215,11 +200,12 @@ function MiniProductCard({
       >
         {/* Product Images */}
         <a
-          href={url && relative(url)?.split('?')[0]}
+          href={url && relative(url)?.split("?")[0]}
           aria-label="view product"
           class="grid grid-cols-1 grid-rows-1 w-full border border-[#E0DFD6]"
         >
-          <SendEventOnClick
+          {
+            /* <SendEventOnClick
             id={id}
             event={{
               name: "add_to_cart",
@@ -229,7 +215,8 @@ function MiniProductCard({
                 items: [eventItem],
               },
             }}
-          />
+          /> */
+          }
           <Image
             src={front.url!}
             alt={front.alternateName}
@@ -265,7 +252,7 @@ function MiniProductCard({
       {/* Prices & Name */}
       <div class="flex-auto flex flex-col justify-between text-start">
         <div class="flex flex-col gap-0">
-          <h2
+          <h3
             class={`truncate font-normal ${
               PROPS_FONT_SIZE[layout?.name?.fontSize || "Small"]
             }`}
@@ -321,7 +308,8 @@ function MiniProductCard({
         </div>
         {l?.onMouseOver?.showCta && l?.onMouseOver.ctaText && cta}
       </div>
-      <SendEventOnView
+      {
+        /* <SendEventOnView
         id={id}
         event={{
           name: "view_item",
@@ -331,7 +319,8 @@ function MiniProductCard({
             items: [eventItem],
           },
         }}
-      />
+      /> */
+      }
     </div>
   );
 }

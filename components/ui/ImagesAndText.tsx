@@ -58,7 +58,6 @@ function CardImage(
     index,
   }: CardImage,
 ) {
-
   return (
     <div
       class="w-full lg:w-2/4 flex flex-col "
@@ -113,70 +112,80 @@ function CardImage(
                   href={button?.href || ""}
                   classCustom={"text-black text-sm"}
                   label={button?.label}
+                  creative_name={title}
+                  creative_slot={index}
+                  promotion_id={button?.label}
+                  promotion_name={alt}
+                  id={id}
                 />
               )}
             </div>
           </>
         )
         : variant == "Variant 2"
-          ? (
-            <>
-              <div class="relative w-full">
-                <Picture preload={preload}>
-                  <Source
-                    src={imageMobile}
-                    width={350}
-                    height={350}
-                    media="(max-width: 1023px)"
-                    fetchPriority="low"
-                    loading={"lazy"}
-                  />
-                  <Source
-                    src={imageDesktop}
-                    width={700}
-                    height={342}
-                    media="(min-width: 1024px)"
-                    fetchPriority="low"
-                    decoding="async"
-                    loading={"lazy"}
-                  />
-                  <img
-                    class="w-full"
-                    src={imageDesktop}
-                    alt={alt}
-                    loading="lazy"
-                  />
-                </Picture>
-                <div class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b to-[#00000087] via-transparent from-transparent flex justify-center items-end">
-                  {title && (
-                    <h2 class=" text-center text-4xl lg:text-5xl mb-7 font-beausiteGrand text-primary">
-                      {title}
-                    </h2>
-                  )}
-                </div>
-              </div>
-              <div class="flex flex-col w-full items-center gap-6 lg:pt-7 lg:pb-4 py-6 lg:px-16 px-10">
-                {content && (
-                  <span
-                    dangerouslySetInnerHTML={{ __html: content }}
-                    class=" text-center text-sm xl:text-base font-medium"
-                  >
-                  </span>
+        ? (
+          <>
+            <div class="relative w-full">
+              <Picture preload={preload}>
+                <Source
+                  src={imageMobile}
+                  width={350}
+                  height={350}
+                  media="(max-width: 1023px)"
+                  fetchPriority="low"
+                  loading={"lazy"}
+                />
+                <Source
+                  src={imageDesktop}
+                  width={700}
+                  height={342}
+                  media="(min-width: 1024px)"
+                  fetchPriority="low"
+                  decoding="async"
+                  loading={"lazy"}
+                />
+                <img
+                  class="w-full"
+                  src={imageDesktop}
+                  alt={alt}
+                  loading="lazy"
+                />
+              </Picture>
+              <div class="absolute top-0 bottom-0 left-0 right-0 bg-gradient-to-b to-[#00000087] via-transparent from-transparent flex justify-center items-end">
+                {title && (
+                  <h2 class=" text-center text-4xl lg:text-5xl mb-7 font-beausiteGrand text-primary">
+                    {title}
+                  </h2>
                 )}
               </div>
-              {button?.label && (
-                <ButtonLink
-                  href={button?.href || ""}
-                  classCustom={"text-black text-sm mx-auto"}
-                  label={button?.label}
-                />
+            </div>
+            <div class="flex flex-col w-full items-center gap-6 lg:pt-7 lg:pb-4 py-6 lg:px-16 px-10">
+              {content && (
+                <span
+                  dangerouslySetInnerHTML={{ __html: content }}
+                  class=" text-center text-sm xl:text-base font-medium"
+                >
+                </span>
               )}
-            </>
-          )
-          : (
-            <>
-            </>
-          )}
+            </div>
+            {button?.label && (
+              <ButtonLink
+                href={button?.href || ""}
+                classCustom={"text-black text-sm mx-auto"}
+                label={button?.label}
+                creative_name={title}
+                creative_slot={index}
+                promotion_id={button?.label}
+                promotion_name={alt}
+                id={id}
+              />
+            )}
+          </>
+        )
+        : (
+          <>
+          </>
+        )}
       <SendEventOnView
         id={id}
         event={{
@@ -197,14 +206,14 @@ export default function ImagesAndText({ title, subTitle, cardsImage }: Props) {
   const id = useId();
   return (
     <div class="flex flex-col gap-8 lg:gap-10 py-8">
-      {
-        title || subTitle ? (
+      {title || subTitle
+        ? (
           <div class="flex flex-col gap-1 px-5">
-            { title ? <Title text={title} /> : null}
-            { subTitle ? <SubTitle text={subTitle} /> : null }
+            {title ? <Title text={title} /> : null}
+            {subTitle ? <SubTitle text={subTitle} /> : null}
           </div>
-        ) : null
-      }
+        )
+        : null}
 
       <div class="flex flex-col lg:flex-row w-full h-full lg:gap-2 gap-16 max-w-[1512px] lg:px-14 mx-auto">
         {cardsImage.map((card, index) => (
@@ -216,8 +225,8 @@ export default function ImagesAndText({ title, subTitle, cardsImage }: Props) {
             content={card.content}
             button={card.button}
             variant={card.variant}
-            backgrond={card.backgrond} 
-            id={id}
+            backgrond={card.backgrond}
+            id={index.toString()}
             index={index.toString()}
           />
         ))}

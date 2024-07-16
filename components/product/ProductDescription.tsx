@@ -71,7 +71,7 @@ export default function ProductDescription(
     }
   });
 
-  const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g).join("");
+  const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g)?.join("");
 
   const Arraylosses: GroupVariants | undefined =
     variants && variants.find((group) => group.type === "Pedras") || undefined;
@@ -89,9 +89,9 @@ export default function ProductDescription(
           title="Descrição"
           titleClass="font-poppins text-[#000000] group-open:text-[#AAA89C]"
         >
-          <h3 class="font-poppins text-lg lg:text-xl text-black mb-2">
+          <p class="font-poppins text-lg lg:text-xl text-black mb-2">
             {newName}
-          </h3>
+          </p>
           {description && (
             <div class="font-poppins text-sm lg:text-base text-black flex flex-col">
               <p
@@ -210,7 +210,7 @@ function Collection(props: CollectionProps) {
         style={{ color: props.style?.color }}
       >
         {props.title && (
-          <h3
+          <p
             class="text-[2.5rem] lg:text-[1.563rem] max-w-[213px]"
             dangerouslySetInnerHTML={{ __html: props.title }}
           />

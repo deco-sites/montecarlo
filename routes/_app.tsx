@@ -146,8 +146,11 @@ export default defineApp(async (_req, ctx) => {
           }}
         >
         </style>
-        <script defer 
-          dangerouslySetInnerHTML={{__html: `
+        {
+          /* <script
+          defer
+          dangerouslySetInnerHTML={{
+            __html: `
             document.addEventListener('DOMContentLoaded', () => {
               setTimeout(initGTM, 7000);
             });
@@ -168,7 +171,10 @@ export default defineApp(async (_req, ctx) => {
               s.async = true;
               s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-TPPDZQGL';
               document.head.appendChild(s);
-            }`}}/>
+            }`,
+          }}
+        /> */
+        }
       </Head>
 
       {/* Rest of Preact tree */}

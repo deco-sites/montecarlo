@@ -36,7 +36,7 @@ export default function ProductCardInline({ product, itemListName }: Props) {
   });
 
   return (
-    <a href={url?.split('?')[0]} class="flex w-full flex-row opacity-1 gap-2">
+    <a href={url?.split("?")[0]} class="flex w-full flex-row opacity-1 gap-2">
       <SendEventOnView
         id={id}
         event={{
@@ -58,7 +58,8 @@ export default function ProductCardInline({ product, itemListName }: Props) {
           },
         }}
       />
-      <SendEventOnClick
+      {
+        /* <SendEventOnClick
         id={id}
         event={{
           name: "add_to_cart",
@@ -68,7 +69,8 @@ export default function ProductCardInline({ product, itemListName }: Props) {
             items: [eventItem],
           },
         }}
-      />
+      /> */
+      }
       <SendEventOnClick
         id={id}
         event={{

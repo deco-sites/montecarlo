@@ -11,6 +11,7 @@ import {
 } from "../../components/Analytics.tsx";
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
 import Breadcrumb from "deco-sites/montecarlo/components/ui/Breadcrumb.tsx";
+import { useDevice } from "deco/hooks/useDevice.ts";
 
 export interface Props {
   /** @title Integration */
@@ -35,6 +36,9 @@ export default function ProductDetails({ page, extraInformations }: Props) {
     product,
   });
 
+  const device = useDevice();
+  const isMobileSection = device != "desktop";
+
   return (
     <div class=" w-full h-full relative">
       <div
@@ -49,11 +53,13 @@ export default function ProductDetails({ page, extraInformations }: Props) {
         <div class="flex flex-col gap-6 lg:flex-row lg:justify-center col-span-3 row-end-1">
           <ImageGallerySlider
             page={page}
+            isMobile={isMobileSection}
           />
         </div>
         <ProductInfo
           page={page}
           extraInformations={extraInformations}
+          isMobile={isMobileSection}
         />
         <SendEventOnView
           id={id}
