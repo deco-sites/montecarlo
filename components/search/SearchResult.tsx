@@ -12,6 +12,7 @@ import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { Section } from "deco/mod.ts";
 import { use } from "https://esm.sh/marked@9.1.1";
 import { useSection } from "deco/hooks/useSection.ts";
+import { RangePriceProps } from "../../loaders/Product/ProductsInfo.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -39,6 +40,7 @@ export interface Props {
     /** @default 500000 */ 
     maxPrice?: number,
   },
+  RangePriceProps?: RangePriceProps,
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
@@ -64,7 +66,8 @@ function Result({
   startingPage = 0,
   url: _url,
   title,
-  rangePrice
+  rangePrice,
+  RangePriceProps,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   url: string;
@@ -83,10 +86,10 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
-  let minPrice = rangePrice?.minPrice || 1;
-  let maxPrice = rangePrice?.maxPrice || 500000;
+  let minPrice = RangePriceProps?.rangePriceData?.minPrice || rangePrice?.minPrice || 1;
+  let maxPrice = RangePriceProps?.rangePriceData?.maxPrice || rangePrice?.maxPrice || 500000;
 
-  !rangePrice?.minPrice && !rangePrice?.maxPrice && products.forEach((product) => {
+  RangePriceProps?.rangePriceData?.maxPrice === undefined && rangePrice?.minPrice === undefined && !rangePrice?.maxPrice && products.forEach((product) => {
     product?.offers?.offers.forEach((offer) => {
       const price = offer.price;
 
@@ -112,6 +115,8 @@ function Result({
   )
   : null
   
+  console.log({RangePriceProps})
+
 
   return (
     <div
@@ -125,8 +130,8 @@ function Result({
       >
         {
           pageInfo?.records ? (
-            <span>{pageInfo?.records > 1 ? `${pageInfo?.records} Produtos` : `${pageInfo?.records} Produto`}</span>
-          ) : <span>0 Produto</span>
+            <div class="py-4">{pageInfo?.records > 1 ? `${pageInfo?.records} Produtos` : `${pageInfo?.records} Produto`}</div>
+          ) : <div class="py-4">0 Produto</div>
         }
 
         {(isFirstPage || !isPartial) && (
