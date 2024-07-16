@@ -12,7 +12,7 @@ import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { Section } from "deco/mod.ts";
 import { use } from "https://esm.sh/marked@9.1.1";
 import { useSection } from "deco/hooks/useSection.ts";
-import { RangePriceProps } from "../../loaders/Product/ProductsInfo.ts";
+import { RangePriceProps } from "../../loaders/Product/RangePriceData.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -33,16 +33,14 @@ export interface Layout {
 
 export interface Props {
   title?: string;
- /** Defines static values for Range Price Filter */
-  RangePriceProps?: RangePriceProps;
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
-
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
-
   sections?: Section[];
+  /** Defines static or automatic values for Range Price Filter */
+  RangePriceProps?: RangePriceProps;
 }
 
 function NotFound() {
