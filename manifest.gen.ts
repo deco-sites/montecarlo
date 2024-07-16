@@ -7,16 +7,17 @@ import * as $$$$$$$$$1 from "./actions/miniCart/removeCEP.ts";
 import * as $$$$$$$$$2 from "./actions/newsletter/sendForm.ts";
 import * as $$$$$$$$$$$0 from "./apps/decohub.ts";
 import * as $$$$$$$$$$$1 from "./apps/site.ts";
-import * as $$$8 from "./loaders/availableIcons.ts";
-import * as $$$9 from "./loaders/icons.ts";
+import * as $$$9 from "./loaders/availableIcons.ts";
+import * as $$$10 from "./loaders/icons.ts";
 import * as $$$0 from "./loaders/Layouts/BannerCollection.tsx";
 import * as $$$1 from "./loaders/Layouts/MaterialProduct.tsx";
 import * as $$$2 from "./loaders/Layouts/MiniProductCard.tsx";
 import * as $$$3 from "./loaders/Layouts/ProductCard.tsx";
 import * as $$$4 from "./loaders/Layouts/RockProduct.tsx";
 import * as $$$5 from "./loaders/List/Sections.tsx";
-import * as $$$6 from "./loaders/Product/SimilarProduct.ts";
-import * as $$$7 from "./loaders/SearchStore.ts";
+import * as $$$6 from "./loaders/Product/RangePriceData.ts";
+import * as $$$7 from "./loaders/Product/SimilarProduct.ts";
+import * as $$$8 from "./loaders/SearchStore.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/Cards/CollectionCards.tsx";
 import * as $$$$$$2 from "./sections/Cards/DashCard.tsx";
@@ -105,16 +106,17 @@ import * as $$$$$$83 from "./sections/Video/FullVideo.tsx";
 
 const manifest = {
   "loaders": {
-    "deco-sites/montecarlo/loaders/availableIcons.ts": $$$8,
-    "deco-sites/montecarlo/loaders/icons.ts": $$$9,
+    "deco-sites/montecarlo/loaders/availableIcons.ts": $$$9,
+    "deco-sites/montecarlo/loaders/icons.ts": $$$10,
     "deco-sites/montecarlo/loaders/Layouts/BannerCollection.tsx": $$$0,
     "deco-sites/montecarlo/loaders/Layouts/MaterialProduct.tsx": $$$1,
     "deco-sites/montecarlo/loaders/Layouts/MiniProductCard.tsx": $$$2,
     "deco-sites/montecarlo/loaders/Layouts/ProductCard.tsx": $$$3,
     "deco-sites/montecarlo/loaders/Layouts/RockProduct.tsx": $$$4,
     "deco-sites/montecarlo/loaders/List/Sections.tsx": $$$5,
-    "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts": $$$6,
-    "deco-sites/montecarlo/loaders/SearchStore.ts": $$$7,
+    "deco-sites/montecarlo/loaders/Product/RangePriceData.ts": $$$6,
+    "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts": $$$7,
+    "deco-sites/montecarlo/loaders/SearchStore.ts": $$$8,
   },
   "sections": {
     "deco-sites/montecarlo/sections/Animation/Animation.tsx": $$$$$$0,

@@ -12,6 +12,7 @@ import ProductGallery, { Columns } from "../product/ProductGallery.tsx";
 import { Section } from "deco/mod.ts";
 import { use } from "https://esm.sh/marked@9.1.1";
 import { useSection } from "deco/hooks/useSection.ts";
+import { RangePriceProps } from "../../loaders/Product/RangePriceData.ts";
 
 export type Format = "Show More" | "Pagination";
 
@@ -32,21 +33,14 @@ export interface Layout {
 
 export interface Props {
   title?: string;
-  /** Defines static values for Range Price Filter */
-  rangePrice?: {
-    /** @default 1 */
-    minPrice?: number;
-    /** @default 500000 */
-    maxPrice?: number;
-  };
   page: ProductListingPage | null;
   layout?: Layout;
   cardLayout?: CardLayout;
-
   /** @description 0 for ?page=0 as your first page */
   startingPage?: 0 | 1;
-
   sections?: Section[];
+  /** Defines static or automatic values for Range Price Filter */
+  RangePriceProps?: RangePriceProps;
 }
 
 function NotFound() {
@@ -64,7 +58,7 @@ function Result({
   startingPage = 0,
   url: _url,
   title,
-  rangePrice,
+  RangePriceProps,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   url: string;
@@ -83,13 +77,12 @@ function Result({
   const isPartial = url.searchParams.get("partial") === "true";
   const isFirstPage = !pageInfo.previousPage;
 
-  let minPrice = rangePrice?.minPrice || 1;
-  let maxPrice = rangePrice?.maxPrice || 500000;
+  let minPrice = RangePriceProps?.rangePriceData?.minPrice || 1;
+  let maxPrice = RangePriceProps?.rangePriceData?.maxPrice || 500000;
 
-  !rangePrice?.minPrice && !rangePrice?.maxPrice &&
-    products.forEach((product) => {
-      product?.offers?.offers.forEach((offer) => {
-        const price = offer.price;
+  RangePriceProps?.rangePriceData?.maxPrice === undefined && RangePriceProps?.rangePriceData?.minPrice === undefined && products.forEach((product) => {
+    product?.offers?.offers.forEach((offer) => {
+      const price = offer.price;
 
         if (price < minPrice) {
           minPrice = price;
