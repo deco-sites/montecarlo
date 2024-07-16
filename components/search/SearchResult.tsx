@@ -114,9 +114,6 @@ function Result({
     })
   )
   : null
-  
-  console.log({RangePriceProps})
-
 
   return (
     <div
