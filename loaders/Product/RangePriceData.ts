@@ -28,7 +28,7 @@ const loader = async ({ query, facets, ProductListingPage }: Props,) : Promise<R
     let q : string | undefined | null = "";
     let facetQuery = "";
 
-    if (ProductListingPage) {    
+    if (ProductListingPage && q === null) {    
         const url = new URL(ProductListingPage?.seo?.canonical || "");
         const searchQuery = url.searchParams.get("q");
 
