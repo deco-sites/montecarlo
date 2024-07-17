@@ -71,7 +71,7 @@ function NewsletterPopup(
             >
               <div
                 class="bg-white shadow-lg flex overflow-hidden max-w-4xl w-fit"
-                style={{ maxWidth: "760px" }}
+                style={{ maxWidth: "760px", transform: "scale(0.9)" }}
               >
                 {/* Left side with image */}
                 <div
