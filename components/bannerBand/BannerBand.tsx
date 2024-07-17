@@ -124,7 +124,7 @@ import {
           id={id}
           href={action?.href ?? "#"}
           aria-label={action?.label}
-          class="absolute overflow-y-hidden w-full h-full"
+          className={`absolute overflow-y-hidden w-full h-full ${!action?.href || action?.href === "" || action?.href === "#" ? "cursor-default" : "cursor-pointer"}`}
         >
           {action && <Action {...action} />}
         </a>
@@ -186,9 +186,9 @@ import {
           <div class="flex flex-row w-full relative">
             <a
               id={id}
-              href={primaryImage.action?.href ?? "#"}
+              href={primaryImage.action?.href ?? ""}
               aria-label={primaryImage.action?.label}
-              class="absolute overflow-y-hidden w-full h-full"
+              className={`absolute overflow-y-hidden w-full h-full ${!primaryImage.action?.href || primaryImage.action?.href === "" || primaryImage.action?.href === "#" ? "cursor-default" : "cursor-pointer"}`}
             >
               {primaryImage.action && <Action {...primaryImage.action} />}
             </a>
