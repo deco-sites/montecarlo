@@ -70,13 +70,7 @@ export interface Props {
    * @description time (in seconds) to start the carousel autoplay
    */
   interval?: number;
-  /**
-   * @default 450
-   */
   heightMobile?: number;
-  /**
-   * @default 795
-   */
   heightDesktop?: number;
 }
 
@@ -217,10 +211,10 @@ function BannerItem({
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
               width={image.banner.length > 1 ? 748 : 1495}
-              height={height || 795}
+              height={height || 742}
             />
             <img
-              class="object-cover w-full"
+              class="object-cover w-full h-full"
               loading={lcp ? "eager" : "lazy"}
               src={primaryImage.desktop}
               alt={primaryImage.alt}
