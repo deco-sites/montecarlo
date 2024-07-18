@@ -240,19 +240,18 @@ function BannerItem({
               },
             }}
           />
-          <SendEventOnView
-            id={id}
-            event={{
-              name: "view_promotion",
-              params: {
-                view_promotion: primaryImage.promotion,
-                crative_name: primaryImage.alt,
-                creative_slot: "banner-carousel",
-                promotion_id: id,
-                promotion_name: primaryImage.promotion,
-                items: [],
-              },
-            }}
+          id={id}
+          event={{
+            name: "view_promotion",
+            params: {
+              view_promotion: primaryImage.promotion,
+              crative_name: primaryImage.alt,
+              creative_slot: "banner-carousel",
+              promotion_id: id,
+              promotion_name: primaryImage.promotion,
+              items: [],
+            },
+          }}
           />
         </div>
       ))}
