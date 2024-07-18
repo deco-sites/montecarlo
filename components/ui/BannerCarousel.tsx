@@ -71,12 +71,9 @@ export interface Props {
    */
   interval?: number;
   /**
-   * @default 450
+   * @title Height Image
    */
   heightMobile?: number;
-  /**
-   * @default 795
-   */
   heightDesktop?: number;
 }
 
@@ -96,9 +93,8 @@ function Action(action: {
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
       {action.title && (
         <span
-          class={`${
-            PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
-          } font-light text-primary text-center font-beausiteGrand`}
+          class={`${PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
+            } font-light text-primary text-center font-beausiteGrand`}
         >
           {action.title}
         </span>
@@ -119,12 +115,12 @@ function BannerItemMobile({
   image,
   lcp,
   id,
-  height,
+  height
 }: {
   image: ImageItem;
   lcp?: boolean;
   id: string;
-  height?: number;
+  height?: number
 }) {
   const { mobile, alt, action, promotion } = image;
 
@@ -190,7 +186,7 @@ function BannerItem({
   image: Banner;
   lcp?: boolean;
   id: string;
-  height?: number;
+  height?: number
 }) {
   return (
     <div class="flex flex-row w-full relative">
@@ -217,13 +213,14 @@ function BannerItem({
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
               width={image.banner.length > 1 ? 748 : 1495}
-              height={height || 795}
+              height={height || 564}
             />
             <img
-              class="object-cover w-full"
+              class="object-cover h-full w-full"
               loading={lcp ? "eager" : "lazy"}
               src={primaryImage.desktop}
               alt={primaryImage.alt}
+              style={{ minHeight: height || 564 }}
             />
           </Picture>
           <SendEventOnClick
@@ -285,11 +282,10 @@ function Dots({
             <Slider.Dot index={index}>
               <div class="py-5">
                 <div
-                  class={`w-12 h-1 lg:w-[71px] ${
-                    !interval
-                      ? "bg-[rgba(255,255,255,0.4)] group-disabled:bg-primary"
-                      : "group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
-                  }`}
+                  class={`w-12 h-1 lg:w-[71px] ${!interval
+                    ? "bg-[rgba(255,255,255,0.4)] group-disabled:bg-primary"
+                    : "group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                    }`}
                   style={{ animationDuration: `${interval}s` }}
                 />
               </div>
