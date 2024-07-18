@@ -254,6 +254,7 @@ function BannerItem({
       ))}
     </div>
   );
+
 }
 
 function Dots({
