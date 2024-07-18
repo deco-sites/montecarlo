@@ -316,7 +316,7 @@ function Buttons() {
 
 function BannerCarousel(props: Props) {
   const id = useId();
-  const { images, preload, interval } = props;
+  const { images, preload, interval, heightDesktop, heightMobile } = props;
   const { isMobile } = useUI();
 
   if (!images || images.length === 0) {
@@ -350,6 +350,7 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
+                height={heightMobile}
               />
             </Slider.Item>
           ))
@@ -360,6 +361,7 @@ function BannerCarousel(props: Props) {
                   image={image}
                   lcp={index === 0 && preload}
                   id={`${id}::${index}`}
+                  height={heightDesktop}
                 />
               </Slider.Item>
             );
