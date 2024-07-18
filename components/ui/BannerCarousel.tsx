@@ -70,6 +70,14 @@ export interface Props {
    * @description time (in seconds) to start the carousel autoplay
    */
   interval?: number;
+  /**
+   * @default 450
+   */
+  heightMobile?: number;
+  /**
+   * @default 795
+   */
+  heightDesktop?: number;
 }
 
 const PROPS_FONT_SIZE = {
@@ -111,10 +119,12 @@ function BannerItemMobile({
   image,
   lcp,
   id,
+  height,
 }: {
   image: ImageItem;
   lcp?: boolean;
   id: string;
+  height?: number;
 }) {
   const { mobile, alt, action, promotion } = image;
 
@@ -137,7 +147,7 @@ function BannerItemMobile({
         src={mobile}
         alt={alt}
         width={350}
-        height={450}
+        height={height || 450}
         fetchPriority={lcp ? "high" : "auto"}
       />
       <SendEventOnClick
@@ -175,10 +185,12 @@ function BannerItem({
   image,
   lcp,
   id,
+  height,
 }: {
   image: Banner;
   lcp?: boolean;
   id: string;
+  height?: number;
 }) {
   return (
     <div class="flex flex-row w-full relative">
@@ -198,14 +210,14 @@ function BannerItem({
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
               width={image.banner.length > 1 ? 631 : 1263}
-              height={492}
+              height={height || 492}
             />
             <Source
               media="(min-width: 1367px)"
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
               width={image.banner.length > 1 ? 748 : 1495}
-              height={583}
+              height={height || 795}
             />
             <img
               class="object-cover w-full"
@@ -308,7 +320,7 @@ function Buttons() {
 
 function BannerCarousel(props: Props) {
   const id = useId();
-  const { images, preload, interval } = props;
+  const { images, preload, interval, heightDesktop, heightMobile } = props;
   const { isMobile } = useUI();
 
   if (!images || images.length === 0) {
@@ -342,6 +354,7 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
+                height={heightMobile}
               />
             </Slider.Item>
           ))
@@ -352,6 +365,7 @@ function BannerCarousel(props: Props) {
                   image={image}
                   lcp={index === 0 && preload}
                   id={`${id}::${index}`}
+                  height={heightDesktop}
                 />
               </Slider.Item>
             );
