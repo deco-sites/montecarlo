@@ -31,8 +31,12 @@ interface FontSize {
 export interface ImageItem {
   /** @description desktop-optimized single image size 1263x493 or two 632x493 images or three 421x528 images*/
   desktop: ImageWidget;
+  widthDesktop?: number;
+  heightDesktop?: number;
   /** @description mobile otimized image 350×449 */
   mobile: ImageWidget;
+  widthMobile?: number;
+  heightMobile?: number;
   /** @description Image's alt text */
   alt: string;
   /** @description Action when user clicks on the image */
@@ -115,12 +119,14 @@ function BannerItemMobile({
   image,
   lcp,
   id,
-  height
+  height,
+  widht,
 }: {
   image: ImageItem;
   lcp?: boolean;
   id: string;
-  height?: number
+  height?: number,
+  widht?: number,
 }) {
   const { mobile, alt, action, promotion } = image;
 
@@ -142,7 +148,7 @@ function BannerItemMobile({
         preload={lcp}
         src={mobile}
         alt={alt}
-        width={350}
+        width={widht || 350}
         height={height || 450}
         fetchPriority={lcp ? "high" : "auto"}
       />
@@ -181,12 +187,10 @@ function BannerItem({
   image,
   lcp,
   id,
-  height,
 }: {
   image: Banner;
   lcp?: boolean;
   id: string;
-  height?: number
 }) {
   return (
     <div class="flex flex-row w-full relative">
@@ -205,22 +209,22 @@ function BannerItem({
               media="(max-width: 1366px)"
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
-              width={image.banner.length > 1 ? 631 : 1263}
-              height={height || 492}
+              width={primaryImage.widthDesktop || 1263}
+              height={primaryImage.heightDesktop || 492}
             />
             <Source
               media="(min-width: 1367px)"
               fetchPriority={lcp ? "high" : "auto"}
               src={primaryImage.desktop}
-              width={image.banner.length > 1 ? 748 : 1495}
-              height={height || 564}
+              width={primaryImage.widthDesktop || 1495}
+              height={primaryImage.heightDesktop || 564}
             />
             <img
               class="object-cover h-full w-full"
               loading={lcp ? "eager" : "lazy"}
               src={primaryImage.desktop}
               alt={primaryImage.alt}
-              style={{ minHeight: height || 564 }}
+              style={{ minHeight: primaryImage.heightDesktop || 564 }}
             />
           </Picture>
           <SendEventOnClick
@@ -316,7 +320,7 @@ function Buttons() {
 
 function BannerCarousel(props: Props) {
   const id = useId();
-  const { images, preload, interval, heightDesktop, heightMobile } = props;
+  const { images, preload, interval } = props;
   const { isMobile } = useUI();
 
   if (!images || images.length === 0) {
@@ -350,7 +354,8 @@ function BannerCarousel(props: Props) {
                 image={image}
                 lcp={index === 0 && preload}
                 id={`${id}::${index}`}
-                height={heightMobile}
+                height={image.heightMobile}
+                widht={image.widthMobile}
               />
             </Slider.Item>
           ))
@@ -361,7 +366,6 @@ function BannerCarousel(props: Props) {
                   image={image}
                   lcp={index === 0 && preload}
                   id={`${id}::${index}`}
-                  height={heightDesktop}
                 />
               </Slider.Item>
             );
