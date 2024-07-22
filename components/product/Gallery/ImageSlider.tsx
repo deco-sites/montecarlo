@@ -78,54 +78,62 @@ export default function GallerySlider(props: Props) {
           ))}
         </Slider>
 
-        <Slider.PrevButton
-          class={`"no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
-            props.arrowMobile ? "flex" : "hidden lg:flex"
-          }`}
-          disabled
-        >
-          <Icon
-            class="text-black group-disabled:opacity-20"
-            size={40}
-            id="arrowLeft"
-            strokeWidth={1}
-          />
-        </Slider.PrevButton>
+        {
+          images.length > 1 ? (
+            <>
+            <Slider.PrevButton
+              class={`"no-animation absolute left-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
+                props.arrowMobile ? "flex" : "hidden lg:flex"
+              }`}
+              disabled
+            >
+              <Icon
+                class="text-black group-disabled:opacity-20"
+                size={40}
+                id="arrowLeft"
+                strokeWidth={1}
+              />
+            </Slider.PrevButton>
+          
+            <Slider.NextButton
+              class={`"no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
+                props.arrowMobile ? "flex" : "hidden lg:flex"
+              }`}
+              disabled={images.length < 2}
+            >
+              <Icon
+                class="text-black group-disabled:opacity-20"
+                size={40}
+                id="arrowRight"
+                strokeWidth={1}
+              />
+            </Slider.NextButton>
 
-        <Slider.NextButton
-          class={`"no-animation absolute right-2 top-1/2 btn border-none btn-outline hover:bg-transparent group ${
-            props.arrowMobile ? "flex" : "hidden lg:flex"
-          }`}
-          disabled={images.length < 2}
-        >
-          <Icon
-            class="text-black group-disabled:opacity-20"
-            size={40}
-            id="arrowRight"
-            strokeWidth={1}
-          />
-        </Slider.NextButton>
-        <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 absolute left-0 right-0 bottom-0 mx-auto top-auto">
-          {images?.map((_, index) => (
-            <li class="carousel-item">
-              {isMobile
-                ? (
-                  <Slider.Dot index={index}>
-                    <div class="py-5">
-                      <div class=" w-8 h-1 group-disabled:bg-primary bg-white" />
-                    </div>
-                  </Slider.Dot>
-                )
-                : (
-                  <Slider.DotLine index={index}>
-                    <div class="py-5">
-                      <div class=" w-8 h-1 group-disabled:bg-primary bg-white" />
-                    </div>
-                  </Slider.DotLine>
-                )}
-            </li>
-          ))}
-        </ul>
+            <ul class="carousel justify-center col-span-full gap-3 lg:gap-5 z-10 row-start-4 absolute left-0 right-0 bottom-0 mx-auto top-auto">
+              {images?.map((_, index) => (
+                <li class="carousel-item">
+                  {isMobile
+                    ? (
+                      <Slider.Dot index={index}>
+                        <div class="py-5">
+                          <div class=" w-8 h-1 group-disabled:bg-primary bg-white" />
+                        </div>
+                      </Slider.Dot>
+                    )
+                    : (
+                      <Slider.DotLine index={index}>
+                        <div class="py-5">
+                          <div class=" w-8 h-1 group-disabled:bg-primary bg-white" />
+                        </div>
+                      </Slider.DotLine>
+                    )}
+                </li>
+              ))}
+            </ul>
+            </>
+          ) : null
+        }
+        
         {isLaunch && (
           <span
             class={"absolute top-1 right-1 lg:top-0 lg:right-0 py-1 px-3 text-xs lg:text-sm bg-perola-intermediario"}
@@ -135,7 +143,7 @@ export default function GallerySlider(props: Props) {
         )}
       </div>
       {/* Dots */}
-      {!isMobile &&
+      {!isMobile && images.length > 1 ?
         (
           <>
             <div class="order-2 sm:order-1 row-span-3 col-start-1 col-end-1 w-full relative h-full">
@@ -164,7 +172,7 @@ export default function GallerySlider(props: Props) {
             </div>
             <SliderDotsJS rootId={id} />
           </>
-        )}
+        ) : null }
       {isMobile && <SliderJS rootId={id} />}
     </div>
   );
