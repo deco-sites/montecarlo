@@ -71,15 +71,18 @@ export default function ProductDescription(
     }
   });
 
+
   const listTechnical = description.match(/<li>[\s\S]*?<\/li>/g)?.join("");
+
+
 
   const Arraylosses: GroupVariants | undefined =
     variants && variants.find((group) => group.type === "Pedras") || undefined;
 
   const banner = complementName && collectionBanners &&
-      collectionBanners.find((banner) =>
-        banner.collectionName == complementName
-      ) || null;
+    collectionBanners.find((banner) =>
+      banner.collectionName == complementName
+    ) || null;
 
   return (
     <div class="">
@@ -154,12 +157,16 @@ export default function ProductDescription(
                   ) {
                     return null;
                   }
-
-                  const img = losses.find((img) => img.name === item.message);
+                  const img = losses.find((img) => {
+                    if (item.active && img.name === item.message){
+                      return img;
+                    }
+                  });
 
                   if (!img || img === undefined) {
                     return null;
                   }
+
                   return (
                     <Material
                       name={img.name}
@@ -170,7 +177,9 @@ export default function ProductDescription(
                       }}
                     />
                   );
+
                 })}
+
               </div>
             </Accordion>
           )}
