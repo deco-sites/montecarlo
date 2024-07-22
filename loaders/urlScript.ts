@@ -4,7 +4,9 @@ import { Script } from "apps/website/types.ts";
 const snippet = () => {
     addEventListener("pushstate", (e) => {
         e.preventDefault()
-        window.location.href = window.location.origin + e.arguments?.[2]
+        if(e.arguments?.[2]){
+            window.location.href = window.location.origin + e.arguments[2]
+        }
     });
 };
 
