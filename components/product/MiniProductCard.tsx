@@ -125,7 +125,7 @@ function MiniProductCard({
     <a
       href={url && relative(url)?.split("?")[0]}
       aria-label="view product"
-      class="w-full justify-center py-[10px] px-[14px] hidden lg:group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
+      class="w-full md:w-fit justify-center py-[10px] px-[14px] hidden lg:group-hover:flex hover:opacity-75 duration-200 bg-primary text-black text-sm mt-3"
     >
       {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>

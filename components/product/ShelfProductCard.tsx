@@ -142,7 +142,7 @@ function ShelfProductCard({
     <a
       href={url && relative(url)?.split("?")[0]}
       aria-label="view product"
-      class="w-full justify-center py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 text-black mt-3 font-poppins text-sm bg-[#FFC72C]"
+      class="w-full md:w-fit justify-center py-[10px] px-[14px] hidden group-hover:flex hover:opacity-75 duration-200 text-black mt-3 font-poppins text-sm bg-[#FFC72C]"
     >
       {l?.onMouseOver?.ctaText || "Ver produto"}
     </a>
