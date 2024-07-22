@@ -129,16 +129,16 @@ function CardImage(
               <Picture preload={preload}>
                 <Source
                   src={imageMobile}
-                  width={350}
-                  height={350}
+                  width={334}
+                  height={230}
                   media="(max-width: 1023px)"
                   fetchPriority="low"
                   loading={"lazy"}
                 />
                 <Source
                   src={imageDesktop}
-                  width={700}
-                  height={342}
+                  width={652}
+                  height={319}
                   media="(min-width: 1024px)"
                   fetchPriority="low"
                   decoding="async"

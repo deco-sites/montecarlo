@@ -42,7 +42,7 @@ export default function GallerySlider(props: Props) {
     layout,
   } = props;
 
-  const { width, height } = layout || { width: 300, height: 300 };
+  const { width, height } = layout || { width: 1500, height: 1500 };
 
   const aspectRatio = `${width} / ${height}`;
 
@@ -156,9 +156,9 @@ export default function GallerySlider(props: Props) {
                     <Slider.Dot index={index}>
                       <Image
                         style={{ aspectRatio }}
-                        class="group-disabled:border-black border w-full"
-                        width={100}
-                        height={100}
+                        class="group-disabled:border-black border rounded w-full"
+                        width={300}
+                        height={300}
                         src={img.url!}
                         alt={img.alternateName}
                         loading={"lazy"}
