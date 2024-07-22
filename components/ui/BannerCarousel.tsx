@@ -97,8 +97,9 @@ function Action(action: {
     <div class="absolute bottom-0 left-0 right-0 sm:right-auto w-full items-center flex flex-col justify-end gap-4 px-8 py-20">
       {action.title && (
         <span
-          class={`${PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
-            } font-light text-primary text-center font-beausiteGrand`}
+          class={`${
+            PROPS_FONT_SIZE[action.fontSize?.fontSize || "Normal"]
+          } font-light text-primary text-center font-beausiteGrand`}
         >
           {action.title}
         </span>
@@ -258,7 +259,6 @@ function BannerItem({
       ))}
     </div>
   );
-
 }
 
 function Dots({
@@ -287,10 +287,11 @@ function Dots({
             <Slider.Dot index={index}>
               <div class="py-5">
                 <div
-                  class={`w-12 h-1 lg:w-[71px] ${!interval
-                    ? "bg-[rgba(255,255,255,0.4)] group-disabled:bg-primary"
-                    : "group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
-                    }`}
+                  class={`w-12 h-1 lg:w-[71px] ${
+                    !interval
+                      ? "bg-[rgba(255,255,255,0.4)] group-disabled:bg-primary"
+                      : "group-disabled:animate-progress bg-gradient-to-r from-primary from-[length:var(--dot-progress)] to-[rgba(255,255,255,0.4)] to-[length:var(--dot-progress)]"
+                  }`}
                   style={{ animationDuration: `${interval}s` }}
                 />
               </div>
