@@ -128,7 +128,7 @@ function NavItem({ item }: { item: MenuNavItem }) {
         ? (
           <div
             data-menu
-            class={`absolute top-full left-0 right-0 hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 py-16 duration-200 shadow-menu
+            class={`absolute top-full left-0 right-0 hidden hover:grid group-hover:grid bg-base-100 z-50 items-start justify-center gap-2 border-t border-b-2 border-base-200 w-screen px-28 pt-5 pb-16 duration-200 shadow-menu
               ${GRIDCOLUMN[cont as keyof typeof GRIDCOLUMN]}`}
           >
             {listlinks !== undefined && listlinks?.length > 0 && (
