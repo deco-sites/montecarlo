@@ -47,11 +47,12 @@ export default function TextSEOCategory(props: Props) {
       )}
       {content && (
         <span
-          class="text-base order-2 line-clamp-3 text-ellipsis peer-has-[:checked]:line-clamp-none peer-has-[:checked]:text-wrap"
+          class="seo-text text-base order-2 line-clamp-3 text-ellipsis peer-has-[:checked]:line-clamp-none peer-has-[:checked]:text-wrap"
           dangerouslySetInnerHTML={{ __html: content }}
         >
         </span>
       )}
+
       <SendEventOnView
         id={id}
         event={{
