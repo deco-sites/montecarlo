@@ -18,6 +18,7 @@ import * as $$$5 from "./loaders/List/Sections.tsx";
 import * as $$$6 from "./loaders/Product/RangePriceData.ts";
 import * as $$$7 from "./loaders/Product/SimilarProduct.ts";
 import * as $$$8 from "./loaders/SearchStore.ts";
+import * as $$$11 from "./loaders/urlScript.ts";
 import * as $$$$$$0 from "./sections/Animation/Animation.tsx";
 import * as $$$$$$1 from "./sections/BannerBand/BannerBand.tsx";
 import * as $$$$$$2 from "./sections/Cards/CollectionCards.tsx";
@@ -118,6 +119,7 @@ const manifest = {
     "deco-sites/montecarlo/loaders/Product/RangePriceData.ts": $$$6,
     "deco-sites/montecarlo/loaders/Product/SimilarProduct.ts": $$$7,
     "deco-sites/montecarlo/loaders/SearchStore.ts": $$$8,
+    "deco-sites/montecarlo/loaders/urlScript.ts": $$$11,
   },
   "sections": {
     "deco-sites/montecarlo/sections/Animation/Animation.tsx": $$$$$$0,
