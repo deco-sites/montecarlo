@@ -13,6 +13,10 @@ import { Section } from "deco/mod.ts";
 import { use } from "https://esm.sh/marked@9.1.1";
 import { useSection } from "deco/hooks/useSection.ts";
 import { RangePriceProps } from "../../loaders/Product/RangePriceData.ts";
+import loaderCodeGroup, { VariantsShelf } from "../../loaders/Product/SimilarProductShelf.ts"
+
+import type { SectionProps } from "deco/types.ts";
+
 
 export type Format = "Show More" | "Pagination";
 
@@ -59,9 +63,11 @@ function Result({
   url: _url,
   title,
   RangePriceProps,
+  code,
 }: Omit<Props, "page"> & {
   page: ProductListingPage;
   url: string;
+  code: VariantsShelf[] | null,
 }) {
   const { products, filters, breadcrumb, pageInfo, sortOptions } = page;
   const perPage = pageInfo?.recordPerPage || products.length;
@@ -84,14 +90,14 @@ function Result({
     product?.offers?.offers.forEach((offer) => {
       const price = offer.price;
 
-        if (price < minPrice) {
-          minPrice = price;
-        }
-        if (price > maxPrice) {
-          maxPrice = price;
-        }
-      });
+      if (price < minPrice) {
+        minPrice = price;
+      }
+      if (price > maxPrice) {
+        maxPrice = price;
+      }
     });
+  });
 
   const isSearchPage = url.href.indexOf("/s?q=") != -1;
   const isSearchPageAndProductsNotFound = isSearchPage && products.length == 0;
@@ -118,9 +124,8 @@ function Result({
       class="relative w-full h-full"
     >
       <div
-        class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${
-          isFirstPage ? "py-10" : "pt-0"
-        } ${pageInfo?.nextPage ? "pb-0" : ""}`}
+        class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${isFirstPage ? "py-10" : "pt-0"
+          } ${pageInfo?.nextPage ? "pb-0" : ""}`}
       >
         {pageInfo?.records
           ? (
@@ -149,16 +154,16 @@ function Result({
           {/* {filters.length > 0 && */}
           {layout?.variant === "aside" && filters.length > 0 &&
             (isFirstPage || !isPartial) && (
-            <aside class="hidden md:block w-min min-w-[250px] max-w-[300px] pr-4 pb-6">
-              <ul class={`flex flex-col gap-6 pt-4 md:pl-0`}>
-                <Filters
-                  filters={filters}
-                  layout={layout.variant}
-                  url={url.href}
-                />
-              </ul>
-            </aside>
-          )}
+              <aside class="hidden md:block w-min min-w-[250px] max-w-[300px] pr-4 pb-6">
+                <ul class={`flex flex-col gap-6 pt-4 md:pl-0`}>
+                  <Filters
+                    filters={filters}
+                    layout={layout.variant}
+                    url={url.href}
+                  />
+                </ul>
+              </aside>
+            )}
           <div
             class={`flex-grow  relative  bg-white`}
             id={id}
@@ -170,6 +175,7 @@ function Result({
               // layout={{ card: cardLayout, columns: {mobile: 2, desktop: 3}, format }}
               pageInfo={pageInfo}
               url={url}
+              code={code}
             />
 
             {isSearchPageAndProductsNotFound && (
@@ -279,7 +285,7 @@ function Result({
 }
 
 function SearchResult(
-  { page, ...props }: ReturnType<typeof loader>,
+  { page, code, ...props }: SectionProps<typeof loader>,
 ) {
   if (!page) {
     return <NotFound />;
@@ -287,15 +293,22 @@ function SearchResult(
 
   return (
     <>
-      <Result {...props} page={page} />
+      <Result {...props} page={page} code={code} />
     </>
   );
 }
 
-export const loader = (props: Props, req: Request) => {
+export const loader = async (props: Props, req: Request) => {
+
+  const { page } = props
+  const products = page?.products || null
+
+  const code: VariantsShelf[] | null = await loaderCodeGroup({ product: products })
+
   return {
     ...props,
     url: req.url,
+    code: code,
   };
 };
 
