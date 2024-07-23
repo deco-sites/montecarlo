@@ -18,7 +18,9 @@ import { clx } from "../../sdk/clx.ts";
 import type { Product } from "apps/commerce/types.ts";
 
 import { mapProductToAnalyticsItem } from "apps/commerce/utils/productToAnalyticsItem.ts";
-
+import { AppContext } from "../../apps/site.ts";
+import type { SectionProps } from "deco/types.ts";
+import loaderCodeGroup, { GroupVariants, VariantsShelf } from "../../loaders/Product/SimilarProductShelf.ts"
 export interface Props {
   products: Product[] | null;
   title?: string;
@@ -75,7 +77,8 @@ function ShelfCollection({
   subTitle,
   layout,
   cardLayout,
-}: Props) {
+  code
+}: SectionProps<typeof loader>) {
   const id = useId();
   const platform = usePlatform();
 
@@ -128,49 +131,53 @@ function ShelfCollection({
         )}
       >
         <Slider
-          class={`row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start ${
-            containerSlider[layout?.numberOfSliders?.mobile ?? 1]
-          }`}
+          class={`row-start-2 carousel carousel-item row-end-5 snap-mandatory snap-start ${containerSlider[layout?.numberOfSliders?.mobile ?? 1]
+            }`}
         >
-          {products?.map((product, index) => (
-            <Slider.Item
-              index={index}
-              class={clx(
-                "carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-start",
-                slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
-                slideMobile[layout?.numberOfSliders?.mobile ?? 1],
-              )}
-            >
-              <ProductCard
-                product={product}
-                itemListName={title}
-                layout={cardLayout}
-                platform={platform}
+          {products?.map((product, index) => {
+
+            const arrayMaterial = code?.find((item) => item.index == index)
+            const arraycode = arrayMaterial?.groupVariants?.find((item) => item.type == "Material")
+
+            return (
+              <Slider.Item
                 index={index}
-              />
-            </Slider.Item>
-          ))}
+                class={clx(
+                  "carousel-item sm:max-w-1/2 lg:max-w-none lg:snap-start",
+                  slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
+                  slideMobile[layout?.numberOfSliders?.mobile ?? 1],
+                )}
+              >
+                <ProductCard
+                  product={product}
+                  itemListName={title}
+                  layout={cardLayout}
+                  platform={platform}
+                  index={index}
+                  code={arraycode}
+                />
+              </Slider.Item>
+            )
+          })}
         </Slider>
 
         {layout?.showArrows && (
           <>
             <div
-              class={`relative z-10 col-start-1 row-start-3 hidden lg:block ${
-                products.length <= numberOfSlidesDesktopFormatted
-                  ? "opacity-0"
-                  : ""
-              }`}
+              class={`relative z-10 col-start-1 row-start-3 hidden lg:block ${products.length <= numberOfSlidesDesktopFormatted
+                ? "opacity-0"
+                : ""
+                }`}
             >
               <Slider.PrevButton class="absolute w-12 h-12 flex justify-center items-center">
                 <Icon size={40} id="arrowLeft" strokeWidth={3} />
               </Slider.PrevButton>
             </div>
             <div
-              class={`relative z-10 col-start-3 row-start-3 hidden lg:block ${
-                products.length <= numberOfSlidesDesktopFormatted
-                  ? "opacity-0"
-                  : ""
-              }`}
+              class={`relative z-10 col-start-3 row-start-3 hidden lg:block ${products.length <= numberOfSlidesDesktopFormatted
+                ? "opacity-0"
+                : ""
+                }`}
             >
               <Slider.NextButton class="absolute w-12 h-12 flex justify-center items-center">
                 <Icon size={40} id="arrowRight" strokeWidth={3} />
@@ -209,3 +216,12 @@ function ShelfCollection({
 }
 
 export default ShelfCollection;
+
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+  const { products, title, subTitle, layout, cardLayout } = props
+
+  const code: VariantsShelf[] | null = await loaderCodeGroup({ product: products })
+
+  return { products, title, subTitle, layout, cardLayout, code };
+
+}
