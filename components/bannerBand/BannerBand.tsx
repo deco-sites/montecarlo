@@ -198,23 +198,21 @@ import {
                 media="(max-width: 1495px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
-                width={image.banner.length > 1 ? 1461 : 1495}
-                height={250}
+                width={1864}
+                height={291}
               />
               <Source
                 media="(min-width: 1495px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
-                width={image.banner.length > 1 ? 1461 : 1495}
-                height={250}
+                width={1864}
+                height={291}
               />
               <img
                 class="object-contain w-full"
                 loading={lcp ? "eager" : "lazy"}
                 src={primaryImage.desktop}
                 alt={primaryImage.alt}
-                width={image.banner.length > 1 ? 1461 : 1495}
-                height={250}
               />
             </Picture>
             <SendEventOnClick
