@@ -205,7 +205,7 @@ import {
                 media="(min-width: 1367px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
-                width={image.banner.length > 1 ? 748 : 1495}
+                width={image.banner.length > 1 ? 1263 : 1495}
                 height={583}
               />
               <img
