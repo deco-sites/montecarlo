@@ -195,21 +195,21 @@ import {
             </a>
             <Picture preload={lcp} class="w-full h-full">
               <Source
-                media="(max-width: 1366px)"
+                media="(max-width: 1495px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
-                width={image.banner.length > 1 ? 631 : 1263}
-                height={492}
+                width={1864}
+                height={291}
               />
               <Source
-                media="(min-width: 1367px)"
+                media="(min-width: 1495px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
-                width={image.banner.length > 1 ? 748 : 1495}
-                height={583}
+                width={1864}
+                height={291}
               />
               <img
-                class="object-cover w-full"
+                class="object-contain w-full"
                 loading={lcp ? "eager" : "lazy"}
                 src={primaryImage.desktop}
                 alt={primaryImage.alt}
