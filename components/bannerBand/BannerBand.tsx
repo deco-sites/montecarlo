@@ -137,8 +137,8 @@ import {
           preload={lcp}
           src={mobile}
           alt={alt}
-          width={430}
-          height={553}
+          width={414}
+          height={532}
           fetchPriority={lcp ? "high" : "auto"}
         />
         <SendEventOnClick
