@@ -130,15 +130,15 @@ import {
           {action && <Action {...action} />}
         </a>
         <Image
-          class="object-cover w-full h-full"
+          class="object-contain w-full h-full"
           loading={lcp ? "eager" : "lazy"}
           decoding="async"
           sizes="(max-width: 640px) 100vw"
           preload={lcp}
           src={mobile}
           alt={alt}
-          width={350}
-          height={450}
+          width={414}
+          height={532}
           fetchPriority={lcp ? "high" : "auto"}
         />
         <SendEventOnClick
