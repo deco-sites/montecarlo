@@ -16,6 +16,10 @@ import ButtonLink from "../ui/ButtonLink.tsx";
 import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
 import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 
+import { AppContext } from "../../apps/site.ts";
+import type { SectionProps } from "deco/types.ts";
+import loaderCodeGroup, { VariantsShelf } from "../../loaders/Product/SimilarProductShelf.ts"
+
 export interface Props {
   products: Product[] | null;
   title?: string;
@@ -69,7 +73,8 @@ function ShelfCollection({
   subTitle,
   layout,
   cardLayout,
-}: Props) {
+  code
+}: SectionProps<typeof loader>) {
   const id = useId();
   const platform = usePlatform();
 
@@ -103,29 +108,39 @@ function ShelfCollection({
         class={clx(
           "grid max-w-[1504px]",
           layout?.showArrows &&
-            "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
+          "lg:grid-cols-[48px_1fr_48px] grid-rows-[1fr_35%] ",
           "px-0",
         )}
       >
         <Slider class="row-start-2 carousel carousel-item row-end-4 snap-mandatory snap-start">
-          {products?.map((product, index) => (
-            <Slider.Item
-              index={index}
-              class={clx(
-                "carousel-item",
-                slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
-                slideMobile[layout?.numberOfSliders?.mobile ?? 1],
-              )}
-            >
-              <MiniProductCard
-                product={product}
-                itemListName={title}
-                layout={cardLayout}
-                platform={platform}
+          {products?.map((product, index) => {
+
+
+            const arrayMaterial = code?.find((item) => item.index == index)
+            const arraycode = arrayMaterial?.groupVariants?.find((item) => item.type == "Material")
+
+
+            return (
+              <Slider.Item
                 index={index}
-              />
-            </Slider.Item>
-          ))}
+                class={clx(
+                  "carousel-item",
+                  slideDesktop[layout?.numberOfSliders?.desktop ?? 3],
+                  slideMobile[layout?.numberOfSliders?.mobile ?? 1],
+                )}
+              >
+                <MiniProductCard
+                  product={product}
+                  itemListName={title}
+                  layout={cardLayout}
+                  platform={platform}
+                  index={index}
+                  code={arraycode}
+                />
+              </Slider.Item>
+            )
+          })
+          }
         </Slider>
 
         {layout?.showArrows && (
@@ -173,3 +188,12 @@ function ShelfCollection({
 }
 
 export default ShelfCollection;
+
+export const loader = async (props: Props, _req: Request, ctx: AppContext) => {
+  const { products, title, subTitle, layout, cardLayout } = props
+
+  const code: VariantsShelf[] | null = await loaderCodeGroup({ product: products })
+
+  return { products, title, subTitle, layout, cardLayout, code };
+
+}
