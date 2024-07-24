@@ -130,15 +130,15 @@ import {
           {action && <Action {...action} />}
         </a>
         <Image
-          class="object-cover w-full h-full"
+          class="object-contain w-full h-full"
           loading={lcp ? "eager" : "lazy"}
           decoding="async"
           sizes="(max-width: 640px) 100vw"
           preload={lcp}
           src={mobile}
           alt={alt}
-          width={350}
-          height={450}
+          width={414}
+          height={532}
           fetchPriority={lcp ? "high" : "auto"}
         />
         <SendEventOnClick
@@ -195,21 +195,21 @@ import {
             </a>
             <Picture preload={lcp} class="w-full h-full">
               <Source
-                media="(max-width: 1366px)"
+                media="(max-width: 1495px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
-                width={image.banner.length > 1 ? 631 : 1263}
-                height={492}
+                width={1864}
+                height={291}
               />
               <Source
-                media="(min-width: 1367px)"
+                media="(min-width: 1495px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
-                width={image.banner.length > 1 ? 748 : 1495}
-                height={583}
+                width={1864}
+                height={291}
               />
               <img
-                class="object-cover w-full"
+                class="object-contain w-full"
                 loading={lcp ? "eager" : "lazy"}
                 src={primaryImage.desktop}
                 alt={primaryImage.alt}
