@@ -155,7 +155,7 @@ function BannerItemMobile({
   const video = banner.video;
 
   return (
-    <div class={`flex flex-row w-full relative ${height ? "": "min-h-[450px]"}`} id={id + "div"}>
+    <div class={`flex flex-row w-full relative ${height ? "": "min-h-[450px]"}`} id={id + "div"} style={height ? {minHeight: height  + "px"} : {}}>
       <a
         id={id}
         href={image?.action?.href ?? "#"}
