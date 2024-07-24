@@ -8,6 +8,7 @@ import Spinner from "../../components/ui/Spinner.tsx";
 import ShowMore from "../../islands/ShowMore.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
 import { useSection } from "deco/hooks/useSection.ts";
+import { VariantsShelf } from "../../loaders/Product/SimilarProductShelf.ts"
 
 export interface Columns {
   mobile?: 1 | 2;
@@ -24,6 +25,7 @@ export interface Props {
     format?: Format;
   };
   url: URL;
+  code: VariantsShelf[] | null,
 }
 
 const MOBILE_COLUMNS = {
@@ -39,7 +41,7 @@ const DESKTOP_COLUMNS = {
 };
 
 function ProductGallery(
-  { products, pageInfo, layout, offset, url }: Props,
+  { products, pageInfo, layout, offset, url, code }: Props,
 ) {
   const platform = usePlatform();
   const mobile = MOBILE_COLUMNS[layout?.columns?.mobile ?? 2];
@@ -66,16 +68,22 @@ function ProductGallery(
         </Head>
       )}
 
-      {products?.map((product, index) => (
-        <ShelfProductCard
-          key={`product-card-${product.productID}`}
-          product={product}
-          preload={index === 0}
-          index={offset + index}
-          layout={layout?.card}
-          platform={platform}
-        />
-      ))}
+      {products?.map((product, index) => {
+        const arrayMaterial = code?.find((item) => item.index == index)
+        const arraycode = arrayMaterial?.groupVariants?.find((item) => item.type == "Material")
+
+        return (
+          <ShelfProductCard
+            key={`product-card-${product.productID}`}
+            product={product}
+            preload={index === 0}
+            index={offset + index}
+            layout={layout?.card}
+            platform={platform}
+            code={arraycode}
+          />
+        )
+      })}
 
       {(layout && layout?.format === "Show More") && (
         <>
