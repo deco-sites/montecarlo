@@ -80,7 +80,7 @@ import * as $$$$$$56 from "./sections/Links/Shortcuts.tsx";
 import * as $$$$$$57 from "./sections/Miscellaneous/CampaignTimer.tsx";
 import * as $$$$$$58 from "./sections/Miscellaneous/CookieConsent.tsx";
 import * as $$$$$$59 from "./sections/Miscellaneous/Slide.tsx";
-import * as $$$$$$85 from "./sections/newsletter-popup/NewsletterPopup.tsx";
+import * as $$$$$$86 from "./sections/newsletter-popup/NewsletterPopup.tsx";
 import * as $$$$$$60 from "./sections/Newsletter/Newsletter.tsx";
 import * as $$$$$$61 from "./sections/Pinterest/CodeValidation.tsx";
 import * as $$$$$$62 from "./sections/Product/BannerProductDotInfo.tsx";
@@ -103,9 +103,10 @@ import * as $$$$$$78 from "./sections/SEO/TextSEOCategory.tsx";
 import * as $$$$$$79 from "./sections/Social/InstagramPosts.tsx";
 import * as $$$$$$80 from "./sections/Social/WhatsApp.tsx";
 import * as $$$$$$81 from "./sections/Theme/Theme.tsx";
-import * as $$$$$$82 from "./sections/UI/Spacing.tsx";
-import * as $$$$$$83 from "./sections/UI/TitleAndSubTitle.tsx";
-import * as $$$$$$84 from "./sections/Video/FullVideo.tsx";
+import * as $$$$$$82 from "./sections/TitleSession/TitleSession.tsx";
+import * as $$$$$$83 from "./sections/UI/Spacing.tsx";
+import * as $$$$$$84 from "./sections/UI/TitleAndSubTitle.tsx";
+import * as $$$$$$85 from "./sections/Video/FullVideo.tsx";
 
 const manifest = {
   "loaders": {
@@ -191,7 +192,7 @@ const manifest = {
     "deco-sites/montecarlo/sections/Miscellaneous/CookieConsent.tsx": $$$$$$58,
     "deco-sites/montecarlo/sections/Miscellaneous/Slide.tsx": $$$$$$59,
     "deco-sites/montecarlo/sections/newsletter-popup/NewsletterPopup.tsx":
-      $$$$$$85,
+      $$$$$$86,
     "deco-sites/montecarlo/sections/Newsletter/Newsletter.tsx": $$$$$$60,
     "deco-sites/montecarlo/sections/Pinterest/CodeValidation.tsx": $$$$$$61,
     "deco-sites/montecarlo/sections/Product/BannerProductDotInfo.tsx": $$$$$$62,
@@ -216,9 +217,10 @@ const manifest = {
     "deco-sites/montecarlo/sections/Social/InstagramPosts.tsx": $$$$$$79,
     "deco-sites/montecarlo/sections/Social/WhatsApp.tsx": $$$$$$80,
     "deco-sites/montecarlo/sections/Theme/Theme.tsx": $$$$$$81,
-    "deco-sites/montecarlo/sections/UI/Spacing.tsx": $$$$$$82,
-    "deco-sites/montecarlo/sections/UI/TitleAndSubTitle.tsx": $$$$$$83,
-    "deco-sites/montecarlo/sections/Video/FullVideo.tsx": $$$$$$84,
+    "deco-sites/montecarlo/sections/TitleSession/TitleSession.tsx": $$$$$$82,
+    "deco-sites/montecarlo/sections/UI/Spacing.tsx": $$$$$$83,
+    "deco-sites/montecarlo/sections/UI/TitleAndSubTitle.tsx": $$$$$$84,
+    "deco-sites/montecarlo/sections/Video/FullVideo.tsx": $$$$$$85,
   },
   "actions": {
     "deco-sites/montecarlo/actions/miniCart/getlistCEP.ts": $$$$$$$$$0,
