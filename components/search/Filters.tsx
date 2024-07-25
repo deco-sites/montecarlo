@@ -68,7 +68,7 @@ function ValueItem(
       hx-push-url={href}
     >
       <div aria-checked={selected} class="checkbox" />
-      <span class="text-sm md:max-w-[200px]">{label}</span>
+      <span class="text-sm md:max-w-[200px] text-left">{label}</span>
       {/* {quantity > 0 && <span class="text-sm text-base-300">({quantity})</span>} */}
     </button>
   );
