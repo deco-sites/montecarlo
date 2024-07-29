@@ -127,7 +127,7 @@ function Result({
         class={`lg:container xl:max-w-[1512px] m-auto px-4 md:px-10 lg:px-14 ${isFirstPage ? "py-10" : "pt-0"
           } ${pageInfo?.nextPage ? "pb-0" : ""}`}
       >
-        {pageInfo?.records
+        {(isFirstPage || !isPartial) && pageInfo?.records
           ? (
             <span>
               {pageInfo?.records > 1
@@ -135,7 +135,7 @@ function Result({
                 : `${pageInfo?.records} Produto`}
             </span>
           )
-          : <span>0 Produto</span>}
+          : (isFirstPage || !isPartial) && <span>0 Produto</span>}
 
         {(isFirstPage || !isPartial) && (
           <SearchControls
@@ -280,7 +280,7 @@ function Result({
           },
         }}
       />
-    </div>
+    </div >
   );
 }
 

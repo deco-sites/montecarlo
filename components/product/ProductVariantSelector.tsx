@@ -26,11 +26,10 @@ function VariantSelector({ product }: Props) {
               <span class="text-xs uppercase">Tamanho</span>
               <div class="relative w-fit">
                 <label
-                  class={`peer relative flex flex-row items-center justify-between border px-3 py-1 ${
-                    isVariantOf && isVariantOf.hasVariant.length > 1
-                      ? "cursor-pointer"
-                      : "cursor-default"
-                  }`}
+                  class={`peer relative flex flex-row items-center justify-between border px-3 py-1 ${isVariantOf && isVariantOf.hasVariant.length > 1
+                    ? "cursor-pointer"
+                    : "cursor-default"
+                    }`}
                 >
                   <input type="checkbox" name="todo[1]" class="peer" />
                   <span class="left-0 z-10 -ml-4 px-6 before:left-0 before:absolute before:-z-10 before:h-5 before:w-8 before:bg-white">
@@ -81,8 +80,8 @@ function VariantSelector({ product }: Props) {
                           variant={relativeLink === relativeUrl
                             ? "active"
                             : relativeLink
-                            ? "default"
-                            : "disabled"}
+                              ? "default"
+                              : "disabled"}
                         />
                       </button>
                     </li>

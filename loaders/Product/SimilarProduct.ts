@@ -85,36 +85,36 @@ const loader = async (props: PropsLoader): Promise<GroupVariants[] | null> => {
   //Define as variações
 
   const materialProperty: string | null = isVariantOf &&
-      isVariantOf.additionalProperty?.find((property: PropertyValue) =>
-        property.name == "Material"
-      )?.value || null;
+    isVariantOf.additionalProperty?.find((property: PropertyValue) =>
+      property.name == "Material"
+    )?.value || null;
   const stoneProperty: string | null = isVariantOf &&
-      isVariantOf.additionalProperty?.find((property: PropertyValue) =>
-        property.name == "Pedra Principal"
-      )?.value || null;
+    isVariantOf.additionalProperty?.find((property: PropertyValue) =>
+      property.name == "Pedra Principal"
+    )?.value || null;
   const sizeCorrenteProperty: string | null = additionalProperty &&
-      isVariantOf?.additionalProperty?.find((property: PropertyValue) =>
-        property.name == "Colar/Corrente (cm)"
-      )?.value || null;
+    isVariantOf?.additionalProperty?.find((property: PropertyValue) =>
+      property.name == "Colar/Corrente (cm)"
+    )?.value || null;
   const sizeProperty: string | null = isVariantOf &&
-      isVariantOf.additionalProperty?.find((property: PropertyValue) =>
-        property.name == "Tamanho"
-      )?.value || null;
+    isVariantOf.additionalProperty?.find((property: PropertyValue) =>
+      property.name == "Tamanho"
+    )?.value || null;
   const LetterProperty: string | null = isVariantOf &&
-      isVariantOf.additionalProperty?.find((property: PropertyValue) =>
-        property.name == "Letras"
-      )
-        ?.value || null;
+    isVariantOf.additionalProperty?.find((property: PropertyValue) =>
+      property.name == "Letras"
+    )
+      ?.value || null;
   const ctsProperty: string | null = isVariantOf &&
-      isVariantOf.additionalProperty?.find((property: PropertyValue) =>
-        property.name == "Cts Diamantes"
-      )?.value || null;
+    isVariantOf.additionalProperty?.find((property: PropertyValue) =>
+      property.name == "Cts Diamantes"
+    )?.value || null;
 
   //Veriafica as categorias
 
   const showThumbsIds = [133, 168, 171, 152, 167, 150, 151, 149, 147, 148];
 
-  const isAneis = currentCategory == 3 || currentCategory == 37;
+  const isAneis = currentCategory == 3 || currentCategory == 36;
   const isAliancas = currentCategory == 2 || currentCategory == 143;
   const isCorrentes = currentCategory == 100;
   const isPingente = currentCategory == 7 || currentCategory == 107;
