@@ -1,4 +1,4 @@
-import { Product, ProductDetailsPage, PropertyValue } from "apps/commerce/types.ts";
+import { Product, PropertyValue } from "apps/commerce/types.ts";
 import { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface property {
@@ -121,7 +121,7 @@ const loader = async (props: PropsLoader): Promise<VariantsShelf[] | null> => {
 
     const showThumbsIds = [133, 168, 171, 152, 167, 150, 151, 149, 147, 148];
 
-    const isAneis = currentCategory == 3 || currentCategory == 37;
+    const isAneis = currentCategory == 3 || currentCategory == 36;
     const isAliancas = currentCategory == 2 || currentCategory == 143;
     const isCorrentes = currentCategory == 100;
     const isPingente = currentCategory == 7 || currentCategory == 107;
@@ -562,7 +562,7 @@ const loader = async (props: PropsLoader): Promise<VariantsShelf[] | null> => {
     product.map(async (item, index) => {
       const result = await getGroupCode(item)
       if (result)
-        variants.push({ groupVariants: result, index})
+        variants.push({ groupVariants: result, index })
       else
         variants.push({ groupVariants: null, index })
     })
