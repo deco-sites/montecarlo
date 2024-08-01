@@ -2,6 +2,8 @@ import type { ImageWidget } from "apps/admin/widgets.ts";
 import { SendEventOnView } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
+import { useDevice } from "deco/hooks/useDevice.ts";
+import Image from "apps/website/components/Image.tsx";
 
 interface StyleProps {
   /** @default BeausiteGrand */
@@ -32,6 +34,7 @@ export interface Props {
     mobile: ImageWidget;
     desktop: ImageWidget;
     alt?: string;
+    preload?: boolean;
   };
   placement: "left" | "right";
   style: StyleProps;
@@ -49,6 +52,9 @@ const PLACEMENT = {
 export default function HeroTextWithImage(props: Props) {
   const { title, description, image, placement, style, CTA } = props;
   const id = useId();
+  const device = useDevice()
+
+  const isMobile = device == "mobile";
 
   return (
     <div
@@ -60,38 +66,25 @@ export default function HeroTextWithImage(props: Props) {
       style={{ backgroundColor: style.backgroundColor, color: style.fontColor }}
     >
       <div class={`h-full ${PLACEMENT[placement]}`}>
-        <Picture preload={true}>
-          <Source
-            media="(max-width: 1023px)"
-            src={image.mobile || ""}
-            width={375}
-            height={293}
-            class="w-full object-cover"
-          />
-          <Source
-            media="(min-width: 1024px)"
-            src={image.desktop || ""}
-            width={756}
-            height={590}
-            class="w-full object-cover"
-          />
-          <img
-            class="w-full h-full object-cover"
-            src={image.desktop || ""}
-            preload={"true"}
-            decoding={"sync"}
-            alt={image.alt}
-            loading={"eager"}
-          />
-        </Picture>
+      <Image
+          alt={image.alt}
+          src={isMobile ? image.mobile : image.desktop}
+          width={isMobile ? 375 : 756}
+          height={isMobile ? 293 : 590}
+          fetchPriority={image.preload ? "high" : "low"}
+          loading={image.preload ? "eager" : "lazy"}
+          preload={image.preload}
+          class={"w-full h-auto object-contain"}
+          decoding={"sync"}
+
+        />
       </div>
 
       <div class="w-full h-full flex-1 flex flex-col px-10 md:items-center justify-end lg:justify-center order-0">
         <div class="flex flex-col p-5 py-14 gap-4">
           <h2
-            class={`text-4xl md:text-5xl lg:text-[3.438rem] block text-left lg:leading-12 font-${
-              style.titleFont ? style.titleFont : "beausiteGrand"
-            } text-${style.textAlign} max-w-[250px] md:max-w-[350px] lg:max-w-[380px]`}
+            class={`text-4xl md:text-5xl lg:text-[3.438rem] block text-left lg:leading-12 font-${style.titleFont ? style.titleFont : "beausiteGrand"
+              } text-${style.textAlign} max-w-[250px] md:max-w-[350px] lg:max-w-[380px]`}
           >
             {title}
           </h2>
@@ -109,11 +102,10 @@ export default function HeroTextWithImage(props: Props) {
               <div
                 class={`
                     flex border border-white w-fit mt-5
-                    ${
-                  (CTA?.alignment === "left" && "justify-start") ||
+                    ${(CTA?.alignment === "left" && "justify-start") ||
                   (CTA?.alignment === "center" && "justify-center") ||
                   (CTA?.alignment === "right" && "justify-end")
-                }
+                  }
                 `}
               >
                 {CTA?.buttons?.map((cta, index) => (
