@@ -234,3 +234,4 @@ export default function ImagesAndText({ title, subTitle, cardsImage }: Props) {
     </div>
   );
 }
+
