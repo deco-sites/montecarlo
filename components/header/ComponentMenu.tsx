@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import Image from "apps/website/components/Image.tsx";
 import {
   SendEventOnClick,
@@ -41,9 +41,10 @@ export interface Image {
   href: string;
   title: string;
   /**
+   * @format rich-text
    * @title Content
    */
-  conter: HTMLWidget;
+  conter: string;
 }
 
 export interface Props {

@@ -1,7 +1,7 @@
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import Image from "apps/website/components/Image.tsx";
 import { headerHeight } from "./constants.ts";
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import ListLinksOurImage from "deco-sites/montecarlo/components/header/ComponentMenu.tsx";
 import { Images } from "https://deno.land/x/openai@v4.19.1/resources/mod.ts";
 import {
@@ -32,7 +32,8 @@ export interface Image {
   };
   href: string;
   title: string;
-  conter: HTMLWidget;
+  /** @format rich-text */
+  conter: string;
 }
 
 export interface MenuNavItem {

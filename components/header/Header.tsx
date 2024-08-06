@@ -2,7 +2,7 @@ import { AppContext } from "../../apps/site.ts";
 import type { Props as SearchbarProps } from "../../components/search/Searchbar.tsx";
 import Drawers from "../../islands/Header/Drawers.tsx";
 import { usePlatform } from "../../sdk/usePlatform.tsx";
-import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import type { SiteNavigationElement } from "apps/commerce/types.ts";
 import type { SectionProps } from "deco/types.ts";
 import Alert from "./Alert.tsx";
@@ -71,9 +71,10 @@ export interface Image {
   href: string;
   title: string;
   /**
+   * @format rich-text
    * @title Content
    */
-  conter: HTMLWidget;
+  conter: string;
 }
 
 export interface MenuNavItem {

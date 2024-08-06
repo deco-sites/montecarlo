@@ -1,5 +1,3 @@
-import type { HTMLWidget } from "apps/admin/widgets.ts";
-
 import type { Props as BannerProductDotInfoProps } from "../../components/product/BannerProductDotInfo/index.tsx";
 import BannerProductDotInfo from "../../islands/BannerProductDotInfo.tsx";
 
@@ -29,8 +27,10 @@ interface CTAProps {
 }
 
 export interface Props {
-  title?: HTMLWidget;
-  description?: HTMLWidget;
+  /** @format rich-text */
+  title?: string;
+  /** @format rich-text */
+  description?: string;
   banner?: BannerProductDotInfoProps;
   placement: "left" | "right";
   style: StyleProps;

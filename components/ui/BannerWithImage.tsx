@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import ButtonLink from "deco-sites/montecarlo/components/ui/ButtonLink.tsx";
 import Image from "apps/website/components/Image.tsx";
@@ -9,11 +9,13 @@ import {
 import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
-  title: HTMLWidget;
+  /** @format rich-text */
+  title: string;
   /**
-   * @titleb Content
+   * @format rich-text
+   * @title Content
    */
-  content?: HTMLWidget;
+  content?: string;
   button: {
     label?: string;
     href?: string;

@@ -1,5 +1,3 @@
-import { HTMLWidget } from "apps/admin/widgets.ts";
-
 import { Signal, useSignal } from "@preact/signals";
 
 import {
@@ -11,7 +9,8 @@ import { useId } from "../../sdk/useId.ts";
 export interface Props {
   content?: {
     title?: string;
-    description?: HTMLWidget;
+    /** @format rich-text */
+    description?: string;
   };
 }
 

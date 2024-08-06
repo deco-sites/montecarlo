@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import Title from "deco-sites/montecarlo/components/product/Shelf/Title.tsx";
 import SubTitle from "deco-sites/montecarlo/components/product/Shelf/SubTitle.tsx";
 import Slider from "deco-sites/montecarlo/components/ui/Slider.tsx";
@@ -20,7 +20,8 @@ export interface Card {
 }
 export interface Props {
   title: string;
-  subTitle: HTMLWidget;
+  /** @format rich-text */
+  subTitle: string;
   cards: Card[];
 }
 

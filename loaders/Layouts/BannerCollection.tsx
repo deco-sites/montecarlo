@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface CollectionProps {
   /**
@@ -9,9 +9,12 @@ export interface CollectionProps {
     desktop?: ImageWidget;
     alt?: string;
   };
-  title: HTMLWidget;
-  titleAccordion?: HTMLWidget;
-  description?: HTMLWidget;
+  /** @format rich-text */
+  title: string;
+  /** @format rich-text */
+  titleAccordion?: string;
+  /** @format rich-text */
+  description?: string;
   cta?: {
     text?: string;
     href?: string;

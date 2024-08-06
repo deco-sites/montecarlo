@@ -1,4 +1,4 @@
-import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 
 import Carousel, {
   Props as CarouselProps,
@@ -22,8 +22,10 @@ interface Benefit {
 
 export interface Props {
   title?: {
-    desktop?: HTMLWidget;
-    mobile?: HTMLWidget;
+    /** @format rich-text */
+    desktop?: string;
+    /** @format rich-text */
+    mobile?: string;
   };
   benefits?: Array<Benefit>;
   slider?: CarouselProps;

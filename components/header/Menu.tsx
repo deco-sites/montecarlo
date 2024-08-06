@@ -4,7 +4,7 @@ import IconUser from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/user.tsx";
 import IconChevronRight from "https://deno.land/x/tabler_icons_tsx@0.0.3/tsx/chevron-right.tsx";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 
 export interface Link {
   label: string;
@@ -28,7 +28,8 @@ export interface Image {
   };
   href: string;
   title: string;
-  conter: HTMLWidget;
+  /** @format rich-text */
+  conter: string;
 }
 
 export interface MenuNavItem {

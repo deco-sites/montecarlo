@@ -1,5 +1,4 @@
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
-import { HTMLWidget } from "apps/admin/widgets.ts";
 import {
   SendEventOnClick,
   SendEventOnView,
@@ -29,7 +28,8 @@ interface Phone {
 export interface StoreInfo {
   /** @title Store */
   label: string;
-  address: HTMLWidget;
+  /** @format rich-text */
+  address: string;
   phone?: Phone[];
   mapLink?: string;
 }
@@ -37,7 +37,8 @@ export interface StoreInfo {
 export interface Props {
   title?: string;
   description?: string;
-  sac?: HTMLWidget;
+  /** @format rich-text */
+  sac?: string;
   info?: State[];
 }
 

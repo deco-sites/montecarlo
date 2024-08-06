@@ -14,7 +14,7 @@ import NavItem from "./NavItem.tsx";
 import { navbarHeight } from "./constants.ts";
 import { Buttons, Logo } from "../../components/header/Header.tsx";
 import ScrollableContainer from "deco-sites/montecarlo/islands/Header/ScrollableContainer.tsx";
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import {
   SendEventOnClick,
   SendEventOnView,
@@ -44,7 +44,8 @@ export interface Image {
   };
   href: string;
   title: string;
-  conter: HTMLWidget;
+  /** @format rich-text */
+  conter: string;
 }
 
 export interface MenuNavItem {
