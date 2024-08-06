@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import type { Product } from "apps/commerce/types.ts";
 import Header from "deco-sites/montecarlo/components/ui/SectionHeader.tsx";
 import Slider from "deco-sites/montecarlo/components/ui/Slider.tsx";

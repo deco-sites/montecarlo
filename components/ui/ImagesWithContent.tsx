@@ -1,4 +1,4 @@
-import { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import { ImageWidget } from "apps/admin/widgets.ts";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 import Image from "apps/website/components/Image.tsx";
 
@@ -27,7 +27,8 @@ export interface Props {
   };
   title: string;
   subTitle: string;
-  content: HTMLWidget;
+  /** @format rich-text */
+  content: string;
   /** @format color-input */
   background: string;
   layout: "variant1" | "variant2";

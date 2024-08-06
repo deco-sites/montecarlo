@@ -1,6 +1,5 @@
 import { useSignal } from "@preact/signals";
 import type { JSX } from "preact";
-import type { HTMLWidget } from "apps/admin/widgets.ts";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
 import {
@@ -11,7 +10,8 @@ import { useId } from "../../sdk/useId.ts";
 
 interface Form {
   fields: Field[];
-  termsAndConditions?: HTMLWidget;
+  /** @format rich-text */
+  termsAndConditions?: string;
   submitButtonText?: string;
 }
 

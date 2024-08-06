@@ -1,4 +1,3 @@
-import { HTMLWidget } from "apps/admin/widgets.ts";
 import ButtonLink from "deco-sites/montecarlo/components/ui/ButtonLink.tsx";
 import {
   SendEventOnClick,
@@ -7,7 +6,8 @@ import {
 import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
-  title: HTMLWidget;
+  /** @format rich-text */
+  title: string;
   button: {
     label: string;
     href: string;

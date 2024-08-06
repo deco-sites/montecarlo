@@ -1,13 +1,13 @@
 import { useId } from "../../sdk/useId.ts";
-import type { HTMLWidget } from "apps/admin/widgets.ts";
 import { scriptAsDataURI } from "apps/utils/dataURI.ts";
 
 export interface Props {
   /**
    * @title Text
+   * @format rich-text
    * @default Time left for a campaign to end with a link
    */
-  text?: HTMLWidget;
+  text?: string;
 
   /**
    * @title Expires at date

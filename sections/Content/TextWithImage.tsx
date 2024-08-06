@@ -5,12 +5,14 @@ import {
 } from "../../components/Analytics.tsx";
 import { useId } from "../../sdk/useId.ts";
 import type { ImageWidget } from "apps/admin/widgets.ts";
-import type { HTMLWidget } from "apps/admin/widgets.ts";
 
 export interface Props {
-  title?: HTMLWidget;
-  titleMobile?: HTMLWidget;
-  description?: HTMLWidget;
+  /** @format rich-text */
+  title?: string;
+  /** @format rich-text */
+  titleMobile?: string;
+  /** @format rich-text */
+  description?: string;
   /**
    * @description size Image mobile 375x418 and size Image desktop 632x704
    */

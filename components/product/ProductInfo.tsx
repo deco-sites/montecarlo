@@ -39,7 +39,6 @@ import type { Custom } from "./Flags/Custom.tsx";
 
 import ProductDescription from "./ProductDescription.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
-import { HTMLWidget } from "apps/admin/widgets.ts";
 import {
   SendEventOnClick,
   SendEventOnView,
@@ -48,9 +47,10 @@ import {
 interface Bonus {
   text: string;
   /**
+   * @format rich-text
    * @description To position the discount add the "${bonus}"
    */
-  message: HTMLWidget;
+  message: string;
   /**
    * @description Value to discount in number example 15% = 15
    */

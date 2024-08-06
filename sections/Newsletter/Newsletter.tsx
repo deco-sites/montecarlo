@@ -1,9 +1,9 @@
-import type { HTMLWidget } from "apps/admin/widgets.ts";
 import Newsletter from "../../islands/Newsletter.tsx";
 
 interface Form {
   fields: Field[];
-  termsAndConditions?: HTMLWidget;
+  /** @format rich-text */
+  termsAndConditions?: string;
   submitButtonText?: string;
 }
 
