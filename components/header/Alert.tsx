@@ -1,4 +1,3 @@
-import { HTMLWidget } from "apps/admin/widgets.ts";
 import Slider from "../../components/ui/Slider.tsx";
 import SliderJS from "../../islands/SliderJS.tsx";
 import { useId } from "../../sdk/useId.ts";
@@ -7,7 +6,8 @@ import ButtonCopy from "deco-sites/montecarlo/islands/Header/ButtonCopy.tsx";
 import { useUI } from "deco-sites/montecarlo/sdk/useUI.ts";
 
 export interface Alert {
-  title?: HTMLWidget;
+  /** @format rich-text */
+  title?: string;
   labelButton?: string;
   cupom?: string;
 }

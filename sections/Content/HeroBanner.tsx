@@ -1,4 +1,4 @@
-import type { HTMLWidget, ImageWidget } from "apps/admin/widgets.ts";
+import type { ImageWidget } from "apps/admin/widgets.ts";
 import { Picture, Source } from "apps/website/components/Picture.tsx";
 import {
   SendEventOnClick,
@@ -6,7 +6,8 @@ import {
 } from "../../components/Analytics.tsx";
 
 export interface textProps {
-  text?: HTMLWidget;
+  /** @format rich-text */
+  text?: string;
   /**
    * @format color-input
    * @default "#000000"

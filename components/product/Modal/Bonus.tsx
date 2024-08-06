@@ -1,10 +1,10 @@
-import { HTMLWidget } from "apps/admin/widgets.ts";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import { formatPrice } from "deco-sites/montecarlo/sdk/format.ts";
 
 export interface Props {
   text: string;
-  message: HTMLWidget;
+  /** @format rich-text */
+  message: string;
   price: number;
   discont: number;
   valueDiscontMax: number;

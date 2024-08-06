@@ -1,4 +1,3 @@
-import { HTMLWidget } from "apps/admin/widgets.ts";
 import {
   SendEventOnClick,
   SendEventOnView,
@@ -6,11 +5,13 @@ import {
 import { useId } from "../../sdk/useId.ts";
 
 export interface Props {
-  title?: HTMLWidget;
+  /** @format rich-text */
+  title?: string;
   /**
+   * @format rich-text
    * @title Content
    */
-  content?: HTMLWidget;
+  content?: string;
   /**
    * @title Content
    * @description default "Continar lendo"

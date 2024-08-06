@@ -1,12 +1,13 @@
-import { HTMLWidget } from "apps/admin/widgets.ts";
 import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 import { formatPrice } from "deco-sites/montecarlo/sdk/format.ts";
 
 export interface Props {
-  text: HTMLWidget;
+  /** @format rich-text */
+  text: string;
   discont: number;
   valueDiscontMax: number;
-  infoBonus?: HTMLWidget;
+  /** @format rich-text */
+  infoBonus?: string;
 }
 
 export function BonusCart(
@@ -37,7 +38,7 @@ export function BonusCart(
   );
 }
 
-export function InfoBonus({ infoBonus }: { infoBonus?: HTMLWidget }) {
+export function InfoBonus({ infoBonus }: { infoBonus?: string }) {
   if (!infoBonus) {
     return null;
   }
