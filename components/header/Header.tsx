@@ -12,11 +12,19 @@ import { useUI } from "../../sdk/useUI.ts";
 import { Section } from "deco/blocks/section.ts";
 import type { Props as PropsBonus } from "deco-sites/montecarlo/components/product/Modal/BonusCart.tsx";
 import ScrollableContainer from "deco-sites/montecarlo/islands/Header/ScrollableContainer.tsx";
+import Timer from "../../islands/Header/Timer.tsx";
 
 export interface AlertMessage {
   /** @format rich-text */
   title?: string;
   labelButton?: string;
+  cupom?: string;
+}
+
+export interface Counter {
+  title?: string;
+  /** @format datetime */
+  timer?: string;
   cupom?: string;
 }
 
@@ -90,6 +98,7 @@ export interface MenuNavItem {
 
 export interface Props {
   alerts?: AlertMessage[];
+  counter?: Counter[];
   interval?: number;
 
   ourStores?: {
@@ -129,6 +138,7 @@ export function Teste() {
 
 function Header({
   alerts,
+  counter,
   searchbar,
   navItems,
   logo = {
@@ -158,12 +168,20 @@ function Header({
           bonus={cart.bonus}
         >
           <div class="bg-base-100 fixed w-full z-50 ">
-            {alerts && alerts.length > 0 &&
+            {alerts && alerts.length > 0 && (counter && counter.length <= 0) &&
               (
                 <ScrollableContainer type="Alert">
                   <Alert alerts={alerts} />
                 </ScrollableContainer>
               )}
+            {counter && counter.length > 0 &&
+              (
+                <Timer
+                  text={counter ? counter[0].title ? counter[0].title : "" : ""}
+                  counter={counter ? counter[0].timer ? counter[0].timer : "" : ""}
+                  cupom={counter ? counter[0].cupom ? counter[0].cupom : "" : ""}
+                />
+            )}
             <Navbar
               device={device}
               items={items}
