@@ -160,7 +160,7 @@ function BannerItemMobile({
         id={id}
         href={image?.action?.href ?? "#"}
         aria-label={image?.action?.label}
-        class="overflow-y-hidden w-full h-full"
+        class="absolute overflow-y-hidden w-full h-full"
       >
         {action && <Action {...action} />}
       </a>
