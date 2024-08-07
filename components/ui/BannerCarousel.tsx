@@ -154,11 +154,13 @@ function BannerItemMobile({
   const image = banner.banner?.[0];
   const video = banner.video;
 
+  const action = video?.action || image?.action;
+
   return (
     <div class={`mt-5 sm:mt-0 flex flex-row w-full relative ${height ? "": "min-h-[450px]"}`} id={id + "div"} style={height ? {minHeight: height  + "px"} : {}}>
       <a
         id={id}
-        href={image?.action?.href ?? "#"}
+        href={image?.action?.href || video?.action?.href || "#"}
         aria-label={image?.action?.label}
         class="absolute overflow-y-hidden w-full h-full z-10"
       >
