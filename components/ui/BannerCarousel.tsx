@@ -155,12 +155,12 @@ function BannerItemMobile({
   const video = banner.video;
 
   return (
-    <div class={`flex flex-row w-full relative ${height ? "": "min-h-[450px]"}`} id={id + "div"} style={height ? {minHeight: height  + "px"} : {}}>
+    <div class={`mt-5 sm:mt-0 flex flex-row w-full relative ${height ? "": "min-h-[450px]"}`} id={id + "div"} style={height ? {minHeight: height  + "px"} : {}}>
       <a
         id={id}
         href={image?.action?.href ?? "#"}
         aria-label={image?.action?.label}
-        class="absolute overflow-y-hidden w-full h-full"
+        class="overflow-y-hidden w-full h-full"
       >
         {action && <Action {...action} />}
       </a>
@@ -168,7 +168,7 @@ function BannerItemMobile({
       {
         !video?.mobile && image?.mobile ? 
           <Image
-            class="object-cover w-full h-full"
+            class="w-full h-full"
             loading={lcp ? "eager" : "lazy"}
             decoding="async"
             sizes="(max-width: 640px) 100vw"
@@ -181,7 +181,7 @@ function BannerItemMobile({
           /> 
           :
             <video 
-              class="absolute top-0 left-0 w-full h-full object-cover"
+              class="top-0 left-0 min-w-full w-full h-full"
               autoPlay muted loop
             >
               <source src={video?.mobile} />
@@ -231,7 +231,7 @@ function BannerItem({
   return (
     <div class="flex flex-row w-full relative">
       {
-        !banner.video ? banner.banner?.map((primaryImage) => ( 
+        !banner.video?.desktop ? banner.banner?.map((primaryImage) => ( 
           <div class="flex flex-row w-full relative">
             <a
               id={id}
@@ -257,7 +257,7 @@ function BannerItem({
                 height={primaryImage.heightDesktop || 564}
               />
               <img
-                class="object-cover h-full w-full"
+                class="h-full w-full"
                 loading={lcp ? "eager" : "lazy"}
                 src={primaryImage.desktop}
                 alt={primaryImage.alt}
@@ -294,7 +294,7 @@ function BannerItem({
           </div>
         ))
         :
-        <div class="relative w-full h-full min-h-[492px] xl:min-h-[564px] overflow-hidden">
+        <div class="relative w-full h-full overflow-hidden">
             <a
               id={id}
               href={banner.video.action?.href ?? "#"}
@@ -306,7 +306,7 @@ function BannerItem({
             {
               banner.video.desktop ? (
                 <video 
-                  class="absolute top-0 left-0 w-full h-full object-cover" 
+                  class="top-0 left-0 w-full h-full" 
                   autoPlay muted loop
                 >
                   <source src={banner.video.desktop} />
