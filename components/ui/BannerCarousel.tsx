@@ -247,17 +247,17 @@ function BannerItem({
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
                 width={primaryImage.widthDesktop || 1263}
-                height={primaryImage.heightDesktop || 492}
+                // height={primaryImage.heightDesktop || "100%"}
               />
               <Source
                 media="(min-width: 1367px)"
                 fetchPriority={lcp ? "high" : "auto"}
                 src={primaryImage.desktop}
                 width={primaryImage.widthDesktop || 1495}
-                height={primaryImage.heightDesktop || 564}
+                // height={primaryImage.heightDesktop || 564}
               />
               <img
-                class="h-full w-full"
+                class="h-auto w-full"
                 loading={lcp ? "eager" : "lazy"}
                 src={primaryImage.desktop}
                 alt={primaryImage.alt}
