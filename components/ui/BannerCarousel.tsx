@@ -160,7 +160,7 @@ function BannerItemMobile({
         id={id}
         href={image?.action?.href ?? "#"}
         aria-label={image?.action?.label}
-        class="absolute overflow-y-hidden w-full h-full"
+        class="absolute overflow-y-hidden w-full h-full z-10"
       >
         {action && <Action {...action} />}
       </a>
@@ -237,7 +237,7 @@ function BannerItem({
               id={id}
               href={primaryImage.action?.href ?? "#"}
               aria-label={primaryImage.action?.label}
-              class="absolute overflow-y-hidden w-full h-full"
+              class="absolute overflow-y-hidden w-full h-full z-10"
             >
               {primaryImage.action && <Action {...primaryImage.action} />}
             </a>
@@ -299,7 +299,7 @@ function BannerItem({
               id={id}
               href={banner.video.action?.href ?? "#"}
               aria-label={banner.video.action?.label}
-              class="absolute overflow-y-hidden w-full h-full"
+              class="absolute overflow-y-hidden w-full h-full z-10"
             >
               {banner.video.action && <Action {...banner.video.action} />}
             </a>
@@ -307,7 +307,7 @@ function BannerItem({
               banner.video.desktop ? (
                 <video 
                   class="top-0 left-0 w-full h-auto" 
-                  autoPlay muted loop
+                  autoPlay muted loop playsInline
                 >
                   <source src={banner.video.desktop} />
                   Your browser does not support the video.
