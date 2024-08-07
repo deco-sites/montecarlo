@@ -168,7 +168,7 @@ function BannerItemMobile({
       {
         !video?.mobile && image?.mobile ? 
           <Image
-            class="w-full h-full"
+            class="w-full h-auto"
             loading={lcp ? "eager" : "lazy"}
             decoding="async"
             sizes="(max-width: 640px) 100vw"
@@ -181,7 +181,7 @@ function BannerItemMobile({
           /> 
           :
             <video 
-              class="top-0 left-0 min-w-full w-full h-full"
+              class="top-0 left-0 min-w-full w-full h-auto"
               autoPlay muted loop
             >
               <source src={video?.mobile} />
@@ -241,7 +241,7 @@ function BannerItem({
             >
               {primaryImage.action && <Action {...primaryImage.action} />}
             </a>
-            <Picture preload={lcp} class="w-full h-full">
+            <Picture preload={lcp} class="w-full h-auto">
               <Source
                 media="(max-width: 1366px)"
                 fetchPriority={lcp ? "high" : "auto"}
@@ -261,7 +261,7 @@ function BannerItem({
                 loading={lcp ? "eager" : "lazy"}
                 src={primaryImage.desktop}
                 alt={primaryImage.alt}
-                style={{ minHeight: primaryImage.heightDesktop || 564 }}
+                // style={{ minHeight: primaryImage.heightDesktop || 564 }}
               />
             </Picture>
             <SendEventOnClick
@@ -294,7 +294,7 @@ function BannerItem({
           </div>
         ))
         :
-        <div class="relative w-full h-full overflow-hidden">
+        <div class="relative w-full h-auto overflow-hidden">
             <a
               id={id}
               href={banner.video.action?.href ?? "#"}
@@ -306,7 +306,7 @@ function BannerItem({
             {
               banner.video.desktop ? (
                 <video 
-                  class="top-0 left-0 w-full h-full" 
+                  class="top-0 left-0 w-full h-auto" 
                   autoPlay muted loop
                 >
                   <source src={banner.video.desktop} />
