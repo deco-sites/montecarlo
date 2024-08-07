@@ -182,7 +182,7 @@ function BannerItemMobile({
           :
             <video 
               class="top-0 left-0 min-w-full w-full h-auto"
-              autoPlay muted loop
+              autoPlay muted loop playsInline
             >
               <source src={video?.mobile} />
               Your browser does not support the video.
