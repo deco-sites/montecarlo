@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from "preact/compat";
 import { AppContext } from "../../apps/site.ts";
 import type { SectionProps } from "deco/types.ts";
 import type { Props as Header } from "../../components/header/Header.tsx";
+import Icon from "deco-sites/montecarlo/components/ui/Icon.tsx";
 
 export interface Props {
     text?: string;
@@ -15,6 +16,37 @@ const style = {
     .timer-header {
         background-color: #FFC72C;
         padding: 0 20px;
+    }
+
+    .timer-header .text {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 21px;
+        letter-spacing: 0.1em;
+    }
+
+    .timer-header .timer {
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 21px;
+        letter-spacing: 0.1em;
+    }
+
+    .timer-header .cupom {
+        border: 1px dashed #000000;
+        position: relative;
+        padding: 1px;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 15px;
+        letter-spacing: 0.1em;
+    }
+
+    .timer-header .cupom svg {
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: translateX(25px);
     }
 
     .timer-header .text, .timer-header .timer, .timer-header .cupom {
@@ -40,6 +72,11 @@ const style = {
         .timer-header {
             display: flex;
             padding: 0;
+        }
+
+        .timer-header .cupom {
+            font-size: 12px;
+            line-height: 18px;
         }
     
         .timer-header-complete {
@@ -125,7 +162,7 @@ function Timer({text, counter, cupom}: SectionProps<typeof loader>) {
                 <p class="timer">{days < 10 ? '0'+days : days} : {hours < 10 ? '0'+hours : hours} : {minutes < 10 ? '0'+minutes : minutes} : {seconds < 10 ? '0'+seconds : seconds}</p>
             )}
             {cupom && cupom.length > 0 &&(
-                <button class="cupom" onClick={CopyCupom}>{cupom}</button>
+                <button class="cupom" onClick={CopyCupom}>{cupom} <Icon id="FileCopy" size={18} /></button>
             )}
         </div>
     );
