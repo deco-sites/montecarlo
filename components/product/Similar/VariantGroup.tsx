@@ -48,25 +48,29 @@ export function SelectVariants(
               newUrl,
             );
             return (
-              <button
-                hx-target="closest section"
-                hx-get={useSection({ href })}
-                hx-swap="outerHTML show:parent:top"
-                hx-indicator="#spinner-pdp"
-                hx-push-url={href}
-                class={`${
-                  item.active &&
-                  "border border-primary rounded-sm p-1 cursor-pointer"
-                } `}
-              >
-                <Image
-                  class="rounded-sm h-min"
-                  src={img.image}
-                  width={20}
-                  height={20}
-                  alt={img.name}
-                />
-              </button>
+              <div className="relative group min-h-[30px] flex">
+                <button
+                  hx-target="closest section"
+                  hx-get={useSection({ href })}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-indicator="#spinner-pdp"
+                  hx-push-url={href}
+                  class={`${item.active &&
+                    "border border-primary rounded-sm p-1 cursor-pointer flex"
+                    } `}
+                >
+                  <Image
+                    class="rounded-sm h-min"
+                    src={img.image}
+                    width={20}
+                    height={20}
+                    alt={img.name}
+                  />
+                </button>
+                <div className="absolute hidden group-hover:block bg-white text-black text-xs rounded-lg p-2 shadow-lg z-50 whitespace-nowrap mt-8">
+                  {item.message}
+                </div>
+              </div>
             );
           })}
         </div>
@@ -94,25 +98,29 @@ export function SelectVariants(
               newUrl,
             );
             return (
-              <a
-                hx-target="closest section"
-                hx-get={useSection({ href })}
-                hx-swap="outerHTML show:parent:top"
-                hx-indicator="#spinner-pdp"
-                hx-push-url={href}
-                class={`${
-                  item.active &&
-                  "border border-primary rounded-sm p-1 cursor-pointer"
-                } `}
-              >
-                <Image
-                  class="rounded-sm h-min"
-                  src={img.image}
-                  width={20}
-                  height={20}
-                  alt={img.name}
-                />
-              </a>
+              <div className="relative group">
+                <a
+                  hx-target="closest section"
+                  hx-get={useSection({ href })}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-indicator="#spinner-pdp"
+                  hx-push-url={href}
+                  class={`${item.active &&
+                    "border border-primary rounded-sm p-1 cursor-pointer flex"
+                    } `}
+                >
+                  <Image
+                    class="rounded-sm h-min"
+                    src={img.image}
+                    width={20}
+                    height={20}
+                    alt={img.name}
+                  />
+                </a>
+                <div className="absolute hidden group-hover:block bg-white text-black text-xs rounded-lg p-2 shadow-lg z-50">
+                  {item.message}
+                </div>
+              </div>
             );
           })}
         </div>
@@ -140,17 +148,22 @@ export function SelectVariants(
                 newUrl,
               );
               return (
-                <a
-                  hx-target="closest section"
-                  hx-get={useSection({ href })}
-                  hx-swap="outerHTML show:parent:top"
-                  hx-indicator="#spinner-pdp"
-                  hx-push-url={href}
-                  selected={variant.active}
-                  class="hover:bg-primary px-2 py-1"
-                >
-                  {variant.message}
-                </a>
+                <div className="relative group">
+                  <a
+                    hx-target="closest section"
+                    hx-get={useSection({ href })}
+                    hx-swap="outerHTML show:parent:top"
+                    hx-indicator="#spinner-pdp"
+                    hx-push-url={href}
+                    selected={variant.active}
+                    class="hover:bg-primary px-2 py-1"
+                  >
+                    {variant.message}
+                  </a>
+                  <div className="absolute hidden group-hover:block bg-white text-black text-xs rounded-lg p-2 shadow-lg z-50">
+                    {variant.message}
+                  </div>
+                </div>
               );
             })}
           </div>
@@ -180,17 +193,22 @@ export function SelectVariants(
                   newUrl,
                 );
                 return (
-                  <a
-                    hx-target="closest section"
-                    hx-get={useSection({ href })}
-                    hx-swap="outerHTML show:parent:top"
-                    hx-indicator="#spinner-pdp"
-                    hx-push-url={href}
-                    selected={variant.active}
-                    class="hover:bg-primary px-2 py-1"
-                  >
-                    {variant.message}
-                  </a>
+                  <div className="relative group">
+                    <a
+                      hx-target="closest section"
+                      hx-get={useSection({ href })}
+                      hx-swap="outerHTML show:parent:top"
+                      hx-indicator="#spinner-pdp"
+                      hx-push-url={href}
+                      selected={variant.active}
+                      class="hover:bg-primary px-2 py-1"
+                    >
+                      {variant.message}
+                    </a>
+                    <div className="absolute hidden group-hover:block bg-white text-black text-xs rounded-lg p-2 shadow-lg z-50">
+                      {variant.message}
+                    </div>
+                  </div>
                 );
               })}
             </div>
@@ -211,18 +229,22 @@ export function SelectVariants(
               newUrl,
             );
             return (
-              <a
-                hx-target="closest section"
-                hx-get={useSection({ href })}
-                hx-swap="outerHTML show:parent:top"
-                hx-indicator="#spinner-pdp"
-                hx-push-url={href}
-                class={` " p-1 w-7 h-7 rounded-full flex justify-center items-center "  ${
-                  item.active && "border border-primary rounded-full "
-                } `}
-              >
-                {item.message}
-              </a>
+              <div className="relative group">
+                <a
+                  hx-target="closest section"
+                  hx-get={useSection({ href })}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-indicator="#spinner-pdp"
+                  hx-push-url={href}
+                  class={` " p-1 w-7 h-7 rounded-full flex justify-center items-center "  ${item.active && "border border-primary rounded-full "
+                    } `}
+                >
+                  {item.message}
+                </a>
+                <div className="absolute hidden group-hover:block bg-white text-black text-xs rounded-lg p-2 shadow-lg z-50">
+                  {item.message}
+                </div>
+              </div>
             );
           })}
         </div>
@@ -239,24 +261,28 @@ export function SelectVariants(
               newUrl,
             );
             return (
-              <a
-                hx-target="closest section"
-                hx-get={useSection({ href })}
-                hx-swap="outerHTML show:parent:top"
-                hx-indicator="#spinner-pdp"
-                hx-push-url={href}
-                class={` " p-1 w-16 h-16 flex justify-center items-center "  ${
-                  item.active && "border border-primary rounded-lg "
-                } `}
-              >
-                <Image
-                  class="w-full h-full object-cover rounded-lg"
-                  src={item.urlImage || ""}
-                  width={30}
-                  height={30}
-                  alt={item.message}
-                />
-              </a>
+              <div className="relative group">
+                <a
+                  hx-target="closest section"
+                  hx-get={useSection({ href })}
+                  hx-swap="outerHTML show:parent:top"
+                  hx-indicator="#spinner-pdp"
+                  hx-push-url={href}
+                  class={` " p-1 w-16 h-16 flex justify-center items-center "  ${item.active && "border border-primary rounded-lg "
+                    } `}
+                >
+                  <Image
+                    class="w-full h-full object-cover rounded-lg"
+                    src={item.urlImage || ""}
+                    width={30}
+                    height={30}
+                    alt={item.message}
+                  />
+                </a>
+                <div className="absolute hidden group-hover:block bg-white text-black text-xs rounded-lg p-2 shadow-lg ">
+                  {item.message}
+                </div>
+              </div>
             );
           })}
         </div>
