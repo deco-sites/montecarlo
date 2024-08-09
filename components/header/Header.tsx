@@ -26,6 +26,8 @@ export interface Counter {
   /** @format datetime */
   timer?: string;
   cupom?: string;
+  labelLink?: string;
+  link?: string;
 }
 
 export interface Logo {
@@ -180,8 +182,17 @@ function Header({
                   text={counter ? counter[0].title ? counter[0].title : "" : ""}
                   counter={counter ? counter[0].timer ? counter[0].timer : "" : ""}
                   cupom={counter ? counter[0].cupom ? counter[0].cupom : "" : ""}
+                  labelLink={counter ? counter[0].labelLink ? counter[0].labelLink : "" : ""}
+                  link={counter ? counter[0].link ? counter[0].link : "" : ""}
                 />
             )}
+            <Timer
+              text={"lorem ipsum"}
+              counter={"2024-08-12T15:00:00.000Z"}
+              cupom={""}
+              labelLink={"saiba mais"}
+              link={"https://google.com.br"}
+            />
             <Navbar
               device={device}
               items={items}

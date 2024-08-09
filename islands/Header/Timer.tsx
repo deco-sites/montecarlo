@@ -9,6 +9,8 @@ export interface Props {
     /** @format datetime */
     counter?: string;
     cupom?: string;
+    labelLink?: string;
+    link?: string;
 }
 
 const style = {
@@ -32,6 +34,13 @@ const style = {
         letter-spacing: 0.1em;
     }
 
+    .timer-header .link {
+        font-size: 12px;
+        font-weight: 700;
+        line-height: 18px;
+        letter-spacing: 0.1em;
+    }
+
     .timer-header .cupom {
         border: 1px dashed #000000;
         position: relative;
@@ -49,7 +58,7 @@ const style = {
         transform: translateX(25px);
     }
 
-    .timer-header .text, .timer-header .timer, .timer-header .cupom {
+    .timer-header .text, .timer-header .timer, .timer-header .cupom, .timer-header .link {
         text-align: center;
     }
 
@@ -105,14 +114,14 @@ const style = {
     }
 `,};
 
-function Timer({text, counter, cupom}: SectionProps<typeof loader>) {
+function Timer({text, counter, cupom, labelLink, link}: SectionProps<typeof loader>) {
     const [timeLeft, setTimeLeft] = useState<number>(0);
     function CopyCupom() {
         navigator.clipboard.writeText(cupom ? cupom : "");
     }
 
     function getClass() {
-        if(text && counter && cupom) {
+        if((text && counter && cupom) || (text && counter && labelLink))   {
             return "timer-header-complete";
         } else if (text && counter && !cupom) {
             return "timer-header-text-counter";
@@ -161,8 +170,11 @@ function Timer({text, counter, cupom}: SectionProps<typeof loader>) {
             {counter && counter.length > 0 &&(
                 <p class="timer">{days < 10 ? '0'+days : days} : {hours < 10 ? '0'+hours : hours} : {minutes < 10 ? '0'+minutes : minutes} : {seconds < 10 ? '0'+seconds : seconds}</p>
             )}
-            {cupom && cupom.length > 0 &&(
+            {cupom && cupom.length > 0 && (!labelLink) && (
                 <button class="cupom" onClick={CopyCupom}>{cupom} <Icon id="FileCopy" size={18} /></button>
+            )}
+            {labelLink && !cupom && (
+                <a class="link" href={link}>{labelLink}</a>
             )}
         </div>
     );
